@@ -15,7 +15,9 @@ import Box from "@mui/material/Box";
 
 const Profile = () => {
   const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [nationality, setNationality] = useState("");
+  const [genero, setGenero] = useState("");
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -25,7 +27,6 @@ const Profile = () => {
     <Box sx={{ m: 8 }}>
       <Stack
         component="form"
-        noValidate
         autoComplete="off"
         sx={{ width: 500 }}
         spacing={2}
@@ -38,7 +39,15 @@ const Profile = () => {
             setFirstName(e.target.value);
           }}
         />
-        <TextField id="filled-basic" label="Last name" />
+        <TextField
+          id="filled-basic"
+          label="Last name"
+          value={lastName}
+          onChange={(e) => {
+            setLastName(e.target.value);
+          }}
+        />
+
         <Stack direction="row">
           {/* <Typography variant="body1">Fecha de Nacimiento</Typography> */}
           <FormLabel
@@ -51,7 +60,15 @@ const Profile = () => {
         </Stack>
 
         <FormControl>
-          <FormLabel id="demo-radio-buttons-group-label">Genero</FormLabel>
+          <FormLabel
+            id="demo-radio-buttons-group-label"
+            value={genero}
+            onChange={(e) => {
+              setGenero(e.target.value);
+            }}
+          >
+            Genero
+          </FormLabel>
           <RadioGroup
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
