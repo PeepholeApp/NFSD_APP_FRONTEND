@@ -12,27 +12,56 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Box from "@mui/material/Box";
+import Autocomplete from "@mui/material/Autocomplete";
+import Button from "@mui/material/Button";
+import axios from "axios";
+
+const languagesOptions = [
+  {
+    label: "Español",
+    value: "ES",
+  },
+  {
+    label: "Ingles",
+    value: "EN",
+  },
+  {
+    label: "Frances",
+    value: "FR",
+  },
+  {
+    label: "Portugues",
+    value: "PR",
+  },
+  {
+    label: "Italiano",
+    value: "IT",
+  },
+];
 
 const Profile = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [brithday, setBrithday] = useState(new Date());
   const [nationality, setNationality] = useState("");
   const [genero, setGenero] = useState("");
+  const [languages, setLanguages] = useState([]);
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  const onSave = async () => {
+    const response = await axios.post("http://localhost:3001/profiles", {
+      name: firstName,
+      last_name: lastName,
+      dob: brithday.toISOString(),
+      gender: genero,
+      nationality,
+      languages: languages.map((language) => language.value),
+    });
   };
 
   return (
     <Box sx={{ m: 8 }}>
-      <Stack
-        component="form"
-        autoComplete="off"
-        sx={{ width: 500 }}
-        spacing={2}
-      >
+      <Stack sx={{ width: 500 }} spacing={2}>
         <TextField
-          id="filled-basic"
           label="First Name"
           value={firstName}
           onChange={(e) => {
@@ -40,7 +69,6 @@ const Profile = () => {
           }}
         />
         <TextField
-          id="filled-basic"
           label="Last name"
           value={lastName}
           onChange={(e) => {
@@ -50,29 +78,23 @@ const Profile = () => {
 
         <Stack direction="row">
           {/* <Typography variant="body1">Fecha de Nacimiento</Typography> */}
-          <FormLabel
-            id="demo-radio-buttons-group-label"
-            sx={{ paddingRight: 2 }}
-          >
-            Fecha de Nacimiento
-          </FormLabel>
-          <DatePicker />
+          <FormLabel sx={{ paddingRight: 2 }}>Fecha de Nacimiento</FormLabel>
+          <DatePicker
+            value={brithday}
+            onChange={(date) => {
+              setBrithday(date);
+            }}
+          />
         </Stack>
 
         <FormControl>
-          <FormLabel
-            id="demo-radio-buttons-group-label"
+          <FormLabel>Genero</FormLabel>
+          <RadioGroup
+            row
             value={genero}
             onChange={(e) => {
               setGenero(e.target.value);
             }}
-          >
-            Genero
-          </FormLabel>
-          <RadioGroup
-            row
-            aria-labelledby="demo-row-radio-buttons-group-label"
-            name="row-radio-buttons-group"
           >
             <FormControlLabel
               value="female"
@@ -89,38 +111,35 @@ const Profile = () => {
         </FormControl>
 
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-          <InputLabel id="demo-select-small-label">Nacionalidad</InputLabel>
+          <InputLabel>Nacionalidad</InputLabel>
           <Select
-            labelId="demo-select-small-label"
-            id="demo-select-small"
             value={nationality}
             label="nationality"
-            onChange={handleChange}
+            onChange={(e) => {
+              setNationality(e.target.value);
+            }}
           >
             <MenuItem value=""></MenuItem>
-            <MenuItem value={10}>Argentino</MenuItem>
-            <MenuItem value={20}>Colombiano</MenuItem>
-            <MenuItem value={20}>Madrileño</MenuItem>
-            <MenuItem value={30}>Venezolano</MenuItem>
+            <MenuItem value={10}>Argentina</MenuItem>
+            <MenuItem value={20}>Colombia</MenuItem>
+            <MenuItem value={20}>España</MenuItem>
+            <MenuItem value={30}>Venezuela</MenuItem>
           </Select>
         </FormControl>
 
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-          <InputLabel id="demo-select-small-label">Idioma</InputLabel>
-          <Select
-            labelId="demo-select-small-label"
-            id="demo-select-small"
-            // value={language}
-            label="language"
-            onChange={handleChange}
-          >
-            <MenuItem value=""></MenuItem>
-            <MenuItem value={10}>Español</MenuItem>
-            <MenuItem value={20}>Ingles</MenuItem>
-            <MenuItem value={20}>Portugues</MenuItem>
-            <MenuItem value={30}>Frances</MenuItem>
-          </Select>
+          <Autocomplete
+            value={languages}
+            onChange={(e, value) => {
+              setLanguages(value);
+            }}
+            multiple
+            options={languagesOptions}
+            // filterSelectedOptions
+            renderInput={(params) => <TextField {...params} label="Idioma" />}
+          />
         </FormControl>
+        <Button onClick={onSave}>GUARDAR</Button>
       </Stack>
     </Box>
   );
