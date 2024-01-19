@@ -61,20 +61,25 @@ const Profile = () => {
   return (
     <Box sx={{ m: 8 }}>
       <Stack sx={{ width: 500 }} spacing={2}>
-        <TextField
-          label="First Name"
-          value={firstName}
-          onChange={(e) => {
-            setFirstName(e.target.value);
-          }}
-        />
-        <TextField
-          label="Last name"
-          value={lastName}
-          onChange={(e) => {
-            setLastName(e.target.value);
-          }}
-        />
+        <FormControl>
+          <TextField
+            label="First Name"
+            value={firstName}
+            onChange={(e) => {
+              setFirstName(e.target.value);
+            }}
+          />
+        </FormControl>
+
+        <FormControl>
+          <TextField
+            label="Last name"
+            value={lastName}
+            onChange={(e) => {
+              setLastName(e.target.value);
+            }}
+          />
+        </FormControl>
 
         <Stack direction="row">
           {/* <Typography variant="body1">Fecha de Nacimiento</Typography> */}
