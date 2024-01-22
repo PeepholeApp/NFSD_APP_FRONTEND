@@ -144,6 +144,14 @@ const Profile = () => {
             renderInput={(params) => <TextField {...params} label="Idioma" />}
           />
         </FormControl>
+        <FormControl
+          sx={{
+            width: 500,
+            maxWidth: "100%",
+          }}
+        >
+          <TextField fullWidth label="Añade una Biografía sobre ti" />
+        </FormControl>
         <Button onClick={onSave}>GUARDAR</Button>
       </Stack>
     </Box>
