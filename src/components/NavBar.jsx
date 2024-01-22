@@ -13,24 +13,28 @@ const Navbar = () => {
     <AppBar component="nav">
       <Toolbar>
         <IconButton
-          color="inherit"
+          color="#inherit"
           aria-label="open drawer"
           edge="start"
           //   onClick={handleDrawerToggle}
           sx={{ mr: 2, display: { sm: "none" } }}
-        >
-          <MenuIcon />
-        </IconButton>
+        ></IconButton>
         <Typography
           variant="h6"
           component="div"
           sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
         >
-          MUI
+          FYP
         </Typography>
         <Box sx={{ display: { xs: "none", sm: "block" } }}>
           <Button key={"Home"} sx={{ color: "#fff" }}>
-            Home
+            Nosotros
+          </Button>
+          <Button key={"Home"} sx={{ color: "#fff" }}>
+            Eventos
+          </Button>
+          <Button key={"Home"} sx={{ color: "#fff" }}>
+            Blog
           </Button>
         </Box>
       </Toolbar>
