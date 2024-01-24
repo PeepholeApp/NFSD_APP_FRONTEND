@@ -1,7 +1,7 @@
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -13,6 +13,8 @@ import Select from "@mui/material/Select";
 import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import { useAuth } from "../context/Login";
+import { useNavigate } from "react-router-dom";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
@@ -57,6 +59,15 @@ const Profile = () => {
   const onBack = () => {
     setStep((prevStep) => prevStep - 1);
   };
+
+  const { token } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    }
+  }, [token]);
 
   const onSave = async () => {
     const response = await axios.post("http://localhost:3001/profiles", {
