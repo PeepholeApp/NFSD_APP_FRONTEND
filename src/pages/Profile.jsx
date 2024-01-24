@@ -1,9 +1,7 @@
-
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -16,6 +14,8 @@ import Box from "@mui/material/Box";
 import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import { useAuth } from "../context/Login";
+import { useNavigate } from "react-router-dom";
 
 const languagesOptions = [
   {
@@ -47,6 +47,15 @@ const Profile = () => {
   const [nationality, setNationality] = useState("");
   const [genero, setGenero] = useState("");
   const [languages, setLanguages] = useState([]);
+
+  const { token } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    }
+  }, [token]);
 
   const onSave = async () => {
     const response = await axios.post("http://localhost:3001/profiles", {
