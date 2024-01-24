@@ -46,12 +46,11 @@ const HomeApp = () => {
   }, []);
 
   const getAllProfiles = async () => {
-    const data = (await axios.get("http://localhost:3001/profiles/profiles"))
-      .data;
+    const data = (await axios.get("http://localhost:3001/profiles")).data;
     setProfiles(data);
   };
 
-  console.log("Estosd son los perfiles: ", profiles);
+  console.log("Estos son los perfiles: ", profiles);
 
   return (
     <>
