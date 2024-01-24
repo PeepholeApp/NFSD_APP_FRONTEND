@@ -56,6 +56,10 @@ const Profile = () => {
     setStep((prevStep) => prevStep + 1);
   };
 
+  const onBack = () => {
+    setStep((prevStep) => prevStep - 1);
+  };
+
   const onSave = async () => {
     const response = await axios.post("http://localhost:3001/profiles", {
       name: firstName,
@@ -68,7 +72,7 @@ const Profile = () => {
   };
 
   return (
-    <Box sx={{ m: 8 }}>
+    <Stack sx={{ m: 8 }} alignItems="center">
       <Stack sx={{ width: 500 }} spacing={2}>
         <Stepper activeStep={step}>
           <Step>
@@ -175,7 +179,12 @@ const Profile = () => {
                 )}
               />
             </FormControl>
-            <Button onClick={onNext}>Avanzar a intereses personales</Button>
+            <Stack direction="row">
+              <Button disabled={step === 0} onClick={onBack}>
+                Back
+              </Button>
+              <Button onClick={onNext}>Avanzar a intereses personales</Button>
+            </Stack>
           </>
         ) : step === 1 ? (
           <>
@@ -187,7 +196,10 @@ const Profile = () => {
             >
               <TextField fullWidth label="Añade una Biografía sobre ti" />
             </FormControl>
-            <Button onClick={onNext}>Siguiente</Button>
+            <Stack direction="row">
+              <Button onClick={onBack}>Back</Button>
+              <Button onClick={onNext}>Ahora sube tus fotos</Button>
+            </Stack>
           </>
         ) : step === 2 ? (
           <>
@@ -196,7 +208,7 @@ const Profile = () => {
           </>
         ) : null}
       </Stack>
-    </Box>
+    </Stack>
   );
 };
 export default Profile;
