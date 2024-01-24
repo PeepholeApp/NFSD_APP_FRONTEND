@@ -12,6 +12,10 @@
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.8",
+    "@mui/material": "^5.15.4",
+    "@mui/x-date-pickers": "^6.19.0",
+    "date-fns": "2.25",
     "@mui/icons-material": "^5.15.4",
     "axios": "^1.6.5",
     "babel-core": "^4.7.16",
@@ -19,7 +23,7 @@
     "babel-preset-env": "^1.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.21.2"
+    "react-router-dom": "^6.21.3"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
