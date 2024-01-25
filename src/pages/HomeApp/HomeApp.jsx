@@ -8,14 +8,24 @@ const HomeApp = () => {
   const [profiles, setProfiles] = useState([]);
   const [toggleNation, setToggleNation] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [nationalities, setNationalities] = useState([]);
 
   useEffect(() => {
     getPaginationProfiles();
+    getAllProfiles();
   }, [currentPage]);
 
   const getAllProfiles = async () => {
-    const data = (await axios.get("http://localhost:3001/profiles")).data;
-    setProfiles(data);
+    const response = await axios.get("http://localhost:3001/profiles/all");
+    const users = response.data;
+    const countries = users.reduce((acc, user) => {
+      if (acc.includes(user.nationality)) {
+        return acc;
+      }
+      acc.push(user.nationality);
+      return acc;
+    }, []);
+    setNationalities(countries);
   };
 
   const getPaginationProfiles = async () => {
@@ -24,20 +34,17 @@ const HomeApp = () => {
         `http://localhost:3001/profiles?page=${currentPage}`
       );
       setProfiles(response.data);
-      console.log("Pasa por aca: ");
     } catch (error) {
       console.error(error);
     }
   };
-
-  console.log("Estos son los perfiles: ", profiles);
 
   return (
     <>
       <div className="page_order">
         <h1>Find your people</h1>
         <div className="nationality_filter_container">
-          {countries.map((country, id) => (
+          {nationalities.map((nationality, id) => (
             <div
               key={id}
               className={`nationality_filter ${
@@ -45,7 +52,7 @@ const HomeApp = () => {
               }`}
               onClick={() => setToggleNation(!toggleNation)}
             >
-              <h3>{country}</h3>
+              <h3>{nationality}</h3>
             </div>
           ))}
         </div>
