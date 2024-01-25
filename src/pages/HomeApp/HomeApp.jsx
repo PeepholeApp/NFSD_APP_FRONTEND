@@ -4,50 +4,30 @@ import "./HomeApp.css";
 
 const countries = ["Arg", "Col", "Ven"];
 
-const members = [
-  {
-    name: "Diego",
-    description: "Hola soy Diego",
-    nationality: "Colombia",
-  },
-  {
-    name: "Karen",
-    description: "Hola soy Karen",
-    nationality: "Venezuela",
-  },
-  {
-    name: "Maribel",
-    description: "Hola soy Maribel",
-    nationality: "Argentina",
-  },
-  {
-    name: "Victor",
-    description: "Hola soy Victor",
-    nationality: "Colombia",
-  },
-  {
-    name: "Daniel",
-    description: "Hola soy Daniel",
-    nationality: "Venezuela",
-  },
-  {
-    name: "Fer",
-    description: "Hola soy Fer",
-    nationality: "Argentina",
-  },
-];
-
 const HomeApp = () => {
   const [profiles, setProfiles] = useState([]);
   const [toggleNation, setToggleNation] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    getAllProfiles();
-  }, []);
+    getPaginationProfiles();
+  }, [currentPage]);
 
   const getAllProfiles = async () => {
     const data = (await axios.get("http://localhost:3001/profiles")).data;
     setProfiles(data);
+  };
+
+  const getPaginationProfiles = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/profiles?page=${currentPage}`
+      );
+      setProfiles(response.data);
+      console.log("Pasa por aca: ");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   console.log("Estos son los perfiles: ", profiles);
@@ -85,6 +65,13 @@ const HomeApp = () => {
             ))}
           </ul>
         </div>
+        <button
+          onClick={() => setCurrentPage((prev) => prev - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <button onClick={() => setCurrentPage((prev) => prev + 1)}>Next</button>
       </div>
     </>
   );
