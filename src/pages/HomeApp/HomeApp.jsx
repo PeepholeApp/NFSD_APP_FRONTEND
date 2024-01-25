@@ -9,23 +9,28 @@ const HomeApp = () => {
   const [toggleNation, setToggleNation] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [nationalities, setNationalities] = useState([]);
+  const [lastPage, setLastPage] = useState(false);
 
   useEffect(() => {
     getPaginationProfiles();
-    getAllProfiles();
+    getAllNationalities();
   }, [currentPage]);
 
-  const getAllProfiles = async () => {
-    const response = await axios.get("http://localhost:3001/profiles/all");
-    const users = response.data;
-    const countries = users.reduce((acc, user) => {
-      if (acc.includes(user.nationality)) {
+  const getAllNationalities = async () => {
+    try {
+      const response = await axios.get("http://localhost:3001/profiles/all");
+      const users = response.data;
+      const countries = users.reduce((acc, user) => {
+        if (acc.includes(user.nationality)) {
+          return acc;
+        }
+        acc.push(user.nationality);
         return acc;
-      }
-      acc.push(user.nationality);
-      return acc;
-    }, []);
-    setNationalities(countries);
+      }, []);
+      setNationalities(countries);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const getPaginationProfiles = async () => {
@@ -33,7 +38,13 @@ const HomeApp = () => {
       const response = await axios.get(
         `http://localhost:3001/profiles?page=${currentPage}`
       );
-      setProfiles(response.data);
+      const data = response.data;
+      setProfiles(data);
+      if (data.length < 9) {
+        setLastPage(true);
+      } else {
+        setLastPage(false);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -78,7 +89,12 @@ const HomeApp = () => {
         >
           Previous
         </button>
-        <button onClick={() => setCurrentPage((prev) => prev + 1)}>Next</button>
+        <button
+          onClick={() => setCurrentPage((prev) => prev + 1)}
+          disabled={lastPage === true}
+        >
+          Next
+        </button>
       </div>
     </>
   );
