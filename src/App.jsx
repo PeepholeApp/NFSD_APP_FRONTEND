@@ -1,16 +1,16 @@
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
+import { AuthProvider } from "./context/Login";
 import Home from "./pages/Home";
 import HomeApp from "./pages/HomeApp/HomeApp";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
-import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
-import { AuthProvider } from "./context/Login";
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
-import "./App.css";
 
 const theme = createTheme({
   palette: {
@@ -24,7 +24,6 @@ const theme = createTheme({
 function App() {
   return (
     <>
-   
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <AuthProvider>
@@ -33,6 +32,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/home" element={<HomeApp />} />
             </Routes>
           </AuthProvider>
         </BrowserRouter>
