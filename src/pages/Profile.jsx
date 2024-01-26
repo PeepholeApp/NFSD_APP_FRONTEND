@@ -50,6 +50,7 @@ const Profile = () => {
   const [nationality, setNationality] = useState("");
   const [genero, setGenero] = useState("");
   const [languages, setLanguages] = useState([]);
+  const [bio, setBio] = useState("");
   const [step, setStep] = useState(0);
 
   const onNext = async () => {
@@ -60,14 +61,14 @@ const Profile = () => {
     setStep((prevStep) => prevStep - 1);
   };
 
-  const { token } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!token) {
+    if (!user?.token) {
       navigate("/login");
     }
-  }, [token]);
+  }, [user]);
 
   const onSave = async () => {
     const response = await axios.post("http://localhost:3001/profiles", {
@@ -77,6 +78,8 @@ const Profile = () => {
       gender: genero,
       nationality,
       languages: languages.map((language) => language.value),
+      bio,
+      user: user.userId,
     });
   };
 
@@ -205,7 +208,14 @@ const Profile = () => {
                   maxWidth: "100%",
                 }}
               >
-                <TextField fullWidth label="Añade una Biografía sobre ti" />
+                <TextField
+                  value={bio}
+                  onChange={(e) => {
+                    setBio(e.target.value);
+                  }}
+                  fullWidth
+                  label="Añade una Biografía sobre ti"
+                />
               </FormControl>
               <Stack direction="row">
                 <Button onClick={onBack}>Back</Button>

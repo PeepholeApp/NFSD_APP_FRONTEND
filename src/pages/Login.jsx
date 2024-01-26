@@ -52,7 +52,7 @@ const Login = () => {
         password,
       });
       const data = response.data;
-      contextLogin(data.token);
+      contextLogin({ token: data.token, userId: data.userId });
       navigate("/");
     } catch (error) {
       setError("Error al iniciar sesión. Verifica tus credenciales.");
