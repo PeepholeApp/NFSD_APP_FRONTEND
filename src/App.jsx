@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
+import HomeApp from "./pages/HomeApp/HomeApp";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
@@ -23,6 +24,7 @@ const theme = createTheme({
 function App() {
   return (
     <>
+   
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <AuthProvider>
