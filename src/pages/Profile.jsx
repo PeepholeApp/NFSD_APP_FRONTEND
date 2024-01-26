@@ -52,6 +52,23 @@ const Profile = () => {
   const [languages, setLanguages] = useState([]);
   const [bio, setBio] = useState("");
   const [step, setStep] = useState(0);
+  const [countries, setCountries] = useState([]);
+
+  useEffect(() => {
+    axios.get("https://restcountries.com/v3.1/all").then((response) => {
+      const countries = response.data
+        .map((country) => {
+          return {
+            label: country.name.common,
+            value: country.cca2,
+          };
+        })
+        .sort((countryA, countryB) => {
+          return countryA.label.localeCompare(countryB.label);
+        });
+      setCountries(countries);
+    });
+  }, []);
 
   const onNext = async () => {
     setStep((prevStep) => prevStep + 1);
@@ -66,7 +83,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (!user?.token) {
-      navigate("/login");
+      // navigate("/login");
     }
   }, [user]);
 
@@ -171,11 +188,11 @@ const Profile = () => {
                     setNationality(e.target.value);
                   }}
                 >
-                  <MenuItem value=""></MenuItem>
-                  <MenuItem value={10}>Argentina</MenuItem>
-                  <MenuItem value={20}>Colombia</MenuItem>
-                  <MenuItem value={20}>España</MenuItem>
-                  <MenuItem value={30}>Venezuela</MenuItem>
+                  {countries.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
 
