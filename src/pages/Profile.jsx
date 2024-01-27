@@ -50,7 +50,25 @@ const Profile = () => {
   const [nationality, setNationality] = useState("");
   const [genero, setGenero] = useState("");
   const [languages, setLanguages] = useState([]);
+  const [bio, setBio] = useState("");
   const [step, setStep] = useState(0);
+  const [countries, setCountries] = useState([]);
+
+  useEffect(() => {
+    axios.get("https://restcountries.com/v3.1/all").then((response) => {
+      const countries = response.data
+        .map((country) => {
+          return {
+            label: country.name.common,
+            value: country.cca2,
+          };
+        })
+        .sort((countryA, countryB) => {
+          return countryA.label.localeCompare(countryB.label);
+        });
+      setCountries(countries);
+    });
+  }, []);
 
   const onNext = async () => {
     setStep((prevStep) => prevStep + 1);
@@ -60,14 +78,14 @@ const Profile = () => {
     setStep((prevStep) => prevStep - 1);
   };
 
-  const { token } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!token) {
-      navigate("/login");
+    if (!user?.token) {
+      // navigate("/login");
     }
-  }, [token]);
+  }, [user]);
 
   const onSave = async () => {
     const response = await axios.post("http://localhost:3001/profiles", {
@@ -77,6 +95,8 @@ const Profile = () => {
       gender: genero,
       nationality,
       languages: languages.map((language) => language.value),
+      bio,
+      user: user.userId,
     });
   };
 
@@ -168,11 +188,11 @@ const Profile = () => {
                     setNationality(e.target.value);
                   }}
                 >
-                  <MenuItem value=""></MenuItem>
-                  <MenuItem value={10}>Argentina</MenuItem>
-                  <MenuItem value={20}>Colombia</MenuItem>
-                  <MenuItem value={20}>España</MenuItem>
-                  <MenuItem value={30}>Venezuela</MenuItem>
+                  {countries.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
 
@@ -205,7 +225,14 @@ const Profile = () => {
                   maxWidth: "100%",
                 }}
               >
-                <TextField fullWidth label="Añade una Biografía sobre ti" />
+                <TextField
+                  value={bio}
+                  onChange={(e) => {
+                    setBio(e.target.value);
+                  }}
+                  fullWidth
+                  label="Añade una Biografía sobre ti"
+                />
               </FormControl>
               <Stack direction="row">
                 <Button onClick={onBack}>Back</Button>
