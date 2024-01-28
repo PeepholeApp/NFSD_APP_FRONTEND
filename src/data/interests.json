@@ -1,0 +1,531 @@
+{
+    "Social": [
+      {
+        "nombre": "Salir de Fiesta",
+        "icono": "🎉"
+      },
+      {
+        "nombre": "Picnic",
+        "icono": "🧺"
+      },
+      {
+        "nombre": "Cena",
+        "icono": "🍽️"
+      },
+      {
+        "nombre": "Concierto",
+        "icono": "🎤"
+      },
+      {
+        "nombre": "Juegos de mesa",
+        "icono": "🎲"
+      },
+      {
+        "nombre": "Senderismo",
+        "icono": "🥾"
+      },
+      {
+        "nombre": "Cine",
+        "icono": "🍿"
+      },
+      {
+        "nombre": "Karaoke",
+        "icono": "🎤"
+      },
+      {
+        "nombre": "Bowling",
+        "icono": "🎳"
+      },
+      {
+        "nombre": "Paintball",
+        "icono": "🎨"
+      },
+      {
+        "nombre": "Barbacoa",
+        "icono": "🍖"
+      },
+      {
+        "nombre": "Festival",
+        "icono": "🎪"
+      },
+      {
+        "nombre": "Escape Room",
+        "icono": "🔐"
+      },
+      {
+        "nombre": "Visitar Museo",
+        "icono": "🏛️"
+      },
+      {
+        "nombre": "Karting",
+        "icono": "🏎️"
+      },
+      {
+        "nombre": "Fiesta en la Playa",
+        "icono": "🏖️"
+      },
+      {
+        "nombre": "Camping",
+        "icono": "🏕️"
+      },
+      {
+        "nombre": "Cine",
+        "icono": "🎬"
+      },
+      {
+        "nombre": "Ir a Parque de Atracciones",
+        "icono": "🎡"
+      },
+      {
+        "nombre": "Noche de Trivia",
+        "icono": "❓"
+      },
+      {
+        "nombre": "Tour Gastronómico",
+        "icono": "🍜"
+      },
+      {
+        "nombre": "Día de Spa",
+        "icono": "💆"
+      },
+      {
+        "nombre": "Partida de Paintball",
+        "icono": "🎨"
+      },
+      {
+        "nombre": "Recorrido en Bicicleta",
+        "icono": "🚴"
+      },
+      {
+        "nombre": "Tarde de Compras",
+        "icono": "🛍️"
+      },
+
+      {
+        "nombre": "Cata de Vinos",
+        "icono": "🍷"
+      },
+      {
+        "nombre": "Festival de Música",
+        "icono": "🎶"
+      },
+      {
+        "nombre": "Visita a un Zoológico",
+        "icono": "🦓"
+      },
+      {
+        "nombre": "Clases de Cocina",
+        "icono": "👩‍🍳"
+      },
+      {
+        "nombre": "Tarde de Videojuegos",
+        "icono": "🎮"
+      },
+      {
+        "nombre": "Club de Lectura",
+        "icono": "📚"
+      },
+      {
+        "nombre": "Noche de Comedia",
+        "icono": "😂"
+      },
+      {
+        "nombre": "Visita a una Feria Local",
+        "icono": "🎡"
+      },
+      {
+        "nombre": "Clases de Baile",
+        "icono": "💃"
+      },
+      {
+        "nombre": "Noche de Observación Estelar",
+        "icono": "🌌"
+      },
+      {
+        "nombre": "Carrera de Go Karts",
+        "icono": "🏎️"
+      }
+
+    ],
+
+    "deportes": [
+        {
+          "nombre": "Fútbol",
+          "icono": "⚽️"
+        },
+        {
+          "nombre": "Baloncesto",
+          "icono": "🏀"
+        },
+        {
+          "nombre": "Tenis",
+          "icono": "🎾"
+        },
+        {
+          "nombre": "Golf",
+          "icono": "⛳"
+        },
+        {
+          "nombre": "Ciclismo",
+          "icono": "🚴"
+        },
+        {
+          "nombre": "Natación",
+          "icono": "🏊"
+        },
+        {
+          "nombre": "Atletismo",
+          "icono": "🏃"
+        },
+        {
+          "nombre": "Hockey sobre Hielo",
+          "icono": "🏒"
+        },
+        {
+          "nombre": "Esquí",
+          "icono": "⛷️"
+        },
+        {
+          "nombre": "Surf",
+          "icono": "🏄"
+        },
+        {
+            "nombre": "Voleibol",
+            "icono": "🏐"
+          },
+          {
+            "nombre": "Béisbol",
+            "icono": "⚾️"
+          },
+          {
+            "nombre": "Rugby",
+            "icono": "🏉"
+          },
+          {
+            "nombre": "Artes Marciales",
+            "icono": "🥋"
+          },
+          {
+            "nombre": "Boxeo",
+            "icono": "🥊"
+          },
+          {
+            "nombre": "Yoga",
+            "icono": "🧘"
+          },
+          {
+            "nombre": "Escalada",
+            "icono": "🧗"
+          },
+          {
+            "nombre": "Paddleboarding",
+            "icono": "🏄‍♂️"
+          },
+          {
+            "nombre": "Balonmano",
+            "icono": "🤾"
+          },
+          {
+            "nombre": "Ski Acuático",
+            "icono": "🚤"
+          },
+          {
+            "nombre": "Snowboard",
+            "icono": "🏂"
+          },
+          {
+            "nombre": "Kickboxing",
+            "icono": "🥊"
+          },
+          {
+            "nombre": "Patinaje sobre Hielo",
+            "icono": "⛸️"
+          },
+          {
+            "nombre": "Surf de Remo",
+            "icono": "🏄‍♂️"
+          },
+          {
+            "nombre": "Carrera de Obstáculos",
+            "icono": "🏃‍♂️"
+          },
+          {
+            "nombre": "Cricket",
+            "icono": "🏏"
+          },
+          {
+            "nombre": "Lucha Libre",
+            "icono": "🤼"
+          }
+      ],
+    "cultura": [
+        {
+          "nombre": "Teatro",
+          "icono": "🎭"
+        },
+        {
+          "nombre": "Museo",
+          "icono": "🏛️"
+        },
+        {
+          "nombre": "Concierto",
+          "icono": "🎶"
+        },
+        {
+          "nombre": "Ópera",
+          "icono": "🎶"
+        },
+        {
+          "nombre": "Ballet",
+          "icono": "💃"
+        },
+        {
+          "nombre": "Arte Contemporáneo",
+          "icono": "🎨"
+        },
+        {
+          "nombre": "Lectura",
+          "icono": "📚"
+        },
+        {
+          "nombre": "Historia",
+          "icono": "📜"
+        },
+        {
+          "nombre": "Arquitectura",
+          "icono": "🏰"
+        },
+        {
+            "nombre": "Cine",
+            "icono": "🎬"
+          },
+          {
+            "nombre": "Escultura",
+            "icono": "🗿"
+          },
+          {
+            "nombre": "Galería de Arte",
+            "icono": "🖼️"
+          },
+          {
+            "nombre": "Danza Folklórica",
+            "icono": "💃"
+          },
+          {
+            "nombre": "Exposición Fotográfica",
+            "icono": "📷"
+          },
+          {
+            "nombre": "Artesanía Local",
+            "icono": "🎨"
+          },
+          {
+            "nombre": "Festival de Literatura",
+            "icono": "📖"
+          },
+          {
+            "nombre": "Conferencia Cultural",
+            "icono": "🎤"
+          },
+          {
+            "nombre": "Recital de Poesía",
+            "icono": "📜"
+          },
+          {
+            "nombre": "Tour Histórico",
+            "icono": "🏰"
+          }
+      ],
+    "juegos": [
+        {
+          "nombre": "Ajedrez",
+          "icono": "♟️"
+        },
+        {
+          "nombre": "Dominó",
+          "icono": "🀄"
+        },
+        {
+          "nombre": "Jenga",
+          "icono": "🏗️"
+        },
+        {
+          "nombre": "Póker",
+          "icono": "🃏"
+        },
+        {
+          "nombre": "Monopoly",
+          "icono": "🎲"
+        },
+        {
+          "nombre": "Scrabble",
+          "icono": "🔠"
+        },
+        {
+          "nombre": "Videojuegos",
+          "icono": "🎮"
+        },
+        {
+          "nombre": "Twister",
+          "icono": "🌀"
+        },
+        {
+          "nombre": "Damas",
+          "icono": "🔲"
+        },
+        {
+          "nombre": "Bingo",
+          "icono": "🎱"
+        },
+        {
+            "nombre": "Ludo",
+            "icono": "🎲"
+          },
+          {
+            "nombre": "Juego de cartas",
+            "icono": "🃏"
+          },
+          {
+            "nombre": "Trivial Pursuit",
+            "icono": "🔵"
+          },
+          {
+            "nombre": "Ahorcado",
+            "icono": "🪝"
+          },
+          {
+            "nombre": "Tetris",
+            "icono": "🕹️"
+          },
+          {
+            "nombre": "Ping Pong",
+            "icono": "🏓"
+          },
+          {
+            "nombre": "Dardos",
+            "icono": "🎯"
+          },
+          {
+            "nombre": "Escape Room",
+            "icono": "🚪"
+          },
+          {
+            "nombre": "Damas Chinas",
+            "icono": "🔵"
+          },
+          {
+            "nombre": "Ta-te-ti (Tic Tac Toe)",
+            "icono": "❌⭕"
+          },
+          {
+            "nombre": "Pictionary",
+            "icono": "🎨"
+          },
+          {
+            "nombre": "Crucigrama",
+            "icono": "🔠"
+          },
+          {
+            "nombre": "Juegos de Palabras",
+            "icono": "🔤"
+          },
+          {
+            "nombre": "Simón Dice",
+            "icono": "🕹️"
+          },
+          {
+            "nombre": "Memory",
+            "icono": "🧠"
+          },
+          {
+            "nombre": "Palabras Encadenadas",
+            "icono": "🔗"
+          }
+
+      ],
+    "estilo_de_vida": [
+        {
+          "nombre": "Fitness",
+          "icono": "💪"
+        },
+        {
+          "nombre": "Yoga",
+          "icono": "🧘"
+        },
+        {
+          "nombre": "Viajes",
+          "icono": "✈️"
+        },
+        {
+          "nombre": "Gastronomía",
+          "icono": "🍽️"
+        },
+        {
+          "nombre": "Aventuras al Aire Libre",
+          "icono": "🏞️"
+        },
+        {
+          "nombre": "Cine y TV",
+          "icono": "🎬"
+        },
+        {
+          "nombre": "Lectura",
+          "icono": "📚"
+        },
+        {
+          "nombre": "Moda",
+          "icono": "👗"
+        },
+        {
+          "nombre": "Música",
+          "icono": "🎵"
+        },
+        {
+          "nombre": "Relajación",
+          "icono": "🌿"
+        },
+        {
+            "nombre": "Ecoturismo",
+            "icono": "🌿"
+          },
+          {
+            "nombre": "Fotografía",
+            "icono": "📷"
+          },
+          {
+            "nombre": "Voluntariado",
+            "icono": "🤝"
+          },
+          {
+            "nombre": "Cocina Saludable",
+            "icono": "🥗"
+          },
+          {
+            "nombre": "Arte y Manualidades",
+            "icono": "🎨"
+          },
+          {
+            "nombre": "Meditación",
+            "icono": "🧘‍♂️"
+          },
+          {
+            "nombre": "Exploración Urbana",
+            "icono": "🏙️"
+          },
+          {
+            "nombre": "Deportes Acuáticos",
+            "icono": "🏄‍♂️"
+          },
+          {
+            "nombre": "Camping",
+            "icono": "🏕️"
+          },
+          {
+            "nombre": "Ciclismo",
+            "icono": "🚴‍♂️"
+          }
+
+      ]
+  }
+
+  
