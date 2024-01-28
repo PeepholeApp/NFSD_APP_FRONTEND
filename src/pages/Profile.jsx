@@ -18,7 +18,6 @@ import { useNavigate } from "react-router-dom";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import NavBar from "../components/NavBar";
 
 const languagesOptions = [
   {
@@ -102,7 +101,6 @@ const Profile = () => {
 
   return (
     <>
-      <NavBar />
       <Stack sx={{ m: 15 }} alignItems="center">
         <Stack sx={{ width: 500 }} spacing={2}>
           <Stepper activeStep={step}>
