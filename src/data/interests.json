@@ -73,7 +73,7 @@
         "icono": "🎬"
       },
       {
-        "nombre": "Visitar un Parque de Atracciones",
+        "nombre": "Ir a Parque de Atracciones",
         "icono": "🎡"
       },
       {
@@ -296,11 +296,7 @@
           "icono": "🏰"
         },
         {
-          "nombre": "Cine Independiente",
-          "icono": "🎥"
-        },
-        {
-            "nombre": "Festival de Cine",
+            "nombre": "Cine",
             "icono": "🎬"
           },
           {
@@ -530,12 +526,6 @@
           }
 
       ]
-     
-    
-
-       
-      
-      
   }
 
   
