@@ -25,6 +25,7 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
+
 const languagesOptions = [
   {
     label: "Español",
@@ -121,7 +122,6 @@ const Profile = () => {
 
   return (
     <>
-      <NavBar />
       <Stack sx={{ m: 15 }} alignItems="center">
         <Stack sx={{ width: 500 }} spacing={2}>
           <Stepper activeStep={step}>

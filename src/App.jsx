@@ -11,6 +11,7 @@ import HomeApp from "./pages/HomeApp/HomeApp";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
+import Navbar from "./components/NavBar";
 
 const theme = createTheme({
   palette: {
@@ -27,6 +28,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <AuthProvider>
+            <Navbar />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
