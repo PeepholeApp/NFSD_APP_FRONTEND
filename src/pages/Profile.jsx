@@ -18,6 +18,13 @@ import { useNavigate } from "react-router-dom";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
+import NavBar from "../components/NavBar";
+import Interests from "../data/interests.json";
+import Chip from "@mui/material/Chip";
+import Avatar from "@mui/material/Avatar";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+
 
 const languagesOptions = [
   {
@@ -52,6 +59,9 @@ const Profile = () => {
   const [bio, setBio] = useState("");
   const [step, setStep] = useState(0);
   const [countries, setCountries] = useState([]);
+  const [selectedInterests, setSelectedInterests] = useState(new Set());
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get("https://restcountries.com/v3.1/all").then((response) => {
@@ -69,6 +79,12 @@ const Profile = () => {
     });
   }, []);
 
+  useEffect(() => {
+    if (!user?.token) {
+      // navigate("/login");
+    }
+  }, [user]);
+
   const onNext = async () => {
     setStep((prevStep) => prevStep + 1);
   };
@@ -77,14 +93,19 @@ const Profile = () => {
     setStep((prevStep) => prevStep - 1);
   };
 
-  const { user } = useAuth();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!user?.token) {
-      // navigate("/login");
-    }
-  }, [user]);
+  //se utilizo el Set js para almacenar los intereses selecionados
+  const onSelectInterest = (interest) => {
+    setSelectedInterests((selectedInterests) => {
+      const selected = new Set(selectedInterests);
+      if (selected.has(interest)) {
+        selected.delete(interest);
+        return selected;
+      } else {
+        selected.add(interest);
+        return selected;
+      }
+    });
+  };
 
   const onSave = async () => {
     const response = await axios.post("http://localhost:3001/profiles", {
@@ -231,6 +252,36 @@ const Profile = () => {
                   fullWidth
                   label="Añade una Biografía sobre ti"
                 />
+                <Stack>
+                  <Typography variant="h5">Intereses</Typography>
+                  {/* entries:convierte un objeto en un arreglo */}
+                  {Object.entries(Interests).map(([category, options]) => (
+                    <Box key={category}>
+                      <Typography variant="h6">{category}</Typography>
+                      <Box direction="row" spacing={1} flexWrap="wrap">
+                        {options.map((option) => (
+                          <Chip
+                            key={option.name}
+                            variant="outlined"
+                            avatar={
+                              <Avatar sx={{ bgcolor: "white" }}>
+                                {option.icon}
+                              </Avatar>
+                            }
+                            label={option.name}
+                            sx={{ mr: 1, mb: 1 }}
+                            onClick={() => onSelectInterest(option.name)}
+                            color={
+                              selectedInterests.has(option.name)
+                                ? "primary"
+                                : "default"
+                            }
+                          />
+                        ))}
+                      </Box>
+                    </Box>
+                  ))}
+                </Stack>
               </FormControl>
               <Stack direction="row">
                 <Button onClick={onBack}>Back</Button>

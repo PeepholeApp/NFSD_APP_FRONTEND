@@ -1,528 +1,528 @@
 {
-    "Social": [
+    "Social": [      
       {
-        "nombre": "Salir de Fiesta",
-        "icono": "🎉"
+        "name": "Salir de Fiesta",
+        "icon": "🎉"
       },
       {
-        "nombre": "Picnic",
-        "icono": "🧺"
+        "name": "Picnic",
+        "icon": "🧺"
       },
       {
-        "nombre": "Cena",
-        "icono": "🍽️"
+        "name": "Cena",
+        "icon": "🍽️"
       },
       {
-        "nombre": "Concierto",
-        "icono": "🎤"
+        "name": "Concierto",
+        "icon": "🎤"
       },
       {
-        "nombre": "Juegos de mesa",
-        "icono": "🎲"
+        "name": "Juegos de mesa",
+        "icon": "🎲"
       },
       {
-        "nombre": "Senderismo",
-        "icono": "🥾"
+        "name": "Senderismo",
+        "icon": "🥾"
       },
       {
-        "nombre": "Cine",
-        "icono": "🍿"
+        "name": "Cine",
+        "icon": "🍿"
       },
       {
-        "nombre": "Karaoke",
-        "icono": "🎤"
+        "name": "Karaoke",
+        "icon": "🎤"
       },
       {
-        "nombre": "Bowling",
-        "icono": "🎳"
+        "name": "Bowling",
+        "icon": "🎳"
       },
       {
-        "nombre": "Paintball",
-        "icono": "🎨"
+        "name": "Paintball",
+        "icon": "🎨"
       },
       {
-        "nombre": "Barbacoa",
-        "icono": "🍖"
+        "name": "Barbacoa",
+        "icon": "🍖"
       },
       {
-        "nombre": "Festival",
-        "icono": "🎪"
+        "name": "Festival",
+        "icon": "🎪"
       },
       {
-        "nombre": "Escape Room",
-        "icono": "🔐"
+        "name": "Escape Room",
+        "icon": "🔐"
       },
       {
-        "nombre": "Visitar Museo",
-        "icono": "🏛️"
+        "name": "Visitar Museo",
+        "icon": "🏛️"
       },
       {
-        "nombre": "Karting",
-        "icono": "🏎️"
+        "name": "Karting",
+        "icon": "🏎️"
       },
       {
-        "nombre": "Fiesta en la Playa",
-        "icono": "🏖️"
+        "name": "Fiesta en la Playa",
+        "icon": "🏖️"
       },
       {
-        "nombre": "Camping",
-        "icono": "🏕️"
+        "name": "Camping",
+        "icon": "🏕️"
       },
       {
-        "nombre": "Cine",
-        "icono": "🎬"
+        "name": "Cine",
+        "icon": "🎬"
       },
       {
-        "nombre": "Ir a Parque de Atracciones",
-        "icono": "🎡"
+        "name": "Ir a Parque de Atracciones",
+        "icon": "🎡"
       },
       {
-        "nombre": "Noche de Trivia",
-        "icono": "❓"
+        "name": "Noche de Trivia",
+        "icon": "❓"
       },
       {
-        "nombre": "Tour Gastronómico",
-        "icono": "🍜"
+        "name": "Tour Gastronómico",
+        "icon": "🍜"
       },
       {
-        "nombre": "Día de Spa",
-        "icono": "💆"
+        "name": "Día de Spa",
+        "icon": "💆"
       },
       {
-        "nombre": "Partida de Paintball",
-        "icono": "🎨"
+        "name": "Partida de Paintball",
+        "icon": "🎨"
       },
       {
-        "nombre": "Recorrido en Bicicleta",
-        "icono": "🚴"
+        "name": "Recorrido en Bicicleta",
+        "icon": "🚴"
       },
       {
-        "nombre": "Tarde de Compras",
-        "icono": "🛍️"
+        "name": "Tarde de Compras",
+        "icon": "🛍️"
       },
 
       {
-        "nombre": "Cata de Vinos",
-        "icono": "🍷"
+        "name": "Cata de Vinos",
+        "icon": "🍷"
       },
       {
-        "nombre": "Festival de Música",
-        "icono": "🎶"
+        "name": "Festival de Música",
+        "icon": "🎶"
       },
       {
-        "nombre": "Visita a un Zoológico",
-        "icono": "🦓"
+        "name": "Visita a un Zoológico",
+        "icon": "🦓"
       },
       {
-        "nombre": "Clases de Cocina",
-        "icono": "👩‍🍳"
+        "name": "Clases de Cocina",
+        "icon": "👩‍🍳"
       },
       {
-        "nombre": "Tarde de Videojuegos",
-        "icono": "🎮"
+        "name": "Tarde de Videojuegos",
+        "icon": "🎮"
       },
       {
-        "nombre": "Club de Lectura",
-        "icono": "📚"
+        "name": "Club de Lectura",
+        "icon": "📚"
       },
       {
-        "nombre": "Noche de Comedia",
-        "icono": "😂"
+        "name": "Noche de Comedia",
+        "icon": "😂"
       },
       {
-        "nombre": "Visita a una Feria Local",
-        "icono": "🎡"
+        "name": "Visita a una Feria Local",
+        "icon": "🎡"
       },
       {
-        "nombre": "Clases de Baile",
-        "icono": "💃"
+        "name": "Clases de Baile",
+        "icon": "💃"
       },
       {
-        "nombre": "Noche de Observación Estelar",
-        "icono": "🌌"
+        "name": "Noche de Observación Estelar",
+        "icon": "🌌"
       },
       {
-        "nombre": "Carrera de Go Karts",
-        "icono": "🏎️"
+        "name": "Carrera de Go Karts",
+        "icon": "🏎️"
       }
 
     ],
 
-    "deportes": [
+    "Deportes": [
         {
-          "nombre": "Fútbol",
-          "icono": "⚽️"
+          "name": "Fútbol",
+          "icon": "⚽️"
         },
         {
-          "nombre": "Baloncesto",
-          "icono": "🏀"
+          "name": "Baloncesto",
+          "icon": "🏀"
         },
         {
-          "nombre": "Tenis",
-          "icono": "🎾"
+          "name": "Tenis",
+          "icon": "🎾"
         },
         {
-          "nombre": "Golf",
-          "icono": "⛳"
+          "name": "Golf",
+          "icon": "⛳"
         },
         {
-          "nombre": "Ciclismo",
-          "icono": "🚴"
+          "name": "Ciclismo",
+          "icon": "🚴"
         },
         {
-          "nombre": "Natación",
-          "icono": "🏊"
+          "name": "Natación",
+          "icon": "🏊"
         },
         {
-          "nombre": "Atletismo",
-          "icono": "🏃"
+          "name": "Atletismo",
+          "icon": "🏃"
         },
         {
-          "nombre": "Hockey sobre Hielo",
-          "icono": "🏒"
+          "name": "Hockey sobre Hielo",
+          "icon": "🏒"
         },
         {
-          "nombre": "Esquí",
-          "icono": "⛷️"
+          "name": "Esquí",
+          "icon": "⛷️"
         },
         {
-          "nombre": "Surf",
-          "icono": "🏄"
+          "name": "Surf",
+          "icon": "🏄"
         },
         {
-            "nombre": "Voleibol",
-            "icono": "🏐"
+            "name": "Voleibol",
+            "icon": "🏐"
           },
           {
-            "nombre": "Béisbol",
-            "icono": "⚾️"
+            "name": "Béisbol",
+            "icon": "⚾️"
           },
           {
-            "nombre": "Rugby",
-            "icono": "🏉"
+            "name": "Rugby",
+            "icon": "🏉"
           },
           {
-            "nombre": "Artes Marciales",
-            "icono": "🥋"
+            "name": "Artes Marciales",
+            "icon": "🥋"
           },
           {
-            "nombre": "Boxeo",
-            "icono": "🥊"
+            "name": "Boxeo",
+            "icon": "🥊"
           },
           {
-            "nombre": "Yoga",
-            "icono": "🧘"
+            "name": "Yoga",
+            "icon": "🧘"
           },
           {
-            "nombre": "Escalada",
-            "icono": "🧗"
+            "name": "Escalada",
+            "icon": "🧗"
           },
           {
-            "nombre": "Paddleboarding",
-            "icono": "🏄‍♂️"
+            "name": "Paddleboarding",
+            "icon": "🏄‍♂️"
           },
           {
-            "nombre": "Balonmano",
-            "icono": "🤾"
+            "name": "Balonmano",
+            "icon": "🤾"
           },
           {
-            "nombre": "Ski Acuático",
-            "icono": "🚤"
+            "name": "Ski Acuático",
+            "icon": "🚤"
           },
           {
-            "nombre": "Snowboard",
-            "icono": "🏂"
+            "name": "Snowboard",
+            "icon": "🏂"
           },
           {
-            "nombre": "Kickboxing",
-            "icono": "🥊"
+            "name": "Kickboxing",
+            "icon": "🥊"
           },
           {
-            "nombre": "Patinaje sobre Hielo",
-            "icono": "⛸️"
+            "name": "Patinaje sobre Hielo",
+            "icon": "⛸️"
           },
           {
-            "nombre": "Surf de Remo",
-            "icono": "🏄‍♂️"
+            "name": "Surf de Remo",
+            "icon": "🏄‍♂️"
           },
           {
-            "nombre": "Carrera de Obstáculos",
-            "icono": "🏃‍♂️"
+            "name": "Carrera de Obstáculos",
+            "icon": "🏃‍♂️"
           },
           {
-            "nombre": "Cricket",
-            "icono": "🏏"
+            "name": "Cricket",
+            "icon": "🏏"
           },
           {
-            "nombre": "Lucha Libre",
-            "icono": "🤼"
+            "name": "Lucha Libre",
+            "icon": "🤼"
           }
       ],
-    "cultura": [
+    "Cultura": [
         {
-          "nombre": "Teatro",
-          "icono": "🎭"
+          "name": "Teatro",
+          "icon": "🎭"
         },
         {
-          "nombre": "Museo",
-          "icono": "🏛️"
+          "name": "Museo",
+          "icon": "🏛️"
         },
         {
-          "nombre": "Concierto",
-          "icono": "🎶"
+          "name": "Concierto",
+          "icon": "🎶"
         },
         {
-          "nombre": "Ópera",
-          "icono": "🎶"
+          "name": "Ópera",
+          "icon": "🎶"
         },
         {
-          "nombre": "Ballet",
-          "icono": "💃"
+          "name": "Ballet",
+          "icon": "💃"
         },
         {
-          "nombre": "Arte Contemporáneo",
-          "icono": "🎨"
+          "name": "Arte Contemporáneo",
+          "icon": "🎨"
         },
         {
-          "nombre": "Lectura",
-          "icono": "📚"
+          "name": "Lectura",
+          "icon": "📚"
         },
         {
-          "nombre": "Historia",
-          "icono": "📜"
+          "name": "Historia",
+          "icon": "📜"
         },
         {
-          "nombre": "Arquitectura",
-          "icono": "🏰"
+          "name": "Arquitectura",
+          "icon": "🏰"
         },
         {
-            "nombre": "Cine",
-            "icono": "🎬"
+            "name": "Cine",
+            "icon": "🎬"
           },
           {
-            "nombre": "Escultura",
-            "icono": "🗿"
+            "name": "Escultura",
+            "icon": "🗿"
           },
           {
-            "nombre": "Galería de Arte",
-            "icono": "🖼️"
+            "name": "Galería de Arte",
+            "icon": "🖼️"
           },
           {
-            "nombre": "Danza Folklórica",
-            "icono": "💃"
+            "name": "Danza Folklórica",
+            "icon": "💃"
           },
           {
-            "nombre": "Exposición Fotográfica",
-            "icono": "📷"
+            "name": "Exposición Fotográfica",
+            "icon": "📷"
           },
           {
-            "nombre": "Artesanía Local",
-            "icono": "🎨"
+            "name": "Artesanía Local",
+            "icon": "🎨"
           },
           {
-            "nombre": "Festival de Literatura",
-            "icono": "📖"
+            "name": "Festival de Literatura",
+            "icon": "📖"
           },
           {
-            "nombre": "Conferencia Cultural",
-            "icono": "🎤"
+            "name": "Conferencia Cultural",
+            "icon": "🎤"
           },
           {
-            "nombre": "Recital de Poesía",
-            "icono": "📜"
+            "name": "Recital de Poesía",
+            "icon": "📜"
           },
           {
-            "nombre": "Tour Histórico",
-            "icono": "🏰"
+            "name": "Tour Histórico",
+            "icon": "🏰"
           }
       ],
-    "juegos": [
+    "Juegos": [
         {
-          "nombre": "Ajedrez",
-          "icono": "♟️"
+          "name": "Ajedrez",
+          "icon": "♟️"
         },
         {
-          "nombre": "Dominó",
-          "icono": "🀄"
+          "name": "Dominó",
+          "icon": "🀄"
         },
         {
-          "nombre": "Jenga",
-          "icono": "🏗️"
+          "name": "Jenga",
+          "icon": "🏗️"
         },
         {
-          "nombre": "Póker",
-          "icono": "🃏"
+          "name": "Póker",
+          "icon": "🃏"
         },
         {
-          "nombre": "Monopoly",
-          "icono": "🎲"
+          "name": "Monopoly",
+          "icon": "🎲"
         },
         {
-          "nombre": "Scrabble",
-          "icono": "🔠"
+          "name": "Scrabble",
+          "icon": "🔠"
         },
         {
-          "nombre": "Videojuegos",
-          "icono": "🎮"
+          "name": "Videojuegos",
+          "icon": "🎮"
         },
         {
-          "nombre": "Twister",
-          "icono": "🌀"
+          "name": "Twister",
+          "icon": "🌀"
         },
         {
-          "nombre": "Damas",
-          "icono": "🔲"
+          "name": "Damas",
+          "icon": "🔲"
         },
         {
-          "nombre": "Bingo",
-          "icono": "🎱"
+          "name": "Bingo",
+          "icon": "🎱"
         },
         {
-            "nombre": "Ludo",
-            "icono": "🎲"
+            "name": "Ludo",
+            "icon": "🎲"
           },
           {
-            "nombre": "Juego de cartas",
-            "icono": "🃏"
+            "name": "Juego de cartas",
+            "icon": "🃏"
           },
           {
-            "nombre": "Trivial Pursuit",
-            "icono": "🔵"
+            "name": "Trivial Pursuit",
+            "icon": "🔵"
           },
           {
-            "nombre": "Ahorcado",
-            "icono": "🪝"
+            "name": "Ahorcado",
+            "icon": "🪝"
           },
           {
-            "nombre": "Tetris",
-            "icono": "🕹️"
+            "name": "Tetris",
+            "icon": "🕹️"
           },
           {
-            "nombre": "Ping Pong",
-            "icono": "🏓"
+            "name": "Ping Pong",
+            "icon": "🏓"
           },
           {
-            "nombre": "Dardos",
-            "icono": "🎯"
+            "name": "Dardos",
+            "icon": "🎯"
           },
           {
-            "nombre": "Escape Room",
-            "icono": "🚪"
+            "name": "Escape Room",
+            "icon": "🚪"
           },
           {
-            "nombre": "Damas Chinas",
-            "icono": "🔵"
+            "name": "Damas Chinas",
+            "icon": "🔵"
           },
           {
-            "nombre": "Ta-te-ti (Tic Tac Toe)",
-            "icono": "❌⭕"
+            "name": "Ta-te-ti (Tic Tac Toe)",
+            "icon": "❌⭕"
           },
           {
-            "nombre": "Pictionary",
-            "icono": "🎨"
+            "name": "Pictionary",
+            "icon": "🎨"
           },
           {
-            "nombre": "Crucigrama",
-            "icono": "🔠"
+            "name": "Crucigrama",
+            "icon": "🔠"
           },
           {
-            "nombre": "Juegos de Palabras",
-            "icono": "🔤"
+            "name": "Juegos de Palabras",
+            "icon": "🔤"
           },
           {
-            "nombre": "Simón Dice",
-            "icono": "🕹️"
+            "name": "Simón Dice",
+            "icon": "🕹️"
           },
           {
-            "nombre": "Memory",
-            "icono": "🧠"
+            "name": "Memory",
+            "icon": "🧠"
           },
           {
-            "nombre": "Palabras Encadenadas",
-            "icono": "🔗"
+            "name": "Palabras Encadenadas",
+            "icon": "🔗"
           }
 
       ],
-    "estilo_de_vida": [
+    "Estilo de vida": [
         {
-          "nombre": "Fitness",
-          "icono": "💪"
+          "name": "Fitness",
+          "icon": "💪"
         },
         {
-          "nombre": "Yoga",
-          "icono": "🧘"
+          "name": "Yoga",
+          "icon": "🧘"
         },
         {
-          "nombre": "Viajes",
-          "icono": "✈️"
+          "name": "Viajes",
+          "icon": "✈️"
         },
         {
-          "nombre": "Gastronomía",
-          "icono": "🍽️"
+          "name": "Gastronomía",
+          "icon": "🍽️"
         },
         {
-          "nombre": "Aventuras al Aire Libre",
-          "icono": "🏞️"
+          "name": "Aventuras al Aire Libre",
+          "icon": "🏞️"
         },
         {
-          "nombre": "Cine y TV",
-          "icono": "🎬"
+          "name": "Cine y TV",
+          "icon": "🎬"
         },
         {
-          "nombre": "Lectura",
-          "icono": "📚"
+          "name": "Lectura",
+          "icon": "📚"
         },
         {
-          "nombre": "Moda",
-          "icono": "👗"
+          "name": "Moda",
+          "icon": "👗"
         },
         {
-          "nombre": "Música",
-          "icono": "🎵"
+          "name": "Música",
+          "icon": "🎵"
         },
         {
-          "nombre": "Relajación",
-          "icono": "🌿"
+          "name": "Relajación",
+          "icon": "🌿"
         },
         {
-            "nombre": "Ecoturismo",
-            "icono": "🌿"
+            "name": "Ecoturismo",
+            "icon": "🌿"
           },
           {
-            "nombre": "Fotografía",
-            "icono": "📷"
+            "name": "Fotografía",
+            "icon": "📷"
           },
           {
-            "nombre": "Voluntariado",
-            "icono": "🤝"
+            "name": "Voluntariado",
+            "icon": "🤝"
           },
           {
-            "nombre": "Cocina Saludable",
-            "icono": "🥗"
+            "name": "Cocina Saludable",
+            "icon": "🥗"
           },
           {
-            "nombre": "Arte y Manualidades",
-            "icono": "🎨"
+            "name": "Arte y Manualidades",
+            "icon": "🎨"
           },
           {
-            "nombre": "Meditación",
-            "icono": "🧘‍♂️"
+            "name": "Meditación",
+            "icon": "🧘‍♂️"
           },
           {
-            "nombre": "Exploración Urbana",
-            "icono": "🏙️"
+            "name": "Exploración Urbana",
+            "icon": "🏙️"
           },
           {
-            "nombre": "Deportes Acuáticos",
-            "icono": "🏄‍♂️"
+            "name": "Deportes Acuáticos",
+            "icon": "🏄‍♂️"
           },
           {
-            "nombre": "Camping",
-            "icono": "🏕️"
+            "name": "Camping",
+            "icon": "🏕️"
           },
           {
-            "nombre": "Ciclismo",
-            "icono": "🚴‍♂️"
+            "name": "Ciclismo",
+            "icon": "🚴‍♂️"
           }
 
       ]
