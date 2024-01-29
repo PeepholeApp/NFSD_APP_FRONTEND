@@ -4,19 +4,23 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true); //estado que representa mientra el usuario se esta cargando
 
   useEffect(() => {
     // revisa en localstorage si el token existe
     const storedToken = localStorage.getItem("token");
-    if (storedToken) {
-      setUser({ token: storedToken });
+    const storedUserId = localStorage.getItem("userId");
+    if (storedToken && storedUserId) {
+      setUser({ token: storedToken, userId: storedUserId });
     }
+    setLoading(false);
   }, []);
 
   const login = (user) => {
     setUser(user);
-    // guarda el token en el local storage cuando se loggean 
+    // guarda el token en el local storage cuando se loggean
     localStorage.setItem("token", user.token);
+    localStorage.setItem("userId", user.userId);
   };
 
   const logout = () => {
@@ -25,7 +29,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
