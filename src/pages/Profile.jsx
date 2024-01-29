@@ -108,6 +108,7 @@ const Profile = () => {
   };
 
   const onSave = async () => {
+    const interests = Array.from(selectedInterests); //convierte el set en un array
     const response = await axios.post("http://localhost:3001/profiles", {
       name: firstName,
       last_name: lastName,
@@ -117,6 +118,7 @@ const Profile = () => {
       languages: languages.map((language) => language.value),
       bio,
       user: user.userId,
+      interest: interests,
     });
   };
 
