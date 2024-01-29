@@ -2,13 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/system";
-import {
-  Button,
-  TextField,
-  Typography,
-  Container,
-  CssBaseline,
-} from "@mui/material";
+import { Button, TextField, Typography, Container } from "@mui/material";
 import { useAuth } from "../context/Login";
 
 const StyledForm = styled("form")(({ theme }) => ({
@@ -63,7 +57,6 @@ const Login = () => {
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div>
         <Typography variant="h1" gutterBottom>
           Login

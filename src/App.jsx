@@ -12,10 +12,11 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import Navbar from "./components/NavBar";
+import CssBaseline from "@mui/material/CssBaseline";
 
 const theme = createTheme({
   palette: {
-    mode: "light",
+    mode: "dark",
     primary: {
       main: "#654ea3",
     },
@@ -28,6 +29,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <AuthProvider>
+            <CssBaseline />
             <Navbar />
             <Routes>
               <Route path="/" element={<Home />} />
