@@ -25,7 +25,6 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
-
 const languagesOptions = [
   {
     label: "Español",
@@ -60,7 +59,7 @@ const Profile = () => {
   const [step, setStep] = useState(0);
   const [countries, setCountries] = useState([]);
   const [selectedInterests, setSelectedInterests] = useState(new Set());
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -80,10 +79,11 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
-    if (!user?.token) {
-      // navigate("/login");
+    //chekeo si existe usuario y este cargado
+    if (!user?.token && !loading) {
+      navigate("/login");
     }
-  }, [user]);
+  }, [user, loading]);
 
   const onNext = async () => {
     setStep((prevStep) => prevStep + 1);
