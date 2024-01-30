@@ -131,6 +131,9 @@ const Profile = () => {
               <StepLabel>Informacion Personal</StepLabel>
             </Step>
             <Step>
+              <StepLabel>Biografia</StepLabel>
+            </Step>
+            <Step>
               <StepLabel>Intereses</StepLabel>
             </Step>
             <Step>
@@ -254,6 +257,15 @@ const Profile = () => {
                   fullWidth
                   label="Añade una Biografía sobre ti"
                 />
+              </FormControl>
+              <Stack direction="row">
+                <Button onClick={onBack}>Back</Button>
+                <Button onClick={onNext}>Dinos tus interese</Button>
+              </Stack>
+            </>
+          ) : step === 2 ? (
+            <>
+              <FormControl>
                 <Stack>
                   <Typography variant="h5">Intereses</Typography>
                   {/* entries:convierte un objeto en un arreglo */}
@@ -290,7 +302,7 @@ const Profile = () => {
                 <Button onClick={onNext}>Ahora sube tus fotos</Button>
               </Stack>
             </>
-          ) : step === 2 ? (
+          ) : step === 3 ? (
             <>
               <h1>Subir fotos</h1>
               <Button onClick={onSave}>Guardar</Button>
