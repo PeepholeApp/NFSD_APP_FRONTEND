@@ -19,7 +19,7 @@ const Navbar = () => {
   };
   return user ? (
     <>
-      <AppBar component="nav">
+      <AppBar component="nav" position="static">
         <Toolbar>
           <Button
             variant="h6"
