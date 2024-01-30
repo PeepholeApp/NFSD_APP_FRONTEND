@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import ProfileInterests from "../../components/ProfileInterests/ProfileInterests";
+import ProfileLanguages from "../../components/ProfileLanguages/ProfileLanguages";
 import "./HomeApp.css";
 
 const HomeApp = () => {
@@ -80,10 +82,12 @@ const HomeApp = () => {
                     </h3>
                   </div>
                   <div className="card_details">
-                    <h3>Bio:</h3>
-                    <h4>{profile.bio}</h4>
-                    <h3>Lenguages:</h3>
-                    <h4>{profile.languages}</h4>
+                    <div>Bio:</div>
+                    <div>{profile.bio}</div>
+                    <div>Lenguages:</div>
+                    <ProfileLanguages languages={profile.languages} />
+                    <div>Intereses:</div>
+                    <ProfileInterests interests={profile.interest} />
                   </div>
                 </li>
               ))}

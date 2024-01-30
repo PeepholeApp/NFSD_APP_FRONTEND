@@ -1,0 +1,15 @@
+.flex_interests {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.style_interests {
+  width: auto;
+  border: 1px solid black;
+  border-radius: 20px;
+  box-sizing: content-box;
+  padding: 5px 10px;
+  white-space: nowrap;
+}
