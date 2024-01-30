@@ -2,14 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./HomeApp.css";
 
-const countries = ["Arg", "Col", "Ven"];
-
 const HomeApp = () => {
   const [profiles, setProfiles] = useState([]);
   const [toggleNation, setToggleNation] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [nationalities, setNationalities] = useState([]);
   const [lastPage, setLastPage] = useState(false);
+  const [toggleFilter, setToggleFilter] = useState(true);
 
   useEffect(() => {
     getPaginationProfiles();
@@ -52,49 +51,57 @@ const HomeApp = () => {
 
   return (
     <>
-      <div className="page_order">
-        <h1>Find your people</h1>
-        <div className="nationality_filter_container">
-          {nationalities.map((nationality, id) => (
-            <div
-              key={id}
-              className={`nationality_filter ${
-                toggleNation ? "checkNation" : ""
-              }`}
-              onClick={() => setToggleNation(!toggleNation)}
-            >
-              <h3>{nationality}</h3>
-            </div>
-          ))}
-        </div>
-        <div className="cards_container">
-          <ul className="card_flex">
-            {profiles.map((profile, id) => (
-              <li key={id} className="card_profile">
-                <div className="card_image">
-                  <h3>
-                    {profile.name} {profile.last_name}
-                  </h3>
-                </div>
-                <div className="card_details">
-                  <h3>{profile.bio}</h3>
-                </div>
-              </li>
+      <div className="flex_display_filter">
+        <div className={`filters ${toggleFilter ? "" : "hidden"}`}>Filters</div>
+        <div className="page_order">
+          <div className="nationality_filter_container">
+            {nationalities.map((nationality, id) => (
+              <div
+                key={id}
+                className={`nationality_filter ${
+                  toggleNation ? "checkNation" : ""
+                }`}
+                onClick={() => setToggleNation(!toggleNation)}
+              >
+                <h3>{nationality}</h3>
+              </div>
             ))}
-          </ul>
+          </div>
+          <button onClick={() => setToggleFilter(!toggleFilter)}>
+            Show filters
+          </button>
+          <div className="cards_container">
+            <ul className="card_flex">
+              {profiles.map((profile, id) => (
+                <li key={id} className="card_profile">
+                  <div className="card_image">
+                    <h3>
+                      {profile.name} {profile.last_name}
+                    </h3>
+                  </div>
+                  <div className="card_details">
+                    <h3>Bio:</h3>
+                    <h4>{profile.bio}</h4>
+                    <h3>Lenguages:</h3>
+                    <h4>{profile.languages}</h4>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <button
+            onClick={() => setCurrentPage((prev) => prev - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <button
+            onClick={() => setCurrentPage((prev) => prev + 1)}
+            disabled={lastPage === true}
+          >
+            Next
+          </button>
         </div>
-        <button
-          onClick={() => setCurrentPage((prev) => prev - 1)}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-        <button
-          onClick={() => setCurrentPage((prev) => prev + 1)}
-          disabled={lastPage === true}
-        >
-          Next
-        </button>
       </div>
     </>
   );

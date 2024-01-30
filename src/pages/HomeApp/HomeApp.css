@@ -1,6 +1,27 @@
 /* offset-x | offset-y | blur-radius | spread-radius | color */
 /* linear-gradient(to right top, rgb(173, 182, 255) 0%, rgb(174, 109, 255) 100%); */
 /* backdrop-filter: blur(6px) saturate(180%); */
+.flex_display_filter {
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  transition: all 0.4s ease-in-out;
+}
+
+.filters {
+  width: 250px;
+  height: 700px;
+  background-color: #262938;
+  border-radius: 20px;
+  transition: all 0.4s ease-in-out;
+  opacity: 1;
+}
+.filters.hidden {
+  opacity: 0;
+  width: 0;
+}
+
 .page_order {
   height: 100vh;
   margin: 0;
@@ -8,7 +29,7 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  background-color: #f6f6f9;
+  /* background-color: #f6f6f9; */
 }
 
 .nationality_filter_container {
@@ -86,28 +107,41 @@
   transform: translateY(-10px);
 }
 
+.card_profile {
+  position: relative;
+}
+
 .card_image {
   width: 100%;
   height: 100px;
+  position: relative;
+  color: black;
 }
+
 .card_image > h3 {
   margin-left: 10px;
 }
 
 .card_details {
-  background-color: dimgray;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  background: rgba(6, 4, 20, 0.524);
+  backdrop-filter: blur(7.5px);
   border: 1px solid black;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   color: white;
-  width: 100%;
-  height: 185px;
   padding: 10px;
   box-sizing: border-box;
-  border-radius: 15px;
   overflow-y: auto;
   opacity: 0;
   transition: opacity 0.4s ease-in-out, top 0.4s ease-in-out;
+  display: flex;
+  flex-direction: column;
 }
 
 .card_profile:hover .card_details {
