@@ -18,9 +18,7 @@ const ProfileInterests = ({ interests }) => {
         <div className="flex_interests">
           {interests.map((interest, index) => (
             <div key={index} className="style_interests">
-              <span role="img" aria-label="interest-icon">
-                {getIcon(interest[0])}
-              </span>
+              <span role="img">{getIcon(interest[0])}</span>
               {interest}
             </div>
           ))}

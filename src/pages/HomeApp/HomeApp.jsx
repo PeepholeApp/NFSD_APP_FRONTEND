@@ -72,26 +72,23 @@ const HomeApp = () => {
           <button onClick={() => setToggleFilter(!toggleFilter)}>
             Show filters
           </button>
-          <div className="cards_container">
-            <ul className="card_flex">
-              {profiles.map((profile, id) => (
-                <li key={id} className="card_profile">
-                  <div className="card_image">
-                    <h3>
-                      {profile.name} {profile.last_name}
-                    </h3>
-                  </div>
-                  <div className="card_details">
-                    <div>Bio:</div>
-                    <div>{profile.bio}</div>
-                    <div>Lenguages:</div>
-                    <ProfileLanguages languages={profile.languages} />
-                    <div>Intereses:</div>
-                    <ProfileInterests interests={profile.interest} />
-                  </div>
-                </li>
-              ))}
-            </ul>
+          <div className="card_flex">
+            {profiles.map((profile, id) => (
+              <div key={id} className="card_profile">
+                <h3>
+                  {profile.name} {profile.last_name}
+                </h3>
+                <div className="card_image"></div>
+                <div className="card_details">
+                  <div>Bio:</div>
+                  <div>{profile.bio}</div>
+                  <div>Lenguajes:</div>
+                  <ProfileLanguages languages={profile.languages} />
+                  <div>Intereses:</div>
+                  <ProfileInterests interests={profile.interest} />
+                </div>
+              </div>
+            ))}
           </div>
           <button
             onClick={() => setCurrentPage((prev) => prev - 1)}
