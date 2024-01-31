@@ -1,5 +1,5 @@
 {
-  "Social": [
+  "interests": [
     {
       "name": "Salir de Fiesta",
       "icon": "🎉"
@@ -144,10 +144,7 @@
     {
       "name": "Carrera de Go Karts",
       "icon": "🏎️"
-    }
-  ],
-
-  "Deportes": [
+    },
     {
       "name": "Fútbol",
       "icon": "⚽️"
@@ -255,9 +252,7 @@
     {
       "name": "Lucha Libre",
       "icon": "🤼"
-    }
-  ],
-  "Cultura": [
+    },
     {
       "name": "Teatro",
       "icon": "🎭"
@@ -333,9 +328,7 @@
     {
       "name": "Tour Histórico",
       "icon": "🏰"
-    }
-  ],
-  "Juegos": [
+    },
     {
       "name": "Ajedrez",
       "icon": "♟️"
@@ -439,9 +432,7 @@
     {
       "name": "Palabras Encadenadas",
       "icon": "🔗"
-    }
-  ],
-  "Estilo de vida": [
+    },
     {
       "name": "Fitness",
       "icon": "💪"

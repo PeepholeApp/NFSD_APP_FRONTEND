@@ -12,4 +12,6 @@
   box-sizing: content-box;
   padding: 5px 10px;
   white-space: nowrap;
+  display: flex;
+  gap: 5px;
 }
