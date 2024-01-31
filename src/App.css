@@ -1,1 +1,10 @@
+@font-face {
+  font-family: "Cascadia Code";
+  src: url("./fonts/CascadiaCodePL.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 
+div {
+  font-family: "Cascadia Code", sans-serif;
+}
