@@ -1,15 +1,19 @@
 import React from "react";
-import iconData from "../../data/interestIcons.json";
+import iconData from "../../data/interests.json";
 import "./ProfileInterests.css";
 
 const ProfileInterests = ({ interests }) => {
-  const icons = iconData.interests;
-
   const getIcon = (interestName) => {
-    const foundInterest = icons.find(
-      (interest) => interest.name === interestName
-    );
-    return foundInterest ? foundInterest.icon : null; // Retorna null si no se encuentra el icono
+    for (const category in iconData) {
+      const interestsInCategory = iconData[category];
+      const foundInterest = interestsInCategory.find(
+        (interest) => interest.name === interestName
+      );
+      if (foundInterest) {
+        return foundInterest.icon;
+      }
+    }
+    return null;
   };
 
   return (
