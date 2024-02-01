@@ -124,194 +124,192 @@ const Profile = () => {
   };
 
   return (
-    <>
-      <Stack sx={{ m: 15 }} alignItems="center">
-        <Stack sx={{ width: 500 }} spacing={2}>
-          <Stepper activeStep={step}>
-            <Step>
-              <StepLabel>Informacion Personal</StepLabel>
-            </Step>
-            <Step>
-              <StepLabel>Biografia</StepLabel>
-            </Step>
-            <Step>
-              <StepLabel>Intereses</StepLabel>
-            </Step>
-            <Step>
-              <StepLabel>Fotos</StepLabel>
-            </Step>
-          </Stepper>
+    <Stack sx={{ m: 20 }} alignItems="center">
+      <Stack sx={{ p: 8, width: 600, backgroundColor: "#262938" }} spacing={2}>
+        <Stepper activeStep={step}>
+          <Step>
+            <StepLabel>Informacion Personal</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel>Biografia</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel>Intereses</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel>Fotos</StepLabel>
+          </Step>
+        </Stepper>
 
-          {step === 0 ? (
-            <>
-              <FormControl>
-                <TextField
-                  label="First Name"
-                  value={firstName}
-                  onChange={(e) => {
-                    setFirstName(e.target.value);
-                  }}
-                />
-              </FormControl>
+        {step === 0 ? (
+          <>
+            <FormControl>
+              <TextField
+                label="First Name"
+                value={firstName}
+                onChange={(e) => {
+                  setFirstName(e.target.value);
+                }}
+              />
+            </FormControl>
 
-              <FormControl>
-                <TextField
-                  label="Last name"
-                  value={lastName}
-                  onChange={(e) => {
-                    setLastName(e.target.value);
-                  }}
-                />
-              </FormControl>
+            <FormControl>
+              <TextField
+                label="Last name"
+                value={lastName}
+                onChange={(e) => {
+                  setLastName(e.target.value);
+                }}
+              />
+            </FormControl>
 
-              <Stack direction="row">
-                {/* <Typography variant="body1">Fecha de Nacimiento</Typography> */}
-                <FormLabel sx={{ paddingRight: 2 }}>
-                  Fecha de Nacimiento
-                </FormLabel>
-                <DatePicker
-                  value={brithday}
-                  onChange={(date) => {
-                    setBrithday(date);
-                  }}
-                />
-              </Stack>
+            <Stack direction="row">
+              {/* <Typography variant="body1">Fecha de Nacimiento</Typography> */}
+              <FormLabel sx={{ paddingRight: 2 }}>
+                Fecha de Nacimiento
+              </FormLabel>
+              <DatePicker
+                value={brithday}
+                onChange={(date) => {
+                  setBrithday(date);
+                }}
+              />
+            </Stack>
 
-              <FormControl>
-                <FormLabel>Genero</FormLabel>
-                <RadioGroup
-                  row
-                  value={genero}
-                  onChange={(e) => {
-                    setGenero(e.target.value);
-                  }}
-                >
-                  <FormControlLabel
-                    value="female"
-                    control={<Radio />}
-                    label="Femenino"
-                  />
-                  <FormControlLabel
-                    value="male"
-                    control={<Radio />}
-                    label="Masculino"
-                  />
-                  <FormControlLabel
-                    value="other"
-                    control={<Radio />}
-                    label="Otro"
-                  />
-                </RadioGroup>
-              </FormControl>
-
-              <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                <InputLabel>Nacionalidad</InputLabel>
-                <Select
-                  value={nationality}
-                  label="nationality"
-                  onChange={(e) => {
-                    setNationality(e.target.value);
-                  }}
-                >
-                  {countries.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-
-              <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                <Autocomplete
-                  value={languages}
-                  onChange={(e, value) => {
-                    setLanguages(value);
-                  }}
-                  multiple
-                  options={languagesOptions}
-                  // filterSelectedOptions
-                  renderInput={(params) => (
-                    <TextField {...params} label="Idioma" />
-                  )}
-                />
-              </FormControl>
-              <Stack direction="row">
-                <Button disabled={step === 0} onClick={onBack}>
-                  Back
-                </Button>
-                <Button onClick={onNext}>Avanzar a intereses personales</Button>
-              </Stack>
-            </>
-          ) : step === 1 ? (
-            <>
-              <FormControl
-                sx={{
-                  width: 500,
-                  maxWidth: "100%",
+            <FormControl>
+              <FormLabel>Genero</FormLabel>
+              <RadioGroup
+                row
+                value={genero}
+                onChange={(e) => {
+                  setGenero(e.target.value);
                 }}
               >
-                <TextField
-                  value={bio}
-                  onChange={(e) => {
-                    setBio(e.target.value);
-                  }}
-                  fullWidth
-                  label="Añade una Biografía sobre ti"
+                <FormControlLabel
+                  value="female"
+                  control={<Radio />}
+                  label="Femenino"
                 />
-              </FormControl>
-              <Stack direction="row">
-                <Button onClick={onBack}>Back</Button>
-                <Button onClick={onNext}>Dinos tus interese</Button>
-              </Stack>
-            </>
-          ) : step === 2 ? (
-            <>
-              <FormControl>
-                <Stack>
-                  <Typography variant="h5">Intereses</Typography>
-                  {/* entries:convierte un objeto en un arreglo */}
-                  {Object.entries(Interests).map(([category, options]) => (
-                    <Box key={category}>
-                      <Typography variant="h6">{category}</Typography>
-                      <Box direction="row" spacing={1} flexWrap="wrap">
-                        {options.map((option) => (
-                          <Chip
-                            key={option.name}
-                            variant="outlined"
-                            avatar={
-                              <Avatar sx={{ bgcolor: "white" }}>
-                                {option.icon}
-                              </Avatar>
-                            }
-                            label={option.name}
-                            sx={{ mr: 1, mb: 1 }}
-                            onClick={() => onSelectInterest(option.name)}
-                            color={
-                              selectedInterests.has(option.name)
-                                ? "primary"
-                                : "default"
-                            }
-                          />
-                        ))}
-                      </Box>
+                <FormControlLabel
+                  value="male"
+                  control={<Radio />}
+                  label="Masculino"
+                />
+                <FormControlLabel
+                  value="other"
+                  control={<Radio />}
+                  label="Otro"
+                />
+              </RadioGroup>
+            </FormControl>
+
+            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+              <InputLabel>Nacionalidad</InputLabel>
+              <Select
+                value={nationality}
+                label="nationality"
+                onChange={(e) => {
+                  setNationality(e.target.value);
+                }}
+              >
+                {countries.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+              <Autocomplete
+                value={languages}
+                onChange={(e, value) => {
+                  setLanguages(value);
+                }}
+                multiple
+                options={languagesOptions}
+                // filterSelectedOptions
+                renderInput={(params) => (
+                  <TextField {...params} label="Idioma" />
+                )}
+              />
+            </FormControl>
+            <Stack direction="row">
+              <Button disabled={step === 0} onClick={onBack}>
+                Back
+              </Button>
+              <Button onClick={onNext}>Avanzar a intereses personales</Button>
+            </Stack>
+          </>
+        ) : step === 1 ? (
+          <>
+            <FormControl
+              sx={{
+                width: 500,
+                maxWidth: "100%",
+              }}
+            >
+              <TextField
+                value={bio}
+                onChange={(e) => {
+                  setBio(e.target.value);
+                }}
+                fullWidth
+                label="Añade una Biografía sobre ti"
+              />
+            </FormControl>
+            <Stack direction="row">
+              <Button onClick={onBack}>Back</Button>
+              <Button onClick={onNext}>Dinos tus interese</Button>
+            </Stack>
+          </>
+        ) : step === 2 ? (
+          <>
+            <FormControl>
+              <Stack>
+                <Typography variant="h5">Intereses</Typography>
+                {/* entries:convierte un objeto en un arreglo */}
+                {Object.entries(Interests).map(([category, options]) => (
+                  <Box key={category}>
+                    <Typography variant="h6">{category}</Typography>
+                    <Box direction="row" spacing={1} flexWrap="wrap">
+                      {options.map((option) => (
+                        <Chip
+                          key={option.name}
+                          variant="outlined"
+                          avatar={
+                            <Avatar sx={{ bgcolor: "white" }}>
+                              {option.icon}
+                            </Avatar>
+                          }
+                          label={option.name}
+                          sx={{ mr: 1, mb: 1 }}
+                          onClick={() => onSelectInterest(option.name)}
+                          color={
+                            selectedInterests.has(option.name)
+                              ? "primary"
+                              : "default"
+                          }
+                        />
+                      ))}
                     </Box>
-                  ))}
-                </Stack>
-              </FormControl>
-              <Stack direction="row">
-                <Button onClick={onBack}>Back</Button>
-                <Button onClick={onNext}>Ahora sube tus fotos</Button>
+                  </Box>
+                ))}
               </Stack>
-            </>
-          ) : step === 3 ? (
-            <>
-              <h1>Subir fotos</h1>
-              <Button onClick={onSave}>Guardar</Button>
-            </>
-          ) : null}
-        </Stack>
+            </FormControl>
+            <Stack direction="row">
+              <Button onClick={onBack}>Back</Button>
+              <Button onClick={onNext}>Ahora sube tus fotos</Button>
+            </Stack>
+          </>
+        ) : step === 3 ? (
+          <>
+            <h1>Subir fotos</h1>
+            <Button onClick={onSave}>Guardar</Button>
+          </>
+        ) : null}
       </Stack>
-    </>
+    </Stack>
   );
 };
 export default Profile;
