@@ -10,8 +10,6 @@ import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
 import logo from "../assets/logo.png";
 import Stack from "@mui/material/Stack";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 
 const Navbar = () => {
   const { user } = useAuth();
@@ -32,7 +30,7 @@ const Navbar = () => {
           }}
         >
           <Box onClick={onHome}>
-            <img src={logo} alt="logo" style={{ width: 100 }} />
+            <img src={logo} alt="logo" style={{ width: 150 }} />
           </Box>
 
           <Box>
@@ -45,7 +43,9 @@ const Navbar = () => {
             <Button key={"Home"} sx={{ color: "#fff" }}>
               About us
             </Button>
-            Contact
+            <Button key={"Home"} sx={{ color: "#fff" }}>
+              Contact
+            </Button>
           </Box>
 
           <Avatar></Avatar>
@@ -54,15 +54,16 @@ const Navbar = () => {
     </>
   ) : (
     <AppBar component="nav">
-      <Toolbar>
-        <Button
-          variant="h6"
-          component="div"
-          onClick={onHome}
-          sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-        >
-          LOGO
-        </Button>
+      <Toolbar
+        sx={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Box onClick={onHome}>
+          <img src={logo} alt="logo" style={{ width: 150 }} />
+        </Box>
         <Box sx={{ display: { xs: "none", sm: "block" } }}>
           <Button key={"Home"} sx={{ color: "#fff" }}>
             App
@@ -73,9 +74,10 @@ const Navbar = () => {
           <Button key={"Home"} sx={{ color: "#fff" }}>
             Blog
           </Button>
-          <IconButton sx={{ p: 0 }}>
-            <Avatar />
-          </IconButton>
+        </Box>
+        <Box>
+          <Button>Sign In</Button>
+          <Button>Sign up</Button>
         </Box>
       </Toolbar>
     </AppBar>
