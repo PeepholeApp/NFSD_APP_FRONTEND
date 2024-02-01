@@ -53,7 +53,7 @@ const Navbar = () => {
       </AppBar>
     </>
   ) : (
-    <AppBar component="nav">
+    <AppBar component="nav" position="static">
       <Toolbar
         sx={{
           flexDirection: "row",
