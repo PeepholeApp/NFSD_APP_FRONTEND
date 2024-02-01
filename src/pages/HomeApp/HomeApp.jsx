@@ -73,8 +73,8 @@ const HomeApp = () => {
             Show filters
           </button>
           <div className="card_flex">
-            {profiles.map((profile, id) => (
-              <div key={id} className="card_profile">
+            {profiles.map((profile) => (
+              <div key={profile._id} className="card_profile">
                 <h3>
                   {profile.name} {profile.last_name}
                 </h3>
