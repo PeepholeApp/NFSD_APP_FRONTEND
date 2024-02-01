@@ -21,6 +21,10 @@ const theme = createTheme({
       main: "#654ea3",
     },
   },
+
+  typography: {
+    fontFamily: ["Source Code Pro"].join(","),
+  },
 });
 
 function App() {
