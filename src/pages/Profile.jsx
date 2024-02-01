@@ -24,6 +24,7 @@ import Chip from "@mui/material/Chip";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { ButtonDark } from "../components/Button";
 
 const languagesOptions = [
   {
@@ -164,7 +165,6 @@ const Profile = () => {
             </FormControl>
 
             <Stack direction="row">
-              {/* <Typography variant="body1">Fecha de Nacimiento</Typography> */}
               <FormLabel sx={{ paddingRight: 2 }}>
                 Fecha de Nacimiento
               </FormLabel>
@@ -234,11 +234,14 @@ const Profile = () => {
                 )}
               />
             </FormControl>
+
             <Stack direction="row">
-              <Button disabled={step === 0} onClick={onBack}>
+              <ButtonDark disabled={step === 0} onClick={onBack}>
                 Back
-              </Button>
-              <Button onClick={onNext}>Avanzar a intereses personales</Button>
+              </ButtonDark>
+              <ButtonDark onClick={onNext}>
+                Avanzar a intereses personales
+              </ButtonDark>
             </Stack>
           </>
         ) : step === 1 ? (
@@ -259,8 +262,8 @@ const Profile = () => {
               />
             </FormControl>
             <Stack direction="row">
-              <Button onClick={onBack}>Back</Button>
-              <Button onClick={onNext}>Dinos tus interese</Button>
+              <ButtonDark onClick={onBack}>Back</ButtonDark>
+              <ButtonDark onClick={onNext}>Cuales son tus interese</ButtonDark>
             </Stack>
           </>
         ) : step === 2 ? (
@@ -298,14 +301,14 @@ const Profile = () => {
               </Stack>
             </FormControl>
             <Stack direction="row">
-              <Button onClick={onBack}>Back</Button>
-              <Button onClick={onNext}>Ahora sube tus fotos</Button>
+              <ButtonDark onClick={onBack}>Back</ButtonDark>
+              <ButtonDark onClick={onNext}>Ahora sube tus fotos</ButtonDark>
             </Stack>
           </>
         ) : step === 3 ? (
           <>
             <h1>Subir fotos</h1>
-            <Button onClick={onSave}>Guardar</Button>
+            <ButtonDark onClick={onSave}>Guardar</ButtonDark>
           </>
         ) : null}
       </Stack>
