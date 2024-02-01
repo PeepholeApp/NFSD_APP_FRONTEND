@@ -98,6 +98,7 @@ const Profile = () => {
     setSelectedInterests((selectedInterests) => {
       const selected = new Set(selectedInterests);
       if (selected.has(interest)) {
+        //el método has --> verifica si existe o no el interest
         selected.delete(interest);
         return selected;
       } else {
