@@ -65,14 +65,14 @@ const HomeApp = () => {
                 }`}
                 onClick={() => setToggleNation(!toggleNation)}
               >
-                <h3>{nationality}</h3>
+                <div>{nationality}</div>
               </div>
             ))}
           </div>
           <button onClick={() => setToggleFilter(!toggleFilter)}>
             Show filters
           </button>
-          <div className="card_flex">
+          <div className="card_grid">
             {profiles.map((profile, id) => (
               <div key={id} className="card_profile">
                 <h3>
