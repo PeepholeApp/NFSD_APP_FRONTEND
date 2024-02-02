@@ -11,20 +11,19 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Autocomplete from "@mui/material/Autocomplete";
-import Button from "@mui/material/Button";
 import axios from "axios";
 import { useAuth } from "../context/Login";
 import { useNavigate } from "react-router-dom";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import NavBar from "../components/NavBar";
 import Interests from "../data/interests.json";
 import Chip from "@mui/material/Chip";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { ButtonDark } from "../components/Button";
+import Modal from "@mui/material/Modal";
 
 const languagesOptions = [
   {
@@ -49,6 +48,18 @@ const languagesOptions = [
   },
 ];
 
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+
 const Profile = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -62,6 +73,7 @@ const Profile = () => {
   const [selectedInterests, setSelectedInterests] = useState(new Set());
   const { user, loading } = useAuth();
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     axios.get("https://restcountries.com/v3.1/all").then((response) => {
@@ -109,7 +121,10 @@ const Profile = () => {
     });
   };
 
+  const handleClose = () => setOpen(false);
+
   const onSave = async () => {
+    setOpen(true);
     const interests = Array.from(selectedInterests); //convierte el set en un array
     const response = await axios.post("http://localhost:3001/profiles", {
       name: firstName,
@@ -309,6 +324,18 @@ const Profile = () => {
           <>
             <h1>Subir fotos</h1>
             <ButtonDark onClick={onSave}>Guardar</ButtonDark>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  🎉🎉🎉Completed profile congratulations!!! 🥳
+                </Typography>
+              </Box>
+            </Modal>
           </>
         ) : null}
       </Stack>
