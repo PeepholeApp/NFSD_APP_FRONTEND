@@ -124,7 +124,6 @@ const Profile = () => {
   const handleClose = () => setOpen(false);
 
   const onSave = async () => {
-    setOpen(true);
     const interests = Array.from(selectedInterests); //convierte el set en un array
     const response = await axios.post("http://localhost:3001/profiles", {
       name: firstName,
@@ -137,6 +136,8 @@ const Profile = () => {
       user: user.userId,
       interest: interests,
     });
+    setOpen(true);
+    setTimeout(() => navigate("/home"), 2000);
   };
 
   return (
