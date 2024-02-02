@@ -125,7 +125,7 @@ const Profile = () => {
   };
 
   return (
-    <Stack sx={{ m: 20 }} alignItems="center">
+    <Stack sx={{ m: 5 }} alignItems="center">
       <Stack sx={{ p: 8, width: 600, backgroundColor: "#262938" }} spacing={2}>
         <Stepper activeStep={step}>
           <Step>
@@ -235,7 +235,7 @@ const Profile = () => {
               />
             </FormControl>
 
-            <Stack direction="row">
+            <Stack direction="row" justifyContent="space-between">
               <ButtonDark disabled={step === 0} onClick={onBack}>
                 Back
               </ButtonDark>
@@ -261,7 +261,7 @@ const Profile = () => {
                 label="Añade una Biografía sobre ti"
               />
             </FormControl>
-            <Stack direction="row">
+            <Stack direction="row" justifyContent="space-between">
               <ButtonDark onClick={onBack}>Back</ButtonDark>
               <ButtonDark onClick={onNext}>Cuales son tus interese</ButtonDark>
             </Stack>
@@ -300,7 +300,7 @@ const Profile = () => {
                 ))}
               </Stack>
             </FormControl>
-            <Stack direction="row">
+            <Stack direction="row" justifyContent="space-between">
               <ButtonDark onClick={onBack}>Back</ButtonDark>
               <ButtonDark onClick={onNext}>Ahora sube tus fotos</ButtonDark>
             </Stack>
