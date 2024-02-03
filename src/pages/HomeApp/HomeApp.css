@@ -2,24 +2,11 @@
 /* linear-gradient(to right top, rgb(173, 182, 255) 0%, rgb(174, 109, 255) 100%); */
 /* backdrop-filter: blur(6px) saturate(180%); */
 .flex_display_filter {
-  margin-top: 30px;
+  margin: 20px;
   display: flex;
   justify-content: center;
   gap: 30px;
   transition: all 0.4s ease-in-out;
-}
-
-.filters {
-  width: 250px;
-  height: 700px;
-  background-color: #262938;
-  border-radius: 20px;
-  transition: all 0.4s ease-in-out;
-  opacity: 1;
-}
-.filters.hidden {
-  opacity: 0;
-  width: 0;
 }
 
 .page_order {
@@ -34,39 +21,6 @@
   /* background-color: #f6f6f9; */
 }
 
-.nationality_filter_container {
-  flex: none;
-  max-width: 1000px;
-  width: 100%;
-  padding: 15px;
-  box-sizing: border-box;
-  overflow-x: auto;
-  border-radius: 25px;
-  background-color: #262938;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-.nationality_filter {
-  flex: none;
-  aspect-ratio: 1 / 1;
-  height: 100%;
-  padding: 15px;
-  border-radius: 50%;
-  border: 2px solid rgb(255, 255, 255);
-  transition: border 0.4s ease-in-out;
-  cursor: pointer;
-}
-.nationality_filter:hover {
-  border: 4px solid plum;
-}
-.checkNation {
-  border: 4px solid greenyellow;
-}
-
 .card_grid {
   max-width: 1000px;
   width: 100%;
@@ -74,6 +28,7 @@
   grid-template-columns: repeat(auto-fill, minmax(270px, 2fr));
   gap: 2rem;
   justify-items: center;
+  /* transition: all 0.4s ease-in-out; */
 }
 
 .card_profile {

@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ProfileInterests from "../../components/ProfileInterests/ProfileInterests";
 import ProfileLanguages from "../../components/ProfileLanguages/ProfileLanguages";
+import FilterContainer from "../../container/FilterContainer.jsx/FilterContainer";
+import NationalitiesFilterContainer from "../../container/NationalitiesFilterContainer/NationalitiesFilterContainer";
 import "./HomeApp.css";
 
 const HomeApp = () => {
@@ -9,36 +11,55 @@ const HomeApp = () => {
   const [toggleNation, setToggleNation] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [nationalities, setNationalities] = useState([]);
+  const [genders, setGenders] = useState([]);
+  const [languages, setLanguages] = useState([]);
   const [lastPage, setLastPage] = useState(false);
   const [toggleFilter, setToggleFilter] = useState(true);
+  const [filters, setFilters] = useState({
+    nationality: [],
+    gender: [],
+    languages: [],
+  });
+
+  useEffect(() => {
+    getAllNationalities();
+  }, []);
 
   useEffect(() => {
     getPaginationProfiles();
-    getAllNationalities();
-  }, [currentPage]);
+  }, [currentPage, filters]);
 
   const getAllNationalities = async () => {
     try {
       const response = await axios.get("http://localhost:3001/profiles/all");
       const users = response.data;
-      const countries = users.reduce((acc, user) => {
-        if (acc.includes(user.nationality)) {
-          return acc;
-        }
-        acc.push(user.nationality);
-        return acc;
-      }, []);
-      setNationalities(countries);
+      setNationalities(getDataFromUsers(users, "nationality"));
+      setGenders(getDataFromUsers(users, "gender"));
+      setLanguages(getDataFromUsers(users, "languages"));
     } catch (error) {
       console.error(error);
     }
   };
 
+  const getDataFromUsers = (users, parameter) => {
+    return users.reduce((acc, user) => {
+      if (acc.includes(user[parameter])) {
+        return acc;
+      }
+      acc.push(user[parameter]);
+      return acc;
+    }, []);
+  };
+
   const getPaginationProfiles = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:3001/profiles?page=${currentPage}`
-      );
+      console.log(filters);
+      const response = await axios.get(`http://localhost:3001/profiles`, {
+        params: {
+          page: currentPage,
+          filters,
+        },
+      });
       const data = response.data;
       setProfiles(data);
       if (data.length < 9) {
@@ -51,27 +72,48 @@ const HomeApp = () => {
     }
   };
 
+  const isFilterSelected = (nameFilter, filterData) => {
+    if (filters[nameFilter] && filters[nameFilter].includes(filterData)) {
+      const filterElements = filters[nameFilter].filter(
+        (filter) => filter !== filterData
+      );
+      setFilters({ ...filters, [nameFilter]: [...filterElements] });
+    } else {
+      setFilters({
+        ...filters,
+        [nameFilter]: [...filters[nameFilter], filterData],
+      });
+    }
+  };
+
+  const getNationalityFilter = (country) => {
+    isFilterSelected("nationality", country);
+  };
+
+  const getGenderFilter = (genderFilter) => {
+    isFilterSelected("gender", genderFilter);
+  };
+  const getLanguageFilter = (languageFilter) => {
+    isFilterSelected("languages", languageFilter);
+  };
+
   return (
     <>
       <div className="flex_display_filter">
-        <div className={`filters ${toggleFilter ? "" : "hidden"}`}>Filters</div>
+        <FilterContainer
+          gendersData={genders}
+          languagesData={languages}
+          getGenderFilter={getGenderFilter}
+          getLanguageFilter={getLanguageFilter}
+        />
         <div className="page_order">
-          <div className="nationality_filter_container">
-            {nationalities.map((nationality, id) => (
-              <div
-                key={id}
-                className={`nationality_filter ${
-                  toggleNation ? "checkNation" : ""
-                }`}
-                onClick={() => setToggleNation(!toggleNation)}
-              >
-                <div>{nationality}</div>
-              </div>
-            ))}
-          </div>
-          <button onClick={() => setToggleFilter(!toggleFilter)}>
-            Show filters
-          </button>
+          <NationalitiesFilterContainer
+            nationalities={nationalities}
+            toggleNation={toggleNation}
+            addCountryFilter={getNationalityFilter}
+          />
+          {/* <button onClick={() => setToggleFilter(!toggleFilter)}> */}
+          <button onClick={() => console.log(filters)}>Show filters</button>
           <div className="card_grid">
             {profiles.map((profile, id) => (
               <div key={id} className="card_profile">

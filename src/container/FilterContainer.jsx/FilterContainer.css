@@ -1,0 +1,23 @@
+.filters {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  background-color: #262938;
+  border-radius: 20px;
+  transition: all 0.4s ease-in-out;
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.filters.hidden {
+  opacity: 0;
+  width: 0;
+}
+
+.division {
+  height: 2px;
+  width: 90%;
+  background-color: black;
+}

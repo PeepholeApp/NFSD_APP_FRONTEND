@@ -1,0 +1,32 @@
+.nationality_filter_container {
+  flex: none;
+  max-width: 1000px;
+  width: 100%;
+  padding: 15px;
+  box-sizing: border-box;
+  overflow-x: auto;
+  border-radius: 25px;
+  background-color: #262938;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.nationality_filter {
+  flex: none;
+  aspect-ratio: 1 / 1;
+  height: 100%;
+  padding: 15px;
+  border-radius: 50%;
+  border: 2px solid rgb(255, 255, 255);
+  transition: border 0.3s ease-in-out;
+  cursor: pointer;
+}
+.nationality_filter:hover {
+  border: 2px solid plum;
+}
+.checkNation {
+  border: 2px solid greenyellow;
+}
