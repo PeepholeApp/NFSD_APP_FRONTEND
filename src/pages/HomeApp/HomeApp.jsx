@@ -106,13 +106,15 @@ const HomeApp = () => {
   return (
     <>
       <div className="flex_display_filter">
-        <FilterContainer
-          gendersData={genders}
-          languagesData={languages}
-          getGenderFilter={getGenderFilter}
-          getLanguageFilter={getLanguageFilter}
-        />
-        <div className="page_order">
+        <div className="flex_Filter">
+          <FilterContainer
+            gendersData={genders}
+            languagesData={languages}
+            getGenderFilter={getGenderFilter}
+            getLanguageFilter={getLanguageFilter}
+          />
+        </div>
+        <div className="flex_page">
           <NationalitiesFilterContainer
             nationalities={nationalities}
             toggleNation={toggleNation}

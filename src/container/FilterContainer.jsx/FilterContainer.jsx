@@ -14,13 +14,14 @@ const FilterContainer = ({
         <h3>Filters</h3>
         <div className="division"></div>
         <div>
-          <div>Gender</div>
+          <h3>Gender</h3>
           {gendersData.map((gender, id) => (
             <div
               key={id}
               onClick={() => {
                 getGenderFilter(gender);
               }}
+              className="filterAction"
             >
               {gender}
             </div>
@@ -28,13 +29,14 @@ const FilterContainer = ({
         </div>
         <div className="division"></div>
         <div>
-          <div>Language</div>
+          <h3>Language</h3>
           {languagesData.map((language, id) => (
             <div
               key={id}
               onClick={() => {
                 getLanguageFilter(language);
               }}
+              className="filterAction"
             >
               {language}
             </div>

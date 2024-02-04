@@ -1,7 +1,6 @@
 .filters {
   width: 100%;
-  height: auto;
-  padding: 10px;
+  padding: 30px;
   background-color: #262938;
   border-radius: 20px;
   transition: all 0.4s ease-in-out;
@@ -20,4 +19,11 @@
   height: 2px;
   width: 90%;
   background-color: black;
+}
+
+.filterAction {
+  cursor: pointer;
+}
+.filterAction:hover {
+  color: blueviolet;
 }

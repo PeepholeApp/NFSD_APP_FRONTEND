@@ -7,7 +7,7 @@ const NationalitiesFilterContainer = ({
   addCountryFilter,
 }) => {
   return (
-    <div>
+    <>
       <div className="nationality_filter_container">
         {nationalities.map((nationality, id) => (
           <div
@@ -21,7 +21,7 @@ const NationalitiesFilterContainer = ({
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 
