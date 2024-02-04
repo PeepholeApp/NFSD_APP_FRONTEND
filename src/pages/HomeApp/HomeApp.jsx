@@ -43,10 +43,19 @@ const HomeApp = () => {
 
   const getDataFromUsers = (users, parameter) => {
     return users.reduce((acc, user) => {
-      if (acc.includes(user[parameter])) {
-        return acc;
+      if (user[parameter]) {
+        if (Array.isArray(user[parameter])) {
+          user[parameter].forEach((value) => {
+            if (!acc.includes(value)) {
+              acc.push(value);
+            }
+          });
+        } else {
+          if (!acc.includes(user[parameter])) {
+            acc.push(user[parameter]);
+          }
+        }
       }
-      acc.push(user[parameter]);
       return acc;
     }, []);
   };
