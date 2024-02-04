@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { styled } from "@mui/system";
 import {
   Button,
@@ -11,8 +11,27 @@ import {
 } from "@mui/material";
 import { useAuth } from "../context/Login";
 
+const StyledContainer = styled(Container)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height: "100vh",
+  backgroundImage: `url('')`, // imagen del background por definir
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+}));
+
+const StyledFormContainer = styled("div")(({ theme }) => ({
+  backgroundColor: "rgba(255, 255, 255, 0.8)", // Fondo blanco semi-transparente
+  padding: theme.spacing(4),
+  borderRadius: theme.spacing(2),
+  boxShadow: theme.shadows[5],
+  textAlign: "center",
+  width: "80%", // Ajusta el ancho del contenedor
+  maxWidth: "400px", // Agrega un ancho máximo para asegurar que no se vuelva demasiado ancho
+}));
+
 const StyledForm = styled("form")(({ theme }) => ({
-  marginTop: theme.spacing(8),
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -20,11 +39,20 @@ const StyledForm = styled("form")(({ theme }) => ({
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
   width: "100%",
-  marginTop: theme.spacing(1),
+  margin: theme.spacing(1, 0),
 }));
 
 const StyledButton = styled(Button)(({ theme }) => ({
-  margin: theme.spacing(3, 0, 2),
+  margin: theme.spacing(2, 0),
+}));
+
+const StyledLink = styled(Link)(({ theme }) => ({
+  margin: theme.spacing(1, 0),
+  color: theme.palette.primary.main,
+  textDecoration: "none",
+  '&:hover': {
+    textDecoration: "underline",
+  },
 }));
 
 const Login = () => {
@@ -39,7 +67,7 @@ const Login = () => {
     e.preventDefault();
 
     if (!email || !password) {
-      setError("Por favor, completa todos los campos.");
+      setError("Please fill in all the fields.");
       return;
     }
 
@@ -53,19 +81,19 @@ const Login = () => {
       });
       const data = response.data;
       contextLogin({ token: data.token, userId: data.userId });
-      navigate("/");
+      navigate("/home");
     } catch (error) {
-      setError("Error al iniciar sesión. Verifica tus credenciales.");
+      setError("Error logging in. Please check your credentials.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <StyledContainer component="main" maxWidth="xs">
       <CssBaseline />
-      <div>
-        <Typography variant="h1" gutterBottom>
+      <StyledFormContainer>
+        <Typography variant="h4" gutterBottom>
           Login
         </Typography>
         <StyledForm onSubmit={login}>
@@ -96,10 +124,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           {error && (
-            <Typography
-              variant="body2"
-              style={{ color: "red", marginBottom: "10px" }}
-            >
+            <Typography variant="body2" style={{ color: "red", margin: "10px 0" }}>
               {error}
             </Typography>
           )}
@@ -107,14 +132,17 @@ const Login = () => {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
             disabled={loading}
           >
             {loading ? "Signing In..." : "Sign In"}
           </StyledButton>
+          <StyledLink to="/forgot-password">Forgot your password?</StyledLink>
+          <Typography variant="body2">
+            Don't have an account? <StyledLink to="/register">Sign up</StyledLink>
+          </Typography>
         </StyledForm>
-      </div>
-    </Container>
+      </StyledFormContainer>
+    </StyledContainer>
   );
 };
 
