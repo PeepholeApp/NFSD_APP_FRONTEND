@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./FilterContainer.css";
 
 const FilterContainer = ({
@@ -6,15 +6,27 @@ const FilterContainer = ({
   languagesData,
   getGenderFilter,
   getLanguageFilter,
+  getAgeFilter,
 }) => {
+  const [ageRange, setAgeRange] = useState({ min: 16, max: 80 });
+
+  const handleSliderChange = (event) => {
+    const { name, value } = event.target;
+    setAgeRange({ ...ageRange, [name]: parseInt(value, 10) });
+  };
+
+  const handleApplyFilter = () => {
+    getAgeFilter(ageRange);
+  };
+
   return (
-    <div>
+    <>
       {/* <div className={`filters ${toggleFilter ? "" : "hidden"}`}> */}
       <div className={`filters`}>
-        <h3>Filters</h3>
+        <div className="title">FILTERS</div>
         <div className="division"></div>
-        <div>
-          <h3>Gender</h3>
+        <div className="flexColumnFilter">
+          <div className="title">Gender</div>
           {gendersData.map((gender, id) => (
             <div
               key={id}
@@ -28,8 +40,8 @@ const FilterContainer = ({
           ))}
         </div>
         <div className="division"></div>
-        <div>
-          <h3>Language</h3>
+        <div className="flexColumnFilter">
+          <div className="title">Language</div>
           {languagesData.map((language, id) => (
             <div
               key={id}
@@ -42,8 +54,34 @@ const FilterContainer = ({
             </div>
           ))}
         </div>
+        <div className="division"></div>
+        <div className="flexColumnFilter">
+          <div className="title">Age Range</div>
+          <div>
+            {ageRange.min} - {ageRange.max} years
+          </div>
+          <div>min:</div>
+          <input
+            type="range"
+            min="16"
+            max={ageRange.max - 1}
+            name="min"
+            value={ageRange.min}
+            onChange={handleSliderChange}
+          />
+          <div>max:</div>
+          <input
+            type="range"
+            min={ageRange.min + 1}
+            max="80"
+            name="max"
+            value={ageRange.max}
+            onChange={handleSliderChange}
+          />
+          <button onClick={handleApplyFilter}>Set age</button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

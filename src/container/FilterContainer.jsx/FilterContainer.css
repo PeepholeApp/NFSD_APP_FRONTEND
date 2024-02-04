@@ -1,6 +1,12 @@
+.title {
+  font-size: 14pt;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
 .filters {
   width: 100%;
-  padding: 30px;
+  padding: 20px;
   background-color: #262938;
   border-radius: 20px;
   transition: all 0.4s ease-in-out;
@@ -8,7 +14,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
 }
 .filters.hidden {
   opacity: 0;
@@ -16,8 +22,8 @@
 }
 
 .division {
-  height: 2px;
-  width: 90%;
+  height: 1px;
+  width: 100%;
   background-color: black;
 }
 
@@ -26,4 +32,38 @@
 }
 .filterAction:hover {
   color: blueviolet;
+}
+
+.flexColumnFilter {
+  flex: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.flexColumnFilter > input {
+  width: 80%;
+  margin: 10px;
+  appearance: none;
+  height: 10px;
+  background: #d3d3d3;
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+.flexColumnFilter > input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgb(5, 70, 168);
+  cursor: pointer;
+}
+.flexColumnFilter > input:hover {
+  opacity: 1;
+}
+.flexColumnFilter > button {
+  margin: 10px;
 }

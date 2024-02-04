@@ -18,6 +18,7 @@ const HomeApp = () => {
     nationality: [],
     gender: [],
     languages: [],
+    age: [],
   });
 
   useEffect(() => {
@@ -102,6 +103,9 @@ const HomeApp = () => {
   const getLanguageFilter = (languageFilter) => {
     isFilterSelected("languages", languageFilter);
   };
+  const getAgeFilter = (ageFilter) => {
+    isFilterSelected("age", ageFilter);
+  };
 
   return (
     <>
@@ -112,6 +116,7 @@ const HomeApp = () => {
             languagesData={languages}
             getGenderFilter={getGenderFilter}
             getLanguageFilter={getLanguageFilter}
+            getAgeFilter={getAgeFilter}
           />
         </div>
         <div className="flex_page">
