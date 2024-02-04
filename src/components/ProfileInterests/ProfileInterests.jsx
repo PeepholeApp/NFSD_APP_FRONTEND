@@ -20,12 +20,13 @@ const ProfileInterests = ({ interests }) => {
     <>
       <div>
         <div className="flex_interests">
-          {interests.map((interest, id) => (
-            <div key={id} className="style_interests">
-              <span role="img">{getIcon(interest[0])}</span>
-              {interest}
-            </div>
-          ))}
+          {interests &&
+            interests.map((interest, id) => (
+              <div key={id} className="style_interests">
+                <span role="img">{getIcon(interest[0])}</span>
+                {interest}
+              </div>
+            ))}
         </div>
       </div>
     </>

@@ -1,5 +1,6 @@
 .flex_languages {
   display: flex;
+  justify-content: center;
   align-items: flex-start;
   gap: 5px;
   flex-wrap: wrap;

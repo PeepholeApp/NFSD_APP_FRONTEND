@@ -13,6 +13,7 @@ import HomeApp from "./pages/HomeApp/HomeApp";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
+import UserDetails from "./pages/UserDetails/UserDetails";
 
 const theme = createTheme({
   palette: {
@@ -37,6 +38,7 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/home" element={<HomeApp />} />
+              <Route path="/user/:userId" element={<UserDetails />} />
             </Routes>
           </AuthProvider>
         </BrowserRouter>

@@ -126,7 +126,7 @@ const HomeApp = () => {
             addCountryFilter={getNationalityFilter}
           />
           {/* <button onClick={() => setToggleFilter(!toggleFilter)}> */}
-          <button onClick={() => console.log(filters)}>Show filters</button>
+          {/* <button onClick={() => console.log(filters)}>Show filters</button> */}
           <UsersContainer profiles={profiles} />
           <button
             onClick={() => setCurrentPage((prev) => prev - 1)}

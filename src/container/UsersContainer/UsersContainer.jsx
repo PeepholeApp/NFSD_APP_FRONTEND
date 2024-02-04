@@ -1,14 +1,20 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import ProfileInterests from "../../components/ProfileInterests/ProfileInterests";
 import ProfileLanguages from "../../components/ProfileLanguages/ProfileLanguages";
 import "./UsersContainer.css";
 
 const UsersContainer = ({ profiles }) => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="card_grid">
         {profiles.map((profile, id) => (
-          <div key={id} className="card_profile">
+          <div
+            key={id}
+            className="card_profile"
+            onClick={() => navigate(`/user/${profile._id}`)}
+          >
             <h3>
               {profile.name} {profile.last_name}
             </h3>
