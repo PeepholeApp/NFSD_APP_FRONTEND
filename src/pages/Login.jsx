@@ -2,13 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { styled } from "@mui/system";
-import {
-  Button,
-  TextField,
-  Typography,
-  Container,
-  CssBaseline,
-} from "@mui/material";
+import { Button, TextField, Typography, Container } from "@mui/material";
 import { useAuth } from "../context/Login";
 
 const StyledContainer = styled(Container)(({ theme }) => ({
@@ -90,10 +84,10 @@ const Login = () => {
   };
 
   return (
-    <StyledContainer component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <StyledFormContainer>
-        <Typography variant="h4" gutterBottom>
+      <div>
+        <Typography variant="h1" gutterBottom>
           Login
         </Typography>
         <StyledForm onSubmit={login}>

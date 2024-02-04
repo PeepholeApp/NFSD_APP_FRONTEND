@@ -1,0 +1,109 @@
+{
+  "languages": [
+    {
+      "name": "Spanish",
+      "shortName": "ES",
+      "icon": "🇪🇸"
+    },
+    {
+      "name": "English",
+      "shortName": "EN",
+      "icon": "🇺🇸"
+    },
+    {
+      "name": "French",
+      "shortName": "FR",
+      "icon": "🇫🇷"
+    },
+    {
+      "name": "German",
+      "shortName": "DE",
+      "icon": "🇩🇪"
+    },
+    {
+      "name": "Chinese",
+      "shortName": "ZH",
+      "icon": "🇨🇳"
+    },
+    {
+      "name": "Portuguese",
+      "shortName": "PT",
+      "icon": "🇵🇹"
+    },
+    {
+      "name": "Russian",
+      "shortName": "RU",
+      "icon": "🇷🇺"
+    },
+    {
+      "name": "Arabic",
+      "shortName": "AR",
+      "icon": "🇸🇦"
+    },
+    {
+      "name": "Japanese",
+      "shortName": "JA",
+      "icon": "🇯🇵"
+    },
+    {
+      "name": "Italian",
+      "shortName": "IT",
+      "icon": "🇮🇹"
+    },
+    {
+      "name": "Dutch",
+      "shortName": "NL",
+      "icon": "🇳🇱"
+    },
+    {
+      "name": "Korean",
+      "shortName": "KO",
+      "icon": "🇰🇷"
+    },
+    {
+      "name": "Turkish",
+      "shortName": "TR",
+      "icon": "🇹🇷"
+    },
+    {
+      "name": "Hindi",
+      "shortName": "HI",
+      "icon": "🇮🇳"
+    },
+    {
+      "name": "Swedish",
+      "shortName": "SV",
+      "icon": "🇸🇪"
+    },
+    {
+      "name": "Polish",
+      "shortName": "PL",
+      "icon": "🇵🇱"
+    },
+    {
+      "name": "Indonesian",
+      "shortName": "ID",
+      "icon": "🇮🇩"
+    },
+    {
+      "name": "Greek",
+      "shortName": "EL",
+      "icon": "🇬🇷"
+    },
+    {
+      "name": "Czech",
+      "shortName": "CS",
+      "icon": "🇨🇿"
+    },
+    {
+      "name": "Danish",
+      "shortName": "DA",
+      "icon": "🇩🇰"
+    },
+    {
+      "name": "Finnish",
+      "shortName": "FI",
+      "icon": "🇫🇮"
+    }
+  ]
+}
