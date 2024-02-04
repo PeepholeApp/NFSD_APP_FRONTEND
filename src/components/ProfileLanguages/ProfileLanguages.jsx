@@ -16,8 +16,8 @@ const ProfileLanguages = ({ languages }) => {
   return (
     <>
       <div className="flex_languages">
-        {languages.map((language, index) => (
-          <div key={index} className="style_languages">
+        {languages.map((language, id) => (
+          <div key={id} className="style_languages">
             <span role="img">{getIcon(language)}</span>
             {language}
           </div>

@@ -1,6 +1,4 @@
 .nationality_filter_container {
-  flex: none;
-  max-width: 1000px;
   width: 100%;
   padding: 15px;
   box-sizing: border-box;

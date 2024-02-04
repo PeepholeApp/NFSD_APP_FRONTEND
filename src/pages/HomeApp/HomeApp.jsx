@@ -1,9 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import ProfileInterests from "../../components/ProfileInterests/ProfileInterests";
-import ProfileLanguages from "../../components/ProfileLanguages/ProfileLanguages";
 import FilterContainer from "../../container/FilterContainer.jsx/FilterContainer";
 import NationalitiesFilterContainer from "../../container/NationalitiesFilterContainer/NationalitiesFilterContainer";
+import UsersContainer from "../../container/UsersContainer/UsersContainer";
 import "./HomeApp.css";
 
 const HomeApp = () => {
@@ -62,7 +61,6 @@ const HomeApp = () => {
 
   const getPaginationProfiles = async () => {
     try {
-      console.log(filters);
       const response = await axios.get(`http://localhost:3001/profiles`, {
         params: {
           page: currentPage,
@@ -98,7 +96,6 @@ const HomeApp = () => {
   const getNationalityFilter = (country) => {
     isFilterSelected("nationality", country);
   };
-
   const getGenderFilter = (genderFilter) => {
     isFilterSelected("gender", genderFilter);
   };
@@ -123,24 +120,7 @@ const HomeApp = () => {
           />
           {/* <button onClick={() => setToggleFilter(!toggleFilter)}> */}
           <button onClick={() => console.log(filters)}>Show filters</button>
-          <div className="card_grid">
-            {profiles.map((profile, id) => (
-              <div key={id} className="card_profile">
-                <h3>
-                  {profile.name} {profile.last_name}
-                </h3>
-                <div className="card_image"></div>
-                <div className="card_details">
-                  <div>Bio:</div>
-                  <div>{profile.bio}</div>
-                  <div>Lenguajes:</div>
-                  <ProfileLanguages languages={profile.languages} />
-                  <div>Intereses:</div>
-                  <ProfileInterests interests={profile.interest} />
-                </div>
-              </div>
-            ))}
-          </div>
+          <UsersContainer profiles={profiles} />
           <button
             onClick={() => setCurrentPage((prev) => prev - 1)}
             disabled={currentPage === 1}
