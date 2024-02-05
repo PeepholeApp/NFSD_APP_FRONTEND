@@ -78,15 +78,14 @@ export default function SignUp() {
 
     try {
       // Check for duplicate email
-      // const response = await axios.get(`http://localhost:3001/users/check-email?email=${email}`);
+      const response = await axios.get(`http://localhost:3001/users/check-email?email=${email}`);
 
-      // if (response.data.isDuplicate) {
-      //   setDuplicateEmailError("Email is already registered");
-      //   setGeneralError(""); // Limpiar el error general si hay uno
-      //   return;
-      // }
+      if (response.data.isDuplicate) {
+        setDuplicateEmailError("Email is already registered");
+        setGeneralError(""); // Limpiar el error general si hay uno
+        return;
+      }
 
-      // Continue with registration
       const registrationResponse = await axios.post("http://localhost:3001/users", {
         email,
         password,

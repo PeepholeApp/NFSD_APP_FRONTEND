@@ -4,25 +4,27 @@ import { useNavigate, Link } from "react-router-dom";
 import { styled } from "@mui/system";
 import { Button, TextField, Typography, Container } from "@mui/material";
 import { useAuth } from "../context/Login";
+import CssBaseline from "@mui/material/CssBaseline";
+import backgroundImage from "../assets/login.png";
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   height: "100vh",
-  backgroundImage: `url('')`, // imagen del background por definir
+  backgroundImage: `url(${backgroundImage})`, // imagen del background por definir
   backgroundSize: "cover",
   backgroundPosition: "center",
 }));
 
 const StyledFormContainer = styled("div")(({ theme }) => ({
-  backgroundColor: "rgba(255, 255, 255, 0.8)", // Fondo blanco semi-transparente
+  backgroundColor: "rgba(0, 0, 0, 0.8)", 
   padding: theme.spacing(4),
   borderRadius: theme.spacing(2),
   boxShadow: theme.shadows[5],
   textAlign: "center",
-  width: "80%", // Ajusta el ancho del contenedor
-  maxWidth: "400px", // Agrega un ancho máximo para asegurar que no se vuelva demasiado ancho
+  width: "80%", 
+  maxWidth: "400px", 
 }));
 
 const StyledForm = styled("form")(({ theme }) => ({
@@ -44,7 +46,7 @@ const StyledLink = styled(Link)(({ theme }) => ({
   margin: theme.spacing(1, 0),
   color: theme.palette.primary.main,
   textDecoration: "none",
-  '&:hover': {
+  "&:hover": {
     textDecoration: "underline",
   },
 }));
@@ -84,10 +86,10 @@ const Login = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <StyledContainer component="main" maxWidth="xs">
       <CssBaseline />
-      <div>
-        <Typography variant="h1" gutterBottom>
+      <StyledFormContainer>
+        <Typography variant="h4" gutterBottom>
           Login
         </Typography>
         <StyledForm onSubmit={login}>
@@ -118,7 +120,10 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           {error && (
-            <Typography variant="body2" style={{ color: "red", margin: "10px 0" }}>
+            <Typography
+              variant="body2"
+              style={{ color: "red", margin: "10px 0" }}
+            >
               {error}
             </Typography>
           )}
@@ -132,7 +137,8 @@ const Login = () => {
           </StyledButton>
           <StyledLink to="/forgot-password">Forgot your password?</StyledLink>
           <Typography variant="body2">
-            Don't have an account? <StyledLink to="/register">Sign up</StyledLink>
+            Don't have an account?{" "}
+            <StyledLink to="/register">Sign up</StyledLink>
           </Typography>
         </StyledForm>
       </StyledFormContainer>
