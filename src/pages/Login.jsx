@@ -4,11 +4,8 @@ import { styled } from "@mui/system";
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import backgroundImage from "../assets/logo1.png";
 import { useAuth } from "../context/Login";
-import CssBaseline from "@mui/material/CssBaseline";
 // import backgroundImage from "../assets/login.png";
-
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   display: "flex",
