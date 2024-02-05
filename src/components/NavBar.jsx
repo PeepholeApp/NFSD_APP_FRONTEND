@@ -6,10 +6,8 @@ import Button from "@mui/material/Button";
 import Home from "../pages/Home";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/Login";
-import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
 import logo from "../assets/logo.png";
-import Stack from "@mui/material/Stack";
 
 const Navbar = () => {
   const { user } = useAuth();
@@ -34,16 +32,32 @@ const Navbar = () => {
           </Box>
 
           <Box>
-            <Button key={"Home"} sx={{ color: "#fff" }}>
+            <Button
+              key={"Home"}
+              onClick={() => navigate("/community")}
+              sx={{ color: "#fff" }}
+            >
               Comunity
             </Button>
-            <Button key={"Home"} sx={{ color: "#fff" }}>
+            <Button
+              key={"Home"}
+              onClick={() => navigate("/blog")}
+              sx={{ color: "#fff" }}
+            >
               Blog
             </Button>
-            <Button key={"Home"} sx={{ color: "#fff" }}>
+            <Button
+              key={"Home"}
+              onClick={() => navigate("/aboutUs")}
+              sx={{ color: "#fff" }}
+            >
               About us
             </Button>
-            <Button key={"Home"} sx={{ color: "#fff" }}>
+            <Button
+              key={"Home"}
+              onClick={() => navigate("/contact")}
+              sx={{ color: "#fff" }}
+            >
               Contact
             </Button>
           </Box>

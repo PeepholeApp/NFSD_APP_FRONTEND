@@ -14,7 +14,10 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import UserDetails from "./pages/UserDetails/UserDetails";
-
+import Community from "./pages/Community";
+import Blog from "./pages/Blog";
+import AboutUs from "./pages/AboutUs";
+import Contact from "./pages/Contact";
 const theme = createTheme({
   palette: {
     mode: "dark",
@@ -43,6 +46,10 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/home" element={<HomeApp />} />
               <Route path="/user/:userId" element={<UserDetails />} />
+              <Route path="/community" element={<Community />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/aboutUs" element={<AboutUs />} />
+              <Route path="/contact" element={<Contact />} />
             </Routes>
           </AuthProvider>
         </BrowserRouter>
