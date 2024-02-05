@@ -21,6 +21,7 @@
     "babel-loader": "^9.1.3",
     "babel-preset-env": "^1.7.0",
     "date-fns": "2.25",
+    "moment": "^2.30.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.3",
