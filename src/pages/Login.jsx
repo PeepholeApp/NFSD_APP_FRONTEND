@@ -5,26 +5,26 @@ import { styled } from "@mui/system";
 import { Button, TextField, Typography, Container } from "@mui/material";
 import { useAuth } from "../context/Login";
 import CssBaseline from "@mui/material/CssBaseline";
-import backgroundImage from "../assets/login.png";
+
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   height: "100vh",
-  backgroundImage: `url(${backgroundImage})`, // imagen del background por definir
+  backgroundImage: `url('')`, // imagen del background por definir
   backgroundSize: "cover",
   backgroundPosition: "center",
 }));
 
 const StyledFormContainer = styled("div")(({ theme }) => ({
-  backgroundColor: "rgba(0, 0, 0, 0.8)", 
+  backgroundColor: "rgba(255, 255, 255, 0.8)", // Fondo blanco semi-transparente
   padding: theme.spacing(4),
   borderRadius: theme.spacing(2),
   boxShadow: theme.shadows[5],
   textAlign: "center",
-  width: "80%", 
-  maxWidth: "400px", 
+  width: "80%", // Ajusta el ancho del contenedor
+  maxWidth: "400px", // Agrega un ancho máximo para asegurar que no se vuelva demasiado ancho
 }));
 
 const StyledForm = styled("form")(({ theme }) => ({
