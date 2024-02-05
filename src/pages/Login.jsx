@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
-import { styled } from "@mui/system";
-import { Button, TextField, Typography, Container } from "@mui/material";
-import { useAuth } from "../context/Login";
+import { Button, Container, TextField, Typography } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
-import backgroundImage from "../assets/login.png";
+import { styled } from "@mui/system";
+import axios from "axios";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import backgroundImage from "../assets/logo1.png";
+import { useAuth } from "../context/Login";
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   display: "flex",
@@ -18,13 +18,13 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 }));
 
 const StyledFormContainer = styled("div")(({ theme }) => ({
-  backgroundColor: "rgba(0, 0, 0, 0.8)", 
+  backgroundColor: "rgba(0, 0, 0, 0.8)",
   padding: theme.spacing(4),
   borderRadius: theme.spacing(2),
   boxShadow: theme.shadows[5],
   textAlign: "center",
-  width: "80%", 
-  maxWidth: "400px", 
+  width: "80%",
+  maxWidth: "400px",
 }));
 
 const StyledForm = styled("form")(({ theme }) => ({
