@@ -78,22 +78,11 @@ const FilterContainer = ({
               className={`style_icons ${
                 selectedFilters.gender.includes(gender) ? "selected" : ""
               }`}
-              onClick={() => {
-                handleFilter("gender", gender);
-              }}
+              onClick={() => handleFilter("gender", gender)}
             >
               <span role="img">{getIconImg("gender", gender)}</span>
               {gender}
             </div>
-            // <div
-            //   key={id}
-            //   onClick={() => handleFilter("gender", gender)}
-            //   className={`filterAction ${
-            //     selectedFilters.gender.includes(gender) ? "selected" : ""
-            //   }`}
-            // >
-            //   {gender}
-            // </div>
           ))}
         </div>
         <div className="division"></div>
@@ -109,9 +98,7 @@ const FilterContainer = ({
                       ? "selected"
                       : ""
                   }`}
-                  onClick={() => {
-                    handleFilter("language", language);
-                  }}
+                  onClick={() => handleFilter("language", language)}
                 >
                   <span role="img">{getIconImg("language", language)}</span>
                   {language}
