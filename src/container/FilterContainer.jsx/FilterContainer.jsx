@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { ButtonDark } from "../../components/Button";
+import gendersDataIcons from "../../data/genders.json";
+import languagesDataIcons from "../../data/languages.json";
 import "./FilterContainer.css";
 
 const FilterContainer = ({
@@ -10,14 +13,10 @@ const FilterContainer = ({
 }) => {
   const [ageMin, setAgeMin] = useState(16);
   const [ageMax, setAgeMax] = useState(80);
-  const [ageRange, setAgeRange] = useState({ min: 16, max: 80 });
-  const [selectedGender, setSelectedGender] = useState(null);
-  const [selectedLanguage, setSelectedLanguage] = useState(null);
-
-  const handleSliderChange = (event) => {
-    const { name, value } = event.target;
-    setAgeRange({ ...ageRange, [name]: parseInt(value, 10) });
-  };
+  const [selectedFilters, setSelectedFilters] = useState({
+    gender: [],
+    language: [],
+  });
 
   const handleApplyFilter = () => {
     getAgeFilter({
@@ -26,14 +25,44 @@ const FilterContainer = ({
     });
   };
 
-  const handleGenderFilter = (gender) => {
-    getGenderFilter(gender);
-    setSelectedGender(gender === selectedGender ? null : gender);
+  const handleFilter = (filterType, filterValue) => {
+    setSelectedFilters((prevFilters) => {
+      const newFilters = { ...prevFilters };
+      if (newFilters[filterType].includes(filterValue)) {
+        newFilters[filterType] = newFilters[filterType].filter(
+          (value) => value !== filterValue
+        );
+      } else {
+        newFilters[filterType].push(filterValue);
+      }
+      return newFilters;
+    });
+
+    if (filterType === "gender") {
+      getGenderFilter(filterValue);
+    } else if (filterType === "language") {
+      getLanguageFilter(filterValue);
+    }
   };
 
-  const handleLanguageFilter = (language) => {
-    getLanguageFilter(language);
-    setSelectedLanguage(language === selectedLanguage ? null : language);
+  const getIconImg = (type, data) => {
+    let foundIcon = {};
+
+    if (type === "gender") {
+      foundIcon = gendersDataIcons.genders.find(
+        (gender) => gender.name === data
+      );
+    }
+    if (type === "language") {
+      foundIcon = languagesDataIcons.languages.find(
+        (language) => language.shortName === data
+      );
+    }
+
+    if (foundIcon) {
+      return foundIcon.icon;
+    }
+    return null;
   };
 
   return (
@@ -42,33 +71,53 @@ const FilterContainer = ({
         <div className="title">FILTERS</div>
         <div className="division"></div>
         <div className="flexColumnFilter">
-          <div className="title">Gender</div>
+          <div className="title">Genders</div>
           {gendersData.map((gender, id) => (
             <div
               key={id}
-              onClick={() => handleGenderFilter(gender)}
-              className={`filterAction ${
-                selectedGender === gender ? "selected" : ""
+              className={`style_icons ${
+                selectedFilters.gender.includes(gender) ? "selected" : ""
               }`}
+              onClick={() => {
+                handleFilter("gender", gender);
+              }}
             >
+              <span role="img">{getIconImg("gender", gender)}</span>
               {gender}
             </div>
+            // <div
+            //   key={id}
+            //   onClick={() => handleFilter("gender", gender)}
+            //   className={`filterAction ${
+            //     selectedFilters.gender.includes(gender) ? "selected" : ""
+            //   }`}
+            // >
+            //   {gender}
+            // </div>
           ))}
         </div>
         <div className="division"></div>
         <div className="flexColumnFilter">
-          <div className="title">Language</div>
-          {languagesData.map((language, id) => (
-            <div
-              key={id}
-              onClick={() => handleLanguageFilter(language)}
-              className={`filterAction ${
-                selectedLanguage === language ? "selected" : ""
-              }`}
-            >
-              {language}
-            </div>
-          ))}
+          <div className="title">Languages</div>
+          <div className="flex_filters_icons">
+            {languagesData &&
+              languagesData.map((language, id) => (
+                <div
+                  key={id}
+                  className={`style_icons ${
+                    selectedFilters.language.includes(language)
+                      ? "selected"
+                      : ""
+                  }`}
+                  onClick={() => {
+                    handleFilter("language", language);
+                  }}
+                >
+                  <span role="img">{getIconImg("language", language)}</span>
+                  {language}
+                </div>
+              ))}
+          </div>
         </div>
         <div className="division"></div>
         <div className="flexColumnFilter">
@@ -94,7 +143,7 @@ const FilterContainer = ({
             value={ageMax}
             onChange={(e) => setAgeMax(e.target.value)}
           />
-          <button onClick={handleApplyFilter}>Set age</button>
+          <ButtonDark onClick={handleApplyFilter}>Apply filter</ButtonDark>
         </div>
       </div>
     </>

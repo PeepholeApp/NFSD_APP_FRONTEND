@@ -84,6 +84,7 @@ const HomeApp = () => {
   const isFilterSelected = (nameFilter, filterData) => {
     if (nameFilter === "age") {
       setFilters({
+        ...filters,
         age: filterData,
       });
     } else {
