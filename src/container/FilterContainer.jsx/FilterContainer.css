@@ -28,6 +28,7 @@
 }
 
 .filterAction {
+  padding: 5px 10px;
   cursor: pointer;
 }
 .filterAction:hover {
@@ -66,4 +67,10 @@
 }
 .flexColumnFilter > button {
   margin: 10px;
+}
+
+.selected {
+  color: black;
+  background-color: white;
+  border-radius: 10px;
 }

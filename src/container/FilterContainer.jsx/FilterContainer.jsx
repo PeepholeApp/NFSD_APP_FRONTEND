@@ -8,7 +8,11 @@ const FilterContainer = ({
   getLanguageFilter,
   getAgeFilter,
 }) => {
+  const [ageMin, setAgeMin] = useState(16);
+  const [ageMax, setAgeMax] = useState(80);
   const [ageRange, setAgeRange] = useState({ min: 16, max: 80 });
+  const [selectedGender, setSelectedGender] = useState(null);
+  const [selectedLanguage, setSelectedLanguage] = useState(null);
 
   const handleSliderChange = (event) => {
     const { name, value } = event.target;
@@ -16,12 +20,24 @@ const FilterContainer = ({
   };
 
   const handleApplyFilter = () => {
-    getAgeFilter(ageRange);
+    getAgeFilter({
+      min: ageMin,
+      max: ageMax,
+    });
+  };
+
+  const handleGenderFilter = (gender) => {
+    getGenderFilter(gender);
+    setSelectedGender(gender === selectedGender ? null : gender);
+  };
+
+  const handleLanguageFilter = (language) => {
+    getLanguageFilter(language);
+    setSelectedLanguage(language === selectedLanguage ? null : language);
   };
 
   return (
     <>
-      {/* <div className={`filters ${toggleFilter ? "" : "hidden"}`}> */}
       <div className={`filters`}>
         <div className="title">FILTERS</div>
         <div className="division"></div>
@@ -30,10 +46,10 @@ const FilterContainer = ({
           {gendersData.map((gender, id) => (
             <div
               key={id}
-              onClick={() => {
-                getGenderFilter(gender);
-              }}
-              className="filterAction"
+              onClick={() => handleGenderFilter(gender)}
+              className={`filterAction ${
+                selectedGender === gender ? "selected" : ""
+              }`}
             >
               {gender}
             </div>
@@ -45,10 +61,10 @@ const FilterContainer = ({
           {languagesData.map((language, id) => (
             <div
               key={id}
-              onClick={() => {
-                getLanguageFilter(language);
-              }}
-              className="filterAction"
+              onClick={() => handleLanguageFilter(language)}
+              className={`filterAction ${
+                selectedLanguage === language ? "selected" : ""
+              }`}
             >
               {language}
             </div>
@@ -58,25 +74,25 @@ const FilterContainer = ({
         <div className="flexColumnFilter">
           <div className="title">Age Range</div>
           <div>
-            {ageRange.min} - {ageRange.max} years
+            {ageMin} - {ageMax} years
           </div>
           <div>min:</div>
           <input
             type="range"
             min="16"
-            max={ageRange.max - 1}
+            max={parseInt(ageMax, 10) - 1}
             name="min"
-            value={ageRange.min}
-            onChange={handleSliderChange}
+            value={ageMin}
+            onChange={(e) => setAgeMin(e.target.value)}
           />
           <div>max:</div>
           <input
             type="range"
-            min={ageRange.min + 1}
+            min={parseInt(ageMin, 10) + 1}
             max="80"
             name="max"
-            value={ageRange.max}
-            onChange={handleSliderChange}
+            value={ageMax}
+            onChange={(e) => setAgeMax(e.target.value)}
           />
           <button onClick={handleApplyFilter}>Set age</button>
         </div>
