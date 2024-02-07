@@ -7,6 +7,7 @@ import ProfileLanguages from "../../components/ProfileLanguages/ProfileLanguages
 import "./UserDetails.css";
 import { ButtonDark } from "../../components/Button";
 import { useAuth } from "../../context/Login";
+import { Link } from "react-router-dom";
 
 const UserDetails = () => {
   const { userId } = useParams();
@@ -15,10 +16,10 @@ const UserDetails = () => {
   const { user: currentUser } = useAuth();
 
   useEffect(() => {
-    getUserDetails();
+    getProfileUser();
   }, []);
 
-  const getUserDetails = async () => {
+  const getProfileUser = async () => {
     try {
       const response = await axios.get(
         `http://localhost:3001/profiles/user/${userId}`
@@ -41,7 +42,9 @@ const UserDetails = () => {
       <div className="flexContainer">
         <div className="backgroundContainer userContainer">
           {currentUser?.profileId === userId ? (
-            <ButtonDark>Editar</ButtonDark>
+            <ButtonDark onClick={() => navigate("/editProfile")}>
+              Editar
+            </ButtonDark>
           ) : null}
           <div className="title">
             {user.name} {user.last_name}
