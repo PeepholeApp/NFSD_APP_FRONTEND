@@ -76,7 +76,11 @@ const Login = () => {
         password,
       });
       const data = response.data;
-      contextLogin({ token: data.token, userId: data.userId });
+      contextLogin({
+        token: data.token,
+        userId: data.userId,
+        profileId: data.profileId,
+      });
       navigate("/home");
     } catch (error) {
       setError("Error logging in. Please check your credentials.");
