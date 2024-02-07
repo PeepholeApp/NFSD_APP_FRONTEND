@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
+import axios from "axios";
 import { FormControl, Stack, TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import FormLabel from "@mui/material/FormLabel";
@@ -7,6 +8,7 @@ import Avatar from "@mui/material/Avatar";
 import { deepPurple } from "@mui/material/colors";
 import Icon from "@mui/material/Icon";
 import { useTheme } from "@mui/material/styles";
+import { useAuth } from "../context/Login";
 
 const useIsDarkMode = () => {
   const theme = useTheme();
@@ -15,8 +17,33 @@ const useIsDarkMode = () => {
 
 const EditProfile = () => {
   const [brithday, setBrithday] = useState(new Date());
+  const [name, setName] = useState("");
+
+  const { user, loading } = useAuth();
 
   const isDarkMode = useIsDarkMode();
+
+  useEffect(() => {
+    if (user && !loading) {
+      const loadProfile = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:3001/profiles/user/${user.profileId}`
+          );
+          const profile = response.data;
+          setName(profile.name);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      loadProfile();
+    }
+  }, [loading, user]);
+
+  const onNameChange = (event) => {
+    setName(event.target.value);
+  };
+
   return (
     <Stack sx={{ m: 5 }} alignItems="center">
       <Stack sx={{ p: 8, width: 600, backgroundColor: "#262938" }} spacing={2}>
@@ -31,7 +58,7 @@ const EditProfile = () => {
           P
         </Avatar>
         <Stack direction="row" spacing={2}>
-          <TextField label="First Name" />
+          <TextField value={name} onChange={onNameChange} />
 
           <TextField label="Last name" />
         </Stack>
