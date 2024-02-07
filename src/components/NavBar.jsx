@@ -11,6 +11,7 @@ import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const { user } = useAuth();
+  console.log("logear usuario", user);
 
   const navigate = useNavigate();
 
@@ -62,7 +63,7 @@ const Navbar = () => {
             </Button>
           </Box>
 
-          <Avatar></Avatar>
+          <Avatar onClick={() => navigate(`/user/${user.profileId}`)}></Avatar>
         </Toolbar>
       </AppBar>
     </>

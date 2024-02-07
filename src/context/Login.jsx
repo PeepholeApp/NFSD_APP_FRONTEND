@@ -10,8 +10,13 @@ export const AuthProvider = ({ children }) => {
     // revisa en localstorage si el token existe
     const storedToken = localStorage.getItem("token");
     const storedUserId = localStorage.getItem("userId");
+    const storedProfileId = localStorage.getItem("profileId");
     if (storedToken && storedUserId) {
-      setUser({ token: storedToken, userId: storedUserId });
+      setUser({
+        token: storedToken,
+        userId: storedUserId,
+        profileId: storedProfileId,
+      });
     }
     setLoading(false);
   }, []);
@@ -21,11 +26,14 @@ export const AuthProvider = ({ children }) => {
     // guarda el token en el local storage cuando se loggean
     localStorage.setItem("token", user.token);
     localStorage.setItem("userId", user.userId);
+    localStorage.setItem("profileId", user.profileId);
   };
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("profileId");
   };
 
   return (

@@ -18,6 +18,8 @@ import Community from "./pages/Community";
 import Blog from "./pages/Blog";
 import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
+import EditProfile from "./pages/EditProfile";
+
 const theme = createTheme({
   palette: {
     mode: "dark",
@@ -44,6 +46,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/editProfile" element={<EditProfile />} />
               <Route path="/home" element={<HomeApp />} />
               <Route path="/user/:userId" element={<UserDetails />} />
               <Route path="/community" element={<Community />} />
