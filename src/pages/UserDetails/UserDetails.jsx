@@ -6,11 +6,13 @@ import ProfileInterests from "../../components/ProfileInterests/ProfileInterests
 import ProfileLanguages from "../../components/ProfileLanguages/ProfileLanguages";
 import "./UserDetails.css";
 import { ButtonDark } from "../../components/Button";
+import { useAuth } from "../../context/Login";
 
 const UserDetails = () => {
   const { userId } = useParams();
   const [user, setUser] = useState({});
   const navigate = useNavigate();
+  const { user: currentUser } = useAuth();
 
   useEffect(() => {
     getUserDetails();
@@ -38,7 +40,9 @@ const UserDetails = () => {
     <>
       <div className="flexContainer">
         <div className="backgroundContainer userContainer">
-          <ButtonDark>Editar</ButtonDark>
+          {currentUser?.profileId === userId ? (
+            <ButtonDark>Editar</ButtonDark>
+          ) : null}
           <div className="title">
             {user.name} {user.last_name}
           </div>
