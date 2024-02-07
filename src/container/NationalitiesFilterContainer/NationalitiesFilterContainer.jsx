@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import countriesData from "../../data/countries.json";
 import "./NationalitiesFilterContainer.css";
 
@@ -7,20 +7,30 @@ const NationalitiesFilterContainer = ({
   toggleNation,
   addCountryFilter,
 }) => {
+  const [selectedFilters, setSelectedFilters] = useState({});
+
   const getIconImg = (type, data) => {
     let foundIcon = {};
 
     if (type === "nationality") {
       foundIcon = countriesData.countries.find(
-        (gender) => gender.acronym === data
+        (country) => country.acronym === data
       );
     }
 
     if (foundIcon) {
-      console.log(foundIcon);
       return foundIcon.icon;
     }
     return null;
+  };
+
+  const handleFilterClick = (nationality) => {
+    setSelectedFilters((prevFilters) => ({
+      ...prevFilters,
+      [nationality]: !prevFilters[nationality],
+    }));
+
+    addCountryFilter(nationality);
   };
 
   return (
@@ -30,9 +40,9 @@ const NationalitiesFilterContainer = ({
           <div
             key={id}
             className={`nationality_filter ${
-              toggleNation ? "checkNation" : ""
+              selectedFilters[nationality] ? "checkNation" : ""
             }`}
-            onClick={() => addCountryFilter(nationality)}
+            onClick={() => handleFilterClick(nationality)}
           >
             <img
               className="iconCountry"
