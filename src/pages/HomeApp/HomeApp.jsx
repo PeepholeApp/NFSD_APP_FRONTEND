@@ -27,6 +27,7 @@ const HomeApp = () => {
 
   useEffect(() => {
     getPaginationProfiles();
+    window.scrollTo({ top: 0 });
   }, [currentPage, filters]);
 
   const getAllNationalities = async () => {
@@ -81,16 +82,23 @@ const HomeApp = () => {
   };
 
   const isFilterSelected = (nameFilter, filterData) => {
-    if (filters[nameFilter] && filters[nameFilter].includes(filterData)) {
-      const filterElements = filters[nameFilter].filter(
-        (filter) => filter !== filterData
-      );
-      setFilters({ ...filters, [nameFilter]: [...filterElements] });
-    } else {
+    if (nameFilter === "age") {
       setFilters({
         ...filters,
-        [nameFilter]: [...filters[nameFilter], filterData],
+        age: filterData,
       });
+    } else {
+      if (filters[nameFilter] && filters[nameFilter].includes(filterData)) {
+        const filterElements = filters[nameFilter].filter(
+          (filter) => filter !== filterData
+        );
+        setFilters({ ...filters, [nameFilter]: [...filterElements] });
+      } else {
+        setFilters({
+          ...filters,
+          [nameFilter]: [...filters[nameFilter], filterData],
+        });
+      }
     }
   };
 

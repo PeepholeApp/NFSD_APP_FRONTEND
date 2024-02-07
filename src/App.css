@@ -8,3 +8,7 @@
 div {
   font-family: "Cascadia Code", sans-serif;
 }
+
+HomeApp {
+  scrollbar-color: black rgba(255, 255, 255, 0);
+}

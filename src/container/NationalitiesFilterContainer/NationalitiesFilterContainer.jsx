@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import countriesData from "../../data/countries.json";
 import "./NationalitiesFilterContainer.css";
 
 const NationalitiesFilterContainer = ({
@@ -6,6 +7,32 @@ const NationalitiesFilterContainer = ({
   toggleNation,
   addCountryFilter,
 }) => {
+  const [selectedFilters, setSelectedFilters] = useState({});
+
+  const getIconImg = (type, data) => {
+    let foundIcon = {};
+
+    if (type === "nationality") {
+      foundIcon = countriesData.countries.find(
+        (country) => country.acronym === data
+      );
+    }
+
+    if (foundIcon) {
+      return foundIcon.icon;
+    }
+    return null;
+  };
+
+  const handleFilterClick = (nationality) => {
+    setSelectedFilters((prevFilters) => ({
+      ...prevFilters,
+      [nationality]: !prevFilters[nationality],
+    }));
+
+    addCountryFilter(nationality);
+  };
+
   return (
     <>
       <div className="nationality_filter_container">
@@ -13,11 +40,15 @@ const NationalitiesFilterContainer = ({
           <div
             key={id}
             className={`nationality_filter ${
-              toggleNation ? "checkNation" : ""
+              selectedFilters[nationality] ? "checkNation" : ""
             }`}
-            onClick={() => addCountryFilter(nationality)}
+            onClick={() => handleFilterClick(nationality)}
           >
-            <div>{nationality}</div>
+            <img
+              className="iconCountry"
+              src={getIconImg("nationality", nationality)}
+              alt={nationality}
+            />
           </div>
         ))}
       </div>

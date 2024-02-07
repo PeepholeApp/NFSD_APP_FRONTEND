@@ -1,0 +1,56 @@
+{
+  "genders": [
+    {
+      "name": "male",
+      "icon": "👨"
+    },
+    {
+      "name": "female",
+      "icon": "👩"
+    },
+    {
+      "name": "Non-Binary",
+      "icon": "⚧️"
+    },
+    {
+      "name": "Genderqueer",
+      "icon": "🌈"
+    },
+    {
+      "name": "Agender",
+      "icon": "⚪"
+    },
+    {
+      "name": "Bigender",
+      "icon": "⚥"
+    },
+    {
+      "name": "Demiboy",
+      "icon": "♁♂️"
+    },
+    {
+      "name": "Demigirl",
+      "icon": "♁♀️"
+    },
+    {
+      "name": "Two-Spirit",
+      "icon": "👬👭"
+    },
+    {
+      "name": "Androgynous",
+      "icon": "🚻"
+    },
+    {
+      "name": "Cisgender",
+      "icon": "🚹🚺"
+    },
+    {
+      "name": "Transgender",
+      "icon": "⚧️"
+    },
+    {
+      "name": "other",
+      "icon": "🌐"
+    }
+  ]
+}
