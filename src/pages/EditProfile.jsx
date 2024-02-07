@@ -7,7 +7,6 @@ import FormLabel from "@mui/material/FormLabel";
 import Avatar from "@mui/material/Avatar";
 import { deepPurple } from "@mui/material/colors";
 import Icon from "@mui/material/Icon";
-import { useTheme } from "@mui/material/styles";
 import { useAuth } from "../context/Login";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
@@ -16,6 +15,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Autocomplete from "@mui/material/Autocomplete";
+import { ButtonDark } from "../components/Button";
 
 const languagesOptions = [
   {
@@ -185,6 +185,7 @@ const EditProfile = () => {
             renderInput={(params) => <TextField {...params} label="Idioma" />}
           />
         </FormControl>
+        <ButtonDark>Guardar Cambios</ButtonDark>
       </Stack>
     </Stack>
   );
