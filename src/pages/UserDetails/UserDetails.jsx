@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ProfileInterests from "../../components/ProfileInterests/ProfileInterests";
 import ProfileLanguages from "../../components/ProfileLanguages/ProfileLanguages";
 import "./UserDetails.css";
+import { ButtonDark } from "../../components/Button";
 
 const UserDetails = () => {
   const { userId } = useParams();
@@ -37,6 +38,7 @@ const UserDetails = () => {
     <>
       <div className="flexContainer">
         <div className="backgroundContainer userContainer">
+          <ButtonDark>Editar</ButtonDark>
           <div className="title">
             {user.name} {user.last_name}
           </div>
