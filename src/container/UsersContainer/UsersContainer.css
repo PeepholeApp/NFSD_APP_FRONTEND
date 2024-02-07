@@ -1,3 +1,12 @@
+.titleUserData {
+  font-size: 12pt;
+  font-weight: bold;
+}
+.subtitleUserData {
+  font-size: 10pt;
+  font-weight: bold;
+}
+
 .card_grid {
   max-width: 1000px;
   width: 100%;
@@ -35,7 +44,6 @@
   position: relative;
   background-color: white;
   border-radius: 20px;
-  margin-bottom: 20px;
 }
 
 .card_image > h3 {
@@ -66,4 +74,17 @@
 
 .card_profile:hover .card_details {
   opacity: 1;
+}
+
+.flexUserInfo {
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  height: auto;
+  margin: 10px;
+}
+.flexData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

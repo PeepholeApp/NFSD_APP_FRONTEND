@@ -1,3 +1,4 @@
+import moment from "moment/moment";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import ProfileInterests from "../../components/ProfileInterests/ProfileInterests";
@@ -6,6 +7,12 @@ import "./UsersContainer.css";
 
 const UsersContainer = ({ profiles }) => {
   const navigate = useNavigate();
+  const ageCalculator = (age) => {
+    const fechaNacimientoMoment = moment(age);
+    const edad = moment().diff(fechaNacimientoMoment, "years");
+    return edad;
+  };
+
   return (
     <>
       <div className="card_grid">
@@ -19,6 +26,24 @@ const UsersContainer = ({ profiles }) => {
               {profile.name} {profile.last_name}
             </h3>
             <div className="card_image"></div>
+            <div className="flexUserInfo">
+              <div className="flexData">
+                <div className="titleUserData">Age</div>
+                <div className="subtitleUserData">
+                  {ageCalculator(profile.dob)}
+                </div>
+              </div>
+              <div className="divisionData"></div>
+              <div className="flexData">
+                <div className="titleUserData">Nationality</div>
+                <div className="subtitleUserData">{profile.nationality}</div>
+              </div>
+              <div className="divisionData"></div>
+              <div className="flexData">
+                <div className="titleUserData">Gender</div>
+                <div className="subtitleUserData">{profile.gender}</div>
+              </div>
+            </div>
             <div className="card_details">
               <div>Bio:</div>
               <div>{profile.bio}</div>

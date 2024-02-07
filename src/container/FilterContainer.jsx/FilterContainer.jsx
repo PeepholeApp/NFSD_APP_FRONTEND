@@ -68,10 +68,10 @@ const FilterContainer = ({
   return (
     <>
       <div className={`filters`}>
-        <div className="title">FILTERS</div>
+        <div className="titleFilter">FILTERS</div>
         <div className="division"></div>
         <div className="flexColumnFilter">
-          <div className="title">Genders</div>
+          <div className="titleFilter">Genders</div>
           {gendersData.map((gender, id) => (
             <div
               key={id}
@@ -87,7 +87,7 @@ const FilterContainer = ({
         </div>
         <div className="division"></div>
         <div className="flexColumnFilter">
-          <div className="title">Languages</div>
+          <div className="titleFilter">Languages</div>
           <div className="flex_filters_icons">
             {languagesData &&
               languagesData.map((language, id) => (
@@ -108,7 +108,7 @@ const FilterContainer = ({
         </div>
         <div className="division"></div>
         <div className="flexColumnFilter">
-          <div className="title">Age Range</div>
+          <div className="titleFilter">Age Range</div>
           <div>
             {ageMin} - {ageMax} years
           </div>
