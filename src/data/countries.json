@@ -1,0 +1,359 @@
+{
+  "countries": [
+    {
+      "name": "United States",
+      "acronym": "US",
+      "icon": "/src/assets/iconCountries/Flag-of-United-States.png"
+    },
+    {
+      "name": "Canada",
+      "acronym": "CA",
+      "icon": "/src/assets/iconCountries/Flag-of-Canada.png"
+    },
+    {
+      "name": "Mexico",
+      "acronym": "MX",
+      "icon": "/src/assets/iconCountries/Flag-of-Mexico.png"
+    },
+    {
+      "name": "Greenland",
+      "acronym": "GL",
+      "icon": "/src/assets/iconCountries/Flag-of-Greenland.png"
+    },
+    {
+      "name": "Cuba",
+      "acronym": "CU",
+      "icon": "/src/assets/iconCountries/Flag-of-Cuba.png"
+    },
+    {
+      "name": "Dominican Republic",
+      "acronym": "DO",
+      "icon": "/src/assets/iconCountries/Flag-of-Dominican-Republic.png"
+    },
+    {
+      "name": "Haiti",
+      "acronym": "HT",
+      "icon": "/src/assets/iconCountries/Flag-of-Haiti.png"
+    },
+    {
+      "name": "Jamaica",
+      "acronym": "JM",
+      "icon": "/src/assets/iconCountries/Flag-of-Jamaica.png"
+    },
+    {
+      "name": "Puerto Rico",
+      "acronym": "PR",
+      "icon": "/src/assets/iconCountries/Flag-of-Puerto-Rico.png"
+    },
+    {
+      "name": "Guatemala",
+      "acronym": "GT",
+      "icon": "/src/assets/iconCountries/Flag-of-Guatemala.png"
+    },
+    {
+      "name": "Honduras",
+      "acronym": "HN",
+      "icon": "/src/assets/iconCountries/Flag-of-Honduras.png"
+    },
+    {
+      "name": "El Salvador",
+      "acronym": "SV",
+      "icon": "/src/assets/iconCountries/Flag-of-El-Salvador.png"
+    },
+    {
+      "name": "Nicaragua",
+      "acronym": "NI",
+      "icon": "/src/assets/iconCountries/Flag-of-Nicaragua.png"
+    },
+    {
+      "name": "Costa Rica",
+      "acronym": "CR",
+      "icon": "/src/assets/iconCountries/Flag-of-Costa-Rica.png"
+    },
+    {
+      "name": "Panama",
+      "acronym": "PA",
+      "icon": "/src/assets/iconCountries/Flag-of-Panama.png"
+    },
+    {
+      "name": "Belize",
+      "acronym": "BZ",
+      "icon": "/src/assets/iconCountries/Flag-of-Belize.png"
+    },
+    {
+      "name": "The Bahamas",
+      "acronym": "BS",
+      "icon": "/src/assets/iconCountries/Flag-of-The-Bahamas.png"
+    },
+    {
+      "name": "Cayman Islands",
+      "acronym": "KY",
+      "icon": "/src/assets/iconCountries/Flag-of-Cayman-Islands.png"
+    },
+    {
+      "name": "Bermuda",
+      "acronym": "BM",
+      "icon": "/src/assets/iconCountries/Flag-of-Bermuda.png"
+    },
+    {
+      "name": "Saint Pierre and Miquelon",
+      "acronym": "PM",
+      "icon": "/src/assets/iconCountries/Flag-of-Saint-Pierre-and-Miquelon.png"
+    },
+    {
+      "name": "Argentina",
+      "acronym": "AR",
+      "icon": "/src/assets/iconCountries/Flag-of-Argentina.png"
+    },
+    {
+      "name": "Brazil",
+      "acronym": "BR",
+      "icon": "/src/assets/iconCountries/Flag-of-Brazil.png"
+    },
+    {
+      "name": "Chile",
+      "acronym": "CL",
+      "icon": "/src/assets/iconCountries/Flag-of-Chile.png"
+    },
+    {
+      "name": "Colombia",
+      "acronym": "CO",
+      "icon": "/src/assets/iconCountries/Flag-of-Colombia.png"
+    },
+    {
+      "name": "Ecuador",
+      "acronym": "EC",
+      "icon": "/src/assets/iconCountries/Flag-of-Ecuador.png"
+    },
+    {
+      "name": "Paraguay",
+      "acronym": "PY",
+      "icon": "/src/assets/iconCountries/Flag-of-Paraguay.png"
+    },
+    {
+      "name": "Peru",
+      "acronym": "PE",
+      "icon": "/src/assets/iconCountries/Flag-of-Peru.png"
+    },
+    {
+      "name": "Uruguay",
+      "acronym": "UY",
+      "icon": "/src/assets/iconCountries/Flag-of-Uruguay.png"
+    },
+    {
+      "name": "Venezuela",
+      "acronym": "VE",
+      "icon": "/src/assets/iconCountries/Flag-of-Venezuela.png"
+    },
+    {
+      "name": "Bolivia",
+      "acronym": "BO",
+      "icon": "/src/assets/iconCountries/Flag-of-Bolivia.png"
+    },
+    {
+      "name": "Guyana",
+      "acronym": "GY",
+      "icon": "/src/assets/iconCountries/Flag-of-Guyana.png"
+    },
+    {
+      "name": "Suriname",
+      "acronym": "SR",
+      "icon": "/src/assets/iconCountries/Flag-of-Suriname.png"
+    },
+    {
+      "name": "French Guiana",
+      "acronym": "GF",
+      "icon": "/src/assets/iconCountries/Flag-of-Guyana.png"
+    },
+    {
+      "name": "Albania",
+      "acronym": "AL",
+      "icon": "/src/assets/iconCountries/Flag-of-Albania.png"
+    },
+    {
+      "name": "Andorra",
+      "acronym": "AD",
+      "icon": "/src/assets/iconCountries/Flag-of-Andorra.png"
+    },
+    {
+      "name": "Austria",
+      "acronym": "AT",
+      "icon": "/src/assets/iconCountries/Flag-of-Austria.png"
+    },
+    {
+      "name": "Belgium",
+      "acronym": "BE",
+      "icon": "/src/assets/iconCountries/Flag-of-Belgium.png"
+    },
+    {
+      "name": "Bulgaria",
+      "acronym": "BG",
+      "icon": "/src/assets/iconCountries/Flag-of-Bulgaria.png"
+    },
+    {
+      "name": "Croatia",
+      "acronym": "HR",
+      "icon": "/src/assets/iconCountries/Flag-of-Croatia.png"
+    },
+    {
+      "name": "Cyprus",
+      "acronym": "CY",
+      "icon": "/src/assets/iconCountries/Flag-of-Cyprus.png"
+    },
+    {
+      "name": "Czech Republic",
+      "acronym": "CZ",
+      "icon": "/src/assets/iconCountries/Flag-of-Czech-Republic.png"
+    },
+    {
+      "name": "Denmark",
+      "acronym": "DK",
+      "icon": "/src/assets/iconCountries/Flag-of-Denmark.png"
+    },
+    {
+      "name": "Estonia",
+      "acronym": "EE",
+      "icon": "/src/assets/iconCountries/Flag-of-Estonia.png"
+    },
+    {
+      "name": "Finland",
+      "acronym": "FI",
+      "icon": "/src/assets/iconCountries/Flag-of-Finland.png"
+    },
+    {
+      "name": "France",
+      "acronym": "FR",
+      "icon": "/src/assets/iconCountries/Flag-of-France.png"
+    },
+    {
+      "name": "Germany",
+      "acronym": "DE",
+      "icon": "/src/assets/iconCountries/Flag-of-Germany.png"
+    },
+    {
+      "name": "Greece",
+      "acronym": "GR",
+      "icon": "/src/assets/iconCountries/Flag-of-Greece.png"
+    },
+    {
+      "name": "Hungary",
+      "acronym": "HU",
+      "icon": "/src/assets/iconCountries/Flag-of-Hungary.png"
+    },
+    {
+      "name": "Iceland",
+      "acronym": "IS",
+      "icon": "/src/assets/iconCountries/Flag-of-Iceland.png"
+    },
+    {
+      "name": "Ireland",
+      "acronym": "IE",
+      "icon": "/src/assets/iconCountries/Flag-of-Ireland.png"
+    },
+    {
+      "name": "Italy",
+      "acronym": "IT",
+      "icon": "/src/assets/iconCountries/Flag-of-Italy.png"
+    },
+    {
+      "name": "Latvia",
+      "acronym": "LV",
+      "icon": "/src/assets/iconCountries/Flag-of-Latvia.png"
+    },
+    {
+      "name": "Liechtenstein",
+      "acronym": "LI",
+      "icon": "/src/assets/iconCountries/Flag-of-Liechtenstein.png"
+    },
+    {
+      "name": "Lithuania",
+      "acronym": "LT",
+      "icon": "/src/assets/iconCountries/Flag-of-Lithuania.png"
+    },
+    {
+      "name": "Luxembourg",
+      "acronym": "LU",
+      "icon": "/src/assets/iconCountries/Flag-of-Luxembourg.png"
+    },
+    {
+      "name": "Malta",
+      "acronym": "MT",
+      "icon": "/src/assets/iconCountries/Flag-of-Malta.png"
+    },
+    {
+      "name": "Monaco",
+      "acronym": "MC",
+      "icon": "/src/assets/iconCountries/Flag-of-Monaco.png"
+    },
+    {
+      "name": "Netherlands",
+      "acronym": "NL",
+      "icon": "/src/assets/iconCountries/Flag-of-Netherlands.png"
+    },
+    {
+      "name": "Norway",
+      "acronym": "NO",
+      "icon": "/src/assets/iconCountries/Flag-of-Norway.png"
+    },
+    {
+      "name": "Poland",
+      "acronym": "PL",
+      "icon": "/src/assets/iconCountries/Flag-of-Poland.png"
+    },
+    {
+      "name": "Portugal",
+      "acronym": "PT",
+      "icon": "/src/assets/iconCountries/Flag-of-Portugal.png"
+    },
+    {
+      "name": "Romania",
+      "acronym": "RO",
+      "icon": "/src/assets/iconCountries/Flag-of-Romania.png"
+    },
+    {
+      "name": "San Marino",
+      "acronym": "SM",
+      "icon": "/src/assets/iconCountries/Flag-of-San-Marino.png"
+    },
+    {
+      "name": "Serbia",
+      "acronym": "RS",
+      "icon": "/src/assets/iconCountries/Flag-of-Serbia.png"
+    },
+    {
+      "name": "Slovakia",
+      "acronym": "SK",
+      "icon": "/src/assets/iconCountries/Flag-of-Slovakia.png"
+    },
+    {
+      "name": "Slovenia",
+      "acronym": "SI",
+      "icon": "/src/assets/iconCountries/Flag-of-Slovenia.png"
+    },
+    {
+      "name": "Spain",
+      "acronym": "ES",
+      "icon": "/src/assets/iconCountries/Flag-of-Spain.png"
+    },
+    {
+      "name": "Sweden",
+      "acronym": "SE",
+      "icon": "/src/assets/iconCountries/Flag-of-Sweden.png"
+    },
+    {
+      "name": "Switzerland",
+      "acronym": "CH",
+      "icon": "/src/assets/iconCountries/Flag-of-Switzerland.png"
+    },
+    {
+      "name": "United Kingdom",
+      "acronym": "GB",
+      "icon": "/src/assets/iconCountries/Flag-of-United-Kingdom.png"
+    },
+    {
+      "name": "Vatican City",
+      "acronym": "VA",
+      "icon": "/src/assets/iconCountries/Flag-of-Vatican-City.png"
+    }
+  ]
+}

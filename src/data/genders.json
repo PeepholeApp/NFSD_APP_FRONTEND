@@ -47,6 +47,10 @@
     {
       "name": "Transgender",
       "icon": "⚧️"
+    },
+    {
+      "name": "other",
+      "icon": "🌐"
     }
   ]
 }
