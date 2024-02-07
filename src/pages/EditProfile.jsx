@@ -60,13 +60,21 @@ const EditProfile = () => {
             `http://localhost:3001/profiles/user/${user.profileId}`
           );
           const profile = response.data;
+
+          const profileLanguages = profile.languages.map((lang) => {
+            const languageOption = languagesOptions.find(
+              (option) => option.value === lang
+            );
+            return languageOption;
+          });
+
           setName(profile.name);
           setLastName(profile.last_name);
           setBirthday(new Date(profile.dob));
           setBio(profile.bio);
           setGenero(profile.gender);
           setNationality(profile.nationality);
-          setLanguages(profile.languages);
+          setLanguages(profileLanguages);
         } catch (error) {
           console.error(error);
         }
@@ -91,6 +99,22 @@ const EditProfile = () => {
     });
   }, []);
 
+  const onSaveModify = async () => {
+    const response = await axios.put(
+      `http://localhost:3001/profiles/${user.profileId}`,
+      {
+        name,
+        last_name: lastName,
+        dob: birthday.toISOString(),
+        gender: genero,
+        nationality,
+        languages: languages.map((language) => language.value),
+        bio,
+        user: user.userId,
+      }
+    );
+  };
+
   return (
     <Stack sx={{ m: 5 }} alignItems="center">
       <Stack sx={{ p: 8, width: 600, backgroundColor: "#262938" }} spacing={2}>
@@ -99,6 +123,7 @@ const EditProfile = () => {
             bgcolor: deepPurple[500],
             width: 50,
             height: 50,
+            alignSelf: "center",
           }}
           variant="square"
         >
@@ -177,15 +202,15 @@ const EditProfile = () => {
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
           <Autocomplete
             value={languages}
-            onChange={(e, value) => {
-              setLanguages(value);
+            onChange={(e, option) => {
+              setLanguages(option);
             }}
             multiple
             options={languagesOptions}
             renderInput={(params) => <TextField {...params} label="Idioma" />}
           />
         </FormControl>
-        <ButtonDark>Guardar Cambios</ButtonDark>
+        <ButtonDark onClick={onSaveModify}>Guardar Cambios</ButtonDark>
       </Stack>
     </Stack>
   );
