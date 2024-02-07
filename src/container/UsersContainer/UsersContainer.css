@@ -32,6 +32,12 @@
 }
 .card_profile:hover {
   transform: translateY(-10px);
+  box-shadow: linear-gradient(
+    to right top,
+    rgb(173, 182, 255) 0%,
+    rgb(174, 109, 255) 100%
+  );
+  box-shadow: -1px 0px 5px 0px #3402b4, 1px 0px 5px 0px #6a1498;
 }
 
 .card_profile {
