@@ -7,18 +7,19 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/NavBar";
+import { FiltersProvider } from "./context/FiltersContext";
 import { AuthProvider } from "./context/Login";
+import AboutUs from "./pages/AboutUs";
+import Blog from "./pages/Blog";
+import Community from "./pages/Community";
+import Contact from "./pages/Contact";
+import EditProfile from "./pages/EditProfile";
 import Home from "./pages/Home";
 import HomeApp from "./pages/HomeApp/HomeApp";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import UserDetails from "./pages/UserDetails/UserDetails";
-import Community from "./pages/Community";
-import Blog from "./pages/Blog";
-import AboutUs from "./pages/AboutUs";
-import Contact from "./pages/Contact";
-import EditProfile from "./pages/EditProfile";
 
 const theme = createTheme({
   palette: {
@@ -39,21 +40,23 @@ function App() {
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <AuthProvider>
-            <CssBaseline />
-            <Navbar />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/editProfile" element={<EditProfile />} />
-              <Route path="/home" element={<HomeApp />} />
-              <Route path="/user/:userId" element={<UserDetails />} />
-              <Route path="/community" element={<Community />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/aboutUs" element={<AboutUs />} />
-              <Route path="/contact" element={<Contact />} />
-            </Routes>
+            <FiltersProvider>
+              <CssBaseline />
+              <Navbar />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/editProfile" element={<EditProfile />} />
+                <Route path="/home" element={<HomeApp />} />
+                <Route path="/user/:userId" element={<UserDetails />} />
+                <Route path="/community" element={<Community />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/aboutUs" element={<AboutUs />} />
+                <Route path="/contact" element={<Contact />} />
+              </Routes>
+            </FiltersProvider>
           </AuthProvider>
         </BrowserRouter>
       </ThemeProvider>

@@ -3,23 +3,23 @@ import React, { useEffect, useState } from "react";
 import FilterContainer from "../../container/FilterContainer.jsx/FilterContainer";
 import NationalitiesFilterContainer from "../../container/NationalitiesFilterContainer/NationalitiesFilterContainer";
 import UsersContainer from "../../container/UsersContainer/UsersContainer";
+import { useFilters } from "../../context/FiltersContext";
 import "./HomeApp.css";
 
 const HomeApp = () => {
   const [profiles, setProfiles] = useState([]);
-  const [toggleNation, setToggleNation] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [nationalities, setNationalities] = useState([]);
   const [genders, setGenders] = useState([]);
   const [languages, setLanguages] = useState([]);
   const [lastPage, setLastPage] = useState(false);
-  const [toggleFilter, setToggleFilter] = useState(true);
-  const [filters, setFilters] = useState({
-    nationality: [],
-    gender: [],
-    languages: [],
-    age: [],
-  });
+  // const [filters, setFilters] = useState({
+  //   nationality: [],
+  //   gender: [],
+  //   languages: [],
+  //   age: [],
+  // });
+  const { filters, updateFilters } = useFilters();
 
   useEffect(() => {
     getAllNationalities();
@@ -83,7 +83,7 @@ const HomeApp = () => {
 
   const isFilterSelected = (nameFilter, filterData) => {
     if (nameFilter === "age") {
-      setFilters({
+      updateFilters({
         ...filters,
         age: filterData,
       });
@@ -92,9 +92,12 @@ const HomeApp = () => {
         const filterElements = filters[nameFilter].filter(
           (filter) => filter !== filterData
         );
-        setFilters({ ...filters, [nameFilter]: [...filterElements] });
+        updateFilters({
+          ...filters,
+          [nameFilter]: [...filterElements],
+        });
       } else {
-        setFilters({
+        updateFilters({
           ...filters,
           [nameFilter]: [...filters[nameFilter], filterData],
         });
@@ -130,7 +133,6 @@ const HomeApp = () => {
         <div className="flex_page">
           <NationalitiesFilterContainer
             nationalities={nationalities}
-            toggleNation={toggleNation}
             addCountryFilter={getNationalityFilter}
           />
           {/* <button onClick={() => setToggleFilter(!toggleFilter)}> */}

@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
+import { useFilters } from "../../context/FiltersContext";
 import countriesData from "../../data/countries.json";
 import "./NationalitiesFilterContainer.css";
 
-const NationalitiesFilterContainer = ({
-  nationalities,
-  toggleNation,
-  addCountryFilter,
-}) => {
-  const [selectedFilters, setSelectedFilters] = useState({});
+const NationalitiesFilterContainer = ({ nationalities, addCountryFilter }) => {
+  const { selectCountryFilter, updateCountryFilter } = useFilters();
 
   const getIconImg = (type, data) => {
     let foundIcon = {};
@@ -25,7 +22,7 @@ const NationalitiesFilterContainer = ({
   };
 
   const handleFilterClick = (nationality) => {
-    setSelectedFilters((prevFilters) => ({
+    updateCountryFilter((prevFilters) => ({
       ...prevFilters,
       [nationality]: !prevFilters[nationality],
     }));
@@ -40,7 +37,7 @@ const NationalitiesFilterContainer = ({
           <div
             key={id}
             className={`nationality_filter ${
-              selectedFilters[nationality] ? "checkNation" : ""
+              selectCountryFilter[nationality] ? "checkNation" : ""
             }`}
             onClick={() => handleFilterClick(nationality)}
           >
