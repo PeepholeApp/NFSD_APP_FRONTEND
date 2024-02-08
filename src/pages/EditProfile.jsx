@@ -32,7 +32,7 @@ const languagesOptions = [
   },
   {
     label: "Portugues",
-    value: "PR",
+    value: "PT",
   },
   {
     label: "Italiano",
@@ -61,12 +61,19 @@ const EditProfile = () => {
           );
           const profile = response.data;
 
-          const profileLanguages = profile.languages.map((lang) => {
-            const languageOption = languagesOptions.find(
-              (option) => option.value === lang
-            );
-            return languageOption;
-          });
+          const profileLanguages = profile.languages
+            .map((lang) => {
+              const languageOption = languagesOptions.find(
+                (option) => option.value === lang
+              );
+              return languageOption;
+            })
+            /*
+                filtrar los codigos de lenguages que no
+                estan en el arreglo en caso de que en Mongo
+                exista un codigo de lenguage desconocido
+            */
+            .filter((option) => !!option);
 
           setName(profile.name);
           setLastName(profile.last_name);

@@ -40,7 +40,7 @@ const languagesOptions = [
   },
   {
     label: "Portugues",
-    value: "PR",
+    value: "PT",
   },
   {
     label: "Italiano",

@@ -7,7 +7,6 @@ import ProfileLanguages from "../../components/ProfileLanguages/ProfileLanguages
 import "./UserDetails.css";
 import { ButtonDark } from "../../components/Button";
 import { useAuth } from "../../context/Login";
-import { Link } from "react-router-dom";
 
 const UserDetails = () => {
   const { userId } = useParams();
