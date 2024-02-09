@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ButtonDark } from "../../components/Button";
+import { useFilters } from "../../context/FiltersContext";
 import gendersDataIcons from "../../data/genders.json";
 import languagesDataIcons from "../../data/languages.json";
 import "./FilterContainer.css";
@@ -17,6 +18,7 @@ const FilterContainer = ({
     gender: [],
     language: [],
   });
+  const { selectOtherFilters, updateOtherFilter } = useFilters();
 
   const handleApplyFilter = () => {
     getAgeFilter({
@@ -26,7 +28,7 @@ const FilterContainer = ({
   };
 
   const handleFilter = (filterType, filterValue) => {
-    setSelectedFilters((prevFilters) => {
+    updateOtherFilter((prevFilters) => {
       const newFilters = { ...prevFilters };
       if (newFilters[filterType].includes(filterValue)) {
         newFilters[filterType] = newFilters[filterType].filter(
@@ -76,7 +78,7 @@ const FilterContainer = ({
             <div
               key={id}
               className={`style_icons ${
-                selectedFilters.gender.includes(gender) ? "selected" : ""
+                selectOtherFilters.gender.includes(gender) ? "selected" : ""
               }`}
               onClick={() => handleFilter("gender", gender)}
             >
@@ -94,7 +96,7 @@ const FilterContainer = ({
                 <div
                   key={id}
                   className={`style_icons ${
-                    selectedFilters.language.includes(language)
+                    selectOtherFilters.language.includes(language)
                       ? "selected"
                       : ""
                   }`}
