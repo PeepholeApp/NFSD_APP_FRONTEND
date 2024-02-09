@@ -44,7 +44,7 @@ const Home = () => {
     <Box
       sx={{
         backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: 'contain', 
+        backgroundSize: 'cover', // Adjusted to cover the container
         backgroundPosition: 'center',
         height: '100vh',
       }}

@@ -1,20 +1,25 @@
-import { Button, Container, TextField, Typography } from "@mui/material";
-import CssBaseline from "@mui/material/CssBaseline";
+// Import necessary components and styles
+import { Button, Container, CssBaseline, TextField, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/Login";
-// import backgroundImage from "../assets/login.png";
+import backgroundImage from "../assets/login.png";
 
-const StyledContainer = styled(Container)(({ theme }) => ({
+const StyledContainer = styled("div")(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  height: "100vh",
-  // backgroundImage: `url(${backgroundImage})`, // imagen del background por definir
+  minHeight: "100vh",
+  backgroundImage: `url(${backgroundImage})`,
   backgroundSize: "cover",
   backgroundPosition: "center",
+  animation: "moveBackground 20s linear infinite", // Add this line for animation
+  "@keyframes moveBackground": { // Define the animation
+    "0%": { backgroundPosition: "0 0" },
+    "100%": { backgroundPosition: "100% 100%" },
+  },
 }));
 
 const StyledFormContainer = styled("div")(({ theme }) => ({
