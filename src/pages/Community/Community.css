@@ -1,0 +1,90 @@
+.flexCommunity {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.activitiesContainer {
+  width: 60%;
+  height: auto;
+  border-radius: 20px;
+  background-color: #262938;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.flexActivity {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  padding: 20px;
+  background: rgba(6, 4, 20, 0.9);
+  backdrop-filter: blur(7.5px);
+  display: flex;
+  justify-content: space-around;
+}
+
+.activityCategory {
+  width: 10%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.styleCategory {
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  border: 2px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.divisionActivity {
+  width: 2px;
+  height: 100%;
+  background-color: #262938;
+}
+
+.activityContainer {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.titleText {
+  font-size: 16pt;
+  font-weight: bold;
+}
+.descriptionText {
+  font-size: 12pt;
+  font-weight: light;
+}
+
+.isAvailable {
+  width: 200px;
+  padding: 5px;
+  align-content: center;
+  border-radius: 20px;
+  background-color: rgb(76, 126, 0);
+  display: flex;
+  justify-content: center;
+}
+.isNotAvailable {
+  background-color: rgb(189, 0, 0);
+}
+
+.flexButtons {
+  width: 10%;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}

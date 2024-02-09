@@ -1,13 +1,12 @@
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Button from "@mui/material/Button";
-import Home from "../pages/Home";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/Login";
 import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Toolbar from "@mui/material/Toolbar";
+import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
+import { useAuth } from "../context/Login";
 
 const Navbar = () => {
   const { user } = useAuth();
@@ -16,7 +15,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const onHome = () => {
-    navigate("/");
+    navigate("/home");
   };
   return user ? (
     <>

@@ -11,7 +11,7 @@ import { FiltersProvider } from "./context/FiltersContext";
 import { AuthProvider } from "./context/Login";
 import AboutUs from "./pages/AboutUs";
 import Blog from "./pages/Blog";
-import Community from "./pages/Community";
+import Community from "./pages/Community/Community";
 import Contact from "./pages/Contact";
 import EditProfile from "./pages/EditProfile";
 import Home from "./pages/Home";
