@@ -74,6 +74,7 @@ const Profile = () => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [image, setImage] = useState([]);
 
   useEffect(() => {
     axios.get("https://restcountries.com/v3.1/all").then((response) => {
@@ -123,6 +124,24 @@ const Profile = () => {
 
   const handleClose = () => setOpen(false);
 
+  const handleUpload = async (e) => {
+    e.preventDefault();
+    if (!image) {
+      return;
+    }
+    const formData = new FormData();
+    formData.append("file", image);
+    const response = await axios.post("http://localhost:3001/image", formData);
+    console.log(response);
+    setImage(response.data.image);
+  };
+
+  const hadleImageSelected = (e) => {
+    const image = e.target.files[0];
+    setImage(image);
+    console.log(image);
+  };
+
   const onSave = async () => {
     const interests = Array.from(selectedInterests); //convierte el set en un array
     const response = await axios.post("http://localhost:3001/profiles", {
@@ -133,6 +152,7 @@ const Profile = () => {
       nationality,
       languages: languages.map((language) => language.value),
       bio,
+      photo: image,
       user: user.userId,
       interest: interests,
     });
@@ -323,7 +343,14 @@ const Profile = () => {
           </>
         ) : step === 3 ? (
           <>
-            <h1>Subir fotos</h1>
+            <h1>Upload Photos</h1>
+            <form onSubmit={handleUpload}>
+              <input type="file" name="image" onChange={hadleImageSelected} />
+              <input type="submit" value="Subir" />
+            </form>
+
+            {image && <img width={100} height={100} src={image} />}
+
             <ButtonDark onClick={onSave}>Guardar</ButtonDark>
             <Modal
               open={open}

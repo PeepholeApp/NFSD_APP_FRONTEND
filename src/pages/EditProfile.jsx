@@ -49,7 +49,7 @@ const EditProfile = () => {
   const [languages, setLanguages] = useState([]);
   const [bio, setBio] = useState("");
   const [countries, setCountries] = useState([]);
-
+  const [images, setImages] = useState([]);
   const { user, loading } = useAuth();
 
   useEffect(() => {
@@ -106,6 +106,23 @@ const EditProfile = () => {
     });
   }, []);
 
+  const handleUpload = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+
+    console.log("que es esto", formData);
+    const files = e.target.file.files;
+    console.log(e.target.file.files);
+    //Toma todos los archivos e itera y agrega al formData
+    for (let file of files) {
+      formData.append("file", file);
+    }
+
+    const response = await axios.post("http://localhost:3001/image", formData);
+    console.log(response.data);
+    setImages(response.data);
+  };
+
   const onSaveModify = async () => {
     const response = await axios.put(
       `http://localhost:3001/profiles/${user.profileId}`,
@@ -117,6 +134,7 @@ const EditProfile = () => {
         nationality,
         languages: languages.map((language) => language.value),
         bio,
+        photo: images,
         user: user.userId,
       }
     );
@@ -216,6 +234,16 @@ const EditProfile = () => {
             options={languagesOptions}
             renderInput={(params) => <TextField {...params} label="Idioma" />}
           />
+        </FormControl>
+        <FormControl>
+          <h1>Upload Photos</h1>
+          <form onSubmit={handleUpload}>
+            <input type="file" name="file" multiple />
+            <input type="submit" value="Subir" />
+          </form>
+
+          {images &&
+            images.map((i) => <img width={200} height={200} src={i} />)}
         </FormControl>
         <ButtonDark onClick={onSaveModify}>Guardar Cambios</ButtonDark>
       </Stack>
