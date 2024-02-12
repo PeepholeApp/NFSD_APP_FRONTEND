@@ -74,6 +74,7 @@ const Profile = () => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [image, setImage] = useState();
 
   useEffect(() => {
     axios.get("https://restcountries.com/v3.1/all").then((response) => {
@@ -122,6 +123,16 @@ const Profile = () => {
   };
 
   const handleClose = () => setOpen(false);
+
+  const handleUpload = (e) => {
+    e.preventDefault();
+  };
+
+  const hadleImageSelected = (e) => {
+    const image = e.target.files[0];
+    setImage(image);
+    console.log(image);
+  };
 
   const onSave = async () => {
     const interests = Array.from(selectedInterests); //convierte el set en un array
@@ -323,7 +334,12 @@ const Profile = () => {
           </>
         ) : step === 3 ? (
           <>
-            <h1>Subir fotos</h1>
+            <h1>Upload Photos</h1>
+            <form onSubmit={handleUpload}>
+              <input type="file" name="image" onChange={hadleImageSelected} />
+              <input type="submit" value="Subir" />
+            </form>
+
             <ButtonDark onClick={onSave}>Guardar</ButtonDark>
             <Modal
               open={open}
