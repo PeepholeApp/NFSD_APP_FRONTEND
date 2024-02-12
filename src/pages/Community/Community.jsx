@@ -7,12 +7,20 @@ function Community() {
 
   useEffect(() => {
     getAllActivities();
-  }, []);
+  }, [activities]);
 
   const getAllActivities = async () => {
     try {
       const response = await axios.get("http://localhost:3001/activities/");
       setActivities(response.data);
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
+
+  const updateCapacity = async (activity) => {
+    try {
+      await axios.put(`http://localhost:3001/activities/increase/${activity}`);
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -33,16 +41,33 @@ function Community() {
                 <div className="titleText">{activity.title}</div>
                 <div className="descriptionText">{activity.description}</div>
                 <div className="descriptionText">Date: {activity.date}</div>
-                <div
-                  className={`isAvailable ${
-                    activity.available ? "" : "isNotAvailable"
-                  }`}
-                >
-                  {activity.available ? "Is available" : "Is not available"}
+                <div className="progressContainer">
+                  <div
+                    className="progressBar"
+                    style={{
+                      width: `${
+                        (activity.capacity / activity.availability) * 100
+                      }%`,
+                    }}
+                  ></div>
+                </div>
+                <div className="">
+                  {activity.capacity}/{activity.availability}
+                </div>
+                <div className="flexAvailable">
+                  <div
+                    className={`isAvailable ${
+                      activity.available ? "" : "isNotAvailable"
+                    }`}
+                  >
+                    {activity.available ? "Available" : "Not available"}
+                  </div>
                 </div>
               </div>
               <div className="flexButtons">
-                <button>Book</button>
+                <button onClick={() => updateCapacity(activity._id)}>
+                  Book
+                </button>
                 <button>Cancel</button>
               </div>
             </div>

@@ -13,12 +13,6 @@ const HomeApp = () => {
   const [genders, setGenders] = useState([]);
   const [languages, setLanguages] = useState([]);
   const [lastPage, setLastPage] = useState(false);
-  // const [filters, setFilters] = useState({
-  //   nationality: [],
-  //   gender: [],
-  //   languages: [],
-  //   age: [],
-  // });
   const { filters, updateFilters } = useFilters();
 
   useEffect(() => {
