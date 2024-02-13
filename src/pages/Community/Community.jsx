@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useAuth } from "../../context/Login";
 import "./Community.css";
 
 function Community() {
   const [activities, setActivities] = useState([]);
+  const { user, loading } = useAuth();
 
   useEffect(() => {
     getAllActivities();
