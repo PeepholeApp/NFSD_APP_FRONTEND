@@ -5,11 +5,14 @@ import "./Community.css";
 
 function Community() {
   const [activities, setActivities] = useState([]);
+  const [userParticipatedActivities, setUserParticipatedActivities] = useState(
+    []
+  );
   const { user, loading } = useAuth();
 
   useEffect(() => {
     getAllActivities();
-  }, [activities]);
+  }, []);
 
   const getAllActivities = async () => {
     try {
@@ -21,8 +24,20 @@ function Community() {
   };
 
   const updateCapacity = async (activity) => {
+    if (userParticipatedActivities.includes(activity._id)) {
+      console.log("Estas registrado en esta actividad");
+      return;
+    }
+    const updatedParticipants = [...activity.participants, user.profileId];
     try {
-      await axios.put(`http://localhost:3001/activities/increase/${activity}`);
+      await axios.put(`http://localhost:3001/activities/${activity._id}`, {
+        participants: updatedParticipants,
+      });
+      setUserParticipatedActivities([
+        ...userParticipatedActivities,
+        activity._id,
+      ]);
+      getAllActivities();
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -48,26 +63,26 @@ function Community() {
                     className="progressBar"
                     style={{
                       width: `${
-                        (activity.capacity / activity.availability) * 100
+                        (activity.participants.length / activity.capacity) * 100
                       }%`,
                     }}
                   ></div>
                 </div>
-                <div className="">
-                  {activity.capacity}/{activity.availability}
+                <div>
+                  {activity.participants.length}/{activity.capacity}
                 </div>
-                <div className="flexAvailable">
-                  <div
-                    className={`isAvailable ${
-                      activity.available ? "" : "isNotAvailable"
-                    }`}
-                  >
-                    {activity.available ? "Available" : "Not available"}
-                  </div>
+                <div className="flexParticipants">
+                  <div>Participants:</div>
+                  {activity.participants.map((participant, index) => (
+                    <span key={index}>{participant.name}</span>
+                  ))}
                 </div>
               </div>
               <div className="flexButtons">
-                <button onClick={() => updateCapacity(activity._id)}>
+                <button
+                  disabled={userParticipatedActivities.includes(activity._id)}
+                  onClick={() => updateCapacity(activity)}
+                >
                   Book
                 </button>
                 <button>Cancel</button>

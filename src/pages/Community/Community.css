@@ -25,6 +25,7 @@
   backdrop-filter: blur(7.5px);
   display: flex;
   justify-content: space-around;
+  transition: all 0.4s ease-in-out;
 }
 
 .activityCategory {
@@ -82,21 +83,15 @@
   transition: all 0.4s ease-in-out;
 }
 
-.flexAvailable {
-  display: flex;
-  font-size: 10pt;
+.flexParticipants {
+  display: none;
+  gap: 5px;
+  opacity: 1;
+  transition: all 0.4s ease-in-out;
 }
-.isAvailable {
-  width: auto;
-  padding: 5px 10px;
-  align-content: center;
-  border-radius: 20px;
-  background-color: rgb(76, 126, 0);
+
+.flexActivity:hover .flexParticipants {
   display: flex;
-  justify-content: center;
-}
-.isNotAvailable {
-  background-color: rgb(189, 0, 0);
 }
 
 .flexButtons {
