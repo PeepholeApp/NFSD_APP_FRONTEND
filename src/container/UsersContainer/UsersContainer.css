@@ -48,9 +48,14 @@
   background-color: white;
   border-radius: 20px;
 }
-
 .card_image > h3 {
   margin-left: 10px;
+}
+.imageProfile {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
 }
 
 .card_details {
