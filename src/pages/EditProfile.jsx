@@ -243,7 +243,14 @@ const EditProfile = () => {
           </form>
 
           {images &&
-            images.map((i) => <img width={200} height={200} src={i} />)}
+            images.map((i) => (
+              <img
+                width={200}
+                height={200}
+                src={i}
+                style={{ objectFit: "cover" }}
+              />
+            ))}
         </FormControl>
         <ButtonDark onClick={onSaveModify}>Guardar Cambios</ButtonDark>
       </Stack>
