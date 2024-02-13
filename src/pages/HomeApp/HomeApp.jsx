@@ -13,12 +13,6 @@ const HomeApp = () => {
   const [genders, setGenders] = useState([]);
   const [languages, setLanguages] = useState([]);
   const [lastPage, setLastPage] = useState(false);
-  // const [filters, setFilters] = useState({
-  //   nationality: [],
-  //   gender: [],
-  //   languages: [],
-  //   age: [],
-  // });
   const { filters, updateFilters } = useFilters();
 
   useEffect(() => {
@@ -135,8 +129,6 @@ const HomeApp = () => {
             nationalities={nationalities}
             addCountryFilter={getNationalityFilter}
           />
-          {/* <button onClick={() => setToggleFilter(!toggleFilter)}> */}
-          {/* <button onClick={() => console.log(filters)}>Show filters</button> */}
           <UsersContainer profiles={profiles} />
           <button
             onClick={() => setCurrentPage((prev) => prev - 1)}
