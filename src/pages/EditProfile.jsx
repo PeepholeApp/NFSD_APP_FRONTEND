@@ -16,6 +16,10 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Autocomplete from "@mui/material/Autocomplete";
 import { ButtonDark } from "../components/Button";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { styled } from "@mui/material/styles";
+import Button from "@mui/material/Button";
+// import { MuiFileInput } from "mui-file-input";
 
 const languagesOptions = [
   {
@@ -51,6 +55,19 @@ const EditProfile = () => {
   const [countries, setCountries] = useState([]);
   const [images, setImages] = useState([]);
   const { user, loading } = useAuth();
+  const [file, setFile] = React.useState(null);
+
+  const VisuallyHiddenInput = styled("input")({
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
+    height: 1,
+    overflow: "hidden",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    whiteSpace: "nowrap",
+    width: 1,
+  });
 
   useEffect(() => {
     if (user && !loading) {
@@ -82,6 +99,7 @@ const EditProfile = () => {
           setGenero(profile.gender);
           setNationality(profile.nationality);
           setLanguages(profileLanguages);
+          setImages(profile.photo);
         } catch (error) {
           console.error(error);
         }
@@ -111,8 +129,8 @@ const EditProfile = () => {
     const formData = new FormData();
 
     console.log("que es esto", formData);
-    const files = e.target.file.files;
-    console.log(e.target.file.files);
+    const files = e.target.files;
+    console.log(e.target.files);
     //Toma todos los archivos e itera y agrega al formData
     for (let file of files) {
       formData.append("file", file);
@@ -140,6 +158,15 @@ const EditProfile = () => {
     );
   };
 
+  const handleChange = (newFile) => {
+    setFile(newFile);
+  };
+
+  const onImageDelete = (index) => () => {
+    setImages((images) =>
+      images.filter((_image, imageIndex) => imageIndex != index)
+    );
+  };
   return (
     <Stack sx={{ m: 5 }} alignItems="center">
       <Stack sx={{ p: 8, width: 600, backgroundColor: "#262938" }} spacing={2}>
@@ -235,23 +262,34 @@ const EditProfile = () => {
             renderInput={(params) => <TextField {...params} label="Idioma" />}
           />
         </FormControl>
-        <FormControl>
-          <h1>Upload Photos</h1>
-          <form onSubmit={handleUpload}>
-            <input type="file" name="file" multiple />
-            <input type="submit" value="Subir" />
-          </form>
+        <FormControl></FormControl>
 
+        <Button
+          component="label"
+          role={undefined}
+          variant="contained"
+          tabIndex={-1}
+          startIcon={<CloudUploadIcon />}
+        >
+          Upload file
+          <VisuallyHiddenInput type="file" onChange={handleUpload} />
+        </Button>
+        <Stack direction="row">
           {images &&
-            images.map((i) => (
-              <img
-                width={200}
-                height={200}
-                src={i}
-                style={{ objectFit: "cover" }}
-              />
+            images.map((url, index) => (
+              <Stack>
+                <img
+                  key={url}
+                  width={200}
+                  height={200}
+                  src={url}
+                  style={{ objectFit: "cover" }}
+                />
+                <Button onClick={onImageDelete(index)}> X </Button>
+              </Stack>
             ))}
-        </FormControl>
+        </Stack>
+
         <ButtonDark onClick={onSaveModify}>Guardar Cambios</ButtonDark>
       </Stack>
     </Stack>
