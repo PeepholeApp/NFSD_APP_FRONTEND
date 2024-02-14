@@ -19,7 +19,8 @@ import { ButtonDark } from "../components/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
-// import { MuiFileInput } from "mui-file-input";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const languagesOptions = [
   {
@@ -277,7 +278,7 @@ const EditProfile = () => {
         <Stack direction="row">
           {images &&
             images.map((url, index) => (
-              <Stack>
+              <Stack sx={{ "& button": { m: 1 } }}>
                 <img
                   key={url}
                   width={200}
@@ -285,7 +286,16 @@ const EditProfile = () => {
                   src={url}
                   style={{ objectFit: "cover" }}
                 />
-                <Button onClick={onImageDelete(index)}> X </Button>
+                <Button
+                  variant="contained"
+                  disableElevation
+                  size="small"
+                  onClick={onImageDelete(index)}
+                >
+                  <IconButton aria-label="delete">
+                    <DeleteIcon />
+                  </IconButton>
+                </Button>
               </Stack>
             ))}
         </Stack>
