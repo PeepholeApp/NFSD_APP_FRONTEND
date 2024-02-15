@@ -6,7 +6,6 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import FormLabel from "@mui/material/FormLabel";
 import Avatar from "@mui/material/Avatar";
 import { deepPurple } from "@mui/material/colors";
-import Icon from "@mui/material/Icon";
 import { useAuth } from "../context/Login";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
@@ -21,6 +20,9 @@ import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
+import { useNavigate } from "react-router-dom";
 
 const languagesOptions = [
   {
@@ -57,6 +59,8 @@ const EditProfile = () => {
   const [images, setImages] = useState([]);
   const { user, loading } = useAuth();
   const [file, setFile] = React.useState(null);
+  const [uploading, setUploading] = useState(false);
+  const navigate = useNavigate();
 
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
@@ -137,9 +141,11 @@ const EditProfile = () => {
       formData.append("file", file);
     }
 
+    setUploading(true);
     const response = await axios.post("http://localhost:3001/image", formData);
     console.log(response.data);
     setImages(response.data);
+    setUploading(false);
   };
 
   const onSaveModify = async () => {
@@ -157,6 +163,7 @@ const EditProfile = () => {
         user: user.userId,
       }
     );
+    navigate("/home");
   };
 
   const handleChange = (newFile) => {
@@ -271,11 +278,16 @@ const EditProfile = () => {
           variant="contained"
           tabIndex={-1}
           startIcon={<CloudUploadIcon />}
+          disabled={uploading}
         >
           Upload file
-          <VisuallyHiddenInput type="file" onChange={handleUpload} />
+          <VisuallyHiddenInput type="file" multiple onChange={handleUpload} />
         </Button>
-        <Stack direction="row">
+        <Box sx={{ width: "100%" }}>
+          {uploading ? <LinearProgress /> : null}
+        </Box>
+
+        <Box display="flex" flexWrap="wrap" gap={2}>
           {images &&
             images.map((url, index) => (
               <Stack sx={{ "& button": { m: 1 } }}>
@@ -290,15 +302,17 @@ const EditProfile = () => {
                   variant="contained"
                   disableElevation
                   size="small"
+                  startIcon={<DeleteIcon />}
                   onClick={onImageDelete(index)}
                 >
-                  <IconButton aria-label="delete">
+                  Delete
+                  {/* <IconButton aria-label="delete">
                     <DeleteIcon />
-                  </IconButton>
+                  </IconButton> */}
                 </Button>
               </Stack>
             ))}
-        </Stack>
+        </Box>
 
         <ButtonDark onClick={onSaveModify}>Guardar Cambios</ButtonDark>
       </Stack>
