@@ -1,13 +1,12 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/Login";
 import AppBar from "@mui/material/AppBar";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import logo from "../assets/logo.png";
-import { useAuth } from "../context/Login";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Menu from "@mui/material/Menu";
@@ -15,9 +14,10 @@ import MenuItem from "@mui/material/MenuItem";
 import Badge from "@mui/material/Badge";
 import EmailIcon from "@mui/icons-material/Email";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import logo from "../assets/logo.png";
 
 const Navbar = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
 
   const [menuEl, setMenuEl] = useState(null);
@@ -28,6 +28,19 @@ const Navbar = () => {
 
   const onHome = () => {
     navigate("/home");
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
+  const handleSignIn = () => {
+    navigate("/login");
+  };
+
+  const handleSignUp = () => {
+    navigate("/register");
   };
 
   return user ? (
@@ -101,9 +114,7 @@ const Navbar = () => {
                 }}
                 sx={{ p: 0 }}
               >
-                <Avatar
-                // onClick={() => navigate(`/user/${user.profileId}`)}
-                ></Avatar>
+                <Avatar />
               </IconButton>
             </Tooltip>
             <Menu
@@ -131,7 +142,7 @@ const Navbar = () => {
                 Profile
               </MenuItem>
               <MenuItem onClick={handleClose}>Help</MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
           </Stack>
         </Toolbar>
@@ -161,11 +172,12 @@ const Navbar = () => {
           </Button>
         </Box>
         <Box>
-          <Button>Sign In</Button>
-          <Button>Sign up</Button>
+          <Button onClick={handleSignIn}>Sign In</Button>
+          <Button onClick={handleSignUp}>Sign up</Button>
         </Box>
       </Toolbar>
     </AppBar>
   );
 };
+
 export default Navbar;
