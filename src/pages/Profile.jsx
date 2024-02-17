@@ -24,6 +24,15 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { ButtonDark } from "../components/Button";
 import Modal from "@mui/material/Modal";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import { styled } from "@mui/material/styles";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import LinearProgress from "@mui/material/LinearProgress";
+import AddIcon from "@mui/icons-material/Add";
 
 const languagesOptions = [
   {
@@ -60,6 +69,25 @@ const style = {
   p: 4,
 };
 
+const Div = styled("div")(({ theme }) => ({
+  ...theme.typography.button,
+  backgroundColor: theme.palette.background.paper,
+  padding: theme.spacing(1),
+  textAlign: "center",
+}));
+
+const VisuallyHiddenInput = styled("input")({
+  clip: "rect(0 0 0 0)",
+  clipPath: "inset(50%)",
+  height: 1,
+  overflow: "hidden",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  whiteSpace: "nowrap",
+  width: 1,
+});
+
 const Profile = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -75,6 +103,8 @@ const Profile = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [image, setImage] = useState([]);
+  const [uploading, setUploading] = useState(false);
+  const [file, setFile] = useState(null);
 
   useEffect(() => {
     axios.get("https://restcountries.com/v3.1/all").then((response) => {
@@ -126,20 +156,33 @@ const Profile = () => {
 
   const handleUpload = async (e) => {
     e.preventDefault();
-    if (!image) {
-      return;
-    }
     const formData = new FormData();
-    formData.append("file", image);
+
+    console.log("que es esto", formData);
+    const files = e.target.files;
+    console.log(e.target.files);
+
+    //Toma todos los archivos e itera y agrega al formData
+    for (let file of files) {
+      formData.append("file", file);
+    }
+
+    setUploading(true);
     const response = await axios.post("http://localhost:3001/image", formData);
-    console.log(response);
-    setImage(response.data.image);
+    console.log(response.data);
+    setImage(response.data);
+    setUploading(false);
   };
 
   const hadleImageSelected = (e) => {
     const image = e.target.files[0];
-    setImage(image);
+    setFile(image);
     console.log(image);
+  };
+  const onImageDelete = (index) => () => {
+    setImage((images) =>
+      images.filter((_image, imageIndex) => imageIndex != index)
+    );
   };
 
   const onSave = async () => {
@@ -343,13 +386,60 @@ const Profile = () => {
           </>
         ) : step === 3 ? (
           <>
-            <h1>Upload Photos</h1>
-            <form onSubmit={handleUpload}>
-              <input type="file" name="image" onChange={hadleImageSelected} />
-              <input type="submit" value="Subir" />
-            </form>
+            <Card sx={{ minWidth: 275 }}>
+              <CardContent>
+                <Div display="flex" justifyContent="center">
+                  {" "}
+                  {"Upload Photos"}{" "}
+                </Div>
+              </CardContent>
 
-            {image && <img width={100} height={100} src={image} />}
+              <CardActions>
+                <Button
+                  component="label"
+                  role={undefined}
+                  variant="contained"
+                  tabIndex={-1}
+                  disabled={uploading}
+                  disableElevation
+                  size="small"
+                  startIcon={<AddIcon />}
+                >
+                  <VisuallyHiddenInput
+                    type="file"
+                    multiple
+                    onChange={handleUpload}
+                  />
+                </Button>
+                <Box sx={{ width: "100%" }}>
+                  {uploading ? <LinearProgress /> : null}
+                </Box>
+
+                <Box display="flex" flexWrap="wrap" gap={2}>
+                  {image &&
+                    image.map((url, index) => (
+                      <Stack sx={{ "& button": { m: 1 } }}>
+                        <img
+                          key={url}
+                          width={200}
+                          height={200}
+                          src={url}
+                          style={{ objectFit: "cover" }}
+                        />
+                        <Button
+                          variant="contained"
+                          disableElevation
+                          size="small"
+                          startIcon={<DeleteIcon />}
+                          onClick={onImageDelete(index)}
+                        >
+                          Delete
+                        </Button>
+                      </Stack>
+                    ))}
+                </Box>
+              </CardActions>
+            </Card>
 
             <ButtonDark onClick={onSave}>Guardar</ButtonDark>
             <Modal
