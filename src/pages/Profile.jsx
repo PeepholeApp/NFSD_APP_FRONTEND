@@ -386,7 +386,7 @@ const Profile = () => {
           </>
         ) : step === 3 ? (
           <>
-            <Card sx={{ minWidth: 275 }}>
+            <Card sx={{ minWidth: 500, minHeight: 500 }}>
               <CardContent>
                 <Div display="flex" justifyContent="center">
                   {" "}
@@ -415,14 +415,14 @@ const Profile = () => {
                   {uploading ? <LinearProgress /> : null}
                 </Box>
 
-                <Box display="flex" flexWrap="wrap" gap={2}>
+                <CardActions display="flex" flexWrap="wrap" gap={2}>
                   {image &&
                     image.map((url, index) => (
                       <Stack sx={{ "& button": { m: 1 } }}>
                         <img
                           key={url}
-                          width={200}
-                          height={200}
+                          width={100}
+                          height={100}
                           src={url}
                           style={{ objectFit: "cover" }}
                         />
@@ -437,7 +437,7 @@ const Profile = () => {
                         </Button>
                       </Stack>
                     ))}
-                </Box>
+                </CardActions>
               </CardActions>
             </Card>
 
