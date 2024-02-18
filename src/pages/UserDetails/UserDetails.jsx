@@ -13,6 +13,7 @@ const UserDetails = () => {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
   const { user: currentUser } = useAuth();
+  const [connectionSend, setConnectionSend] = useState(false);
 
   useEffect(() => {
     getProfileUser();
@@ -36,6 +37,20 @@ const UserDetails = () => {
     return edad;
   };
 
+  const sendConnection = async () => {
+    const response = await axios.post(
+      `http://localhost:3001/connections/${userId}`,
+      {},
+      {
+        headers: {
+          //manda el token del usuario verificado
+          Authorization: `Bearer ${currentUser.token}`,
+        },
+      }
+    );
+    setConnectionSend(true);
+  };
+
   return (
     <>
       <div className="flexContainer">
@@ -48,6 +63,9 @@ const UserDetails = () => {
           <div className="title">
             {user.name} {user.last_name}
           </div>
+          <ButtonDark onClick={sendConnection} disabled={connectionSend}>
+            {connectionSend ? "Connection Request Sent" : "Connect"}
+          </ButtonDark>
           <div className="imagesProfile">image</div>
           <div className="flexDataUser">
             <div className="flexEachData">
