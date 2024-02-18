@@ -24,8 +24,6 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { ButtonDark } from "../components/Button";
 import Modal from "@mui/material/Modal";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import { styled } from "@mui/material/styles";
 import UploadPhotos from "../components/UploadPhotos";
