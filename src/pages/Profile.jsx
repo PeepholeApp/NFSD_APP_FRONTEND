@@ -27,12 +27,8 @@ import Modal from "@mui/material/Modal";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
-import LinearProgress from "@mui/material/LinearProgress";
-import AddIcon from "@mui/icons-material/Add";
+import UploadPhotos from "../components/UploadPhotos";
 
 const languagesOptions = [
   {
@@ -88,7 +84,7 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-const Profile = () => {
+const Profile = ({}) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [brithday, setBrithday] = useState(new Date());
@@ -102,9 +98,7 @@ const Profile = () => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const [image, setImage] = useState([]);
-  const [uploading, setUploading] = useState(false);
-  const [file, setFile] = useState(null);
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     axios.get("https://restcountries.com/v3.1/all").then((response) => {
@@ -386,60 +380,27 @@ const Profile = () => {
           </>
         ) : step === 3 ? (
           <>
-            <Card sx={{ minWidth: 500, minHeight: 500 }}>
-              <CardContent>
-                <Div display="flex" justifyContent="center">
-                  {" "}
-                  {"Upload Photos"}{" "}
-                </Div>
-              </CardContent>
-
-              <CardActions>
-                <Button
-                  component="label"
-                  role={undefined}
-                  variant="contained"
-                  tabIndex={-1}
-                  disabled={uploading}
-                  disableElevation
-                  size="small"
-                  startIcon={<AddIcon />}
-                >
-                  <VisuallyHiddenInput
-                    type="file"
-                    multiple
-                    onChange={handleUpload}
-                  />
-                </Button>
-                <Box sx={{ width: "100%" }}>
-                  {uploading ? <LinearProgress /> : null}
-                </Box>
-
-                <CardActions display="flex" flexWrap="wrap" gap={2}>
-                  {image &&
-                    image.map((url, index) => (
-                      <Stack sx={{ "& button": { m: 1 } }}>
-                        <img
-                          key={url}
-                          width={100}
-                          height={100}
-                          src={url}
-                          style={{ objectFit: "cover" }}
-                        />
-                        <Button
-                          variant="contained"
-                          disableElevation
-                          size="small"
-                          startIcon={<DeleteIcon />}
-                          onClick={onImageDelete(index)}
-                        >
-                          Delete
-                        </Button>
-                      </Stack>
-                    ))}
-                </CardActions>
-              </CardActions>
-            </Card>
+            <CardContent>
+              <Div display="flex" justifyContent="center">
+                {" "}
+                {"Upload Photos"}{" "}
+              </Div>
+            </CardContent>
+            <Box
+              sx={{
+                backgroundColor: "#333",
+                minWidth: 500,
+                minHeight: 500,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <UploadPhotos
+                images={images}
+                onChange={(images) => setImages(images)}
+              />
+            </Box>
 
             <ButtonDark onClick={onSave}>Guardar</ButtonDark>
             <Modal
