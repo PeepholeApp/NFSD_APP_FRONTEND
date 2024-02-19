@@ -14,7 +14,6 @@ function Community() {
 
   useEffect(() => {
     getAllActivities();
-    getUsersInActivities();
   }, []);
 
   const getAllActivities = async () => {
@@ -26,30 +25,12 @@ function Community() {
     }
   };
 
-  const getUsersInActivities = async () => {
-    try {
-      const response = await axios.get(`http://localhost:3001/activities/`);
-      // setUserParticipatedActivities(response.data);
-      console.log("Activities: ", response);
-    } catch (error) {
-      console.log("Error: ", error);
-    }
-  };
-
   const updateCapacity = async (activity) => {
-    if (userParticipatedActivities.includes(activity._id)) {
-      console.log("Estas registrado en esta actividad");
-      return;
-    }
     const updatedParticipants = [...activity.participants, user.profileId];
     try {
       await axios.put(`http://localhost:3001/activities/${activity._id}`, {
         participants: updatedParticipants,
       });
-      setUserParticipatedActivities([
-        ...userParticipatedActivities,
-        activity._id,
-      ]);
       getAllActivities();
     } catch (error) {
       console.log("Error: ", error);
@@ -94,12 +75,17 @@ function Community() {
               <div className="flexButtons">
                 <button
                   className="buttonStyle book"
-                  disabled={userParticipatedActivities.includes(activity._id)}
+                  disabled={activity.participants
+                    .map((participant) => participant._id)
+                    .includes(user.profileId)}
                   onClick={() => updateCapacity(activity)}
                 >
                   <FontAwesomeIcon icon={faBook} />
                 </button>
-                <button className="buttonStyle cancel">
+                <button
+                  className="buttonStyle cancel"
+                  onClick={() => console.log(activity.participants)}
+                >
                   <FontAwesomeIcon icon={faCancel} />
                 </button>
               </div>
