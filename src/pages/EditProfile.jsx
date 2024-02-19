@@ -15,14 +15,8 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Autocomplete from "@mui/material/Autocomplete";
 import { ButtonDark } from "../components/Button";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { styled } from "@mui/material/styles";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
-import Box from "@mui/material/Box";
-import LinearProgress from "@mui/material/LinearProgress";
 import { useNavigate } from "react-router-dom";
+import UploadPhotos from "../components/UploadPhotos";
 
 const languagesOptions = [
   {
@@ -58,21 +52,8 @@ const EditProfile = () => {
   const [countries, setCountries] = useState([]);
   const [images, setImages] = useState([]);
   const { user, loading } = useAuth();
-  const [file, setFile] = React.useState(null);
-  const [uploading, setUploading] = useState(false);
-  const navigate = useNavigate();
 
-  const VisuallyHiddenInput = styled("input")({
-    clip: "rect(0 0 0 0)",
-    clipPath: "inset(50%)",
-    height: 1,
-    overflow: "hidden",
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    whiteSpace: "nowrap",
-    width: 1,
-  });
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user && !loading) {
@@ -129,25 +110,6 @@ const EditProfile = () => {
     });
   }, []);
 
-  const handleUpload = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-
-    console.log("que es esto", formData);
-    const files = e.target.files;
-    console.log(e.target.files);
-    //Toma todos los archivos e itera y agrega al formData
-    for (let file of files) {
-      formData.append("file", file);
-    }
-
-    setUploading(true);
-    const response = await axios.post("http://localhost:3001/image", formData);
-    console.log(response.data);
-    setImages(response.data);
-    setUploading(false);
-  };
-
   const onSaveModify = async () => {
     const response = await axios.put(
       `http://localhost:3001/profiles/${user.profileId}`,
@@ -166,15 +128,6 @@ const EditProfile = () => {
     navigate("/home");
   };
 
-  const handleChange = (newFile) => {
-    setFile(newFile);
-  };
-
-  const onImageDelete = (index) => () => {
-    setImages((images) =>
-      images.filter((_image, imageIndex) => imageIndex != index)
-    );
-  };
   return (
     <Stack sx={{ m: 5 }} alignItems="center">
       <Stack sx={{ p: 8, width: 600, backgroundColor: "#262938" }} spacing={2}>
@@ -270,49 +223,11 @@ const EditProfile = () => {
             renderInput={(params) => <TextField {...params} label="Idioma" />}
           />
         </FormControl>
-        <FormControl></FormControl>
 
-        <Button
-          component="label"
-          role={undefined}
-          variant="contained"
-          tabIndex={-1}
-          startIcon={<CloudUploadIcon />}
-          disabled={uploading}
-        >
-          Upload file
-          <VisuallyHiddenInput type="file" multiple onChange={handleUpload} />
-        </Button>
-        <Box sx={{ width: "100%" }}>
-          {uploading ? <LinearProgress /> : null}
-        </Box>
-
-        <Box display="flex" flexWrap="wrap" gap={2}>
-          {images &&
-            images.map((url, index) => (
-              <Stack sx={{ "& button": { m: 1 } }}>
-                <img
-                  key={url}
-                  width={200}
-                  height={200}
-                  src={url}
-                  style={{ objectFit: "cover" }}
-                />
-                <Button
-                  variant="contained"
-                  disableElevation
-                  size="small"
-                  startIcon={<DeleteIcon />}
-                  onClick={onImageDelete(index)}
-                >
-                  Delete
-                  {/* <IconButton aria-label="delete">
-                    <DeleteIcon />
-                  </IconButton> */}
-                </Button>
-              </Stack>
-            ))}
-        </Box>
+        <UploadPhotos
+          images={images}
+          onChange={(images) => setImages(images)}
+        />
 
         <ButtonDark onClick={onSaveModify}>Guardar Cambios</ButtonDark>
       </Stack>
