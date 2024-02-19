@@ -24,6 +24,9 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { ButtonDark } from "../components/Button";
 import Modal from "@mui/material/Modal";
+import CardContent from "@mui/material/CardContent";
+import { styled } from "@mui/material/styles";
+import UploadPhotos from "../components/UploadPhotos";
 
 const languagesOptions = [
   {
@@ -60,7 +63,26 @@ const style = {
   p: 4,
 };
 
-const Profile = () => {
+const Div = styled("div")(({ theme }) => ({
+  ...theme.typography.button,
+  backgroundColor: theme.palette.background.paper,
+  padding: theme.spacing(1),
+  textAlign: "center",
+}));
+
+const VisuallyHiddenInput = styled("input")({
+  clip: "rect(0 0 0 0)",
+  clipPath: "inset(50%)",
+  height: 1,
+  overflow: "hidden",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  whiteSpace: "nowrap",
+  width: 1,
+});
+
+const Profile = ({}) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [brithday, setBrithday] = useState(new Date());
@@ -74,6 +96,7 @@ const Profile = () => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     axios.get("https://restcountries.com/v3.1/all").then((response) => {
@@ -123,6 +146,37 @@ const Profile = () => {
 
   const handleClose = () => setOpen(false);
 
+  const handleUpload = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+
+    console.log("que es esto", formData);
+    const files = e.target.files;
+    console.log(e.target.files);
+
+    //Toma todos los archivos e itera y agrega al formData
+    for (let file of files) {
+      formData.append("file", file);
+    }
+
+    setUploading(true);
+    const response = await axios.post("http://localhost:3001/image", formData);
+    console.log(response.data);
+    setImage(response.data);
+    setUploading(false);
+  };
+
+  const hadleImageSelected = (e) => {
+    const image = e.target.files[0];
+    setFile(image);
+    console.log(image);
+  };
+  const onImageDelete = (index) => () => {
+    setImage((images) =>
+      images.filter((_image, imageIndex) => imageIndex != index)
+    );
+  };
+
   const onSave = async () => {
     const interests = Array.from(selectedInterests); //convierte el set en un array
     const response = await axios.post("http://localhost:3001/profiles", {
@@ -133,6 +187,7 @@ const Profile = () => {
       nationality,
       languages: languages.map((language) => language.value),
       bio,
+      photo: image,
       user: user.userId,
       interest: interests,
     });
@@ -323,7 +378,28 @@ const Profile = () => {
           </>
         ) : step === 3 ? (
           <>
-            <h1>Subir fotos</h1>
+            <CardContent>
+              <Div display="flex" justifyContent="center">
+                {" "}
+                {"Upload Photos"}{" "}
+              </Div>
+            </CardContent>
+            <Box
+              sx={{
+                backgroundColor: "#333",
+                minWidth: 500,
+                minHeight: 500,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <UploadPhotos
+                images={images}
+                onChange={(images) => setImages(images)}
+              />
+            </Box>
+
             <ButtonDark onClick={onSave}>Guardar</ButtonDark>
             <Modal
               open={open}

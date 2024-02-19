@@ -6,7 +6,6 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import FormLabel from "@mui/material/FormLabel";
 import Avatar from "@mui/material/Avatar";
 import { deepPurple } from "@mui/material/colors";
-import Icon from "@mui/material/Icon";
 import { useAuth } from "../context/Login";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
@@ -16,6 +15,8 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Autocomplete from "@mui/material/Autocomplete";
 import { ButtonDark } from "../components/Button";
+import { useNavigate } from "react-router-dom";
+import UploadPhotos from "../components/UploadPhotos";
 
 const languagesOptions = [
   {
@@ -49,8 +50,10 @@ const EditProfile = () => {
   const [languages, setLanguages] = useState([]);
   const [bio, setBio] = useState("");
   const [countries, setCountries] = useState([]);
-
+  const [images, setImages] = useState([]);
   const { user, loading } = useAuth();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user && !loading) {
@@ -82,6 +85,7 @@ const EditProfile = () => {
           setGenero(profile.gender);
           setNationality(profile.nationality);
           setLanguages(profileLanguages);
+          setImages(profile.photo);
         } catch (error) {
           console.error(error);
         }
@@ -117,9 +121,11 @@ const EditProfile = () => {
         nationality,
         languages: languages.map((language) => language.value),
         bio,
+        photo: images,
         user: user.userId,
       }
     );
+    navigate("/home");
   };
 
   return (
@@ -217,6 +223,12 @@ const EditProfile = () => {
             renderInput={(params) => <TextField {...params} label="Idioma" />}
           />
         </FormControl>
+
+        <UploadPhotos
+          images={images}
+          onChange={(images) => setImages(images)}
+        />
+
         <ButtonDark onClick={onSaveModify}>Guardar Cambios</ButtonDark>
       </Stack>
     </Stack>

@@ -1,22 +1,48 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/Login";
 import AppBar from "@mui/material/AppBar";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
-import * as React from "react";
-import { useNavigate } from "react-router-dom";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Badge from "@mui/material/Badge";
+import EmailIcon from "@mui/icons-material/Email";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 import logo from "../assets/logo.png";
-import { useAuth } from "../context/Login";
 
 const Navbar = () => {
-  const { user } = useAuth();
-  console.log("logear usuario", user);
-
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
+
+  const [menuEl, setMenuEl] = useState(null);
+
+  const handleClose = () => {
+    setMenuEl(null);
+  };
 
   const onHome = () => {
     navigate("/home");
   };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
+  const handleSignIn = () => {
+    navigate("/login");
+  };
+
+  const handleSignUp = () => {
+    navigate("/register");
+  };
+
   return user ? (
     <>
       <AppBar component="nav" position="static">
@@ -33,28 +59,28 @@ const Navbar = () => {
 
           <Box>
             <Button
-              key={"Home"}
+              key="home"
               onClick={() => navigate("/community")}
               sx={{ color: "#fff" }}
             >
               Comunity
             </Button>
             <Button
-              key={"Home"}
+              key="blog"
               onClick={() => navigate("/blog")}
               sx={{ color: "#fff" }}
             >
               Blog
             </Button>
             <Button
-              key={"Home"}
+              key="about"
               onClick={() => navigate("/aboutUs")}
               sx={{ color: "#fff" }}
             >
               About us
             </Button>
             <Button
-              key={"Home"}
+              key="contact"
               onClick={() => navigate("/contact")}
               sx={{ color: "#fff" }}
             >
@@ -62,7 +88,63 @@ const Navbar = () => {
             </Button>
           </Box>
 
-          <Avatar onClick={() => navigate(`/user/${user.profileId}`)}></Avatar>
+          <Stack sx={{ flexGrow: 0 }} gap={1} direction="row">
+            <IconButton
+              size="large"
+              aria-label="show 4 new mails"
+              color="inherit"
+            >
+              <Badge badgeContent={2} color="primary">
+                <EmailIcon />
+              </Badge>
+            </IconButton>
+            <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+            >
+              <Badge badgeContent={0} color="error">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+            <Tooltip title="Open settings">
+              <IconButton
+                onClick={(event) => {
+                  setMenuEl(event.currentTarget);
+                }}
+                sx={{ p: 0 }}
+              >
+                <Avatar />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: "45px" }}
+              id="menu-appbar"
+              anchorEl={menuEl}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(menuEl)}
+              onClose={handleClose}
+            >
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  navigate(`/user/${user.profileId}`);
+                }}
+              >
+                Profile
+              </MenuItem>
+              <MenuItem onClick={handleClose}>Help</MenuItem>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            </Menu>
+          </Stack>
         </Toolbar>
       </AppBar>
     </>
@@ -79,22 +161,23 @@ const Navbar = () => {
           <img src={logo} alt="logo" style={{ width: 150 }} />
         </Box>
         <Box sx={{ display: { xs: "none", sm: "block" } }}>
-          <Button key={"Home"} sx={{ color: "#fff" }}>
+          <Button key="app" sx={{ color: "#fff" }}>
             App
           </Button>
-          <Button key={"Home"} sx={{ color: "#fff" }}>
+          <Button key="about" sx={{ color: "#fff" }}>
             About us
           </Button>
-          <Button key={"Home"} sx={{ color: "#fff" }}>
+          <Button key="blog" sx={{ color: "#fff" }}>
             Blog
           </Button>
         </Box>
         <Box>
-          <Button>Sign In</Button>
-          <Button>Sign up</Button>
+          <Button onClick={handleSignIn}>Sign In</Button>
+          <Button onClick={handleSignUp}>Sign up</Button>
         </Box>
       </Toolbar>
     </AppBar>
   );
 };
+
 export default Navbar;

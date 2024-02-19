@@ -46,7 +46,9 @@ const UsersContainer = ({ profiles }) => {
             <h3>
               {profile.name} {profile.last_name}
             </h3>
-            <div className="card_image"></div>
+            <div className="card_image">
+              <img className="imageProfile" src={profile.photo[0]} />
+            </div>
             <div className="flexUserInfo">
               <div className="flexData">
                 <div className="titleUserData">Age</div>
