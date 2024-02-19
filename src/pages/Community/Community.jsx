@@ -1,3 +1,5 @@
+import { faBook, faCancel } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/Login";
@@ -12,12 +14,23 @@ function Community() {
 
   useEffect(() => {
     getAllActivities();
+    getUsersInActivities();
   }, []);
 
   const getAllActivities = async () => {
     try {
       const response = await axios.get("http://localhost:3001/activities/");
       setActivities(response.data);
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
+
+  const getUsersInActivities = async () => {
+    try {
+      const response = await axios.get(`http://localhost:3001/activities/`);
+      // setUserParticipatedActivities(response.data);
+      console.log("Activities: ", response);
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -80,12 +93,15 @@ function Community() {
               </div>
               <div className="flexButtons">
                 <button
+                  className="buttonStyle book"
                   disabled={userParticipatedActivities.includes(activity._id)}
                   onClick={() => updateCapacity(activity)}
                 >
-                  Book
+                  <FontAwesomeIcon icon={faBook} />
                 </button>
-                <button>Cancel</button>
+                <button className="buttonStyle cancel">
+                  <FontAwesomeIcon icon={faCancel} />
+                </button>
               </div>
             </div>
           ))}
