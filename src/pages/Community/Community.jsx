@@ -1,18 +1,56 @@
+import { faBook, faCancel } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useAuth } from "../../context/Login";
 import "./Community.css";
 
 function Community() {
   const [activities, setActivities] = useState([]);
+  const [userParticipatedActivities, setUserParticipatedActivities] = useState(
+    []
+  );
+  const { user, loading } = useAuth();
 
   useEffect(() => {
     getAllActivities();
+    getUsersInActivities();
   }, []);
 
   const getAllActivities = async () => {
     try {
       const response = await axios.get("http://localhost:3001/activities/");
       setActivities(response.data);
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
+
+  const getUsersInActivities = async () => {
+    try {
+      const response = await axios.get(`http://localhost:3001/activities/`);
+      // setUserParticipatedActivities(response.data);
+      console.log("Activities: ", response);
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
+
+  const updateCapacity = async (activity) => {
+    if (userParticipatedActivities.includes(activity._id)) {
+      console.log("Estas registrado en esta actividad");
+      return;
+    }
+    const updatedParticipants = [...activity.participants, user.profileId];
+    try {
+      await axios.put(`http://localhost:3001/activities/${activity._id}`, {
+        participants: updatedParticipants,
+      });
+      setUserParticipatedActivities([
+        ...userParticipatedActivities,
+        activity._id,
+      ]);
+      getAllActivities();
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -33,17 +71,37 @@ function Community() {
                 <div className="titleText">{activity.title}</div>
                 <div className="descriptionText">{activity.description}</div>
                 <div className="descriptionText">Date: {activity.date}</div>
-                <div
-                  className={`isAvailable ${
-                    activity.available ? "" : "isNotAvailable"
-                  }`}
-                >
-                  {activity.available ? "Is available" : "Is not available"}
+                <div className="progressContainer">
+                  <div
+                    className="progressBar"
+                    style={{
+                      width: `${
+                        (activity.participants.length / activity.capacity) * 100
+                      }%`,
+                    }}
+                  ></div>
+                </div>
+                <div>
+                  {activity.participants.length}/{activity.capacity}
+                </div>
+                <div className="flexParticipants">
+                  <div>Participants:</div>
+                  {activity.participants.map((participant, index) => (
+                    <span key={index}>{participant.name}</span>
+                  ))}
                 </div>
               </div>
               <div className="flexButtons">
-                <button>Book</button>
-                <button>Cancel</button>
+                <button
+                  className="buttonStyle book"
+                  disabled={userParticipatedActivities.includes(activity._id)}
+                  onClick={() => updateCapacity(activity)}
+                >
+                  <FontAwesomeIcon icon={faBook} />
+                </button>
+                <button className="buttonStyle cancel">
+                  <FontAwesomeIcon icon={faCancel} />
+                </button>
               </div>
             </div>
           ))}
