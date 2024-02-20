@@ -7,14 +7,10 @@ import "./Community.css";
 
 function Community() {
   const [activities, setActivities] = useState([]);
-  const [userParticipatedActivities, setUserParticipatedActivities] = useState(
-    []
-  );
   const { user, loading } = useAuth();
 
   useEffect(() => {
     getAllActivities();
-    getUsersInActivities();
   }, []);
 
   const getAllActivities = async () => {
@@ -26,34 +22,33 @@ function Community() {
     }
   };
 
-  const getUsersInActivities = async () => {
-    try {
-      const response = await axios.get(`http://localhost:3001/activities/`);
-      // setUserParticipatedActivities(response.data);
-      console.log("Activities: ", response);
-    } catch (error) {
-      console.log("Error: ", error);
-    }
-  };
-
-  const updateCapacity = async (activity) => {
-    if (userParticipatedActivities.includes(activity._id)) {
-      console.log("Estas registrado en esta actividad");
-      return;
-    }
+  const bookUserInActivity = async (activity) => {
     const updatedParticipants = [...activity.participants, user.profileId];
     try {
       await axios.put(`http://localhost:3001/activities/${activity._id}`, {
         participants: updatedParticipants,
       });
-      setUserParticipatedActivities([
-        ...userParticipatedActivities,
-        activity._id,
-      ]);
       getAllActivities();
     } catch (error) {
       console.log("Error: ", error);
     }
+  };
+
+  const cancelBookUserInActivity = async (activity) => {
+    try {
+      await axios.delete(
+        `http://localhost:3001/activities/${activity._id}/participants/${user.profileId}`
+      );
+      getAllActivities();
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
+
+  const userIsInActivity = (activity) => {
+    return activity.participants
+      .map((participant) => participant._id)
+      .includes(user.profileId);
   };
 
   return (
@@ -93,13 +88,25 @@ function Community() {
               </div>
               <div className="flexButtons">
                 <button
-                  className="buttonStyle book"
-                  disabled={userParticipatedActivities.includes(activity._id)}
-                  onClick={() => updateCapacity(activity)}
+                  className={`buttonBookStyle ${
+                    userIsInActivity(activity)
+                      ? "disabledBookButton"
+                      : "bookButton"
+                  }`}
+                  disabled={userIsInActivity(activity)}
+                  onClick={() => bookUserInActivity(activity)}
                 >
                   <FontAwesomeIcon icon={faBook} />
                 </button>
-                <button className="buttonStyle cancel">
+                <button
+                  className={`buttonBookStyle ${
+                    !userIsInActivity(activity)
+                      ? "disabledBookButton"
+                      : "cancelBookButton"
+                  }`}
+                  disabled={!userIsInActivity(activity)}
+                  onClick={() => cancelBookUserInActivity(activity)}
+                >
                   <FontAwesomeIcon icon={faCancel} />
                 </button>
               </div>

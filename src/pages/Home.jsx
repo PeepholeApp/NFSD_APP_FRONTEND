@@ -1,30 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ButtonDark, ButtonLight } from '../components/Button';
-import { Box, Typography } from '@mui/material';
-import { styled } from '@mui/system';
-import backgroundImage from '../assets/homepage.png';
+import { Box, Typography } from "@mui/material";
+import { styled } from "@mui/system";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import backgroundImage from "../assets/homepage.png";
+import { ButtonDark, ButtonLight } from "../components/Button";
+
+const ImageContainer = styled("div")({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height: "75vh", // Adjust the height as needed
+});
+
+const Image = styled("img")({
+  maxWidth: "100%",
+  maxHeight: "100%",
+});
 
 const WelcomeText = styled(Typography)({
-  fontSize: '1.5rem',
-  transition: 'font-size 3s',
+  fontSize: "1.5rem",
+  transition: "font-size 3s",
 });
 
-const ContentContainer = styled('div')({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'flex-end',
-  height: '100vh',
+const ContentContainer = styled("div")({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "flex-end",
 });
 
-const ButtonContainer = styled('div')({
-  marginTop: theme => theme.spacing(2),
+const ButtonContainer = styled("div")({
+  marginTop: (theme) => theme.spacing(2),
 });
 
 const Home = () => {
-  const [welcomeText, setWelcomeText] = useState('');
-  const originalText = "Knock, knock... ¿Who's knocking on your friendship door?";
+  const [welcomeText, setWelcomeText] = useState("");
+  const originalText =
+    "Knock, knock... ¿Who's knocking on your friendship door?";
 
   useEffect(() => {
     let currentIndex = 0;
@@ -38,17 +50,14 @@ const Home = () => {
     }, 100);
 
     return () => clearInterval(intervalId);
-  }, []); 
+  }, []);
 
   return (
-    <Box
-      sx={{
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: 'cover', // Adjusted to cover the container
-        backgroundPosition: 'center',
-        height: '100vh',
-      }}
-    >
+    <Box>
+      <ImageContainer>
+        <Image src={backgroundImage} alt="Background" />
+      </ImageContainer>
+
       <ContentContainer>
         <WelcomeText variant="h1" color="white" mb={2}>
           {welcomeText}
