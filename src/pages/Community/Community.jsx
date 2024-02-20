@@ -7,9 +7,6 @@ import "./Community.css";
 
 function Community() {
   const [activities, setActivities] = useState([]);
-  const [userParticipatedActivities, setUserParticipatedActivities] = useState(
-    []
-  );
   const { user, loading } = useAuth();
 
   useEffect(() => {
