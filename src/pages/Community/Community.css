@@ -98,7 +98,7 @@
   gap: 10px;
 }
 
-.buttonStyle {
+.buttonBookStyle {
   width: auto;
   padding: 5px;
   border: none;
@@ -106,16 +106,26 @@
   border-radius: 10px;
   box-shadow: 0 4px #777777;
 }
-.buttonStyle:active {
-  background-color: #262938;
+
+.bookButton {
+  background-color: rgba(0, 137, 0, 0.655);
+}
+.book:active {
+  background-color: rgba(0, 70, 0, 0.655);
   box-shadow: 0 1px #666;
   transform: translateY(4px);
 }
 
-.book {
-  background-color: rgba(0, 137, 0, 0.655);
+.disabledBookButton {
+  background-color: #4e4e59;
+  cursor: no-drop;
 }
 
-.cancel {
+.cancelBookButton {
   background-color: rgba(175, 0, 0, 0.726);
+}
+.cancelBookButton:active {
+  background-color: rgba(100, 0, 0, 0.726);
+  box-shadow: 0 1px #666;
+  transform: translateY(4px);
 }

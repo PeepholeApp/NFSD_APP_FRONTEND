@@ -22,7 +22,7 @@ function Community() {
     }
   };
 
-  const updateCapacity = async (activity) => {
+  const bookUserInActivity = async (activity) => {
     const updatedParticipants = [...activity.participants, user.profileId];
     try {
       await axios.put(`http://localhost:3001/activities/${activity._id}`, {
@@ -32,6 +32,12 @@ function Community() {
     } catch (error) {
       console.log("Error: ", error);
     }
+  };
+
+  const userIsInActivity = (activity) => {
+    return activity.participants
+      .map((participant) => participant._id)
+      .includes(user.profileId);
   };
 
   return (
@@ -71,16 +77,23 @@ function Community() {
               </div>
               <div className="flexButtons">
                 <button
-                  className="buttonStyle book"
-                  disabled={activity.participants
-                    .map((participant) => participant._id)
-                    .includes(user.profileId)}
-                  onClick={() => updateCapacity(activity)}
+                  className={`buttonBookStyle ${
+                    userIsInActivity(activity)
+                      ? "disabledBookButton"
+                      : "bookButton"
+                  }`}
+                  disabled={userIsInActivity(activity)}
+                  onClick={() => bookUserInActivity(activity)}
                 >
                   <FontAwesomeIcon icon={faBook} />
                 </button>
                 <button
-                  className="buttonStyle cancel"
+                  className={`buttonBookStyle ${
+                    !userIsInActivity(activity)
+                      ? "disabledBookButton"
+                      : "cancelBookButton"
+                  }`}
+                  disabled={!userIsInActivity(activity)}
                   onClick={() => console.log(activity.participants)}
                 >
                   <FontAwesomeIcon icon={faCancel} />
