@@ -110,7 +110,7 @@
 .bookButton {
   background-color: rgba(0, 137, 0, 0.655);
 }
-.book:active {
+.bookButton:active {
   background-color: rgba(0, 70, 0, 0.655);
   box-shadow: 0 1px #666;
   transform: translateY(4px);
