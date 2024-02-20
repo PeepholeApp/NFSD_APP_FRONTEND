@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/Login";
 import AppBar from "@mui/material/AppBar";
 import Avatar from "@mui/material/Avatar";
@@ -27,7 +27,11 @@ const Navbar = () => {
   };
 
   const onHome = () => {
-    navigate("/home");
+    if (user) {
+      navigate("/home");
+    } else {
+      navigate("/");
+    }
   };
 
   const handleLogout = () => {
@@ -58,32 +62,16 @@ const Navbar = () => {
           </Box>
 
           <Box>
-            <Button
-              key="home"
-              onClick={() => navigate("/community")}
-              sx={{ color: "#fff" }}
-            >
+            <Button key="home" component={Link} to="/community" sx={{ color: "#fff" }}>
               Comunity
             </Button>
-            <Button
-              key="blog"
-              onClick={() => navigate("/blog")}
-              sx={{ color: "#fff" }}
-            >
+            <Button key="blog" component={Link} to="/blog" sx={{ color: "#fff" }}>
               Blog
             </Button>
-            <Button
-              key="about"
-              onClick={() => navigate("/aboutUs")}
-              sx={{ color: "#fff" }}
-            >
+            <Button key="about" component={Link} to="/aboutUs" sx={{ color: "#fff" }}>
               About us
             </Button>
-            <Button
-              key="contact"
-              onClick={() => navigate("/contact")}
-              sx={{ color: "#fff" }}
-            >
+            <Button key="contact" component={Link} to="/contact" sx={{ color: "#fff" }}>
               Contact
             </Button>
           </Box>
@@ -161,13 +149,13 @@ const Navbar = () => {
           <img src={logo} alt="logo" style={{ width: 150 }} />
         </Box>
         <Box sx={{ display: { xs: "none", sm: "block" } }}>
-          <Button key="app" sx={{ color: "#fff" }}>
+          <Button key="app" component={Link} to="/app" sx={{ color: "#fff" }}>
             App
           </Button>
-          <Button key="about" sx={{ color: "#fff" }}>
+          <Button key="about" component={Link} to="/aboutUs" sx={{ color: "#fff" }}>
             About us
           </Button>
-          <Button key="blog" sx={{ color: "#fff" }}>
+          <Button key="blog" component={Link} to="/blog" sx={{ color: "#fff" }}>
             Blog
           </Button>
         </Box>
