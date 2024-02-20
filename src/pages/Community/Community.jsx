@@ -34,6 +34,17 @@ function Community() {
     }
   };
 
+  const cancelBookUserInActivity = async (activity) => {
+    try {
+      await axios.delete(
+        `http://localhost:3001/activities/${activity._id}/participants/${user.profileId}`
+      );
+      getAllActivities();
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
+
   const userIsInActivity = (activity) => {
     return activity.participants
       .map((participant) => participant._id)
@@ -94,7 +105,7 @@ function Community() {
                       : "cancelBookButton"
                   }`}
                   disabled={!userIsInActivity(activity)}
-                  onClick={() => console.log(activity.participants)}
+                  onClick={() => cancelBookUserInActivity(activity)}
                 >
                   <FontAwesomeIcon icon={faCancel} />
                 </button>
