@@ -13,6 +13,7 @@ const HomeApp = () => {
   const [genders, setGenders] = useState([]);
   const [languages, setLanguages] = useState([]);
   const [lastPage, setLastPage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { filters, updateFilters } = useFilters();
 
   useEffect(() => {
@@ -20,14 +21,20 @@ const HomeApp = () => {
   }, []);
 
   useEffect(() => {
-    getPaginationProfiles();
+    getPaginationProfiles(true);
+  }, [filters]);
+
+  useEffect(() => {
+    getPaginationProfiles(false);
+  }, [currentPage]);
+
+  useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [currentPage, filters]);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isLoading]);
 
   const getAllNationalities = async () => {
+    setIsLoading(true);
     try {
       const response = await axios.get("http://localhost:3001/profiles/all");
       const users = response.data;
@@ -36,6 +43,8 @@ const HomeApp = () => {
       setLanguages(getDataFromUsers(users, "languages"));
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -59,19 +68,20 @@ const HomeApp = () => {
   };
 
   const handleScroll = () => {
-    const buffer = 1;
     if (
-      window.innerHeight + document.documentElement.scrollTop + buffer >=
-      document.documentElement.offsetHeight
+      window.innerHeight + document.documentElement.scrollTop + 0.5 !==
+        document.documentElement.offsetHeight ||
+      isLoading
     ) {
-      console.log("End of page");
-      if (!lastPage) {
-        setCurrentPage((prev) => prev + 1);
-      }
+      return;
+    }
+    if (!lastPage) {
+      setCurrentPage(currentPage + 1);
     }
   };
 
-  const getPaginationProfiles = async () => {
+  const getPaginationProfiles = async (type) => {
+    setIsLoading(true);
     try {
       const response = await axios.get(`http://localhost:3001/profiles`, {
         params: {
@@ -80,7 +90,12 @@ const HomeApp = () => {
         },
       });
       const data = response.data;
-      setProfiles((prevProfiles) => [...prevProfiles, ...data]);
+      if (type) {
+        setProfiles(data);
+        setCurrentPage(1);
+      } else {
+        setProfiles([...profiles, ...data]);
+      }
       if (data.length < 9) {
         setLastPage(true);
       } else {
@@ -88,6 +103,8 @@ const HomeApp = () => {
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
