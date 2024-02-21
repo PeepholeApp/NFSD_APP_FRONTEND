@@ -21,7 +21,10 @@ const HomeApp = () => {
 
   useEffect(() => {
     getPaginationProfiles();
-    window.scrollTo({ top: 0 });
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [currentPage, filters]);
 
   const getAllNationalities = async () => {
@@ -55,6 +58,19 @@ const HomeApp = () => {
     }, []);
   };
 
+  const handleScroll = () => {
+    const buffer = 1;
+    if (
+      window.innerHeight + document.documentElement.scrollTop + buffer >=
+      document.documentElement.offsetHeight
+    ) {
+      console.log("End of page");
+      if (!lastPage) {
+        setCurrentPage((prev) => prev + 1);
+      }
+    }
+  };
+
   const getPaginationProfiles = async () => {
     try {
       const response = await axios.get(`http://localhost:3001/profiles`, {
@@ -64,7 +80,7 @@ const HomeApp = () => {
         },
       });
       const data = response.data;
-      setProfiles(data);
+      setProfiles((prevProfiles) => [...prevProfiles, ...data]);
       if (data.length < 9) {
         setLastPage(true);
       } else {
@@ -130,18 +146,6 @@ const HomeApp = () => {
             addCountryFilter={getNationalityFilter}
           />
           <UsersContainer profiles={profiles} />
-          <button
-            onClick={() => setCurrentPage((prev) => prev - 1)}
-            disabled={currentPage === 1}
-          >
-            Previous
-          </button>
-          <button
-            onClick={() => setCurrentPage((prev) => prev + 1)}
-            disabled={lastPage === true}
-          >
-            Next
-          </button>
         </div>
       </div>
     </>

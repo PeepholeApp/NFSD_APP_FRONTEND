@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/Login";
+import categories from "../../data/categories.json";
 import "./Community.css";
 
 function Community() {
@@ -20,6 +21,17 @@ function Community() {
     } catch (error) {
       console.log("Error: ", error);
     }
+  };
+
+  const getIconImg = (type, data) => {
+    let foundIcon = {};
+    if (type === "categories") {
+      foundIcon = categories.find((category) => category.name === data);
+    }
+    if (foundIcon) {
+      return foundIcon.icon;
+    }
+    return null;
   };
 
   const bookUserInActivity = async (activity) => {
@@ -58,7 +70,11 @@ function Community() {
           {activities.map((activity, id) => (
             <div key={id} className="flexActivity">
               <div className="activityCategory">
-                <div className="styleCategory">.</div>
+                <img
+                  className="styleCategory"
+                  src={getIconImg("categories", activity.category)}
+                  alt={activity.category}
+                />
                 <div className="descriptionText">{activity.category}</div>
               </div>
               <div className="divisionActivity"></div>
