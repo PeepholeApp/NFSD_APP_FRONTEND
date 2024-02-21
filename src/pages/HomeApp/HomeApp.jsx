@@ -59,12 +59,11 @@ const HomeApp = () => {
   };
 
   const handleScroll = () => {
-    const buffer = 1; // Adjust the buffer size as needed
+    const buffer = 1;
     if (
       window.innerHeight + document.documentElement.scrollTop + buffer >=
       document.documentElement.offsetHeight
     ) {
-      // User has scrolled to the bottom
       console.log("End of page");
       if (!lastPage) {
         setCurrentPage((prev) => prev + 1);

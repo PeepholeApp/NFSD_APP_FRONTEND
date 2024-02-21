@@ -24,13 +24,12 @@
   justify-content: center;
 }
 .nationality_filter:hover {
-  border: 3px solid plum;
   transform: translateY(-5px);
   transform: scale(115%);
 }
 .checkNation {
-  border: 3px solid #6a1498;
-  transform: scale(115%);
+  border: 3px solid green;
+  transform: scale(125%);
 }
 
 .iconCountry {
