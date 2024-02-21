@@ -43,7 +43,7 @@
 
 .card_image {
   width: 80%;
-  aspect-ratio: 1 / 1;
+  height: 300px;
   position: relative;
   background-color: white;
   border-radius: 20px;
@@ -88,7 +88,6 @@
   width: 80%;
   display: flex;
   justify-content: space-around;
-  height: auto;
   margin: 10px;
 }
 .flexData {

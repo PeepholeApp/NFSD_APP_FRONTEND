@@ -29,18 +29,17 @@
 }
 
 .activityCategory {
-  width: 10%;
+  width: 100px;
   padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 10px;
 }
 .styleCategory {
   width: 100%;
-  aspect-ratio: 1/1;
-  border-radius: 50%;
-  border: 2px solid white;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
