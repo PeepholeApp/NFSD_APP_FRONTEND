@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import FilterContainer from "../../container/FilterContainer.jsx/FilterContainer";
 import NationalitiesFilterContainer from "../../container/NationalitiesFilterContainer/NationalitiesFilterContainer";
 import UsersContainer from "../../container/UsersContainer/UsersContainer";
@@ -12,26 +13,20 @@ const HomeApp = () => {
   const [nationalities, setNationalities] = useState([]);
   const [genders, setGenders] = useState([]);
   const [languages, setLanguages] = useState([]);
-  const [lastPage, setLastPage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { filters, updateFilters } = useFilters();
+  const { filters, updateFilters } = useFilters({});
 
   useEffect(() => {
     getAllNationalities();
   }, []);
 
   useEffect(() => {
-    getPaginationProfiles(true);
+    getFilterProfiles();
   }, [filters]);
 
   useEffect(() => {
-    getPaginationProfiles(false);
-  }, [currentPage]);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isLoading]);
+    getPaginationProfiles();
+  }, []);
 
   const getAllNationalities = async () => {
     setIsLoading(true);
@@ -67,20 +62,27 @@ const HomeApp = () => {
     }, []);
   };
 
-  const handleScroll = () => {
-    if (
-      window.innerHeight + document.documentElement.scrollTop + 0.5 !==
-        document.documentElement.offsetHeight ||
-      isLoading
-    ) {
-      return;
-    }
-    if (!lastPage) {
-      setCurrentPage(currentPage + 1);
+  const getFilterProfiles = async () => {
+    console.log("get filters");
+    setIsLoading(true);
+    try {
+      const response = await axios.get(`http://localhost:3001/profiles`, {
+        params: {
+          page: 1,
+          filters,
+        },
+      });
+      const data = response.data;
+      setProfiles(data);
+      setCurrentPage(2);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
-
-  const getPaginationProfiles = async (type) => {
+  const getPaginationProfiles = async () => {
+    console.log("get with pagination", currentPage);
     setIsLoading(true);
     try {
       const response = await axios.get(`http://localhost:3001/profiles`, {
@@ -90,17 +92,8 @@ const HomeApp = () => {
         },
       });
       const data = response.data;
-      if (type) {
-        setProfiles(data);
-        setCurrentPage(1);
-      } else {
-        setProfiles([...profiles, ...data]);
-      }
-      if (data.length < 9) {
-        setLastPage(true);
-      } else {
-        setLastPage(false);
-      }
+      setProfiles([...profiles, ...data]);
+      setCurrentPage(currentPage + 1);
     } catch (error) {
       console.error(error);
     } finally {
@@ -147,24 +140,30 @@ const HomeApp = () => {
 
   return (
     <>
-      <div className="flex_display_filter">
-        <div className="flex_Filter">
-          <FilterContainer
-            gendersData={genders}
-            languagesData={languages}
-            getGenderFilter={getGenderFilter}
-            getLanguageFilter={getLanguageFilter}
-            getAgeFilter={getAgeFilter}
-          />
+      <InfiniteScroll
+        dataLength={profiles.length}
+        next={getPaginationProfiles}
+        hasMore={true}
+      >
+        <div className="flex_display_filter">
+          <div className="flex_Filter">
+            <FilterContainer
+              gendersData={genders}
+              languagesData={languages}
+              getGenderFilter={getGenderFilter}
+              getLanguageFilter={getLanguageFilter}
+              getAgeFilter={getAgeFilter}
+            />
+          </div>
+          <div className="flex_page">
+            <NationalitiesFilterContainer
+              nationalities={nationalities}
+              addCountryFilter={getNationalityFilter}
+            />
+            <UsersContainer profiles={profiles} />
+          </div>
         </div>
-        <div className="flex_page">
-          <NationalitiesFilterContainer
-            nationalities={nationalities}
-            addCountryFilter={getNationalityFilter}
-          />
-          <UsersContainer profiles={profiles} />
-        </div>
-      </div>
+      </InfiniteScroll>
     </>
   );
 };
