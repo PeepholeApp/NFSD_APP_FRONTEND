@@ -5,3 +5,56 @@
   background-color: #262938;
   padding: 20px;
 }
+.addActivity_Container > h2 {
+  margin: 0;
+}
+
+.titleFlex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.formFlex {
+  display: flex;
+  align-items: center;
+}
+
+.contentFlex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inputStyle {
+  border: 5px solid rgba(6, 4, 20, 0.9);
+  border-radius: 10px;
+  font-size: 16px;
+
+  height: auto;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.buttonAddStyle {
+  width: auto;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  color: white;
+  background-color: rgba(6, 4, 20, 0.9);
+  box-shadow: 0 4px #777777;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s ease-in-out;
+}
+.buttonAddStyle:hover {
+  background-color: #350c93;
+}
+.buttonAddStyle:active {
+  box-shadow: 0 1px #666;
+  transform: translateY(4px);
+}
