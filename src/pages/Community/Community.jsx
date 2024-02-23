@@ -2,6 +2,7 @@ import { faBook, faCancel } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import AddActivity from "../../container/AddActivity/AddActivity";
 import { useAuth } from "../../context/Login";
 import categories from "../../data/categories.json";
 import "./Community.css";
@@ -66,6 +67,7 @@ function Community() {
   return (
     <>
       <div className="flexCommunity">
+        <AddActivity />
         <div className="activitiesContainer">
           {activities.map((activity, id) => (
             <div key={id} className="flexActivity">
