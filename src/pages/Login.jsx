@@ -15,8 +15,8 @@ const StyledContainer = styled("div")(({ theme }) => ({
   backgroundImage: `url(${backgroundImage})`,
   backgroundSize: "cover",
   backgroundPosition: "center",
-  animation: "moveBackground 20s linear infinite", // Add this line for animation
-  "@keyframes moveBackground": { // Define the animation
+  animation: "moveBackground 20s linear infinite", 
+  "@keyframes moveBackground": { 
     "0%": { backgroundPosition: "0 0" },
     "100%": { backgroundPosition: "100% 100%" },
   },
@@ -85,6 +85,7 @@ const Login = () => {
         token: data.token,
         userId: data.userId,
         profileId: data.profileId,
+        role: data.role,
       });
       navigate("/home");
     } catch (error) {
