@@ -67,7 +67,7 @@ function Community() {
   return (
     <>
       <div className="flexCommunity">
-        <AddActivity />
+        <AddActivity getAllActivities={getAllActivities} />
         <div className="activitiesContainer">
           {activities.map((activity, id) => (
             <div key={id} className="flexActivity">

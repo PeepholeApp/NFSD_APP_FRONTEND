@@ -1,18 +1,25 @@
+import axios from "axios";
 import React, { useState } from "react";
 import categorties from "../../data/categories.json";
 import "./AddActivity.css";
 
-const AddActivity = () => {
+const AddActivity = ({ getAllActivities }) => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState();
-  const [numOfParticipants, setNumOfParticipants] = useState(0);
+  const [capacity, setCapacity] = useState(0);
 
   const addActivityFromAdmin = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/activities/");
-      setActivities(response.data);
+      await axios.post("http://localhost:3001/activities/", {
+        title,
+        category,
+        description,
+        date,
+        capacity,
+      });
+      getAllActivities();
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -71,16 +78,10 @@ const AddActivity = () => {
             id="activityParticipant"
             type="number"
             name="activityParticipant"
-            onChange={(e) => setNumOfParticipants(e.target.value)}
+            onChange={(e) => setCapacity(e.target.value)}
           />
         </div>
-        <button
-          onClick={() =>
-            console.log(title, category, description, date, numOfParticipants)
-          }
-        >
-          Add Activity
-        </button>
+        <button onClick={addActivityFromAdmin}>Add Activity</button>
       </div>
     </>
   );
