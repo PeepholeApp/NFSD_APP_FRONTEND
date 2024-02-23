@@ -32,7 +32,7 @@ const UserDetails = () => {
     }
   };
 
-  // conecta si el usuario ya esta conectado
+  // conecta si el usuario ya esta
   const getConnectionRequest = async () => {
     try {
       const response = await axios.get(
