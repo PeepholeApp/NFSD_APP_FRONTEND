@@ -1,32 +1,51 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import jwtDecode from 'jwt-decode';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); //estado que representa mientra el usuario se esta cargando
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // revisa en localstorage si el token existe
-    const storedToken = localStorage.getItem("token");
-    const storedUserId = localStorage.getItem("userId");
-    const storedProfileId = localStorage.getItem("profileId");
-    if (storedToken && storedUserId) {
-      setUser({
-        token: storedToken,
-        userId: storedUserId,
-        profileId: storedProfileId,
-      });
+    try {
+      const storedToken = localStorage.getItem("token");
+
+      if (storedToken) {
+        const decodedToken = jwtDecode(storedToken);
+        const { sub: userId, profileId, roles } = decodedToken;
+        
+        const updatedRoles = roles || [];
+        if (!updatedRoles.includes("user")) {
+          updatedRoles.push("user");
+        }
+
+        setUser({
+          token: storedToken,
+          userId: userId,
+          profileId: profileId,
+          roles: updatedRoles,
+        });
+      }
+
+      setLoading(false);
+    } catch (error) {
+      console.error("Error in useEffect:", error);
+      setLoading(false);
     }
-    setLoading(false);
   }, []);
 
   const login = (user) => {
     setUser(user);
-    // guarda el token en el local storage cuando se loggean
+
+    const rolesToStore = Array.isArray(user.roles) ? user.roles : [];
+
     localStorage.setItem("token", user.token);
     localStorage.setItem("userId", user.userId);
     localStorage.setItem("profileId", user.profileId);
+    const rolesString = JSON.stringify(rolesToStore);
+    localStorage.setItem("roles", rolesString);
+    console.log("Roles stored:", rolesString);
   };
 
   const logout = () => {
@@ -34,6 +53,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
     localStorage.removeItem("profileId");
+    localStorage.removeItem("roles");
   };
 
   return (
@@ -44,5 +64,11 @@ export const AuthProvider = ({ children }) => {
 };
 
 export const useAuth = () => {
-  return useContext(AuthContext);
+  const { user, loading, login, logout } = useContext(AuthContext);
+
+  const hasRole = (role) => {
+    return user && user.roles.includes(role);
+  };
+
+  return { user, loading, login, logout, hasRole };
 };
