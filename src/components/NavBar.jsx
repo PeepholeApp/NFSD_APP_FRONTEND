@@ -55,6 +55,8 @@ const Navbar = () => {
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
+            backgroundColor: "#0C0C0C", 
+            boxShadow: "0px 2px 10px 0px #1B0554", 
           }}
         >
           <Box onClick={onHome}>
@@ -143,6 +145,8 @@ const Navbar = () => {
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
+          backgroundColor: "#0C0C0C", // Set background color
+          boxShadow: "0px 2px 10px 0px #1B0554", // Add drop shadow
         }}
       >
         <Box onClick={onHome}>
