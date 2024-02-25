@@ -1,3 +1,9 @@
+import {
+  faArrowDown,
+  faArrowUp,
+  faFilter,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import categoriesData from "../../data/categories.json";
@@ -5,6 +11,7 @@ import "./FilterActivity.css";
 
 const FilterActivity = () => {
   const [categories, setCategories] = useState([]);
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
   useEffect(() => {
     getCategories();
@@ -39,16 +46,27 @@ const FilterActivity = () => {
   return (
     <>
       <div className="backgroundFilters">
-        <h2>Filters</h2>
-        <div>
+        <div className="categoryFilterFlex">
           {categories.map((category, id) => (
-            <div key={id}>
-              {category}
-              <img src={getCategoryIcon(category)} alt="" />
+            <div className="borderCategoriesIcons">
+              <img
+                className="categoriesIcons"
+                key={id}
+                src={getCategoryIcon(category)}
+                alt=""
+              />
             </div>
           ))}
         </div>
+        <div className={`${isCollapsed ? "collapsed" : "expand"}`}>Estoy</div>
       </div>
+      <button
+        className="expandFiltersButton"
+        onClick={() => setIsCollapsed(!isCollapsed)}
+      >
+        <FontAwesomeIcon icon={faFilter} />
+        <FontAwesomeIcon icon={isCollapsed ? faArrowDown : faArrowUp} />
+      </button>
     </>
   );
 };

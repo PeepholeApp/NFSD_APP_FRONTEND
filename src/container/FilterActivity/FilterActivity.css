@@ -4,4 +4,43 @@
   height: auto;
   border-radius: 20px;
   background-color: #262938;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.categoryFilterFlex {
+  display: flex;
+  gap: 20px;
+}
+.borderCategoriesIcons {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+}
+.borderCategoriesIcons:hover {
+  cursor: pointer;
+  transform: scale(115%);
+}
+.categoriesIcons {
+  width: 70%;
+}
+
+.expandFiltersButton {
+  color: white;
+  background-color: #ffffff00;
+  border-style: none;
+}
+
+.collapsed {
+  display: none;
+}
+.expand {
+  display: block;
 }
