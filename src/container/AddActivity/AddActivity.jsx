@@ -64,45 +64,47 @@ const AddActivity = ({ getAllActivities }) => {
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
-        <div className="contentFlex">
-          <FontAwesomeIcon icon={faVideo} />
-          <select
-            className="inputStyle"
-            name="categorySelect"
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option value="null">Category:</option>
-            <option value="null" disabled>
-              ----------------
-            </option>
-            {categorties.map((category, id) => (
-              <option key={id} value={category.name}>
-                {category.name}
+        <div className="contentFlexGroup">
+          <div className="contentFlex">
+            <FontAwesomeIcon icon={faVideo} />
+            <select
+              className="inputStyle"
+              name="categorySelect"
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="null">Category:</option>
+              <option value="null" disabled>
+                ----------------
               </option>
-            ))}
-          </select>
-        </div>
-        <div className="contentFlex">
-          <FontAwesomeIcon icon={faCalendar} />
-          <input
-            className="inputStyle"
-            id="activityDate"
-            type="date"
-            name="activityDate"
-            onChange={(e) => setDate(e.target.value)}
-          />
-        </div>
-        <div className="contentFlex">
-          <FontAwesomeIcon icon={faSortNumericAsc} />
-          <input
-            className="inputStyle"
-            id="activityParticipant"
-            type="number"
-            name="activityParticipant"
-            placeholder="Number of participants"
-            max={50}
-            onChange={(e) => setCapacity(e.target.value)}
-          />
+              {categorties.map((category, id) => (
+                <option key={id} value={category.name}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="contentFlex">
+            <FontAwesomeIcon icon={faCalendar} />
+            <input
+              className="inputStyle"
+              id="activityDate"
+              type="date"
+              name="activityDate"
+              onChange={(e) => setDate(e.target.value)}
+            />
+          </div>
+          <div className="contentFlex">
+            <FontAwesomeIcon icon={faSortNumericAsc} />
+            <input
+              className="inputStyle"
+              id="activityParticipant"
+              type="number"
+              name="activityParticipant"
+              placeholder="# Participants"
+              max={50}
+              onChange={(e) => setCapacity(e.target.value)}
+            />
+          </div>
         </div>
         <button className="buttonAddStyle" onClick={addActivityFromAdmin}>
           <h3>Add activity</h3>

@@ -48,7 +48,7 @@ const FilterActivity = () => {
       <div className="backgroundFilters">
         <div className="categoryFilterFlex">
           {categories.map((category, id) => (
-            <div className="borderCategoriesIcons">
+            <div key={id} className="borderCategoriesIcons">
               <img
                 className="categoriesIcons"
                 key={id}

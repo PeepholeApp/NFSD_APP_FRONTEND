@@ -45,6 +45,13 @@
   background-color: rgba(6, 4, 20, 0.9);
 }
 
+.contentFlexGroup {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
 .inputStyle {
   border: 5px solid rgba(6, 4, 20, 0.9);
   border-radius: 10px;
