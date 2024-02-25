@@ -14,10 +14,6 @@ const FilterContainer = ({
 }) => {
   const [ageMin, setAgeMin] = useState(16);
   const [ageMax, setAgeMax] = useState(80);
-  const [selectedFilters, setSelectedFilters] = useState({
-    gender: [],
-    language: [],
-  });
   const { selectOtherFilters, updateOtherFilter } = useFilters();
 
   const handleApplyFilter = () => {

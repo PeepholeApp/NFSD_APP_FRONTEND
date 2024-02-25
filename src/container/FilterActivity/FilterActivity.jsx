@@ -60,13 +60,15 @@ const FilterActivity = () => {
         </div>
         <div className={`${isCollapsed ? "collapsed" : "expand"}`}>Estoy</div>
       </div>
-      <button
-        className="expandFiltersButton"
-        onClick={() => setIsCollapsed(!isCollapsed)}
-      >
-        <FontAwesomeIcon icon={faFilter} />
-        <FontAwesomeIcon icon={isCollapsed ? faArrowDown : faArrowUp} />
-      </button>
+      <div className="filterFlex">
+        <button
+          className="expandFiltersButton"
+          onClick={() => setIsCollapsed(!isCollapsed)}
+        >
+          <FontAwesomeIcon icon={faFilter} />
+          <FontAwesomeIcon icon={isCollapsed ? faArrowDown : faArrowUp} />
+        </button>
+      </div>
     </>
   );
 };
