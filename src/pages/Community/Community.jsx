@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import AddActivity from "../../container/AddActivity/AddActivity";
+import FilterActivity from "../../container/FilterActivity/FilterActivity";
 import { useAuth } from "../../context/Login";
 import categories from "../../data/categories.json";
 import "./Community.css";
@@ -68,6 +69,7 @@ function Community() {
     <>
       <div className="flexCommunity">
         <AddActivity getAllActivities={getAllActivities} />
+        <FilterActivity />
         <div className="activitiesContainer">
           {activities.map((activity, id) => (
             <div key={id} className="flexActivity">

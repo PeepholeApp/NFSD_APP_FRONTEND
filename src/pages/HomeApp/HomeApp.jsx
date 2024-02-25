@@ -33,6 +33,7 @@ const HomeApp = () => {
     try {
       const response = await axios.get("http://localhost:3001/profiles/all");
       const users = response.data;
+      console.log("usres:", users);
       setNationalities(getDataFromUsers(users, "nationality"));
       setGenders(getDataFromUsers(users, "gender"));
       setLanguages(getDataFromUsers(users, "languages"));
