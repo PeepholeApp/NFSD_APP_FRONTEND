@@ -46,8 +46,8 @@
 }
 
 .contentInGroup {
-  max-width: 260px;
-  min-width: 100px;
+  flex: 1;
+  min-width: 200px;
 }
 
 .contentFlexGroup {

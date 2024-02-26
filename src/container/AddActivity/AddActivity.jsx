@@ -20,7 +20,7 @@ const AddActivity = ({ getAllActivities }) => {
 
   const addActivityFromAdmin = async () => {
     try {
-      await axios.post(`${process.env.DATABASE_URL}/activities/`, {
+      await axios.post(`http://localhost:3001/activities/`, {
         title,
         category,
         description,

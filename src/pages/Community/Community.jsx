@@ -109,11 +109,15 @@ function Community() {
               <div className="flexButtons">
                 <button
                   className={`buttonBookStyle ${
-                    userIsInActivity(activity)
+                    userIsInActivity(activity) ||
+                    activity.participants.length === activity.capacity
                       ? "disabledBookButton"
                       : "bookButton"
                   }`}
-                  disabled={userIsInActivity(activity)}
+                  disabled={
+                    userIsInActivity(activity) ||
+                    activity.participants.length === activity.capacity
+                  }
                   onClick={() => bookUserInActivity(activity)}
                 >
                   <FontAwesomeIcon icon={faBook} />
