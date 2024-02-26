@@ -49,7 +49,9 @@ const Navbar = () => {
           },
         }
       );
-      setRequest(response.data);
+      if (response.data) {
+        setRequest(response.data);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -97,8 +99,8 @@ const Navbar = () => {
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
-            backgroundColor: "#0C0C0C", 
-            boxShadow: "0px 2px 10px 0px #1B0554", 
+            backgroundColor: "#0C0C0C",
+            boxShadow: "0px 2px 10px 0px #1B0554",
           }}
         >
           <Box onClick={onHome}>
