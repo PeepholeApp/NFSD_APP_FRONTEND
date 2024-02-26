@@ -6,7 +6,7 @@ import Navbar from "./components/NavBar";
 import { FiltersProvider } from "./context/FiltersContext";
 import { useAuth } from "./context/Login"; // Adjust the import
 import AboutUs from "./pages/AboutUs";
-import Blog from "./pages/Blog";
+import Blog from "./pages/Blog/Blog";
 import Community from "./pages/Community/Community";
 import Contact from "./pages/Contact";
 import EditProfile from "./pages/EditProfile";
@@ -27,7 +27,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: ["Source Code Pro"].join(","),
+    fontFamily: ["Cascadia Code PL"].join(","),
   },
 });
 
