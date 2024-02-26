@@ -1,10 +1,10 @@
-// Import necessary components and styles
-import { Button, Container, CssBaseline, TextField, Typography } from "@mui/material";
+import { Button, CssBaseline, TextField, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/Login";
+import ForgotPassword from "./ForgotPassword";
 import backgroundImage from "../assets/login.png";
 
 const StyledContainer = styled("div")(({ theme }) => ({
@@ -100,7 +100,7 @@ const Login = () => {
       <CssBaseline />
       <StyledFormContainer>
         <Typography variant="h4" gutterBottom>
-          Login
+          Welcome back
         </Typography>
         <StyledForm onSubmit={login}>
           <StyledTextField
