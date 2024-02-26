@@ -13,10 +13,11 @@ const UserDetails = () => {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
   const { user: currentUser } = useAuth();
-  const [connectionSend, setConnectionSend] = useState(false);
+  const [connectionSent, setConnectionSent] = useState(false);
 
   useEffect(() => {
     getProfileUser();
+    getConnectionRequest();
   }, []);
 
   const getProfileUser = async () => {
@@ -26,6 +27,26 @@ const UserDetails = () => {
       );
       const users = response.data;
       setUser(users);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // conecta si el usuario ya esta
+  const getConnectionRequest = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/connections/${userId}`,
+        {
+          headers: {
+            //manda el token del usuario verificado
+            Authorization: `Bearer ${currentUser.token}`,
+          },
+        }
+      );
+
+      const connection = response.data;
+      setConnectionSent(connection || false);
     } catch (error) {
       console.error(error);
     }
@@ -48,7 +69,7 @@ const UserDetails = () => {
         },
       }
     );
-    setConnectionSend(true);
+    setConnectionSent(true);
   };
 
   return (
@@ -63,8 +84,8 @@ const UserDetails = () => {
           <div className="title">
             {user.name} {user.last_name}
           </div>
-          <ButtonDark onClick={sendConnection} disabled={connectionSend}>
-            {connectionSend ? "Connection Request Sent" : "Connect"}
+          <ButtonDark onClick={sendConnection} disabled={connectionSent}>
+            {connectionSent ? "Connection Request Sent" : "Connect"}
           </ButtonDark>
           <div className="imagesProfile">image</div>
           <div className="flexDataUser">
