@@ -45,11 +45,17 @@
   background-color: rgba(6, 4, 20, 0.9);
 }
 
+.contentInGroup {
+  max-width: 260px;
+  min-width: 100px;
+}
+
 .contentFlexGroup {
   width: 100%;
   display: flex;
   justify-content: space-between;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .inputStyle {

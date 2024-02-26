@@ -19,7 +19,7 @@ const FilterActivity = () => {
 
   const getCategories = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/activities/");
+      const response = await axios.get("http://localhost:3001/activities/all");
       const activities = response.data;
       const categoriesNotRepeat = activities.reduce((acc, activity) => {
         if (acc.includes(activity.category)) {

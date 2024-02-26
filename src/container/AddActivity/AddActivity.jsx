@@ -20,7 +20,7 @@ const AddActivity = ({ getAllActivities }) => {
 
   const addActivityFromAdmin = async () => {
     try {
-      await axios.post("http://localhost:3001/activities/", {
+      await axios.post(`${process.env.DATABASE_URL}/activities/`, {
         title,
         category,
         description,
@@ -65,7 +65,7 @@ const AddActivity = ({ getAllActivities }) => {
           />
         </div>
         <div className="contentFlexGroup">
-          <div className="contentFlex">
+          <div className="contentFlex contentInGroup">
             <FontAwesomeIcon icon={faVideo} />
             <select
               className="inputStyle"
@@ -83,7 +83,7 @@ const AddActivity = ({ getAllActivities }) => {
               ))}
             </select>
           </div>
-          <div className="contentFlex">
+          <div className="contentFlex contentInGroup">
             <FontAwesomeIcon icon={faCalendar} />
             <input
               className="inputStyle"
@@ -93,7 +93,7 @@ const AddActivity = ({ getAllActivities }) => {
               onChange={(e) => setDate(e.target.value)}
             />
           </div>
-          <div className="contentFlex">
+          <div className="contentFlex contentInGroup">
             <FontAwesomeIcon icon={faSortNumericAsc} />
             <input
               className="inputStyle"
