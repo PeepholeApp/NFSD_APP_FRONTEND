@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import styled from "@emotion/styled";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -18,6 +19,32 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import { LockOutlined as LockOutlinedIcon } from "@mui/icons-material";
+import backgroundImage from "../assets/login.png";
+
+const StyledContainer = styled("div")(({ theme }) => ({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  minHeight: "100vh",
+  backgroundImage: `url(${backgroundImage})`,
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  animation: "moveBackground 20s linear infinite",
+  "@keyframes moveBackground": {
+    "0%": { backgroundPosition: "0 0" },
+    "100%": { backgroundPosition: "100% 100%" },
+  },
+}));
+
+const StyledBox = styled(Box)(({ theme }) => ({
+  backgroundColor: "rgba(0, 0, 0, 0.8)",
+  padding: theme.spacing(4),
+  borderRadius: theme.spacing(2),
+  boxShadow: theme.shadows[5],
+  textAlign: "center",
+  width: "90%",  // Ajusta el ancho según tus preferencias
+  maxWidth: "500px",  
+}));
 
 function WelcomeMessage() {
   return (
@@ -52,8 +79,8 @@ export default function SignUp() {
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
-    setDuplicateEmailError(""); // Limpiar el error al cambiar el correo electrónico
-    setGeneralError(""); // Limpiar el error general al cambiar el correo electrónico
+    setDuplicateEmailError("");
+    setGeneralError("");
   };
 
   const handlePasswordChange = (e) => {
@@ -84,7 +111,7 @@ export default function SignUp() {
 
       if (response.data.isDuplicate) {
         setDuplicateEmailError("Email is already registered");
-        setGeneralError(""); // Limpiar el error general si hay uno
+        setGeneralError("");
         return;
       }
 
@@ -117,51 +144,90 @@ export default function SignUp() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
-        <WelcomeMessage />
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-          {generalError && (
-            <Typography variant="body2" color="error" mb={2}>
-              {generalError}
+    <StyledContainer>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <StyledBox>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign up
             </Typography>
-          )}
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="email"
-                label="Email address"
-                name="email"
-                autoComplete="email"
-                value={email}
-                onChange={handleEmailChange}
-              />
-              {duplicateEmailError && (
-                <Typography variant="body2" color="error" mt={1}>
-                  {duplicateEmailError}
+            <WelcomeMessage />
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+              {generalError && (
+                <Typography variant="body2" color="error" mb={2}>
+                  {generalError}
                 </Typography>
               )}
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email address"
+                    name="email"
+                    autoComplete="email"
+                    value={email}
+                    onChange={handleEmailChange}
+                  />
+                  {duplicateEmailError && (
+                    <Typography variant="body2" color="error" mt={1}>
+                      {duplicateEmailError}
+                    </Typography>
+                  )}
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    name="password"
+                    label="New password"
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    autoComplete="new-password"
+                    value={password}
+                    onChange={handlePasswordChange}
+                    InputProps={{
+                      endAdornment: (
+                        <IconButton onClick={togglePasswordVisibility}>
+                          {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                        </IconButton>
+                      ),
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    name="confirmPassword"
+                    label="Confirm password"
+                    type={showPassword ? "text" : "password"}
+                    id="confirmPassword"
+                    autoComplete="new-password"
+                    value={confirmPassword}
+                    onChange={handleConfirmPasswordChange}
+                  />
+                </Grid>
+              </Grid>
+              <Button
+                type="submit"
                 fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={handleOpenModal}
+              >
+                Sign Up
                 name="password"
                 label="New password"
                 type={showPassword ? "text" : "password"}
@@ -214,17 +280,28 @@ export default function SignUp() {
               <Button onClick={handleClose} color="primary">
                 ACCEPT
               </Button>
-            </DialogActions>
-          </Dialog>
-          <Grid container justifyContent="flex-end">
-            <Grid item>
-              <Link component={RouterLink} to="/login" variant="body2">
-                Already have an account? Log in
-              </Link>
-            </Grid>
-          </Grid>
-        </Box>
-      </Box>
-    </Container>
+              <Dialog open={openModal} onClose={handleClose}>
+                <DialogTitle>Terms and Conditions</DialogTitle>
+                <DialogContent>
+                  <Typography>Terms and conditions go here.</Typography>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose} color="primary">
+                    ACCEPT
+                  </Button>
+                </DialogActions>
+              </Dialog>
+              <Grid container justifyContent="flex-end">
+                <Grid item>
+                  <Link component={RouterLink} to="/login" variant="body2">
+                    Already have an account? Log in
+                  </Link>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        </StyledBox>
+      </Container>
+    </StyledContainer>
   );
 }

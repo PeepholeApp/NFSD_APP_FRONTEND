@@ -120,7 +120,7 @@ const ForgotPassword = () => {
             variant="contained"
             disabled={loading}
           >
-            {loading ? "Sending Email..." : "Send Reset Email"}
+            {loading ? "Sending Email..." : "Reset password"}
           </StyledButton>
           <StyledLink to="/login">Back to Login</StyledLink>
         </StyledForm>

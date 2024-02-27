@@ -4,7 +4,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Navbar from "./components/NavBar";
 import { FiltersProvider } from "./context/FiltersContext";
-import { useAuth } from "./context/Login"; // Adjust the import
+import { useAuth } from "./context/Login"; 
 import AboutUs from "./pages/AboutUs";
 import Blog from "./pages/Blog";
 import Community from "./pages/Community/Community";
@@ -28,7 +28,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: ["Source Code Pro"].join(","),
+    fontFamily: ["Cascadia Code PL"].join(","),
   },
 });
 
