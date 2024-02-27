@@ -99,7 +99,7 @@ const Login = () => {
     <StyledContainer component="main" maxWidth="xs">
       <CssBaseline />
       <StyledFormContainer>
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h6" gutterBottom>
           Welcome back
         </Typography>
         <StyledForm onSubmit={login}>
