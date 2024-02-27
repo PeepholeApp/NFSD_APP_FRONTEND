@@ -15,8 +15,8 @@ const StyledContainer = styled("div")(({ theme }) => ({
   backgroundImage: `url(${backgroundImage})`,
   backgroundSize: "cover",
   backgroundPosition: "center",
-  animation: "moveBackground 20s linear infinite", 
-  "@keyframes moveBackground": { 
+  animation: "moveBackground 20s linear infinite",
+  "@keyframes moveBackground": {
     "0%": { backgroundPosition: "0 0" },
     "100%": { backgroundPosition: "100% 100%" },
   },
@@ -76,10 +76,13 @@ const Login = () => {
     setError(null);
 
     try {
-      const response = await axios.post("http://localhost:3001/users/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/users/login`,
+        {
+          email,
+          password,
+        }
+      );
       const data = response.data;
       contextLogin({
         token: data.token,

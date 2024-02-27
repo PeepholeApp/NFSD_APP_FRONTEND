@@ -105,7 +105,9 @@ export default function SignUp() {
 
     try {
       // Check for duplicate email
-      const response = await axios.get(`http://localhost:3001/users/check-email?email=${email}`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/users/check-email?email=${email}`
+      );
 
       if (response.data.isDuplicate) {
         setDuplicateEmailError("Email is already registered");
@@ -113,16 +115,22 @@ export default function SignUp() {
         return;
       }
 
-      const registrationResponse = await axios.post("http://localhost:3001/users", {
-        email,
-        password,
-      });
+      const registrationResponse = await axios.post(
+        `${import.meta.env.VITE_API_URL}/users`,
+        {
+          email,
+          password,
+        }
+      );
 
       if (registrationResponse.status === 201) {
         console.log("Registration successful.");
         navigate("/login");
       } else {
-        console.error("Error in registration:", registrationResponse.data.message);
+        console.error(
+          "Error in registration:",
+          registrationResponse.data.message
+        );
       }
     } catch (error) {
       console.error("Error submitting form:", error.message);
@@ -220,6 +228,57 @@ export default function SignUp() {
                 onClick={handleOpenModal}
               >
                 Sign Up
+                name="password"
+                label="New password"
+                type={showPassword ? "text" : "password"}
+                id="password"
+                autoComplete="new-password"
+                value={password}
+                onChange={handlePasswordChange}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton onClick={togglePasswordVisibility}>
+                      {showPassword ? (
+                        <VisibilityIcon />
+                      ) : (
+                        <VisibilityOffIcon />
+                      )}
+                    </IconButton>
+                  ),
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                name="confirmPassword"
+                label="Confirm password"
+                type={showPassword ? "text" : "password"}
+                id="confirmPassword"
+                autoComplete="new-password"
+                value={confirmPassword}
+                onChange={handleConfirmPasswordChange}
+              />
+            </Grid>
+          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+            onClick={handleOpenModal}
+          >
+            Sign Up
+          </Button>
+          <Dialog open={openModal} onClose={handleClose}>
+            <DialogTitle>Terms and Conditions</DialogTitle>
+            <DialogContent>
+              <Typography>Terms and conditions go here.</Typography>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="primary">
+                ACCEPT
               </Button>
               <Dialog open={openModal} onClose={handleClose}>
                 <DialogTitle>Terms and Conditions</DialogTitle>

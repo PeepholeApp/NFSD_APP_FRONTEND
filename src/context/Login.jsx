@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import jwtDecode from 'jwt-decode';
+import jwtDecode from "jwt-decode";
 
 const AuthContext = createContext();
 
@@ -11,10 +11,14 @@ export const AuthProvider = ({ children }) => {
     try {
       const storedToken = localStorage.getItem("token");
 
+      // No sacar a menos que el token contenga esta informacion
+      const storedUserId = localStorage.getItem("userId");
+      const storedProfileId = localStorage.getItem("profileId");
+
       if (storedToken) {
         const decodedToken = jwtDecode(storedToken);
         const { sub: userId, profileId, roles } = decodedToken;
-        
+
         const updatedRoles = roles || [];
         if (!updatedRoles.includes("user")) {
           updatedRoles.push("user");
@@ -22,8 +26,8 @@ export const AuthProvider = ({ children }) => {
 
         setUser({
           token: storedToken,
-          userId: userId,
-          profileId: profileId,
+          userId: storedUserId,
+          profileId: storedProfileId,
           roles: updatedRoles,
         });
       }
