@@ -65,7 +65,7 @@ const HomeApp = () => {
   };
 
   const getFilterProfiles = async () => {
-    console.log("get filters");
+    console.log(filters);
     setIsLoading(true);
     try {
       const response = await axios.get(
@@ -87,7 +87,6 @@ const HomeApp = () => {
     }
   };
   const getPaginationProfiles = async () => {
-    console.log("get with pagination", currentPage);
     setIsLoading(true);
     try {
       const response = await axios.get(
