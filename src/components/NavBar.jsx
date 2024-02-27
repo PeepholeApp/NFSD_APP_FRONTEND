@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
 import { useAuth } from "../context/Login";
 import axios from "axios";
 import AppBar from "@mui/material/AppBar";
@@ -24,12 +24,19 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Typography from "@mui/material/Typography";
 import Profile from "../pages/Profile";
+import SendIcon from "@mui/icons-material/Send";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
-  const [requests, setRequest] = useState([]);
+
+  console.log("user", user);
+
+  const [requests, setRequests] = useState([]);
   const navigate = useNavigate();
   const [menuEl, setMenuEl] = useState(null);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const { userId } = useParams();
 
   useEffect(() => {
     if (user) {
@@ -50,7 +57,7 @@ const Navbar = () => {
         }
       );
       if (response.data) {
-        setRequest(response.data);
+        setRequests(response.data);
       }
     } catch (error) {
       console.error(error);
@@ -82,10 +89,32 @@ const Navbar = () => {
     navigate("/register");
   };
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
   const handleClick = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
+  };
+
+  const handleConnectionUpdate = (profileId, status) => async () => {
+    const response = await axios.patch(
+      `http://localhost:3001/connections/${profileId}`,
+      {
+        status,
+      },
+      {
+        headers: {
+          //manda el token del usuario verificado
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+    if (response) {
+      setRequests((requests) =>
+        requests.map((request) => {
+          return request._id == profileId
+            ? { ...request, connectionStatus: response.data.status }
+            : request;
+        })
+      );
+    }
   };
 
   const open = Boolean(anchorEl);
@@ -184,6 +213,34 @@ const Navbar = () => {
                           </React.Fragment>
                         }
                       />
+                      {!profile.connectionStatus ? (
+                        <Stack>
+                          <Button
+                            variant="contained"
+                            endIcon={<SendIcon />}
+                            size="small"
+                            onClick={handleConnectionUpdate(
+                              profile._id,
+                              "accepted"
+                            )}
+                          >
+                            Aceptar
+                          </Button>
+                          <Button
+                            variant="outlined"
+                            startIcon={<DeleteIcon />}
+                            size="small"
+                            onClick={handleConnectionUpdate(
+                              profile._id,
+                              "rejected"
+                            )}
+                          >
+                            Rechazar
+                          </Button>
+                        </Stack>
+                      ) : (
+                        <p>Status: {profile.connectionStatus}</p>
+                      )}
                     </ListItem>
                   ))}
 
