@@ -20,13 +20,6 @@ function Community() {
 
   const getAllActivities = async () => {
     try {
-
-      const response = await axios.get(`http://localhost:3001/activities/`, {
-        params: {
-          category: activitiesFilters,
-        },
-      });
-
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/activities/`
       );
