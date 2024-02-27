@@ -72,7 +72,7 @@ const ForgotPassword = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/users/forgot-password",
+        `${import.meta.env.VITE_API_URL}/users/forgot-password`,
         {
           email,
         }
@@ -80,9 +80,7 @@ const ForgotPassword = () => {
 
       console.log(response.data.message);
     } catch (error) {
-      setError(
-        "Error sending reset email. Please check your email address."
-      );
+      setError("Error sending reset email. Please check your email address.");
     } finally {
       setLoading(false);
     }
@@ -92,7 +90,7 @@ const ForgotPassword = () => {
     <StyledContainer>
       <StyledFormContainer>
         <Typography variant="h6" gutterBottom>
-        Lost keys? No problem! 
+          Lost keys? No problem!
         </Typography>
         <StyledForm onSubmit={sendResetEmail}>
           <StyledTextField
