@@ -87,8 +87,15 @@
 
 .flexParticipants {
   display: flex;
+  flex-direction: column;
   gap: 5px;
   transition: all 0.4s ease-in-out;
+}
+.participantStyle {
+  color: black;
+  background-color: white;
+  padding: 5px;
+  border-radius: 20px;
 }
 
 .flexButtons {

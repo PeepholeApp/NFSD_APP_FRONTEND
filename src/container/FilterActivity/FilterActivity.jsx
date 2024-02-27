@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 import categoriesData from "../../data/categories.json";
 import "./FilterActivity.css";
 
-const FilterActivity = () => {
+const FilterActivity = ({ getCategorySelection }) => {
   const [categories, setCategories] = useState([]);
   const [isCollapsed, setIsCollapsed] = useState(true);
 
@@ -48,7 +48,11 @@ const FilterActivity = () => {
       <div className="backgroundFilters">
         <div className="categoryFilterFlex">
           {categories.map((category, id) => (
-            <div key={id} className="borderCategoriesIcons">
+            <div
+              key={id}
+              className="borderCategoriesIcons"
+              onClick={() => getCategorySelection(category)}
+            >
               <img
                 className="categoriesIcons"
                 key={id}

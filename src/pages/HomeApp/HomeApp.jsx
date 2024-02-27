@@ -63,6 +63,7 @@ const HomeApp = () => {
   };
 
   const getFilterProfiles = async () => {
+    console.log(filters);
     setIsLoading(true);
     try {
       const response = await axios.get(`http://localhost:3001/profiles`, {

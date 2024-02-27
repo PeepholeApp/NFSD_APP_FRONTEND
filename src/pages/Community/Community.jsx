@@ -10,15 +10,21 @@ import "./Community.css";
 
 function Community() {
   const [activities, setActivities] = useState([]);
+  const [activitiesFilters, setActivitiesFilters] = useState({});
+  const [category, setCategory] = useState({});
   const { user, loading } = useAuth();
 
   useEffect(() => {
     getAllActivities();
-  }, []);
+  }, [activitiesFilters]);
 
   const getAllActivities = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/activities/`, {});
+      const response = await axios.get(`http://localhost:3001/activities/`, {
+        params: {
+          category: activitiesFilters,
+        },
+      });
       setActivities(response.data);
     } catch (error) {
       console.log("Error: ", error);
@@ -65,11 +71,15 @@ function Community() {
       .includes(user.profileId);
   };
 
+  const getCategorySelection = (categorySelection) => {
+    setActivitiesFilters(categorySelection);
+  };
+
   return (
     <>
       <div className="flexCommunity">
         <AddActivity getAllActivities={getAllActivities} />
-        <FilterActivity />
+        <FilterActivity getCategorySelection={getCategorySelection} />
         <div className="activitiesContainer">
           {activities.map((activity, id) => (
             <div key={id} className="flexActivity">
@@ -101,9 +111,13 @@ function Community() {
                 </div>
                 <div className="flexParticipants">
                   <div>Participants:</div>
-                  {activity.participants.map((participant, index) => (
-                    <span key={index}>{participant.name}</span>
-                  ))}
+                  <div>
+                    {activity.participants.map((participant, index) => (
+                      <span className="participantStyle" key={index}>
+                        {participant.name}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
               <div className="flexButtons">
