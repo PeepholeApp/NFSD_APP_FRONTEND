@@ -42,7 +42,7 @@ const StyledBox = styled(Box)(({ theme }) => ({
   borderRadius: theme.spacing(2),
   boxShadow: theme.shadows[5],
   textAlign: "center",
-  width: "90%",  // Ajusta el ancho según tus preferencias
+  width: "90%",  
   maxWidth: "500px",  
 }));
 
@@ -104,7 +104,6 @@ export default function SignUp() {
     }
 
     try {
-      // Check for duplicate email
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/users/check-email?email=${email}`
       );
@@ -228,77 +227,26 @@ export default function SignUp() {
                 onClick={handleOpenModal}
               >
                 Sign Up
-                name="password"
-                label="New password"
-                type={showPassword ? "text" : "password"}
-                id="password"
-                autoComplete="new-password"
-                value={password}
-                onChange={handlePasswordChange}
-                InputProps={{
-                  endAdornment: (
-                    <IconButton onClick={togglePasswordVisibility}>
-                      {showPassword ? (
-                        <VisibilityIcon />
-                      ) : (
-                        <VisibilityOffIcon />
-                      )}
-                    </IconButton>
-                  ),
-                }}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                name="confirmPassword"
-                label="Confirm password"
-                type={showPassword ? "text" : "password"}
-                id="confirmPassword"
-                autoComplete="new-password"
-                value={confirmPassword}
-                onChange={handleConfirmPasswordChange}
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-            onClick={handleOpenModal}
-          >
-            Sign Up
-          </Button>
-          <Dialog open={openModal} onClose={handleClose}>
-            <DialogTitle>Terms and Conditions</DialogTitle>
-            <DialogContent>
-              <Typography>Terms and conditions go here.</Typography>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose} color="primary">
-                ACCEPT
               </Button>
-              <Dialog open={openModal} onClose={handleClose}>
-                <DialogTitle>Terms and Conditions</DialogTitle>
-                <DialogContent>
-                  <Typography>Terms and conditions go here.</Typography>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={handleClose} color="primary">
-                    ACCEPT
-                  </Button>
-                </DialogActions>
-              </Dialog>
-              <Grid container justifyContent="flex-end">
-                <Grid item>
-                  <Link component={RouterLink} to="/login" variant="body2">
-                    Already have an account? Log in
-                  </Link>
-                </Grid>
-              </Grid>
             </Box>
+            <Dialog open={openModal} onClose={handleClose}>
+              <DialogTitle>Terms and Conditions</DialogTitle>
+              <DialogContent>
+                <Typography>Terms and conditions go here.</Typography>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose} color="primary">
+                  ACCEPT
+                </Button>
+              </DialogActions>
+            </Dialog>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link component={RouterLink} to="/login" variant="body2">
+                  Already have an account? Log in
+                </Link>
+              </Grid>
+            </Grid>
           </Box>
         </StyledBox>
       </Container>
