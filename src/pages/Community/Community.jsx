@@ -20,11 +20,16 @@ function Community() {
 
   const getAllActivities = async () => {
     try {
+
       const response = await axios.get(`http://localhost:3001/activities/`, {
         params: {
           category: activitiesFilters,
         },
       });
+
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/activities/`
+      );
       setActivities(response.data);
     } catch (error) {
       console.log("Error: ", error);
@@ -45,9 +50,12 @@ function Community() {
   const bookUserInActivity = async (activity) => {
     const updatedParticipants = [...activity.participants, user.profileId];
     try {
-      await axios.put(`http://localhost:3001/activities/${activity._id}`, {
-        participants: updatedParticipants,
-      });
+      await axios.put(
+        `${import.meta.env.VITE_API_URL}/activities/${activity._id}`,
+        {
+          participants: updatedParticipants,
+        }
+      );
       getAllActivities();
     } catch (error) {
       console.log("Error: ", error);
@@ -57,7 +65,9 @@ function Community() {
   const cancelBookUserInActivity = async (activity) => {
     try {
       await axios.delete(
-        `http://localhost:3001/activities/${activity._id}/participants/${user.profileId}`
+        `${import.meta.env.VITE_API_URL}/activities/${
+          activity._id
+        }/participants/${user.profileId}`
       );
       getAllActivities();
     } catch (error) {

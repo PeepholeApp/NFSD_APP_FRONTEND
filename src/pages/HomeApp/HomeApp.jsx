@@ -31,7 +31,9 @@ const HomeApp = () => {
   const getAllNationalities = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get("http://localhost:3001/profiles/all");
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/profiles/all`
+      );
       const users = response.data;
       setNationalities(getDataFromUsers(users, "nationality"));
       setGenders(getDataFromUsers(users, "gender"));
@@ -66,12 +68,15 @@ const HomeApp = () => {
     console.log(filters);
     setIsLoading(true);
     try {
-      const response = await axios.get(`http://localhost:3001/profiles`, {
-        params: {
-          page: 1,
-          filters,
-        },
-      });
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/profiles`,
+        {
+          params: {
+            page: 1,
+            filters,
+          },
+        }
+      );
       const data = response.data;
       setProfiles(data);
       setCurrentPage(2);
@@ -84,12 +89,15 @@ const HomeApp = () => {
   const getPaginationProfiles = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get(`http://localhost:3001/profiles`, {
-        params: {
-          page: currentPage,
-          filters,
-        },
-      });
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/profiles`,
+        {
+          params: {
+            page: currentPage,
+            filters,
+          },
+        }
+      );
       const data = response.data;
       setProfiles([...profiles, ...data]);
       setCurrentPage(currentPage + 1);

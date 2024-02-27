@@ -34,9 +34,11 @@ export default function UploadPhotos({ images, onChange }) {
     for (let file of files) {
       formData.append("file", file);
     }
-
     setUploading(true);
-    const response = await axios.post("http://localhost:3001/image", formData);
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_URL}/image`,
+      formData
+    );
     console.log(response.data);
     onChange(response.data);
     setUploading(false);

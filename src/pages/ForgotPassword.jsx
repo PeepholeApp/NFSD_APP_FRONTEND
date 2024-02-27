@@ -1,11 +1,9 @@
-import { Button, CssBaseline, TextField, Typography } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import axios from "axios";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/Login";
-import ForgotPassword from "./ForgotPassword";
-import backgroundImage from "../assets/login.png";
+import { Link } from "react-router-dom";
+import backgroundImage from "../assets/login.png"; // Import the background image
 
 const StyledContainer = styled("div")(({ theme }) => ({
   display: "flex",
@@ -56,19 +54,16 @@ const StyledLink = styled(Link)(({ theme }) => ({
   },
 }));
 
-const Login = () => {
+const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { login: contextLogin } = useAuth();
-  const navigate = useNavigate();
 
-  const login = async (e) => {
+  const sendResetEmail = async (e) => {
     e.preventDefault();
 
-    if (!email || !password) {
-      setError("Please fill in all the fields.");
+    if (!email) {
+      setError("Please enter your email address.");
       return;
     }
 
@@ -77,35 +72,27 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/users/login`,
+        `${import.meta.env.VITE_API_URL}/users/forgot-password`,
         {
           email,
-          password,
         }
       );
-      const data = response.data;
-      contextLogin({
-        token: data.token,
-        userId: data.userId,
-        profileId: data.profileId,
-        role: data.role,
-      });
-      navigate("/home");
+
+      console.log(response.data.message);
     } catch (error) {
-      setError("Error logging in. Please check your credentials.");
+      setError("Error sending reset email. Please check your email address.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <StyledContainer component="main" maxWidth="xs">
-      <CssBaseline />
+    <StyledContainer>
       <StyledFormContainer>
         <Typography variant="h6" gutterBottom>
-          Welcome back
+          Lost keys? No problem!
         </Typography>
-        <StyledForm onSubmit={login}>
+        <StyledForm onSubmit={sendResetEmail}>
           <StyledTextField
             variant="outlined"
             margin="normal"
@@ -118,19 +105,6 @@ const Login = () => {
             autoFocus
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-          />
-          <StyledTextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
           />
           {error && (
             <Typography
@@ -146,17 +120,13 @@ const Login = () => {
             variant="contained"
             disabled={loading}
           >
-            {loading ? "Signing In..." : "Sign In"}
+            {loading ? "Sending Email..." : "Reset password"}
           </StyledButton>
-          <StyledLink to="/forgot-password">Forgot your password?</StyledLink>
-          <Typography variant="body2">
-            Don't have an account?{" "}
-            <StyledLink to="/register">Sign up</StyledLink>
-          </Typography>
+          <StyledLink to="/login">Back to Login</StyledLink>
         </StyledForm>
       </StyledFormContainer>
     </StyledContainer>
   );
 };
 
-export default Login;
+export default ForgotPassword;
