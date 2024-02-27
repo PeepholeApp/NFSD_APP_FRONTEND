@@ -78,7 +78,9 @@ export default function SignUp() {
 
     try {
       // Check for duplicate email
-      const response = await axios.get(`http://localhost:3001/users/check-email?email=${email}`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/users/check-email?email=${email}`
+      );
 
       if (response.data.isDuplicate) {
         setDuplicateEmailError("Email is already registered");
@@ -86,16 +88,22 @@ export default function SignUp() {
         return;
       }
 
-      const registrationResponse = await axios.post("http://localhost:3001/users", {
-        email,
-        password,
-      });
+      const registrationResponse = await axios.post(
+        `${import.meta.env.VITE_API_URL}/users`,
+        {
+          email,
+          password,
+        }
+      );
 
       if (registrationResponse.status === 201) {
         console.log("Registration successful.");
         navigate("/login");
       } else {
-        console.error("Error in registration:", registrationResponse.data.message);
+        console.error(
+          "Error in registration:",
+          registrationResponse.data.message
+        );
       }
     } catch (error) {
       console.error("Error submitting form:", error.message);
@@ -164,7 +172,11 @@ export default function SignUp() {
                 InputProps={{
                   endAdornment: (
                     <IconButton onClick={togglePasswordVisibility}>
-                      {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                      {showPassword ? (
+                        <VisibilityIcon />
+                      ) : (
+                        <VisibilityOffIcon />
+                      )}
                     </IconButton>
                   ),
                 }}

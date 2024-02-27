@@ -27,6 +27,8 @@ import Profile from "../pages/Profile";
 import SendIcon from "@mui/icons-material/Send";
 import DeleteIcon from "@mui/icons-material/Delete";
 
+console.log("api url", import.meta.env);
+
 const Navbar = () => {
   const { user, logout } = useAuth();
 
@@ -47,7 +49,7 @@ const Navbar = () => {
   const getRequests = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/connections/`,
+        `${import.meta.env.VITE_API_URL}/connections/`,
 
         {
           headers: {
@@ -95,7 +97,7 @@ const Navbar = () => {
 
   const handleConnectionUpdate = (profileId, status) => async () => {
     const response = await axios.patch(
-      `http://localhost:3001/connections/${profileId}`,
+      `${import.meta.env.VITE_API_URL}/connections/${profileId}`,
       {
         status,
       },

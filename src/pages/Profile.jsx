@@ -160,7 +160,10 @@ const Profile = ({}) => {
     }
 
     setUploading(true);
-    const response = await axios.post("http://localhost:3001/image", formData);
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_URL}/image`,
+      formData
+    );
     console.log(response.data);
     setImage(response.data);
     setUploading(false);
@@ -179,18 +182,21 @@ const Profile = ({}) => {
 
   const onSave = async () => {
     const interests = Array.from(selectedInterests); //convierte el set en un array
-    const response = await axios.post("http://localhost:3001/profiles", {
-      name: firstName,
-      last_name: lastName,
-      dob: brithday.toISOString(),
-      gender: genero,
-      nationality,
-      languages: languages.map((language) => language.value),
-      bio,
-      photo: image,
-      user: user.userId,
-      interest: interests,
-    });
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_URL}/profiles`,
+      {
+        name: firstName,
+        last_name: lastName,
+        dob: brithday.toISOString(),
+        gender: genero,
+        nationality,
+        languages: languages.map((language) => language.value),
+        bio,
+        photo: image,
+        user: user.userId,
+        interest: interests,
+      }
+    );
     setOpen(true);
     setTimeout(() => navigate("/home"), 2000);
   };
