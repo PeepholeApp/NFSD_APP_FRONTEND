@@ -1,0 +1,60 @@
+.backgroundFilters {
+  width: 60%;
+  min-width: 330px;
+  height: auto;
+  border-radius: 20px;
+  background-color: #262938;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: all 0.8s ease-in-out;
+}
+
+.categoryFilterFlex {
+  display: flex;
+  gap: 20px;
+  padding: 15px;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255, 255, 255) rgba(255, 255, 255, 0);
+}
+.borderCategoriesIcons {
+  aspect-ratio: 1/1;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+}
+.borderCategoriesIcons:hover {
+  cursor: pointer;
+  transform: scale(115%);
+}
+.categoriesIcons {
+  width: 70%;
+}
+
+.filterFlex {
+  width: 60%;
+  display: flex;
+}
+
+.expandFiltersButton {
+  cursor: pointer;
+  background: #007bff;
+  color: #fff;
+  border-style: none;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.collapsed {
+  display: none;
+  opacity: 0;
+}
+.expand {
+  opacity: 1;
+  display: block;
+}

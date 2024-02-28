@@ -60,7 +60,7 @@ const EditProfile = () => {
       const loadProfile = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:3001/profiles/user/${user.profileId}`
+            `${import.meta.env.VITE_API_URL}/profiles/user/${user.profileId}`
           );
           const profile = response.data;
 
@@ -112,7 +112,7 @@ const EditProfile = () => {
 
   const onSaveModify = async () => {
     const response = await axios.put(
-      `http://localhost:3001/profiles/${user.profileId}`,
+      `${import.meta.env.VITE_API_URL}/profiles/${user.profileId}`,
       {
         name,
         last_name: lastName,

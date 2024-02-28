@@ -29,7 +29,7 @@ async function initializeNotifications(user) {
     }).then(async (token) => {
       if (token) {
         const response = await axios.patch(
-          `http://localhost:3001/users/${user.userId}`,
+          `${import.meta.env.VITE_API_URL}/users/${user.userId}`,
           {
             pushToken: token,
           },

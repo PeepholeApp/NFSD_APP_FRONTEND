@@ -1,11 +1,14 @@
 .flexCommunity {
   margin-top: 20px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 .activitiesContainer {
   width: 60%;
+  min-width: 330px;
   height: auto;
   border-radius: 20px;
   background-color: #262938;
@@ -84,8 +87,15 @@
 
 .flexParticipants {
   display: flex;
+  flex-direction: column;
   gap: 5px;
   transition: all 0.4s ease-in-out;
+}
+.participantStyle {
+  color: black;
+  background-color: white;
+  padding: 5px;
+  border-radius: 20px;
 }
 
 .flexButtons {

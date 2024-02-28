@@ -2,21 +2,27 @@ import { faBook, faCancel } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import AddActivity from "../../container/AddActivity/AddActivity";
+import FilterActivity from "../../container/FilterActivity/FilterActivity";
 import { useAuth } from "../../context/Login";
 import categories from "../../data/categories.json";
 import "./Community.css";
 
 function Community() {
   const [activities, setActivities] = useState([]);
+  const [activitiesFilters, setActivitiesFilters] = useState({});
+  const [category, setCategory] = useState({});
   const { user, loading } = useAuth();
 
   useEffect(() => {
     getAllActivities();
-  }, []);
+  }, [activitiesFilters]);
 
   const getAllActivities = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/activities/");
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/activities/`
+      );
       setActivities(response.data);
     } catch (error) {
       console.log("Error: ", error);
@@ -37,9 +43,12 @@ function Community() {
   const bookUserInActivity = async (activity) => {
     const updatedParticipants = [...activity.participants, user.profileId];
     try {
-      await axios.put(`http://localhost:3001/activities/${activity._id}`, {
-        participants: updatedParticipants,
-      });
+      await axios.put(
+        `${import.meta.env.VITE_API_URL}/activities/${activity._id}`,
+        {
+          participants: updatedParticipants,
+        }
+      );
       getAllActivities();
     } catch (error) {
       console.log("Error: ", error);
@@ -49,7 +58,9 @@ function Community() {
   const cancelBookUserInActivity = async (activity) => {
     try {
       await axios.delete(
-        `http://localhost:3001/activities/${activity._id}/participants/${user.profileId}`
+        `${import.meta.env.VITE_API_URL}/activities/${
+          activity._id
+        }/participants/${user.profileId}`
       );
       getAllActivities();
     } catch (error) {
@@ -63,9 +74,15 @@ function Community() {
       .includes(user.profileId);
   };
 
+  const getCategorySelection = (categorySelection) => {
+    setActivitiesFilters(categorySelection);
+  };
+
   return (
     <>
       <div className="flexCommunity">
+        <AddActivity getAllActivities={getAllActivities} />
+        <FilterActivity getCategorySelection={getCategorySelection} />
         <div className="activitiesContainer">
           {activities.map((activity, id) => (
             <div key={id} className="flexActivity">
@@ -97,19 +114,27 @@ function Community() {
                 </div>
                 <div className="flexParticipants">
                   <div>Participants:</div>
-                  {activity.participants.map((participant, index) => (
-                    <span key={index}>{participant.name}</span>
-                  ))}
+                  <div>
+                    {activity.participants.map((participant, index) => (
+                      <span className="participantStyle" key={index}>
+                        {participant.name}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
               <div className="flexButtons">
                 <button
                   className={`buttonBookStyle ${
-                    userIsInActivity(activity)
+                    userIsInActivity(activity) ||
+                    activity.participants.length === activity.capacity
                       ? "disabledBookButton"
                       : "bookButton"
                   }`}
-                  disabled={userIsInActivity(activity)}
+                  disabled={
+                    userIsInActivity(activity) ||
+                    activity.participants.length === activity.capacity
+                  }
                   onClick={() => bookUserInActivity(activity)}
                 >
                   <FontAwesomeIcon icon={faBook} />

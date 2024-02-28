@@ -23,7 +23,7 @@ const UserDetails = () => {
   const getProfileUser = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/profiles/user/${userId}`
+        `${import.meta.env.VITE_API_URL}/profiles/user/${userId}`
       );
       const users = response.data;
       setUser(users);
@@ -36,7 +36,7 @@ const UserDetails = () => {
   const getConnectionRequest = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/connections/${userId}`,
+        `${import.meta.env.VITE_API_URL}/connections/${userId}`,
         {
           headers: {
             //manda el token del usuario verificado
@@ -60,7 +60,7 @@ const UserDetails = () => {
 
   const sendConnection = async () => {
     const response = await axios.post(
-      `http://localhost:3001/connections/${userId}`,
+      `${import.meta.env.VITE_API_URL}/connections/${userId}`,
       {},
       {
         headers: {

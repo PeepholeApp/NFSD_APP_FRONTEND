@@ -4,7 +4,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Navbar from "./components/NavBar";
 import { FiltersProvider } from "./context/FiltersContext";
-import { useAuth } from "./context/Login"; // Adjust the import
+import { useAuth } from "./context/Login"; 
 import AboutUs from "./pages/AboutUs";
 import Blog from "./pages/Blog/Blog";
 import Community from "./pages/Community/Community";
@@ -16,6 +16,7 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import UserDetails from "./pages/UserDetails/UserDetails";
+import ForgotPassword from "./pages/ForgotPassword";
 import { useParams } from "react-router-dom";
 import initializeNotifications from "../notifications";
 
@@ -71,6 +72,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route
                 path="/profile"
                 element={<PrivateRoute element={<Profile />} />}

@@ -1,0 +1,91 @@
+.addActivity_Container {
+  width: 60%;
+  min-width: 330px;
+  height: auto;
+  border-radius: 20px;
+  background-color: #262938;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.subTitleFlex {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: normal;
+}
+
+.titleFlex {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.divisorActivityForm {
+  height: 2px;
+  width: 100%;
+  background-color: rgba(6, 4, 20, 0.9);
+  margin-bottom: 10px;
+}
+
+.contentFlex {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 5px 5px 15px;
+  border-radius: 15px;
+  background-color: rgba(6, 4, 20, 0.9);
+}
+
+.contentInGroup {
+  flex: 1;
+  min-width: 200px;
+}
+
+.contentFlexGroup {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.inputStyle {
+  border: 5px solid rgba(6, 4, 20, 0.9);
+  border-radius: 10px;
+  font-size: 16px;
+
+  width: 100%;
+  height: auto;
+  padding: 10px;
+}
+
+.buttonAddStyle {
+  width: 40%;
+  padding: 0px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  color: white;
+  background-color: rgba(6, 4, 20, 0.9);
+  box-shadow: 0 4px #777777;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.buttonAddStyle:hover {
+  background-color: #350c93;
+}
+.buttonAddStyle:active {
+  box-shadow: 0 1px #666;
+  transform: translateY(4px);
+}
