@@ -18,6 +18,7 @@ import MadridStreets from '@/assets/madrid-streets.png';
 import MadridSunset from '@/assets/madrid-sunset.png';
 
 
+
 const sections = [
   { title: 'Living in Madrid', url: '#' },
   { title: 'Migrant Information', url: '#' },
