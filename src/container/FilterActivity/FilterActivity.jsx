@@ -6,6 +6,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { ButtonLight } from "../../components/Button";
 import categoriesData from "../../data/categories.json";
 import "./FilterActivity.css";
 
@@ -65,13 +66,13 @@ const FilterActivity = ({ getCategorySelection }) => {
         <div className={`${isCollapsed ? "collapsed" : "expand"}`}>Estoy</div>
       </div>
       <div className="filterFlex">
-        <button
+        <ButtonLight
           className="expandFiltersButton"
           onClick={() => setIsCollapsed(!isCollapsed)}
         >
           <FontAwesomeIcon icon={faFilter} />
           <FontAwesomeIcon icon={isCollapsed ? faArrowDown : faArrowUp} />
-        </button>
+        </ButtonLight>
       </div>
     </>
   );
