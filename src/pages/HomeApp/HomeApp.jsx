@@ -167,6 +167,15 @@ const HomeApp = () => {
               nationalities={nationalities}
               addCountryFilter={getNationalityFilter}
             />
+            <div className="flex_FilerResponsive">
+              <FilterContainer
+                gendersData={genders}
+                languagesData={languages}
+                getGenderFilter={getGenderFilter}
+                getLanguageFilter={getLanguageFilter}
+                getAgeFilter={getAgeFilter}
+              />
+            </div>
             <UsersContainer profiles={profiles} />
           </div>
         </div>
