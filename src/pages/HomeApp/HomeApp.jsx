@@ -1,6 +1,13 @@
+import {
+  faArrowDown,
+  faArrowUp,
+  faFilter,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { ButtonLight } from "../../components/Button";
 import FilterContainer from "../../container/FilterContainer.jsx/FilterContainer";
 import NationalitiesFilterContainer from "../../container/NationalitiesFilterContainer/NationalitiesFilterContainer";
 import UsersContainer from "../../container/UsersContainer/UsersContainer";
@@ -15,6 +22,7 @@ const HomeApp = () => {
   const [languages, setLanguages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { filters, updateFilters } = useFilters({});
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
   useEffect(() => {
     getAllNationalities();
@@ -167,6 +175,25 @@ const HomeApp = () => {
               nationalities={nationalities}
               addCountryFilter={getNationalityFilter}
             />
+            <div className="expandFiltersHomeButton">
+              <ButtonLight onClick={() => setIsCollapsed(!isCollapsed)}>
+                <FontAwesomeIcon icon={faFilter} />
+                <FontAwesomeIcon icon={isCollapsed ? faArrowDown : faArrowUp} />
+              </ButtonLight>
+            </div>
+            <div
+              className={`flex_FilerResponsive ${
+                isCollapsed ? "collapsedHomeFilter" : ""
+              }`}
+            >
+              <FilterContainer
+                gendersData={genders}
+                languagesData={languages}
+                getGenderFilter={getGenderFilter}
+                getLanguageFilter={getLanguageFilter}
+                getAgeFilter={getAgeFilter}
+              />
+            </div>
             <UsersContainer profiles={profiles} />
           </div>
         </div>
