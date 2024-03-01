@@ -1,30 +1,24 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import XIcon from '@mui/icons-material/X';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Header from './Header';
 import MainFeaturedPost from './MainFeaturedPost';
 import FeaturedPost from './FeaturedPost';
 import Main from './Main';
 import Sidebar from './Sidebar';
-import Footer from './Footer';
+import Footer from '../../components/Footer';
 import MadridCityScape from '@/assets/madrid-cityscape.png';
 import MadridStreets from '@/assets/madrid-streets.png';
 import MadridSunset from '@/assets/madrid-sunset.png';
 
 
-
-const sections = [
-  { title: 'Living in Madrid', url: '#' },
-  { title: 'Migrant Information', url: '#' },
-  { title: 'First Steps in Madrid', url: '#' },
-  
-];
 
 const theme = createTheme({
   palette: {
@@ -39,12 +33,12 @@ const theme = createTheme({
 });
 
 const mainFeaturedPost = {
-  title: 'Living in Madrid: A Guide for Migrants',
+  title: 'Living in Madrid: A guide for migrants',
   description:
     'Discover the vibrant life in Madrid and get essential information for migrants on their first steps in this beautiful city.',
   image: MadridCityScape, 
   imageText: 'Madrid Cityscape',
-  linkText: 'Explore More',
+  linkText: 'Explore more',
 };
 
 const featuredPosts = [
@@ -57,7 +51,7 @@ const featuredPosts = [
     imageLabel: 'Madrid Streets',
   },
   {
-    title: 'Settling Down in Madrid',
+    title: 'Settling down in Madrid',
     date: 'Nov 11',
     description:
       'Get tips on finding accommodation, schools, and healthcare services for a smooth transition.',
@@ -68,46 +62,47 @@ const featuredPosts = [
 
 const posts = [
   {
-    title: 'First Steps in Madrid',
+    title: 'First steps in Madrid',
     content: (
       <React.Fragment>
         <p>
           Find out the essential things you need to do once you arrive in Madrid as a migrant.
         </p>
         <p>
-          Check out the <a href="#LivingInMadrid">Living in Madrid</a> section for more information.
+          Check out the <a href="#LivingInMadrid">living in Madrid</a> section for more information.
         </p>
       </React.Fragment>
     ),
   },
-  // Add more posts as needed
 ];
+
 
 
 
 const sidebar = {
   title: 'About',
   description:
-    'Welcome to our blog about living in Madrid! We provide valuable information and insights for migrants to make their life in Madrid enjoyable.',
+    '¡Welcome to your new home away from home!',
   archives: [
-    { title: 'Madrid Guide', url: '#' },
-    { title: 'Migrant Tips', url: '#' },
-    
-  ],
-  social: [
-    { name: 'GitHub', icon: GitHubIcon },
-    { name: 'X', icon: XIcon },
-    { name: 'Facebook', icon: FacebookIcon },
-    { name: 'Instagram', icon: InstagramIcon },
+    { title: 'Madrid Guide', link: 'https://www.esmadrid.com/sites/default/files/documentos/madrid_imprescindible_2016_ing_web_0.pdf' },
+    { title: 'Migrant Tips', link: 'https://www.legalizados.es/empadronarse-espana-primero-debes-hacer-al-emigrar/' },
   ],
 };
+
+const socialIcons = [
+  { icon: GitHubIcon, link: 'https://github.com/PeepholeApp' },
+  { icon: XIcon, link: 'https://twitter.com/Peepholeapp_' },
+  { icon: FacebookIcon, link: 'https://www.facebook.com/profile.php?id=61556777854922' },
+  { icon: InstagramIcon, link: 'https://www.instagram.com/peepholeapp_/' },
+];
+
+
 
 export default function Blog() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Header title="Living in Madrid" sections={sections} />
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />
           <Grid container spacing={4}>
@@ -120,15 +115,20 @@ export default function Blog() {
             <Sidebar
               title={sidebar.title}
               description={sidebar.description}
-              archives={sidebar.archives}
-              social={sidebar.social}
+              archives={sidebar.archives.map(archive => (
+                {
+                  title: archive.title,
+                  url: archive.link
+                }
+              ))}
             />
           </Grid>
         </main>
       </Container>
       <Footer
-        title="Peephole blog"
-        description="Your go-to source for information on living in Madrid!"
+        title="Peephole"
+        description="Make friends, make memories."
+        social={socialIcons}
       />
     </ThemeProvider>
   );
