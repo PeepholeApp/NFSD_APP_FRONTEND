@@ -98,7 +98,6 @@ function Community() {
                 <img
                   className="styleCategory"
                   src={getIconImg("categories", activity.category)}
-                  alt={activity.category}
                 />
                 <div className="descriptionText">{activity.category}</div>
               </div>
