@@ -23,6 +23,7 @@ function MainFeaturedPost(props) {
       }}
     >
       {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
+      {/* Translucent black box */}
       <Box
         sx={{
           position: 'absolute',
@@ -30,7 +31,7 @@ function MainFeaturedPost(props) {
           bottom: 0,
           right: 0,
           left: 0,
-          backgroundColor: 'rgba(0,0,0,.3)',
+          backgroundColor: 'rgba(0, 0, 0, 0.7)', // Adjust the alpha value for transparency
         }}
       />
       <Grid container>
