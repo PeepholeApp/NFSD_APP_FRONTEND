@@ -7,12 +7,14 @@ import FilterActivity from "../../container/FilterActivity/FilterActivity";
 import { useAuth } from "../../context/Login";
 import categories from "../../data/categories.json";
 import "./Community.css";
+import Map from "../../components/Map";
 
 function Community() {
   const [activities, setActivities] = useState([]);
   const [activitiesFilters, setActivitiesFilters] = useState({});
   const [category, setCategory] = useState({});
   const { user, loading } = useAuth();
+  const [address, setAddress] = useState(null);
 
   useEffect(() => {
     getAllActivities();
@@ -81,7 +83,13 @@ function Community() {
   return (
     <>
       <div className="flexCommunity">
-        <AddActivity getAllActivities={getAllActivities} />
+        <AddActivity
+          address={address}
+          getAllActivities={getAllActivities}
+          onAddressChange={(address) => setAddress(address)}
+        />
+        <Map address={address} activities={activities} />
+
         <FilterActivity getCategorySelection={getCategorySelection} />
         <div className="activitiesContainer">
           {activities.map((activity, id) => (
@@ -123,6 +131,7 @@ function Community() {
                   </div>
                 </div>
               </div>
+
               <div className="flexButtons">
                 <button
                   className={`buttonBookStyle ${
