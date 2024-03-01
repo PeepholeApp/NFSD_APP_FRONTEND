@@ -10,15 +10,19 @@ import axios from "axios";
 import React, { useState } from "react";
 import categorties from "../../data/categories.json";
 import "./AddActivity.css";
+import { SearchBox } from "@mapbox/search-js-react";
 
-const AddActivity = ({ getAllActivities }) => {
+const AddActivity = ({ getAllActivities, onAddressChange, address }) => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState();
   const [capacity, setCapacity] = useState(0);
+  const [search, setSearch] = useState("");
 
   const addActivityFromAdmin = async () => {
+    const properties = address.features[0].properties;
+
     try {
       await axios.post(`http://localhost:3001/activities/`, {
         title,
@@ -26,6 +30,9 @@ const AddActivity = ({ getAllActivities }) => {
         description,
         date,
         capacity,
+        address: properties.name + ", " + properties.place_formatted,
+        latitude: properties.coordinates.latitude,
+        longitude: properties.coordinates.longitude,
       });
       getAllActivities();
     } catch (error) {
@@ -64,6 +71,19 @@ const AddActivity = ({ getAllActivities }) => {
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
+
+        <div className="contentFlex">
+          <SearchBox
+            className="inputStyle"
+            id="activityLocation"
+            name="activityLocation"
+            value={search}
+            onChange={(value) => setSearch(value)}
+            onRetrieve={(address) => onAddressChange(address)}
+            accessToken={import.meta.env.VITE_MAPBOX}
+          />
+        </div>
+
         <div className="contentFlexGroup">
           <div className="contentFlex contentInGroup">
             <FontAwesomeIcon icon={faVideo} />
