@@ -14,9 +14,9 @@ import FeaturedPost from './FeaturedPost';
 import Main from './Main';
 import Sidebar from './Sidebar';
 import Footer from '../../components/Footer';
-import MadridCityScape from '@/assets/madrid-cityscape.png';
-import MadridStreets from '@/assets/madrid-streets.png';
-import MadridSunset from '@/assets/madrid-sunset.png';
+import MadridCityScape from '/assets/madrid-cityscape.png';
+import MadridStreets from '/assets/madrid-streets.png';
+import MadridSunset from '/assets/madrid-sunset.png';
 
 
 
