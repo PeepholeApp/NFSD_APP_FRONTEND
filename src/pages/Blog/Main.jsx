@@ -33,7 +33,7 @@ Main.propTypes = {
   posts: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
-      content: PropTypes.string.isRequired,
+      content: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
     })
   ).isRequired,
   title: PropTypes.string.isRequired,
