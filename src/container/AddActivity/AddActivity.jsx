@@ -19,7 +19,7 @@ const AddActivity = ({ getAllActivities, onAddressChange, address }) => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
-  const [date, setDate] = useState();
+  const [date, setDate] = useState("");
   const [capacity, setCapacity] = useState(0);
   const [search, setSearch] = useState("");
   const [minDate, setMinDate] = useState("");
@@ -43,6 +43,12 @@ const AddActivity = ({ getAllActivities, onAddressChange, address }) => {
         longitude: properties.coordinates.longitude,
       });
       getAllActivities();
+      setTitle("");
+      setCategory("");
+      setDescription("");
+      setDate("");
+      setCapacity("");
+      setSearch("");
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -64,6 +70,7 @@ const AddActivity = ({ getAllActivities, onAddressChange, address }) => {
             type="text"
             name="activityTitle"
             placeholder="Title"
+            value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
           />
@@ -76,6 +83,7 @@ const AddActivity = ({ getAllActivities, onAddressChange, address }) => {
             type="text"
             name="activityDescription"
             placeholder="Description"
+            value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
@@ -100,6 +108,7 @@ const AddActivity = ({ getAllActivities, onAddressChange, address }) => {
             <select
               className="inputStyle"
               name="categorySelect"
+              value={category}
               onChange={(e) => setCategory(e.target.value)}
             >
               <option value="null">Category:</option>
@@ -121,6 +130,7 @@ const AddActivity = ({ getAllActivities, onAddressChange, address }) => {
               type="date"
               min={minDate}
               name="activityDate"
+              value={date}
               onChange={(e) => setDate(e.target.value)}
             />
           </div>
@@ -133,6 +143,7 @@ const AddActivity = ({ getAllActivities, onAddressChange, address }) => {
               name="activityParticipant"
               placeholder="# Participants"
               max={50}
+              value={capacity}
               onChange={(e) => setCapacity(e.target.value)}
             />
           </div>
