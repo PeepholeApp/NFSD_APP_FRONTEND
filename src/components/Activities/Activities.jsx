@@ -66,13 +66,45 @@ const Activities = ({
             </div>
             <div className="flexParticipants">
               <div>Participants:</div>
-              <div>
+              <div className="eachParticipant">
                 {activity.participants.map((participant, index) => (
                   <span className="participantStyle" key={index}>
                     {participant.name}
                   </span>
                 ))}
               </div>
+            </div>
+            <div className="flexButtonsResponsive">
+              <button
+                className={`buttonBookStyle ${
+                  userIsInActivity(activity) ||
+                  activity.participants.length === activity.capacity ||
+                  activity.date <= todayDate
+                    ? "disabledBookButton"
+                    : "bookButton"
+                }`}
+                disabled={
+                  userIsInActivity(activity) ||
+                  activity.participants.length === activity.capacity ||
+                  activity.date <= todayDate
+                }
+                onClick={() => bookUserInActivity(activity)}
+              >
+                <FontAwesomeIcon icon={faBook} />
+              </button>
+              <button
+                className={`buttonBookStyle ${
+                  !userIsInActivity(activity) || activity.date <= todayDate
+                    ? "disabledBookButton"
+                    : "cancelBookButton"
+                }`}
+                disabled={
+                  !userIsInActivity(activity) || activity.date <= todayDate
+                }
+                onClick={() => cancelBookUserInActivity(activity)}
+              >
+                <FontAwesomeIcon icon={faCancel} />
+              </button>
             </div>
           </div>
 

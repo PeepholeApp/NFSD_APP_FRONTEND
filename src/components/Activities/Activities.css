@@ -38,7 +38,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  gap: 5px;
+  gap: 10px;
 }
 
 .expiredText {
@@ -78,6 +78,11 @@
   gap: 5px;
   transition: all 0.4s ease-in-out;
 }
+.eachParticipant {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
 .participantStyle {
   color: black;
   background-color: white;
@@ -92,6 +97,9 @@
   flex-direction: column;
   justify-content: center;
   gap: 10px;
+}
+.flexButtonsResponsive {
+  display: none;
 }
 
 .buttonBookStyle {
@@ -124,4 +132,21 @@
   background-color: rgba(100, 0, 0, 0.726);
   box-shadow: 0 1px #666;
   transform: translateY(4px);
+}
+
+@media (max-width: 900px) {
+  .flexButtons {
+    display: none;
+  }
+  .flexButtonsResponsive {
+    width: 100%;
+    border-radius: 5px;
+    display: flex;
+    justify-content: left;
+    gap: 10px;
+  }
+  .buttonBookStyle {
+    width: 30%;
+    min-width: auto;
+  }
 }
