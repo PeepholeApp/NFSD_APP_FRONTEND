@@ -1,42 +1,42 @@
 [
   {
     "name": "cinema",
-    "icon": "/src/assets/iconCategories/cinema.png"
+    "icon": "/assets/iconCategories/cinema.png"
   },
   {
     "name": "coworking",
-    "icon": "/src/assets/iconCategories/coworking.png"
+    "icon": "/assets/iconCategories/coworking.png"
   },
   {
     "name": "dance",
-    "icon": "/src/assets/iconCategories/dance.png"
+    "icon": "/assets/iconCategories/dance.png"
   },
   {
     "name": "drink",
-    "icon": "/src/assets/iconCategories/drink.png"
+    "icon": "/assets/iconCategories/drink.png"
   },
   {
     "name": "eat",
-    "icon": "/src/assets/iconCategories/eat.png"
+    "icon": "/assets/iconCategories/eat.png"
   },
   {
     "name": "park",
-    "icon": "/src/assets/iconCategories/park.png"
+    "icon": "/assets/iconCategories/park.png"
   },
   {
     "name": "sport",
-    "icon": "/src/assets/iconCategories/sports.png"
+    "icon": "/assets/iconCategories/sports.png"
   },
   {
     "name": "study",
-    "icon": "/src/assets/iconCategories/study.png"
+    "icon": "/assets/iconCategories/study.png"
   },
   {
     "name": "tourism",
-    "icon": "/src/assets/iconCategories/tourism.png"
+    "icon": "/assets/iconCategories/tourism.png"
   },
   {
     "name": "travel",
-    "icon": "/src/assets/iconCategories/travel.png"
+    "icon": "/assets/iconCategories/travel.png"
   }
 ]

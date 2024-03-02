@@ -12,6 +12,7 @@ import FilterContainer from "../../container/FilterContainer.jsx/FilterContainer
 import NationalitiesFilterContainer from "../../container/NationalitiesFilterContainer/NationalitiesFilterContainer";
 import UsersContainer from "../../container/UsersContainer/UsersContainer";
 import { useFilters } from "../../context/FiltersContext";
+import { useAuth } from "../../context/Login";
 import "./HomeApp.css";
 
 const HomeApp = () => {
@@ -23,6 +24,7 @@ const HomeApp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { filters, updateFilters } = useFilters({});
   const [isCollapsed, setIsCollapsed] = useState(true);
+  const { user, loading } = useAuth();
 
   useEffect(() => {
     getAllNationalities();
@@ -40,7 +42,12 @@ const HomeApp = () => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/profiles/all`
+        `${import.meta.env.VITE_API_URL}/profiles/all`,
+        {
+          params: {
+            profileId: user.profileId,
+          },
+        }
       );
       const users = response.data;
       setNationalities(getDataFromUsers(users, "nationality"));
@@ -73,7 +80,6 @@ const HomeApp = () => {
   };
 
   const getFilterProfiles = async () => {
-    console.log(filters);
     setIsLoading(true);
     try {
       const response = await axios.get(
@@ -82,6 +88,7 @@ const HomeApp = () => {
           params: {
             page: 1,
             filters,
+            profileId: user.profileId,
           },
         }
       );
@@ -103,6 +110,7 @@ const HomeApp = () => {
           params: {
             page: currentPage,
             filters,
+            profileId: user.profileId,
           },
         }
       );
