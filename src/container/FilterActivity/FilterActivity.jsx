@@ -46,25 +46,24 @@ const FilterActivity = ({ getCategorySelection }) => {
 
   return (
     <>
-      <div className="backgroundFilters">
-        <div className="categoryFilterFlex">
-          {categories.map((category, id) => (
-            <div
+      <div className="categoryFilterFlex">
+        {categories.map((category, id) => (
+          <div
+            key={id}
+            className="borderCategoriesIcons"
+            onClick={() => getCategorySelection(category)}
+          >
+            <img
+              className="categoriesIcons"
               key={id}
-              className="borderCategoriesIcons"
-              onClick={() => getCategorySelection(category)}
-            >
-              <img
-                className="categoriesIcons"
-                key={id}
-                src={getCategoryIcon(category)}
-                alt=""
-              />
-            </div>
-          ))}
-        </div>
-        <div className={`${isCollapsed ? "collapsed" : "expand"}`}>Estoy</div>
+              src={getCategoryIcon(category)}
+              alt=""
+            />
+          </div>
+        ))}
       </div>
+      <div className={`${isCollapsed ? "collapsed" : "expand"}`}>Estoy</div>
+
       <div className="filterFlex">
         <ButtonLight
           className="expandFiltersButton"

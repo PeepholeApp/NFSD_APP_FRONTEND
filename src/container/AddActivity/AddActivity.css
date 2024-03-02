@@ -67,6 +67,10 @@
   height: auto;
   padding: 10px;
 }
+.locationInput {
+  padding: 0;
+  margin: 0;
+}
 
 .buttonAddStyle {
   width: 40%;
@@ -88,4 +92,14 @@
 .buttonAddStyle:active {
   box-shadow: 0 1px #666;
   transform: translateY(4px);
+}
+
+.alertText {
+  margin: 0;
+}
+.alertError {
+  color: red;
+}
+.alertSuccessfully {
+  color: green;
 }
