@@ -2,11 +2,11 @@ import axios from "axios";
 import moment from "moment/moment";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { ButtonDark } from "../../components/Button";
 import ProfileInterests from "../../components/ProfileInterests/ProfileInterests";
 import ProfileLanguages from "../../components/ProfileLanguages/ProfileLanguages";
-import "./UserDetails.css";
-import { ButtonDark } from "../../components/Button";
 import { useAuth } from "../../context/Login";
+import "./UserDetails.css";
 
 const UserDetails = () => {
   const { userId } = useParams();
@@ -27,6 +27,7 @@ const UserDetails = () => {
       );
       const users = response.data;
       setUser(users);
+      console.log("user:", users);
     } catch (error) {
       console.error(error);
     }
@@ -87,7 +88,9 @@ const UserDetails = () => {
           <ButtonDark onClick={sendConnection} disabled={connectionSent}>
             {connectionSent ? "Connection Request Sent" : "Connect"}
           </ButtonDark>
-          <div className="imagesProfile">image</div>
+          <div className="imagesProfile">
+            <img className="imageFit" src={user.photo} alt="" />
+          </div>
           <div className="flexDataUser">
             <div className="flexEachData">
               <div className="subtitleDataBold">Age</div>
