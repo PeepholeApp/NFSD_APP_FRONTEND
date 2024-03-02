@@ -39,6 +39,11 @@
 .filterFlex {
   width: 60%;
   display: flex;
+  display: none;
+}
+
+.filterActivitySelected {
+  border: 3px solid green;
 }
 
 .expandFiltersButton {

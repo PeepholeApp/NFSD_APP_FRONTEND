@@ -24,7 +24,12 @@ function Community() {
   const getAllActivities = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/activities/`
+        `${import.meta.env.VITE_API_URL}/activities/`,
+        {
+          params: {
+            filters: activitiesFilters,
+          },
+        }
       );
       setActivities(response.data);
     } catch (error) {
