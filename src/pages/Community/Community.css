@@ -6,19 +6,16 @@
   gap: 10px;
 }
 
-.mapContainer {
+.showMapButtonsFlex {
   width: 60%;
-  aspect-ratio: 1/1;
   min-width: 330px;
-  background-color: #262938;
-  padding: 20px;
-  border-radius: 20px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 10px 0;
 }
-.showMap {
-  display: block;
-}
-.notShowMap {
-  display: none;
+.textInButtons {
+  margin: 0;
 }
 
 .activitiesContainer {
@@ -32,4 +29,31 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
+}
+
+.filtersActivitiesContainer {
+  width: 60%;
+  min-width: 330px;
+  height: auto;
+  border-radius: 20px;
+  background-color: #262938;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: all 0.8s ease-in-out;
+}
+
+.mapContainer {
+  width: 60%;
+  aspect-ratio: 1/1;
+  min-width: 330px;
+  background-color: #262938;
+  padding: 20px;
+  border-radius: 20px;
+}
+.showMap {
+  display: flex;
+}
+.notShowMap {
+  display: none;
 }

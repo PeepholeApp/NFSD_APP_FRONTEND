@@ -89,13 +89,29 @@ function Community() {
           getAllActivities={getAllActivities}
           onAddressChange={(address) => setAddress(address)}
         />
-        <ButtonDark onClick={() => setMapView(false)}>List</ButtonDark>
-        <ButtonLight onClick={() => setMapView(true)}>Map</ButtonLight>
+        <div className="showMapButtonsFlex">
+          <ButtonDark onClick={() => setMapView(false)}>
+            <h3 className="textInButtons">Show list of activities</h3>
+          </ButtonDark>
+          <ButtonLight onClick={() => setMapView(true)}>
+            <h3 className="textInButtons">Show Map of activities</h3>
+          </ButtonLight>
+        </div>
         <div className={`mapContainer ${mapView ? "showMap" : "notShowMap"}`}>
           <Map address={address} mapView={mapView} activities={activities} />
         </div>
-        <FilterActivity getCategorySelection={getCategorySelection} />
-        <div className="activitiesContainer">
+        <div
+          className={`filtersActivitiesContainer ${
+            mapView ? "notShowMap" : "showMap"
+          }`}
+        >
+          <FilterActivity getCategorySelection={getCategorySelection} />
+        </div>
+        <div
+          className={`activitiesContainer ${
+            mapView ? "notShowMap" : "showMap"
+          }`}
+        >
           <Activities
             activities={activities}
             bookUserInActivity={bookUserInActivity}
