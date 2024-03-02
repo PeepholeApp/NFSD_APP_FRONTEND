@@ -2,15 +2,17 @@ import {
   faAdd,
   faCalendar,
   faFileText,
+  faFileWord,
+  faLocation,
   faSortNumericAsc,
   faVideo,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { SearchBox } from "@mapbox/search-js-react";
 import axios from "axios";
 import React, { useState } from "react";
 import categorties from "../../data/categories.json";
 import "./AddActivity.css";
-import { SearchBox } from "@mapbox/search-js-react";
 
 const AddActivity = ({ getAllActivities, onAddressChange, address }) => {
   const [title, setTitle] = useState("");
@@ -49,7 +51,7 @@ const AddActivity = ({ getAllActivities, onAddressChange, address }) => {
         </h3>
         <div className="divisorActivityForm"></div>
         <div className="contentFlex">
-          <FontAwesomeIcon icon={faFileText} />
+          <FontAwesomeIcon icon={faFileWord} />
           <input
             className="inputStyle"
             id="activityTitle"
@@ -73,15 +75,17 @@ const AddActivity = ({ getAllActivities, onAddressChange, address }) => {
         </div>
 
         <div className="contentFlex">
-          <SearchBox
-            className="inputStyle"
-            id="activityLocation"
-            name="activityLocation"
-            value={search}
-            onChange={(value) => setSearch(value)}
-            onRetrieve={(address) => onAddressChange(address)}
-            accessToken={import.meta.env.VITE_MAPBOX}
-          />
+          <FontAwesomeIcon icon={faLocation} />
+          <div className="inputStyle locationInput">
+            <SearchBox
+              id="activityLocation"
+              name="activityLocation"
+              value={search}
+              onChange={(value) => setSearch(value)}
+              onRetrieve={(address) => onAddressChange(address)}
+              accessToken={import.meta.env.VITE_MAPBOX}
+            />
+          </div>
         </div>
 
         <div className="contentFlexGroup">

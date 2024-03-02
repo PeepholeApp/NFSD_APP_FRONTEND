@@ -67,6 +67,10 @@
   height: auto;
   padding: 10px;
 }
+.locationInput {
+  padding: 0;
+  margin: 0;
+}
 
 .buttonAddStyle {
   width: 40%;
