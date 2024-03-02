@@ -10,6 +10,15 @@ const Activities = ({
   userIsInActivity,
   getIconImg,
 }) => {
+  const formatDateString = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    const formattedDate = new Date(dateString).toLocaleDateString(
+      undefined,
+      options
+    );
+    return formattedDate;
+  };
+
   return (
     <>
       {activities.map((activity, id) => (
@@ -25,7 +34,9 @@ const Activities = ({
           <div className="activityContainer">
             <div className="titleText">{activity.title}</div>
             <div className="descriptionText">{activity.description}</div>
-            <div className="descriptionText">Date: {activity.date}</div>
+            <div className="descriptionText">
+              Date: {formatDateString(activity.date)}
+            </div>
             <div className="descriptionText">Location: {activity.address}</div>
             <div className="progressContainer">
               <div
