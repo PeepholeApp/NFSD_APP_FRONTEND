@@ -1,13 +1,13 @@
-import { faBook, faCancel } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import Activities from "../../components/Activities/Activities";
+import { ButtonDark, ButtonLight } from "../../components/Button";
+import Map from "../../components/Map/Map";
 import AddActivity from "../../container/AddActivity/AddActivity";
 import FilterActivity from "../../container/FilterActivity/FilterActivity";
 import { useAuth } from "../../context/Login";
 import categories from "../../data/categories.json";
 import "./Community.css";
-import Map from "../../components/Map";
 
 function Community() {
   const [activities, setActivities] = useState([]);
@@ -15,10 +15,11 @@ function Community() {
   const [category, setCategory] = useState({});
   const { user, loading } = useAuth();
   const [address, setAddress] = useState(null);
+  const [mapView, setMapView] = useState(false);
 
   useEffect(() => {
     getAllActivities();
-  }, [activitiesFilters]);
+  }, [activitiesFilters, mapView]);
 
   const getAllActivities = async () => {
     try {
@@ -88,79 +89,20 @@ function Community() {
           getAllActivities={getAllActivities}
           onAddressChange={(address) => setAddress(address)}
         />
-        <Map address={address} activities={activities} />
-
+        <ButtonDark onClick={() => setMapView(false)}>List</ButtonDark>
+        <ButtonLight onClick={() => setMapView(true)}>Map</ButtonLight>
+        <div className={`mapContainer ${mapView ? "showMap" : "notShowMap"}`}>
+          <Map address={address} mapView={mapView} activities={activities} />
+        </div>
         <FilterActivity getCategorySelection={getCategorySelection} />
         <div className="activitiesContainer">
-          {activities.map((activity, id) => (
-            <div key={id} className="flexActivity">
-              <div className="activityCategory">
-                <img
-                  className="styleCategory"
-                  src={getIconImg("categories", activity.category)}
-                />
-                <div className="descriptionText">{activity.category}</div>
-              </div>
-              <div className="divisionActivity"></div>
-              <div className="activityContainer">
-                <div className="titleText">{activity.title}</div>
-                <div className="descriptionText">{activity.description}</div>
-                <div className="descriptionText">Date: {activity.date}</div>
-                <div className="progressContainer">
-                  <div
-                    className="progressBar"
-                    style={{
-                      width: `${
-                        (activity.participants.length / activity.capacity) * 100
-                      }%`,
-                    }}
-                  ></div>
-                </div>
-                <div>
-                  {activity.participants.length}/{activity.capacity}
-                </div>
-                <div className="flexParticipants">
-                  <div>Participants:</div>
-                  <div>
-                    {activity.participants.map((participant, index) => (
-                      <span className="participantStyle" key={index}>
-                        {participant.name}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="flexButtons">
-                <button
-                  className={`buttonBookStyle ${
-                    userIsInActivity(activity) ||
-                    activity.participants.length === activity.capacity
-                      ? "disabledBookButton"
-                      : "bookButton"
-                  }`}
-                  disabled={
-                    userIsInActivity(activity) ||
-                    activity.participants.length === activity.capacity
-                  }
-                  onClick={() => bookUserInActivity(activity)}
-                >
-                  <FontAwesomeIcon icon={faBook} />
-                </button>
-                <button
-                  className={`buttonBookStyle ${
-                    !userIsInActivity(activity)
-                      ? "disabledBookButton"
-                      : "cancelBookButton"
-                  }`}
-                  disabled={!userIsInActivity(activity)}
-                  onClick={() => cancelBookUserInActivity(activity)}
-                >
-                  <FontAwesomeIcon icon={faCancel} />
-                </button>
-              </div>
-            </div>
-          ))}
+          <Activities
+            activities={activities}
+            bookUserInActivity={bookUserInActivity}
+            cancelBookUserInActivity={cancelBookUserInActivity}
+            userIsInActivity={userIsInActivity}
+            getIconImg={getIconImg}
+          />
         </div>
       </div>
     </>

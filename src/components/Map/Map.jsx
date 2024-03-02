@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
 import mapbox from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import React, { useEffect, useRef } from "react";
+import "./Map.css";
 
 mapbox.accessToken = import.meta.env.VITE_MAPBOX;
 
-function Map({ address, activities }) {
+function Map({ address, mapView, activities }) {
   const mapRef = useRef(); //
   const mapElementRef = useRef();
   const markerRef = useRef(); //instancia del marcador
@@ -21,7 +22,7 @@ function Map({ address, activities }) {
           .addTo(mapRef.current);
       });
     }
-  }, [activities, mapRef]);
+  }, [activities, mapView, mapRef]);
 
   useEffect(() => {
     if (mapRef.current && address) {
@@ -36,7 +37,7 @@ function Map({ address, activities }) {
       }
       mapRef.current.panTo(coordinates);
     }
-  }, [address, mapRef]);
+  }, [address, mapView, mapRef]);
 
   useEffect(() => {
     if (mapElementRef.current) {
@@ -46,8 +47,8 @@ function Map({ address, activities }) {
         zoom: 12.94,
       });
     }
-  }, [mapElementRef]);
+  }, [mapElementRef, mapView]);
 
-  return <div style={{ width: 800, height: 500 }} ref={mapElementRef}></div>;
+  return <div className="mapStyle" ref={mapElementRef}></div>;
 }
 export default Map;
