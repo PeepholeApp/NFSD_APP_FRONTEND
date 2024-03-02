@@ -26,6 +26,7 @@ const Activities = ({
             <div className="titleText">{activity.title}</div>
             <div className="descriptionText">{activity.description}</div>
             <div className="descriptionText">Date: {activity.date}</div>
+            <div className="descriptionText">Location: {activity.address}</div>
             <div className="progressContainer">
               <div
                 className="progressBar"
