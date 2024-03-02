@@ -185,7 +185,9 @@ const AddActivity = ({ getAllActivities, onAddressChange, address }) => {
           <h3>Add activity</h3>
           <FontAwesomeIcon icon={faAdd} />
         </button>
-        <h3 className={`alert${typeMessage}`}>{messageAddActivity}</h3>
+        <h3 className={`alertText alert${typeMessage}`}>
+          {messageAddActivity}
+        </h3>
       </div>
     </>
   );

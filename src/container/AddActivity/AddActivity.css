@@ -94,6 +94,9 @@
   transform: translateY(4px);
 }
 
+.alertText {
+  margin: 0;
+}
 .alertError {
   color: red;
 }

@@ -41,6 +41,14 @@
   gap: 5px;
 }
 
+.expiredText {
+  margin: 0;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  border-radius: 20px;
+}
+
 .titleText {
   font-size: 16pt;
   font-weight: bold;

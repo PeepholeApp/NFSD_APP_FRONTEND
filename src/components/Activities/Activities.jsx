@@ -1,6 +1,7 @@
 import { faBook, faCancel } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import moment from "moment";
+import React, { useEffect, useState } from "react";
 import "./Activities.css";
 
 const Activities = ({
@@ -10,6 +11,12 @@ const Activities = ({
   userIsInActivity,
   getIconImg,
 }) => {
+  const [todayDate, setTodayDate] = useState("");
+
+  useEffect(() => {
+    setTodayDate(moment().format("YYYY-MM-DD"));
+  }, []);
+
   const formatDateString = (dateString) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
     const formattedDate = new Date(dateString).toLocaleDateString(
@@ -32,6 +39,12 @@ const Activities = ({
           </div>
           <div className="divisionActivity"></div>
           <div className="activityContainer">
+            {activity.date <= todayDate ? (
+              <h3 className="expiredText">Expired</h3>
+            ) : (
+              <></>
+            )}
+
             <div className="titleText">{activity.title}</div>
             <div className="descriptionText">{activity.description}</div>
             <div className="descriptionText">
@@ -67,13 +80,15 @@ const Activities = ({
             <button
               className={`buttonBookStyle ${
                 userIsInActivity(activity) ||
-                activity.participants.length === activity.capacity
+                activity.participants.length === activity.capacity ||
+                activity.date <= todayDate
                   ? "disabledBookButton"
                   : "bookButton"
               }`}
               disabled={
                 userIsInActivity(activity) ||
-                activity.participants.length === activity.capacity
+                activity.participants.length === activity.capacity ||
+                activity.date <= todayDate
               }
               onClick={() => bookUserInActivity(activity)}
             >
@@ -81,11 +96,13 @@ const Activities = ({
             </button>
             <button
               className={`buttonBookStyle ${
-                !userIsInActivity(activity)
+                !userIsInActivity(activity) || activity.date <= todayDate
                   ? "disabledBookButton"
                   : "cancelBookButton"
               }`}
-              disabled={!userIsInActivity(activity)}
+              disabled={
+                !userIsInActivity(activity) || activity.date <= todayDate
+              }
               onClick={() => cancelBookUserInActivity(activity)}
             >
               <FontAwesomeIcon icon={faCancel} />
