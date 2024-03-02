@@ -44,6 +44,18 @@ const AddActivity = ({ getAllActivities, onAddressChange, address }) => {
       return;
     }
 
+    if (capacity > 50) {
+      setMessageAddActivity(
+        "The capacity of the activity should be a maximum of 50 members"
+      );
+      setTypeMessage("Error");
+      setTimeout(() => {
+        setMessageAddActivity("");
+        setTypeMessage("");
+      }, 3000);
+      return;
+    }
+
     const properties = address.features[0].properties;
 
     try {
