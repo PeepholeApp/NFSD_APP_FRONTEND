@@ -10,7 +10,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { SearchBox } from "@mapbox/search-js-react";
 import axios from "axios";
-import React, { useState } from "react";
+import moment from "moment";
+import React, { useEffect, useState } from "react";
 import categorties from "../../data/categories.json";
 import "./AddActivity.css";
 
@@ -21,6 +22,11 @@ const AddActivity = ({ getAllActivities, onAddressChange, address }) => {
   const [date, setDate] = useState();
   const [capacity, setCapacity] = useState(0);
   const [search, setSearch] = useState("");
+  const [minDate, setMinDate] = useState("");
+
+  useEffect(() => {
+    setMinDate(moment().format("YYYY-MM-DD"));
+  }, []);
 
   const addActivityFromAdmin = async () => {
     const properties = address.features[0].properties;
@@ -113,6 +119,7 @@ const AddActivity = ({ getAllActivities, onAddressChange, address }) => {
               className="inputStyle"
               id="activityDate"
               type="date"
+              min={minDate}
               name="activityDate"
               onChange={(e) => setDate(e.target.value)}
             />
