@@ -24,11 +24,26 @@ const AddActivity = ({ getAllActivities, onAddressChange, address }) => {
   const [search, setSearch] = useState("");
   const [minDate, setMinDate] = useState("");
 
+  const [messageAddActivity, setMessageAddActivity] = useState("");
+  const [typeMessage, setTypeMessage] = useState("");
+
   useEffect(() => {
     setMinDate(moment().format("YYYY-MM-DD"));
   }, []);
 
-  const addActivityFromAdmin = async () => {
+  const addActivityFromAdmin = async (e) => {
+    e.preventDefault();
+
+    if (!title || !category || !description || !date || !capacity || !search) {
+      setMessageAddActivity("You must fill all the fields to add the activity");
+      setTypeMessage("Error");
+      setTimeout(() => {
+        setMessageAddActivity("");
+        setTypeMessage("");
+      }, 3000);
+      return;
+    }
+
     const properties = address.features[0].properties;
 
     try {
@@ -49,6 +64,12 @@ const AddActivity = ({ getAllActivities, onAddressChange, address }) => {
       setDate("");
       setCapacity("");
       setSearch("");
+      setMessageAddActivity("Activity successfully added");
+      setTypeMessage("Successfully");
+      setTimeout(() => {
+        setMessageAddActivity("");
+        setTypeMessage("");
+      }, 3000);
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -152,6 +173,7 @@ const AddActivity = ({ getAllActivities, onAddressChange, address }) => {
           <h3>Add activity</h3>
           <FontAwesomeIcon icon={faAdd} />
         </button>
+        <h3 className={`alert${typeMessage}`}>{messageAddActivity}</h3>
       </div>
     </>
   );

@@ -93,3 +93,10 @@
   box-shadow: 0 1px #666;
   transform: translateY(4px);
 }
+
+.alertError {
+  color: red;
+}
+.alertSuccessfully {
+  color: green;
+}
