@@ -26,6 +26,7 @@ import Typography from "@mui/material/Typography";
 import Profile from "../pages/Profile";
 import SendIcon from "@mui/icons-material/Send";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ThreePIcon from "@mui/icons-material/ThreeP";
 
 console.log("api url", import.meta.env);
 
@@ -62,6 +63,7 @@ const Navbar = () => {
         setRequests(response.data);
       }
     } catch (error) {
+      logout();
       console.error(error);
     }
   };
@@ -257,7 +259,7 @@ const Navbar = () => {
               color="inherit"
             >
               <Badge badgeContent={0} color="error">
-                <NotificationsIcon />
+                <ThreePIcon />
               </Badge>
             </IconButton>
             <Tooltip title="Open settings">
