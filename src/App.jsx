@@ -1,24 +1,29 @@
-import React, { useEffect } from "react";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import React, { useEffect } from "react";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  useParams,
+} from "react-router-dom";
+import initializeNotifications from "../notifications";
 import Navbar from "./components/NavBar";
 import { FiltersProvider } from "./context/FiltersContext";
-import { useAuth } from "./context/Login"; 
+import { useAuth } from "./context/Login";
 import AboutUs from "./pages/AboutUs";
 import Blog from "./pages/Blog/Blog";
 import Community from "./pages/Community/Community";
 import Contact from "./pages/Contact";
 import EditProfile from "./pages/EditProfile";
+import ForgotPassword from "./pages/ForgotPassword";
 import Home from "./pages/Home";
 import HomeApp from "./pages/HomeApp/HomeApp";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import UserDetails from "./pages/UserDetails/UserDetails";
-import ForgotPassword from "./pages/ForgotPassword";
-import { useParams } from "react-router-dom";
-import initializeNotifications from "../notifications";
 
 const theme = createTheme({
   palette: {
@@ -28,7 +33,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: ["Cascadia Code PL"].join(","),
+    fontFamily: ["Source Code Pro"].join(","),
   },
 });
 
