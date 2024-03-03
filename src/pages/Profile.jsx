@@ -28,29 +28,35 @@ import Alert from "@mui/material/Alert";
 import CardContent from "@mui/material/CardContent";
 import { styled } from "@mui/material/styles";
 import UploadPhotos from "../components/UploadPhotos";
+import languages from "../data/languages.json";
 
-const languagesOptions = [
-  {
-    label: "Español",
-    value: "ES",
-  },
-  {
-    label: "Ingles",
-    value: "EN",
-  },
-  {
-    label: "Frances",
-    value: "FR",
-  },
-  {
-    label: "Portugues",
-    value: "PT",
-  },
-  {
-    label: "Italiano",
-    value: "IT",
-  },
-];
+// const languagesOptions = [
+//   {
+//     label: "Español",
+//     value: "ES",
+//   },
+//   {
+//     label: "Ingles",
+//     value: "EN",
+//   },
+//   {
+//     label: "Frances",
+//     value: "FR",
+//   },
+//   {
+//     label: "Portugues",
+//     value: "PT",
+//   },
+//   {
+//     label: "Italiano",
+//     value: "IT",
+//   },
+// ];
+
+const languagesOptions = languages.languages.map((lang) => ({
+  label: lang.name,
+  value: lang.shorName,
+}));
 
 const style = {
   position: "absolute",
@@ -124,19 +130,19 @@ const Profile = ({}) => {
   }, [user, loading]);
 
   const onNext = async () => {
-    // if (
-    //   ((firstName === "" ||
-    //     lastName === "" ||
-    //     brithday === "" ||
-    //     nationality === "" ||
-    //     genero === "" ||
-    //     languages === "") &&
-    //     step === 0) ||
-    //   (bio === "" && step === 1)
-    // ) {
-    //   setError("All fields are required");
-    //   return;
-    // }
+    if (
+      ((firstName === "" ||
+        lastName === "" ||
+        brithday === "" ||
+        nationality === "" ||
+        genero === "" ||
+        languages === "") &&
+        step === 0) ||
+      (bio === "" && step === 1)
+    ) {
+      setError("All fields are required");
+      return;
+    }
 
     if (selectedInterests.size < 5 && step === 2) {
       setError("Requires at least 5 selected fields");
@@ -171,8 +177,6 @@ const Profile = ({}) => {
   const handleUpload = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-
-    console.log("que es esto", formData);
     const files = e.target.files;
     console.log(e.target.files);
 
