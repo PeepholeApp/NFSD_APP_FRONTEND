@@ -7,6 +7,7 @@ import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import ButtonBase from "@mui/material/ButtonBase";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
@@ -14,7 +15,6 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Badge from "@mui/material/Badge";
 import EmailIcon from "@mui/icons-material/Email";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import logo from "../assets/logo.png";
 import Popper from "@mui/material/Popper";
 import List from "@mui/material/List";
@@ -23,29 +23,58 @@ import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Typography from "@mui/material/Typography";
-import Profile from "../pages/Profile";
+import Drawer from "@mui/material/Drawer";
 import SendIcon from "@mui/icons-material/Send";
 import DeleteIcon from "@mui/icons-material/Delete";
-
-console.log("api url", import.meta.env);
+import ThreePIcon from "@mui/icons-material/ThreeP";
+import MenuIcon from "@mui/icons-material/Menu";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import json2mq from "json2mq";
+import MainMenu from "./MainMenu";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
 
-  console.log("user", user);
-
   const [requests, setRequests] = useState([]);
   const navigate = useNavigate();
   const [menuEl, setMenuEl] = useState(null);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const { userId } = useParams();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [profile, setProfile] = useState(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  // devuelve verdadero para dispositivos moviles
+  const isMobile = useMediaQuery(
+    json2mq({
+      maxWidth: 700,
+    })
+  );
 
   useEffect(() => {
     if (user) {
       getRequests();
+      getProfile();
     }
   }, [user]);
 
+  const getProfile = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/profiles/user/${user.profileId}`,
+
+        {
+          headers: {
+            //manda el token del usuario verificado
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      if (response.data) {
+        setProfile(response.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const getRequests = async () => {
     try {
       const response = await axios.get(
@@ -62,6 +91,7 @@ const Navbar = () => {
         setRequests(response.data);
       }
     } catch (error) {
+      logout();
       console.error(error);
     }
   };
@@ -79,6 +109,7 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
+    handleClose();
     logout();
     navigate("/");
   };
@@ -120,9 +151,8 @@ const Navbar = () => {
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? "simple-popper" : undefined;
 
-  return user ? (
+  return (
     <>
       <AppBar component="nav" position="static">
         <Toolbar
@@ -134,209 +164,177 @@ const Navbar = () => {
             boxShadow: "0px 2px 10px 0px #1B0554",
           }}
         >
-          <Box onClick={onHome}>
+          <ButtonBase onClick={onHome}>
             <img src={logo} alt="logo" style={{ width: 150 }} />
-          </Box>
+          </ButtonBase>
 
-          <Box>
-            <Button
-              key="home"
-              component={Link}
-              to="/community"
-              sx={{ color: "#fff" }}
-            >
-              Comunity
-            </Button>
-            <Button
-              key="blog"
-              component={Link}
-              to="/blog"
-              sx={{ color: "#fff" }}
-            >
-              Blog
-            </Button>
-            <Button
-              key="about"
-              component={Link}
-              to="/aboutUs"
-              sx={{ color: "#fff" }}
-            >
-              About us
-            </Button>
-            <Button
-              key="contact"
-              component={Link}
-              to="/contact"
-              sx={{ color: "#fff" }}
-            >
-              Contact
-            </Button>
-          </Box>
+          {!isMobile ? <MainMenu logged={user} /> : null}
 
-          <Stack sx={{ flexGrow: 0 }} gap={1} direction="row">
-            <IconButton
-              size="large"
-              aria-label="show 4 new mails"
-              color="inherit"
-              onClick={handleClick}
-              aria-describedby={id}
-              type="button"
-            >
-              <Badge badgeContent={requests.length} color="primary">
-                <EmailIcon />
-              </Badge>
-            </IconButton>
-
-            <Popper id={id} open={open} anchorEl={anchorEl}>
-              <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
-                <List
-                  sx={{
-                    width: "100%",
-                    maxWidth: 360,
-                    bgcolor: "background.paper",
-                  }}
+          <Stack
+            sx={{ flexGrow: 0 }}
+            gap={1}
+            direction="row"
+            alignItems="center"
+          >
+            {user ? (
+              <>
+                {/* connection requests */}
+                <IconButton
+                  size="large"
+                  aria-label="show 4 new mails"
+                  color="inherit"
+                  onClick={handleClick}
+                  type="button"
                 >
-                  {requests.map((profile) => (
-                    <ListItem alignItems="flex-start">
-                      <ListItemAvatar>
-                        <Avatar alt="Remy Sharp" src={profile.photo[0]} />
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={profile.name}
-                        secondary={
-                          <React.Fragment>
-                            <Typography
-                              sx={{ display: "inline" }}
-                              component="span"
-                              variant="body2"
-                              color="text.primary"
-                            ></Typography>
-                            {"Hi! — Wants to contact you"}
-                          </React.Fragment>
-                        }
-                      />
-                      {!profile.connectionStatus ? (
-                        <Stack>
-                          <Button
-                            variant="contained"
-                            endIcon={<SendIcon />}
-                            size="small"
-                            onClick={handleConnectionUpdate(
-                              profile._id,
-                              "accepted"
-                            )}
-                          >
-                            Aceptar
-                          </Button>
-                          <Button
-                            variant="outlined"
-                            startIcon={<DeleteIcon />}
-                            size="small"
-                            onClick={handleConnectionUpdate(
-                              profile._id,
-                              "rejected"
-                            )}
-                          >
-                            Rechazar
-                          </Button>
-                        </Stack>
-                      ) : (
-                        <p>Status: {profile.connectionStatus}</p>
-                      )}
-                    </ListItem>
-                  ))}
+                  <Badge badgeContent={requests.length} color="primary">
+                    <EmailIcon />
+                  </Badge>
+                </IconButton>
+                <Popper open={open} anchorEl={anchorEl}>
+                  <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
+                    <List
+                      sx={{
+                        width: "100%",
+                        maxWidth: 360,
+                        bgcolor: "background.paper",
+                      }}
+                    >
+                      {requests.map((profile) => (
+                        <ListItem alignItems="flex-start">
+                          <ListItemAvatar>
+                            <Avatar alt="Remy Sharp" src={profile.photo[0]} />
+                          </ListItemAvatar>
+                          <ListItemText
+                            primary={profile.name}
+                            secondary={
+                              <React.Fragment>
+                                <Typography
+                                  sx={{ display: "inline" }}
+                                  component="span"
+                                  variant="body2"
+                                  color="text.primary"
+                                ></Typography>
+                                {"Hi! — Wants to contact you"}
+                              </React.Fragment>
+                            }
+                          />
+                          {!profile.connectionStatus ? (
+                            <Stack>
+                              <Button
+                                variant="contained"
+                                endIcon={<SendIcon />}
+                                size="small"
+                                onClick={handleConnectionUpdate(
+                                  profile._id,
+                                  "accepted"
+                                )}
+                              >
+                                Aceptar
+                              </Button>
+                              <Button
+                                variant="outlined"
+                                startIcon={<DeleteIcon />}
+                                size="small"
+                                onClick={handleConnectionUpdate(
+                                  profile._id,
+                                  "rejected"
+                                )}
+                              >
+                                Rechazar
+                              </Button>
+                            </Stack>
+                          ) : (
+                            <p>Status: {profile.connectionStatus}</p>
+                          )}
+                        </ListItem>
+                      ))}
 
-                  <Divider variant="inset" component="li" />
-                </List>
-              </Box>
-            </Popper>
+                      <Divider variant="inset" component="li" />
+                    </List>
+                  </Box>
+                </Popper>
 
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={0} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <Tooltip title="Open settings">
-              <IconButton
-                onClick={(event) => {
-                  setMenuEl(event.currentTarget);
-                }}
-                sx={{ p: 0 }}
-              >
-                <Avatar />
+                {/* chat notifications */}
+                <IconButton
+                  size="large"
+                  aria-label="show 17 new notifications"
+                  color="inherit"
+                >
+                  <Badge badgeContent={0} color="error">
+                    <ThreePIcon />
+                  </Badge>
+                </IconButton>
+
+                {/* user menu */}
+                <Tooltip title="Open settings">
+                  <IconButton
+                    onClick={(event) => {
+                      setMenuEl(event.currentTarget);
+                    }}
+                    sx={{ p: 0 }}
+                  >
+                    {profile ? (
+                      <Avatar alt="photo" src={profile.photo[0]} />
+                    ) : (
+                      <Avatar />
+                    )}
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={menuEl}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(menuEl)}
+                  onClose={handleClose}
+                >
+                  <MenuItem
+                    onClick={() => {
+                      handleClose();
+                      navigate(`/user/${user.profileId}`);
+                    }}
+                  >
+                    Profile
+                  </MenuItem>
+                  <MenuItem onClick={handleClose}>Help</MenuItem>
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </Menu>
+              </>
+            ) : null}
+
+            {/* mobile menu */}
+            {isMobile ? (
+              <IconButton onClick={() => setDrawerOpen(true)}>
+                <MenuIcon />
               </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={menuEl}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(menuEl)}
-              onClose={handleClose}
-            >
-              <MenuItem
-                onClick={() => {
-                  handleClose();
-                  navigate(`/user/${user.profileId}`);
-                }}
-              >
-                Profile
-              </MenuItem>
-              <MenuItem onClick={handleClose}>Help</MenuItem>
-              <MenuItem onClick={handleLogout}>Logout</MenuItem>
-            </Menu>
+            ) : null}
+            {!isMobile && !user ? <Box sx={{ width: 150 }} /> : null}
           </Stack>
         </Toolbar>
+
+        {isMobile ? (
+          <Drawer
+            anchor="right"
+            open={drawerOpen}
+            onClose={() => setDrawerOpen(false)}
+          >
+            <MainMenu
+              logged={user}
+              vertical
+              onMenuClick={() => setDrawerOpen(false)}
+            />
+          </Drawer>
+        ) : null}
       </AppBar>
     </>
-  ) : (
-    <AppBar component="nav" position="static">
-      <Toolbar
-        sx={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          backgroundColor: "#0C0C0C", // Set background color
-          boxShadow: "0px 2px 10px 0px #1B0554", // Add drop shadow
-        }}
-      >
-        <Box onClick={onHome}>
-          <img src={logo} alt="logo" style={{ width: 150 }} />
-        </Box>
-        <Box sx={{ display: { xs: "none", sm: "block" } }}>
-          <Button key="app" component={Link} to="/app" sx={{ color: "#fff" }}>
-            App
-          </Button>
-          <Button
-            key="about"
-            component={Link}
-            to="/aboutUs"
-            sx={{ color: "#fff" }}
-          >
-            About us
-          </Button>
-          <Button key="blog" component={Link} to="/blog" sx={{ color: "#fff" }}>
-            Blog
-          </Button>
-        </Box>
-        <Box>
-          <Button onClick={handleSignIn}>Sign In</Button>
-          <Button onClick={handleSignUp}>Sign up</Button>
-        </Box>
-      </Toolbar>
-    </AppBar>
   );
 };
 

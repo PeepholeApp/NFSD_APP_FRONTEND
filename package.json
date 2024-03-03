@@ -27,6 +27,7 @@
     "babel-preset-env": "^1.7.0",
     "date-fns": "2.25",
     "firebase": "^10.8.0",
+    "json2mq": "^0.2.0",
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^3.1.2",
     "mapbox-gl": "^3.1.2",
