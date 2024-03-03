@@ -20,7 +20,9 @@ const FilterActivity = ({ getCategorySelection }) => {
 
   const getCategories = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/activities/all");
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/activities/all`
+      );
       const activities = response.data;
       const categoriesNotRepeat = activities.reduce((acc, activity) => {
         if (acc.includes(activity.category)) {

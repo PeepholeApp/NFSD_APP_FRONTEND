@@ -59,7 +59,7 @@ const AddActivity = ({ getAllActivities, onAddressChange, address }) => {
     const properties = address.features[0].properties;
 
     try {
-      await axios.post(`http://localhost:3001/activities/`, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/activities/`, {
         title,
         category,
         description,
