@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 
 function Contact() {
   const [email, setEmail] = useState("");
@@ -15,23 +15,47 @@ function Contact() {
   return (
     <>
       <h1>Contact us</h1>
-      <Box component="form" onSubmit={handleSubmit}>
+
+      <Stack
+        component="form"
+        onSubmit={handleSubmit}
+        sx={{ p: 8, width: 600, backgroundColor: "#262938" }}
+        spacing={2}
+      >
+        <TextField
+          id="fullName"
+          label="FullName"
+          type="fullName"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          required
+        />
         <TextField
           id="email"
           label="Email"
           type="email"
           variant="outlined"
           fullWidth
-          helperText="Enter a valid email"
+          margin="normal"
           required
           value={email}
           te
           onChange={(e) => setEmail(e.target.value)}
         />
+        <Typography variant="h6">Phono</Typography>
+        <TextField id="phono" type="phono" variant="outlined" />
+        <TextField
+          id="message"
+          label="Message"
+          type="message"
+          variant="outlined"
+          required
+        />
         <Button type="submit" variant="outline" sx={{ mt: 2 }}>
           Enviar
         </Button>
-      </Box>
+      </Stack>
     </>
   );
 }
