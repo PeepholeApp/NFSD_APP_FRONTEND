@@ -6,6 +6,7 @@ import { ButtonDark } from "../../components/Button";
 import ProfileInterests from "../../components/ProfileInterests/ProfileInterests";
 import ProfileLanguages from "../../components/ProfileLanguages/ProfileLanguages";
 import { useAuth } from "../../context/Login";
+import countriesData from "../../data/countries.json";
 import "./UserDetails.css";
 
 const UserDetails = () => {
@@ -73,6 +74,10 @@ const UserDetails = () => {
     setConnectionSent(true);
   };
 
+  const nationalityCountry = countriesData.countries.find(
+    (country) => country.acronym === user.nationality
+  );
+
   return (
     <>
       <div className="flexContainer">
@@ -99,7 +104,16 @@ const UserDetails = () => {
             <div className="divisionData"></div>
             <div className="flexEachData">
               <div className="subtitleDataBold">Nationality</div>
-              <div className="subtitleDataLight">{user.nationality}</div>
+              <div className="subtitleDataLight">
+                {nationalityCountry ? (
+                  <>
+                    <img src={nationalityCountry.icon} />
+                    {nationalityCountry.name}
+                  </>
+                ) : (
+                  user.nationality
+                )}{" "}
+              </div>
             </div>
             <div className="divisionData"></div>
             <div className="flexEachData">

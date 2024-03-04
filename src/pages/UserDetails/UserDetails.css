@@ -15,8 +15,16 @@
   font-weight: bold;
 }
 .subtitleDataLight {
+  display: flex;
+  align-items: center;
+  gap: 5px;
   font-size: 15pt;
   font-weight: lighter;
+}
+
+.subtitleDataLight img {
+  width: 20px;
+  vertical-align: middle;
 }
 
 .flexContainer {

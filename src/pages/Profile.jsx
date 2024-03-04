@@ -24,32 +24,39 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { ButtonDark } from "../components/Button";
 import Modal from "@mui/material/Modal";
+import Alert from "@mui/material/Alert";
 import CardContent from "@mui/material/CardContent";
 import { styled } from "@mui/material/styles";
 import UploadPhotos from "../components/UploadPhotos";
+import languages from "../data/languages.json";
 
-const languagesOptions = [
-  {
-    label: "Español",
-    value: "ES",
-  },
-  {
-    label: "Ingles",
-    value: "EN",
-  },
-  {
-    label: "Frances",
-    value: "FR",
-  },
-  {
-    label: "Portugues",
-    value: "PT",
-  },
-  {
-    label: "Italiano",
-    value: "IT",
-  },
-];
+// const languagesOptions = [
+//   {
+//     label: "Español",
+//     value: "ES",
+//   },
+//   {
+//     label: "Ingles",
+//     value: "EN",
+//   },
+//   {
+//     label: "Frances",
+//     value: "FR",
+//   },
+//   {
+//     label: "Portugues",
+//     value: "PT",
+//   },
+//   {
+//     label: "Italiano",
+//     value: "IT",
+//   },
+// ];
+
+const languagesOptions = languages.languages.map((lang) => ({
+  label: lang.name,
+  value: lang.shorName,
+}));
 
 const style = {
   position: "absolute",
@@ -97,6 +104,7 @@ const Profile = ({}) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [images, setImages] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     axios.get("https://restcountries.com/v3.1/all").then((response) => {
@@ -122,6 +130,26 @@ const Profile = ({}) => {
   }, [user, loading]);
 
   const onNext = async () => {
+    if (
+      ((firstName === "" ||
+        lastName === "" ||
+        brithday === "" ||
+        nationality === "" ||
+        genero === "" ||
+        languages === "") &&
+        step === 0) ||
+      (bio === "" && step === 1)
+    ) {
+      setError("All fields are required");
+      return;
+    }
+
+    if (selectedInterests.size < 5 && step === 2) {
+      setError("Requires at least 5 selected fields");
+      return;
+    }
+
+    setError("");
     setStep((prevStep) => prevStep + 1);
   };
 
@@ -149,8 +177,6 @@ const Profile = ({}) => {
   const handleUpload = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-
-    console.log("que es esto", formData);
     const files = e.target.files;
     console.log(e.target.files);
 
@@ -192,11 +218,17 @@ const Profile = ({}) => {
         nationality,
         languages: languages.map((language) => language.value),
         bio,
-        photo: image,
+        photo: images,
         user: user.userId,
         interest: interests,
       }
     );
+
+    if (images.length < 1 && step === 3) {
+      setError("Requires uploading at least one photo");
+      return;
+    }
+    setError("");
     setOpen(true);
     setTimeout(() => navigate("/home"), 2000);
   };
@@ -218,6 +250,8 @@ const Profile = ({}) => {
             <StepLabel>Fotos</StepLabel>
           </Step>
         </Stepper>
+
+        {error ? <Alert severity="error">{error}</Alert> : null}
 
         {step === 0 ? (
           <>
