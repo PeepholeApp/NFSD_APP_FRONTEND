@@ -9,7 +9,6 @@ function Map({ address, mapView, activities }) {
   const mapRef = useRef(); //
   const mapElementRef = useRef();
   const markerRef = useRef(); //instancia del marcador
-  console.log(address);
 
   useEffect(() => {
     if (mapRef.current && activities.length) {
