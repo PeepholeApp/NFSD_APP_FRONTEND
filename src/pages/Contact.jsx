@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Box, Button, Stack, TextField, Typography } from "@mui/material";
+import { Stack, TextField, Typography } from "@mui/material";
+import { ButtonLight } from "../components/Button";
 
 function Contact() {
   const [email, setEmail] = useState("");
@@ -14,47 +15,52 @@ function Contact() {
 
   return (
     <>
-      <h1>Contact us</h1>
+      <Stack sx={{ m: 5 }} alignItems="center">
+        <Typography variant="h3" sx={{ m: 5 }}>
+          Contact us
+        </Typography>
+        <Stack
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{ p: 8, width: 600, backgroundColor: "#262938" }}
+          spacing={2}
+        >
+          <TextField
+            id="fullName"
+            label="FullName"
+            type="fullName"
+            variant="outlined"
+            margin="normal"
+            required
+          />
+          <TextField
+            id="email"
+            label="Email"
+            type="email"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            required
+            value={email}
+            te
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-      <Stack
-        component="form"
-        onSubmit={handleSubmit}
-        sx={{ p: 8, width: 600, backgroundColor: "#262938" }}
-        spacing={2}
-      >
-        <TextField
-          id="fullName"
-          label="FullName"
-          type="fullName"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          required
-        />
-        <TextField
-          id="email"
-          label="Email"
-          type="email"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          required
-          value={email}
-          te
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <Typography variant="h6">Phono</Typography>
-        <TextField id="phono" type="phono" variant="outlined" />
-        <TextField
-          id="message"
-          label="Message"
-          type="message"
-          variant="outlined"
-          required
-        />
-        <Button type="submit" variant="outline" sx={{ mt: 2 }}>
-          Enviar
-        </Button>
+          <TextField
+            id="message"
+            label="Message"
+            type="message"
+            variant="outlined"
+            required
+          />
+          <ButtonLight disabled={!email} onClick={handleSubmit}>
+            <Typography variant="h6">Enviar</Typography>
+          </ButtonLight>
+          {/* 
+          <Button type="submit" variant="outline" sx={{ mt: 2 }}>
+            Enviar
+          </Button> */}
+        </Stack>
       </Stack>
     </>
   );
