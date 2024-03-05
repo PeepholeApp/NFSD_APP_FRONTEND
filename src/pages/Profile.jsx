@@ -30,29 +30,6 @@ import { styled } from "@mui/material/styles";
 import UploadPhotos from "../components/UploadPhotos";
 import languages from "../data/languages.json";
 
-// const languagesOptions = [
-//   {
-//     label: "Español",
-//     value: "ES",
-//   },
-//   {
-//     label: "Ingles",
-//     value: "EN",
-//   },
-//   {
-//     label: "Frances",
-//     value: "FR",
-//   },
-//   {
-//     label: "Portugues",
-//     value: "PT",
-//   },
-//   {
-//     label: "Italiano",
-//     value: "IT",
-//   },
-// ];
-
 const languagesOptions = languages.languages.map((lang) => ({
   label: lang.name,
   value: lang.shorName,
