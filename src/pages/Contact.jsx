@@ -74,7 +74,7 @@ function Contact() {
         <Typography variant="h3" sx={{ m: 5 }}>
           Contact us
         </Typography>
-        <Typography variant="h6" sx={{ m: 5 }}>
+        <Typography variant="h6" sx={{ m: 5, width: 600 }}>
           Thank you very much for your interest in Peephole. If you would like
           to speak to a member of our team, please fill out the form below. A
           representative will contact you as soon as possible.

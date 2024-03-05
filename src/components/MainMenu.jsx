@@ -38,20 +38,9 @@ const MainMenu = ({ logged, vertical, onMenuClick }) => {
           >
             About us
           </Button>
-          <Button
-            key="contact"
-            component={Link}
-            to="/contact"
-            sx={{ color: "#fff" }}
-          >
-            Contact
-          </Button>
         </>
       ) : (
         <>
-          <Button key="app" component={Link} to="/app" sx={{ color: "#fff" }}>
-            App
-          </Button>
           <Button
             key="about"
             component={Link}
@@ -60,8 +49,18 @@ const MainMenu = ({ logged, vertical, onMenuClick }) => {
           >
             About us
           </Button>
+
           <Button key="blog" component={Link} to="/blog" sx={{ color: "#fff" }}>
             Blog
+          </Button>
+
+          <Button
+            key="contact"
+            component={Link}
+            to="/contact"
+            sx={{ color: "#fff" }}
+          >
+            Contact
           </Button>
         </>
       )}
