@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Navbar from "./components/NavBar";
 import { FiltersProvider } from "./context/FiltersContext";
-import { useAuth } from "./context/Login"; 
+import { useAuth } from "./context/Login";
 import AboutUs from "./pages/AboutUs";
 import Blog from "./pages/Blog/Blog";
 import Community from "./pages/Community/Community";
@@ -54,11 +54,11 @@ function UserDetailsWrapper() {
 }
 
 function App() {
+  const [newNotifications, setNewNotifications] = useState(false);
   const { user } = useAuth();
   useEffect(() => {
-    console.log("user", user);
     if (user) {
-      initializeNotifications(user);
+      initializeNotifications(user, () => setNewNotifications(true));
     }
   }, [user]);
   return (
@@ -67,7 +67,10 @@ function App() {
         <BrowserRouter>
           <FiltersProvider>
             <CssBaseline />
-            <Navbar />
+            <Navbar
+              newNotifications={newNotifications}
+              onNotificationsRefresh={() => setNewNotifications(false)}
+            />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
