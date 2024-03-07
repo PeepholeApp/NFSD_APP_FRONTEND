@@ -193,6 +193,7 @@ const Navbar = () => {
                 <Popper open={open} anchorEl={anchorEl}>
                   <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
                     <List
+                      key="index"
                       sx={{
                         width: "100%",
                         maxWidth: 360,
