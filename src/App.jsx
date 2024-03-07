@@ -1,17 +1,13 @@
-
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import React, { useEffect } from "react";
 import {
   BrowserRouter,
-  Navigate,
   Route,
   Routes,
+  Navigate,
   useParams,
 } from "react-router-dom";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 import initializeNotifications from "../notifications";
 import Navbar from "./components/NavBar";
 import { FiltersProvider } from "./context/FiltersContext";
