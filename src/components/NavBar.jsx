@@ -55,8 +55,10 @@ const Navbar = ({ newNotifications, onNotificationsRefresh }) => {
       getProfile();
     }
   }, [user]);
+
   useEffect(() => {
     if (newNotifications) {
+      getRequests();
       onNotificationsRefresh();
     }
   }, [newNotifications, onNotificationsRefresh]);
