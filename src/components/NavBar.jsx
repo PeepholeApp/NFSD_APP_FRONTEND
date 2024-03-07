@@ -199,66 +199,70 @@ const Navbar = ({ newNotifications, onNotificationsRefresh }) => {
                 </IconButton>
                 <Popper open={open} anchorEl={anchorEl}>
                   <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
-                    <List
-                      key="index"
-                      sx={{
-                        width: "100%",
-                        maxWidth: 360,
-                        bgcolor: "background.paper",
-                      }}
-                    >
-                      {requests.map((profile) => (
-                        <ListItem alignItems="flex-start">
-                          <ListItemAvatar>
-                            <Avatar alt="Remy Sharp" src={profile.photo[0]} />
-                          </ListItemAvatar>
-                          <ListItemText
-                            primary={profile.name}
-                            secondary={
-                              <React.Fragment>
-                                <Typography
-                                  sx={{ display: "inline" }}
-                                  component="span"
-                                  variant="body2"
-                                  color="text.primary"
-                                ></Typography>
-                                {"Hi! — Wants to contact you"}
-                              </React.Fragment>
-                            }
-                          />
-                          {!profile.connectionStatus ? (
-                            <Stack>
-                              <Button
-                                variant="contained"
-                                endIcon={<SendIcon />}
-                                size="small"
-                                onClick={handleConnectionUpdate(
-                                  profile._id,
-                                  "accepted"
-                                )}
-                              >
-                                Aceptar
-                              </Button>
-                              <Button
-                                variant="outlined"
-                                startIcon={<DeleteIcon />}
-                                size="small"
-                                onClick={handleConnectionUpdate(
-                                  profile._id,
-                                  "rejected"
-                                )}
-                              >
-                                Rechazar
-                              </Button>
-                            </Stack>
-                          ) : (
-                            <p>Status: {profile.connectionStatus}</p>
-                          )}
-                        </ListItem>
-                      ))}
+                    {requests.length > 0 ? (
+                      <List
+                        sx={{
+                          width: "100%",
+                          maxWidth: 360,
+                          bgcolor: "background.paper",
+                        }}
+                      >
+                        {requests.map((profile, index) => (
+                          <ListItem alignItems="flex-start">
+                            <ListItemAvatar>
+                              <Avatar alt="Remy Sharp" src={profile.photo[0]} />
+                            </ListItemAvatar>
+                            <ListItemText
+                              key={index}
+                              primary={profile.name}
+                              secondary={
+                                <React.Fragment>
+                                  <Typography
+                                    sx={{ display: "inline" }}
+                                    component="span"
+                                    variant="body2"
+                                    color="text.primary"
+                                  ></Typography>
+                                  {"Hi! — Wants to contact you"}
+                                </React.Fragment>
+                              }
+                            />
+                            {!profile.connectionStatus ? (
+                              <Stack>
+                                <Button
+                                  variant="contained"
+                                  endIcon={<SendIcon />}
+                                  size="small"
+                                  onClick={handleConnectionUpdate(
+                                    profile._id,
+                                    "accepted"
+                                  )}
+                                >
+                                  Aceptar
+                                </Button>
+                                <Button
+                                  variant="outlined"
+                                  startIcon={<DeleteIcon />}
+                                  size="small"
+                                  onClick={handleConnectionUpdate(
+                                    profile._id,
+                                    "rejected"
+                                  )}
+                                >
+                                  Rechazar
+                                </Button>
+                              </Stack>
+                            ) : (
+                              <p>Status: {profile.connectionStatus}</p>
+                            )}
+                          </ListItem>
+                        ))}
 
-                      <Divider variant="inset" component="li" />
-                    </List>
+                        <Divider variant="inset" component="li" />
+                      </List>
+                    ) : (
+                      <p>No hay solicitudes</p>
+                    )}
                   </Box>
                 </Popper>
 
