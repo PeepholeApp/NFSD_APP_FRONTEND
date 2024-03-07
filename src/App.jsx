@@ -16,6 +16,7 @@ import AboutUs from "./pages/AboutUs";
 import Blog from "./pages/Blog/Blog";
 import Community from "./pages/Community/Community";
 import Contact from "./pages/Contact";
+import Dashboard from "./pages/Dashboard/Dashboard";
 import EditProfile from "./pages/EditProfile";
 import ForgotPassword from "./pages/ForgotPassword";
 import Home from "./pages/Home";
@@ -24,6 +25,7 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import UserDetails from "./pages/UserDetails/UserDetails";
+import UserManager from "./pages/UserManager/UserManager";
 
 const theme = createTheme({
   palette: {
@@ -98,6 +100,8 @@ function App() {
               <Route path="/blog" element={<Blog />} />
               <Route path="/aboutUs" element={<AboutUs />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/userManager" element={<UserManager />} />
             </Routes>
           </FiltersProvider>
         </BrowserRouter>
