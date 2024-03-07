@@ -32,7 +32,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import json2mq from "json2mq";
 import MainMenu from "./MainMenu";
 
-const Navbar = ({ newNotification, onNotificationsRefresh }) => {
+const Navbar = ({ newNotifications, onNotificationsRefresh }) => {
   const { user, logout } = useAuth();
 
   const [requests, setRequests] = useState([]);
@@ -56,10 +56,10 @@ const Navbar = ({ newNotification, onNotificationsRefresh }) => {
     }
   }, [user]);
   useEffect(() => {
-    if (newNotification) {
+    if (newNotifications) {
       onNotificationsRefresh();
     }
-  });
+  }, [newNotifications, onNotificationsRefresh]);
 
   const getProfile = async () => {
     try {
