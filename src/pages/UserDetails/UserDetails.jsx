@@ -18,7 +18,7 @@ const UserDetails = () => {
 
   useEffect(() => {
     getProfileUser();
-    getConnectionRequest();
+    // getConnectionRequest();
   }, []);
 
   const getProfileUser = async () => {

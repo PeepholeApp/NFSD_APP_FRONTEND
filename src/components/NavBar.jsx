@@ -32,7 +32,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import json2mq from "json2mq";
 import MainMenu from "./MainMenu";
 
-const Navbar = () => {
+const Navbar = ({ newNotification, onNotificationsRefresh }) => {
   const { user, logout } = useAuth();
 
   const [requests, setRequests] = useState([]);
@@ -55,6 +55,11 @@ const Navbar = () => {
       getProfile();
     }
   }, [user]);
+  useEffect(() => {
+    if (newNotification) {
+      onNotificationsRefresh();
+    }
+  });
 
   const getProfile = async () => {
     try {
@@ -193,6 +198,7 @@ const Navbar = () => {
                 <Popper open={open} anchorEl={anchorEl}>
                   <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
                     <List
+                      key="index"
                       sx={{
                         width: "100%",
                         maxWidth: 360,
