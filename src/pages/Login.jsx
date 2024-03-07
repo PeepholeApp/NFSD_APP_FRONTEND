@@ -90,7 +90,11 @@ const Login = () => {
         profileId: data.profileId,
         role: data.role,
       });
-      navigate("/home");
+      if (data.profileId) {
+        navigate("/home");
+      } else {
+        navigate("/profile");
+      }
     } catch (error) {
       setError("Error logging in. Please check your credentials.");
     } finally {

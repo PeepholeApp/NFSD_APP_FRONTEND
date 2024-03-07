@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import axios from "axios";
 
-async function initializeNotifications(user) {
+async function initializeNotifications(user, onNewMessages) {
   const firebaseConfig = {
     apiKey: "AIzaSyAaYR3xE_0MFP3l9akg5OqeBQOGPqoAkiM",
     authDomain: "peephole-a72ed.firebaseapp.com",
@@ -20,7 +20,9 @@ async function initializeNotifications(user) {
 
   onMessage(messaging, (message) => {
     console.log("message", message);
+    if (onNewMessages) onNewMessages();
   });
+
   const result = await Notification.requestPermission();
   if (result === "granted") {
     getToken(messaging, {
