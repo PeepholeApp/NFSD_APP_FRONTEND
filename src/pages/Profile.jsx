@@ -106,6 +106,13 @@ const Profile = ({}) => {
     }
   }, [user, loading]);
 
+  useEffect(() => {
+    //chekeo si existe usuario y este cargado
+    if (user?.profileId && !loading) {
+      navigate("/home");
+    }
+  }, [user, loading]);
+
   const onNext = async () => {
     if (
       ((firstName === "" ||
