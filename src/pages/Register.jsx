@@ -42,8 +42,8 @@ const StyledBox = styled(Box)(({ theme }) => ({
   borderRadius: theme.spacing(2),
   boxShadow: theme.shadows[5],
   textAlign: "center",
-  width: "90%",  
-  maxWidth: "500px",  
+  width: "90%",
+  maxWidth: "500px",
 }));
 
 function WelcomeMessage() {
@@ -161,7 +161,12 @@ export default function SignUp() {
               Sign up
             </Typography>
             <WelcomeMessage />
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 3 }}
+            >
               {generalError && (
                 <Typography variant="body2" color="error" mb={2}>
                   {generalError}
@@ -199,7 +204,11 @@ export default function SignUp() {
                     InputProps={{
                       endAdornment: (
                         <IconButton onClick={togglePasswordVisibility}>
-                          {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                          {showPassword ? (
+                            <VisibilityIcon />
+                          ) : (
+                            <VisibilityOffIcon />
+                          )}
                         </IconButton>
                       ),
                     }}

@@ -2,7 +2,7 @@ import { Button, TextField, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import backgroundImage from "../assets/login.png"; // Import the background image
 
 const StyledContainer = styled("div")(({ theme }) => ({
@@ -58,6 +58,8 @@ const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [emailSent, setEmailSent] = useState(false);
+  const navigate = useNavigate();
 
   const sendResetEmail = async (e) => {
     e.preventDefault();
@@ -72,13 +74,14 @@ const ForgotPassword = () => {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/users/forgot-password`,
+        `${import.meta.env.VITE_API_URL}/password-recovery/send-link`,
         {
           email,
         }
       );
 
-      console.log(response.data.message);
+      setEmailSent(true);
+      setTimeout(() => navigate("/"), 3000);
     } catch (error) {
       setError("Error sending reset email. Please check your email address.");
     } finally {
@@ -86,7 +89,15 @@ const ForgotPassword = () => {
     }
   };
 
-  return (
+  return emailSent ? (
+    <StyledContainer>
+      <StyledFormContainer>
+        <Typography variant="h6" gutterBottom>
+          We've sent a recovery link to your email!
+        </Typography>
+      </StyledFormContainer>
+    </StyledContainer>
+  ) : (
     <StyledContainer>
       <StyledFormContainer>
         <Typography variant="h6" gutterBottom>
