@@ -19,6 +19,7 @@ import Contact from "./pages/Contact";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import EditProfile from "./pages/EditProfile";
 import ForgotPassword from "./pages/ForgotPassword";
+import RecoverPassword from "./pages/RecoverPassword";
 import Home from "./pages/Home";
 import HomeApp from "./pages/HomeApp/HomeApp";
 import Login from "./pages/Login";
@@ -83,6 +84,10 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route
+                path="/reset-password/:token"
+                element={<RecoverPassword />}
+              />
               <Route
                 path="/profile"
                 element={<PrivateRoute element={<Profile />} />}
