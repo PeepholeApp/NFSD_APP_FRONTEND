@@ -1,5 +1,5 @@
-import { createContext, useContext, useState, useEffect } from "react";
 import jwtDecode from "jwt-decode";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
       // No sacar a menos que el token contenga esta informacion
       const storedUserId = localStorage.getItem("userId");
       const storedProfileId = localStorage.getItem("profileId");
+      const storedRole = localStorage.getItem("role");
 
       if (storedToken) {
         const decodedToken = jwtDecode(storedToken);
@@ -28,7 +29,7 @@ export const AuthProvider = ({ children }) => {
           token: storedToken,
           userId: storedUserId,
           profileId: storedProfileId,
-          roles: updatedRoles,
+          role: storedRole,
         });
       }
 
@@ -42,13 +43,12 @@ export const AuthProvider = ({ children }) => {
   const login = (user) => {
     setUser(user);
 
-    const rolesToStore = Array.isArray(user.roles) ? user.roles : [];
-
+    const rolesToStore = Array.isArray(user.role) ? user.role : [];
     localStorage.setItem("token", user.token);
     localStorage.setItem("userId", user.userId);
     localStorage.setItem("profileId", user.profileId);
-    const rolesString = JSON.stringify(rolesToStore);
-    localStorage.setItem("roles", rolesString);
+    const rolesString = JSON.stringify(user.role);
+    localStorage.setItem("role", rolesString);
     console.log("Roles stored:", rolesString);
   };
 
@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
     localStorage.removeItem("profileId");
-    localStorage.removeItem("roles");
+    localStorage.removeItem("role");
   };
 
   return (
@@ -71,7 +71,7 @@ export const useAuth = () => {
   const { user, loading, login, logout } = useContext(AuthContext);
 
   const hasRole = (role) => {
-    return user && user.roles.includes(role);
+    return user && user.role && user.roles.includes(role);
   };
 
   return { user, loading, login, logout, hasRole };

@@ -89,11 +89,16 @@ function Community() {
   return (
     <>
       <div className="flexCommunity">
-        <AddActivity
-          address={address}
-          getAllActivities={getAllActivities}
-          onAddressChange={(address) => setAddress(address)}
-        />
+        {user.role === "admin" ? (
+          <AddActivity
+            address={address}
+            getAllActivities={getAllActivities}
+            onAddressChange={(address) => setAddress(address)}
+          />
+        ) : (
+          <></>
+        )}
+
         <div className="showMapButtonsFlex">
           <ButtonDark onClick={() => setMapView(false)}>
             <h3 className="textInButtons">Show list of activities</h3>
