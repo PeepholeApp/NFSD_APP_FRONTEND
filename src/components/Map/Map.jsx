@@ -16,7 +16,14 @@ function Map({ address, mapView, activities }) {
         (activity) => activity.latitude
       );
       activitiesWithCoordinates.forEach((activity) => {
+        const popap = new mapbox.Popup({ className: "popup" }).setHTML(
+          `<h3>${activity.title}</h3>
+          <p>${activity.description}</p>
+          <p>${activity.date}</p>
+          `
+        );
         const marker = new mapbox.Marker()
+          .setPopup(popap)
           .setLngLat([activity.longitude, activity.latitude])
           .addTo(mapRef.current);
       });
