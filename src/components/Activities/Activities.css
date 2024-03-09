@@ -134,6 +134,15 @@
   transform: translateY(4px);
 }
 
+.deleteButton {
+  background-color: rgba(175, 0, 0, 0.726);
+}
+.deleteButton:active {
+  background-color: rgba(100, 0, 0, 0.726);
+  box-shadow: 0 1px #666;
+  transform: translateY(4px);
+}
+
 @media (max-width: 900px) {
   .flexButtons {
     display: none;
