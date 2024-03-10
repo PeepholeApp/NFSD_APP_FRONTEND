@@ -3,9 +3,8 @@ import { styled } from "@mui/system";
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/Login";
-import ForgotPassword from "./ForgotPassword";
 import backgroundImage from "../assets/login.png";
+import { useAuth } from "../context/Login";
 
 const StyledContainer = styled("div")(({ theme }) => ({
   display: "flex",
@@ -97,6 +96,7 @@ const Login = () => {
       }
     } catch (error) {
       setError("Error logging in. Please check your credentials.");
+      console.log(error);
     } finally {
       setLoading(false);
     }

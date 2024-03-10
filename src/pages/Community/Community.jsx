@@ -76,6 +76,17 @@ function Community() {
     }
   };
 
+  const deleteActivity = async (activity) => {
+    try {
+      await axios.delete(
+        `${import.meta.env.VITE_API_URL}/activities/${activity._id}`
+      );
+      getAllActivities();
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
+
   const userIsInActivity = (activity) => {
     return activity.participants
       .map((participant) => participant._id)
@@ -89,11 +100,15 @@ function Community() {
   return (
     <>
       <div className="flexCommunity">
-        <AddActivity
-          address={address}
-          getAllActivities={getAllActivities}
-          onAddressChange={(address) => setAddress(address)}
-        />
+        {user.role === "admin" ? (
+          <AddActivity
+            address={address}
+            getAllActivities={getAllActivities}
+            onAddressChange={(address) => setAddress(address)}
+          />
+        ) : (
+          <></>
+        )}
         <div className="showMapButtonsFlex">
           <ButtonDark onClick={() => setMapView(false)}>
             <h3 className="textInButtons">Show list of activities</h3>
@@ -121,6 +136,7 @@ function Community() {
             activities={activities}
             bookUserInActivity={bookUserInActivity}
             cancelBookUserInActivity={cancelBookUserInActivity}
+            deleteActivity={deleteActivity}
             userIsInActivity={userIsInActivity}
             getIconImg={getIconImg}
           />
