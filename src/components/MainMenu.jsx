@@ -1,9 +1,11 @@
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 import React from "react";
 import { Link } from "react-router-dom";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
+import { useAuth } from "../context/Login";
 
 const MainMenu = ({ logged, vertical, onMenuClick }) => {
+  const { user, loading } = useAuth();
   const stackProps = vertical
     ? {
         mt: 2,
@@ -38,6 +40,18 @@ const MainMenu = ({ logged, vertical, onMenuClick }) => {
           >
             About us
           </Button>
+          {user.role === "admin" ? (
+            <Button
+              key="userManager"
+              component={Link}
+              to="/userManager"
+              sx={{ color: "#fff" }}
+            >
+              Dashboard
+            </Button>
+          ) : (
+            <></>
+          )}
         </>
       ) : (
         <>
