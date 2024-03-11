@@ -1,6 +1,8 @@
 import axios from "axios";
 import moment from "moment/moment";
 import React, { useEffect, useState } from "react";
+import countriesData from "../../data/countries.json";
+import gendersData from "../../data/genders.json";
 import "./Dashboard.css";
 
 const Dashboard = () => {
@@ -44,7 +46,6 @@ const Dashboard = () => {
       return acc;
     }, []);
     numberOf.sort((a, b) => b.count - a.count);
-    console.log(numberOf);
     return numberOf;
   };
 
@@ -54,6 +55,23 @@ const Dashboard = () => {
     return edad;
   };
 
+  const getIconImg = (type, data) => {
+    let foundIcon = {};
+    if (type === "nationality") {
+      foundIcon = countriesData.countries.find(
+        (country) => country.acronym === data
+      );
+    }
+    if (type === "gender") {
+      foundIcon = gendersData.genders.find((gender) => gender.name === data);
+      console.log(foundIcon);
+    }
+    if (foundIcon) {
+      return foundIcon.icon;
+    }
+    return null;
+  };
+
   return (
     <>
       <div className="dashboardContainer">
@@ -61,24 +79,34 @@ const Dashboard = () => {
         <div className="styleDashboardContainer flexDashboardContainer">
           {dsbNationalities.map((dsbNationality, id) => (
             <div className="infoDashboard" key={id}>
-              {dsbNationality.nationality}: {dsbNationality.count}
+              <img
+                className="iconCountry"
+                src={getIconImg("nationality", dsbNationality.nationality)}
+                alt={dsbNationality.nationality}
+              />
+              <h4 className="countText">
+                {dsbNationality.nationality}: {dsbNationality.count}
+              </h4>
             </div>
           ))}
         </div>
         <h3>Genders:</h3>
         <div className="styleDashboardContainer flexDashboardContainer">
           {dsbGenders.map((dsbGender, id) => (
-            <div className="" key={id}>
-              <div>
+            <div className="infoDashboard" key={id}>
+              <h1 className="countText">
+                {getIconImg("gender", dsbGender.gender)}
+              </h1>
+              <h4 className="countText">
                 {dsbGender.gender}: {dsbGender.count}
-              </div>
+              </h4>
             </div>
           ))}
         </div>
         <h3>Ages:</h3>
         <div className="styleDashboardContainer flexDashboardContainer">
           {dsbAges.map((dsbAge, id) => (
-            <div className="" key={id}>
+            <div className="infoDashboard" key={id}>
               Age of {dsbAge.dob}: {dsbAge.count}
             </div>
           ))}
