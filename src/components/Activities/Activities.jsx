@@ -1,17 +1,20 @@
-import { faBook, faCancel } from "@fortawesome/free-solid-svg-icons";
+import { faBook, faCancel, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import { useAuth } from "../../context/Login";
 import "./Activities.css";
 
 const Activities = ({
   activities,
   bookUserInActivity,
   cancelBookUserInActivity,
+  deleteActivity,
   userIsInActivity,
   getIconImg,
 }) => {
   const [todayDate, setTodayDate] = useState("");
+  const { user, loading } = useAuth();
 
   useEffect(() => {
     setTodayDate(moment().format("YYYY-MM-DD"));
@@ -105,6 +108,16 @@ const Activities = ({
               >
                 <FontAwesomeIcon icon={faCancel} />
               </button>
+              {user.role === "admin" ? (
+                <button
+                  className={`buttonBookStyle deleteButton`}
+                  onClick={() => deleteActivity(activity)}
+                >
+                  <FontAwesomeIcon icon={faTrash} />
+                </button>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
 
@@ -139,6 +152,16 @@ const Activities = ({
             >
               <FontAwesomeIcon icon={faCancel} />
             </button>
+            {user.role === "admin" ? (
+              <button
+                className={`buttonBookStyle deleteButton`}
+                onClick={() => deleteActivity(activity)}
+              >
+                <FontAwesomeIcon icon={faTrash} />
+              </button>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       ))}

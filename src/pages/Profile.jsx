@@ -24,32 +24,18 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { ButtonDark } from "../components/Button";
 import Modal from "@mui/material/Modal";
+import Alert from "@mui/material/Alert";
 import CardContent from "@mui/material/CardContent";
 import { styled } from "@mui/material/styles";
 import UploadPhotos from "../components/UploadPhotos";
+import languages from "../data/languages.json";
+import { useMediaQuery } from "@mui/material";
+import json2mq from "json2mq";
 
-const languagesOptions = [
-  {
-    label: "Español",
-    value: "ES",
-  },
-  {
-    label: "Ingles",
-    value: "EN",
-  },
-  {
-    label: "Frances",
-    value: "FR",
-  },
-  {
-    label: "Portugues",
-    value: "PT",
-  },
-  {
-    label: "Italiano",
-    value: "IT",
-  },
-];
+const languagesOptions = languages.languages.map((lang) => ({
+  label: lang.name,
+  value: lang.shorName,
+}));
 
 const style = {
   position: "absolute",
@@ -83,6 +69,7 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 const Profile = ({}) => {
+  const mobile = useMediaQuery(json2mq({ maxWidth: 600 }));
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [brithday, setBrithday] = useState(new Date());
@@ -97,6 +84,7 @@ const Profile = ({}) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [images, setImages] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     axios.get("https://restcountries.com/v3.1/all").then((response) => {
@@ -115,13 +103,38 @@ const Profile = ({}) => {
   }, []);
 
   useEffect(() => {
-    //chekeo si existe usuario y este cargado
     if (!user?.token && !loading) {
       navigate("/login");
     }
   }, [user, loading]);
 
+  useEffect(() => {
+    if (user?.profileId && !loading) {
+      navigate("/home");
+    }
+  }, [user, loading]);
+
   const onNext = async () => {
+    if (
+      ((firstName === "" ||
+        lastName === "" ||
+        brithday === "" ||
+        nationality === "" ||
+        genero === "" ||
+        languages === "") &&
+        step === 0) ||
+      (bio === "" && step === 1)
+    ) {
+      setError("All fields are required");
+      return;
+    }
+
+    if (selectedInterests.size < 5 && step === 2) {
+      setError("Requires at least 5 selected fields");
+      return;
+    }
+
+    setError("");
     setStep((prevStep) => prevStep + 1);
   };
 
@@ -129,12 +142,10 @@ const Profile = ({}) => {
     setStep((prevStep) => prevStep - 1);
   };
 
-  //se utilizo el Set js para almacenar los intereses selecionados
   const onSelectInterest = (interest) => {
     setSelectedInterests((selectedInterests) => {
       const selected = new Set(selectedInterests);
       if (selected.has(interest)) {
-        //el método has --> verifica si existe o no el interest
         selected.delete(interest);
         return selected;
       } else {
@@ -149,12 +160,9 @@ const Profile = ({}) => {
   const handleUpload = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-
-    console.log("que es esto", formData);
     const files = e.target.files;
     console.log(e.target.files);
 
-    //Toma todos los archivos e itera y agrega al formData
     for (let file of files) {
       formData.append("file", file);
     }
@@ -181,7 +189,7 @@ const Profile = ({}) => {
   };
 
   const onSave = async () => {
-    const interests = Array.from(selectedInterests); //convierte el set en un array
+    const interests = Array.from(selectedInterests);
     const response = await axios.post(
       `${import.meta.env.VITE_API_URL}/profiles`,
       {
@@ -192,32 +200,42 @@ const Profile = ({}) => {
         nationality,
         languages: languages.map((language) => language.value),
         bio,
-        photo: image,
+        photo: images,
         user: user.userId,
         interest: interests,
       }
     );
+
+    if (images.length < 1 && step === 3) {
+      setError("Requires uploading at least one photo");
+      return;
+    }
+    setError("");
     setOpen(true);
     setTimeout(() => navigate("/home"), 2000);
   };
 
   return (
-    <Stack sx={{ m: 5 }} alignItems="center">
-      <Stack sx={{ p: 8, width: 600, backgroundColor: "#262938" }} spacing={2}>
-        <Stepper activeStep={step}>
-          <Step>
-            <StepLabel>Informacion Personal</StepLabel>
-          </Step>
-          <Step>
-            <StepLabel>Biografia</StepLabel>
-          </Step>
-          <Step>
-            <StepLabel>Intereses</StepLabel>
-          </Step>
-          <Step>
-            <StepLabel>Fotos</StepLabel>
-          </Step>
-        </Stepper>
+    <Stack sx={{ m: 4 }} alignItems="center">
+      <Stack sx={{ p: mobile ? 4 : 6, backgroundColor: "#262938" }} spacing={2}>
+        <Box pb={3}>
+          <Stepper activeStep={step}>
+            <Step>
+              <StepLabel>Datos</StepLabel>
+            </Step>
+            <Step>
+              <StepLabel>Bio</StepLabel>
+            </Step>
+            <Step>
+              <StepLabel>Intereses</StepLabel>
+            </Step>
+            <Step>
+              <StepLabel>Fotos</StepLabel>
+            </Step>
+          </Stepper>
+        </Box>
+
+        {error ? <Alert severity="error">{error}</Alert> : null}
 
         {step === 0 ? (
           <>
@@ -325,7 +343,7 @@ const Profile = ({}) => {
           <>
             <FormControl
               sx={{
-                width: 500,
+                width: mobile ? undefined : 500,
                 maxWidth: "100%",
               }}
             >
@@ -348,7 +366,6 @@ const Profile = ({}) => {
             <FormControl>
               <Stack>
                 <Typography variant="h5">Intereses</Typography>
-                {/* entries:convierte un objeto en un arreglo */}
                 {Object.entries(Interests).map(([category, options]) => (
                   <Box key={category}>
                     <Typography variant="h6">{category}</Typography>
@@ -393,7 +410,8 @@ const Profile = ({}) => {
             <Box
               sx={{
                 backgroundColor: "#333",
-                minWidth: 500,
+                minWidth: mobile ? undefined : 500,
+                maxWidth: 500,
                 minHeight: 500,
                 display: "flex",
                 alignItems: "center",

@@ -1,24 +1,19 @@
-import React, { useState } from "react";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import styled from "@emotion/styled";
-import Avatar from "@mui/material/Avatar";
+
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
+
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
-import { LockOutlined as LockOutlinedIcon } from "@mui/icons-material";
 import backgroundImage from "../assets/login.png";
 
 const StyledContainer = styled("div")(({ theme }) => ({
@@ -46,41 +41,30 @@ const StyledBox = styled(Box)(({ theme }) => ({
   maxWidth: "500px",
 }));
 
-function WelcomeMessage() {
-  return (
-    <Box mb={4} textAlign="center">
-      <Typography variant="h5" fontWeight="bold" mb={2}>
-        Greetings, explorer!
-      </Typography>
-      <Typography variant="body2" color="textSecondary">
-        The peephole reveals a community excited to welcome you.
-      </Typography>
-    </Box>
-  );
-}
-
-export default function SignUp() {
-  const [openModal, setOpenModal] = useState(false);
-  const [email, setEmail] = useState("");
+export default function RecoverPassword() {
+  const { token } = useParams();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [duplicateEmailError, setDuplicateEmailError] = useState("");
   const [generalError, setGeneralError] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const handleOpenModal = () => {
-    setOpenModal(true);
-  };
+  useEffect(() => {
+    verifyToken();
+  }, []);
 
-  const handleClose = () => {
-    setOpenModal(false);
-  };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-    setDuplicateEmailError("");
-    setGeneralError("");
+  const verifyToken = async () => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/password-recovery/verify-token`,
+        {
+          token,
+        }
+      );
+    } catch (error) {
+      setGeneralError(error.response.data.error);
+    }
   };
 
   const handlePasswordChange = (e) => {
@@ -98,51 +82,53 @@ export default function SignUp() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!validateEmail(email)) {
-      setGeneralError("Invalid email address");
-      return;
-    }
-
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/users/check-email?email=${email}`
-      );
-
-      if (response.data.isDuplicate) {
-        setDuplicateEmailError("Email is already registered");
-        setGeneralError("");
-        return;
-      }
-
-      const registrationResponse = await axios.post(
-        `${import.meta.env.VITE_API_URL}/users`,
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/password-recovery/reset-password`,
         {
-          email,
+          token,
           password,
         }
       );
 
-      if (registrationResponse.status === 201) {
-        console.log("Registration successful.");
+      setMessage("Password changed successfully. You can now log in.");
+      setTimeout(() => {
         navigate("/login");
-      } else {
-        console.error(
-          "Error in registration:",
-          registrationResponse.data.message
-        );
-      }
+      }, 2000);
     } catch (error) {
-      console.error("Error submitting form:", error.message);
-      setGeneralError("An unexpected error occurred");
+      setGeneralError(error.response.data.error);
     }
   };
 
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  return (
+  return message ? (
+    <StyledContainer>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <StyledBox>
+          <Typography variant="h6" gutterBottom>
+            {message}
+          </Typography>
+        </StyledBox>
+      </Container>
+    </StyledContainer>
+  ) : generalError === "Token is invalid" ? (
+    <StyledContainer>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <StyledBox>
+          <Typography variant="h6" gutterBottom>
+            {generalError}
+          </Typography>
+          <Button
+            onClick={() => navigate("/forgot-password")}
+            variant="contained"
+          >
+            Start over!
+          </Button>
+        </StyledBox>
+      </Container>
+    </StyledContainer>
+  ) : (
     <StyledContainer>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -154,13 +140,6 @@ export default function SignUp() {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign up
-            </Typography>
-            <WelcomeMessage />
             <Box
               component="form"
               noValidate
@@ -173,23 +152,6 @@ export default function SignUp() {
                 </Typography>
               )}
               <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="email"
-                    label="Email address"
-                    name="email"
-                    autoComplete="email"
-                    value={email}
-                    onChange={handleEmailChange}
-                  />
-                  {duplicateEmailError && (
-                    <Typography variant="body2" color="error" mt={1}>
-                      {duplicateEmailError}
-                    </Typography>
-                  )}
-                </Grid>
                 <Grid item xs={12}>
                   <TextField
                     required
@@ -233,29 +195,10 @@ export default function SignUp() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                onClick={handleOpenModal}
               >
-                Sign Up
+                Reset Password
               </Button>
             </Box>
-            <Dialog open={openModal} onClose={handleClose}>
-              <DialogTitle>Terms and Conditions</DialogTitle>
-              <DialogContent>
-                <Typography>Terms and conditions go here.</Typography>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose} color="primary">
-                  ACCEPT
-                </Button>
-              </DialogActions>
-            </Dialog>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link component={RouterLink} to="/login" variant="body2">
-                  Already have an account? Log in
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </StyledBox>
       </Container>

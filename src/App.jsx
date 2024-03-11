@@ -1,19 +1,29 @@
-import React, { useEffect } from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import React, { useEffect, useState } from "react";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  useParams,
+} from "react-router-dom";
+import initializeNotifications from "../notifications";
 import Navbar from "./components/NavBar";
+import Dashboard from "./container/Dashboard/Dashboard";
 import { FiltersProvider } from "./context/FiltersContext";
-import { useAuth } from "./context/Login"; 
+import { useAuth } from "./context/Login";
 import AboutUs from "./pages/AboutUs";
 import Blog from "./pages/Blog/Blog";
 import Community from "./pages/Community/Community";
 import Contact from "./pages/Contact";
 import EditProfile from "./pages/EditProfile";
+import ForgotPassword from "./pages/ForgotPassword";
 import Home from "./pages/Home";
 import HomeApp from "./pages/HomeApp/HomeApp";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import RecoverPassword from "./pages/RecoverPassword";
 import Register from "./pages/Register";
 import UserDetails from "./pages/UserDetails/UserDetails";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -22,6 +32,8 @@ import initializeNotifications from "../notifications";
 import Chat from "./pages/Chat/Chat";
 import io from "socket.io-client";
 import { ChatContextProvider } from './context/ChatContext';
+import UserManager from "./pages/UserManager/UserManager";
+
 
 const theme = createTheme({
   palette: {
@@ -31,7 +43,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: ["Cascadia Code PL"].join(","),
+    fontFamily: ["Source Code Pro"].join(","),
   },
 });
 
@@ -58,11 +70,12 @@ function UserDetailsWrapper() {
 
 function App() {
   const { user, loading } = useAuth();
+  const [newNotifications, setNewNotifications] = useState(false);
+
 
   useEffect(() => {
-    console.log("user", user);
     if (user) {
-      initializeNotifications(user);
+      initializeNotifications(user, () => setNewNotifications(true));
     }
   }, [user]);
 
@@ -98,7 +111,9 @@ function App() {
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/aboutUs" element={<AboutUs />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/chat" element={<Chat />} />
+                <Route path="/chat" 
+                  element={<PrivateRoute element={<Chat />} />} 
+                  />
                 <Route path="*" element={<Navigate to="/" />} />
               </Routes>
             </ChatContextProvider>

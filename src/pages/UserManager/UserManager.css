@@ -1,0 +1,27 @@
+.background1 {
+  background-color: #262938;
+}
+
+.userManagerFlex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.userManagerContainer {
+  width: 60%;
+  border-radius: 20px;
+  background-color: #262938;
+  margin: 20px;
+  padding: 20px;
+}
+
+.getUserContainer {
+  width: 60%;
+  border-radius: 20px;
+  margin: 0 20px;
+  padding: 20px;
+}
+
+.dashboardStyle {
+  width: 60%;
+}
