@@ -1,29 +1,29 @@
-import React, { useState, useEffect } from "react";
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import React, { useEffect, useState } from "react";
 import {
   BrowserRouter,
+  Navigate,
   Route,
   Routes,
-  Navigate,
   useParams,
 } from "react-router-dom";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 import initializeNotifications from "../notifications";
 import Navbar from "./components/NavBar";
+import Dashboard from "./container/Dashboard/Dashboard";
 import { FiltersProvider } from "./context/FiltersContext";
 import { useAuth } from "./context/Login";
 import AboutUs from "./pages/AboutUs";
 import Blog from "./pages/Blog/Blog";
 import Community from "./pages/Community/Community";
 import Contact from "./pages/Contact";
-import Dashboard from "./pages/Dashboard/Dashboard";
 import EditProfile from "./pages/EditProfile";
 import ForgotPassword from "./pages/ForgotPassword";
-import RecoverPassword from "./pages/RecoverPassword";
 import Home from "./pages/Home";
 import HomeApp from "./pages/HomeApp/HomeApp";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import RecoverPassword from "./pages/RecoverPassword";
 import Register from "./pages/Register";
 import UserDetails from "./pages/UserDetails/UserDetails";
 import UserManager from "./pages/UserManager/UserManager";

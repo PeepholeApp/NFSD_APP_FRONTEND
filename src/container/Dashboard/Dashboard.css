@@ -1,0 +1,23 @@
+.dashboardContainer {
+  width: 100%;
+}
+
+.styleDashboardContainer {
+  background-color: #262938;
+  border-radius: 20px;
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.flexDashboardContainer {
+  flex: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.infoDashboard {
+  background-color: black;
+  border-radius: 10px;
+  padding: 5px;
+}
