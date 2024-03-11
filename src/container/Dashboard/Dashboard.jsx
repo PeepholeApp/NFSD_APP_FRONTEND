@@ -6,7 +6,6 @@ import gendersData from "../../data/genders.json";
 import "./Dashboard.css";
 
 const Dashboard = () => {
-  const [profiles, setProfiles] = useState([]);
   const [dsbNationalities, setDsbNationalities] = useState([]);
   const [dsbGenders, setDsbGenders] = useState([]);
   const [dsbAges, setDsbAges] = useState([]);
@@ -24,7 +23,6 @@ const Dashboard = () => {
       setDsbNationalities(accumulator("nationality", users));
       setDsbGenders(accumulator("gender", users));
       setDsbAges(accumulator("dob", users));
-      setProfiles(users);
     } catch (error) {
       console.error(error);
     } finally {
@@ -64,7 +62,6 @@ const Dashboard = () => {
     }
     if (type === "gender") {
       foundIcon = gendersData.genders.find((gender) => gender.name === data);
-      console.log(foundIcon);
     }
     if (foundIcon) {
       return foundIcon.icon;

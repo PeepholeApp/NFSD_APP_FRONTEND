@@ -14,7 +14,6 @@ const UserManager = () => {
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/profiles/search/${userEmail}`
       );
-      console.log(response.data);
       setUser(response.data);
     } catch (error) {
       setUser();
@@ -33,6 +32,7 @@ const UserManager = () => {
       });
       setEditToggle(false);
       getUserByEmail();
+      console.log("Pasa por aca: ", user);
     } catch (error) {
       console.log(error);
     } finally {
@@ -42,11 +42,13 @@ const UserManager = () => {
   return (
     <>
       <div className="userManagerFlex">
+        <h1>Dashboard</h1>
         <div className="userManagerContainer">
           <h2>Search</h2>
           <label htmlFor=""></label>
           <input onChange={(e) => setUserEmail(e.target.value)} type="text" />
           <button onClick={getUserByEmail}>Search</button>
+          <button onClick={() => setUser()}>Clear</button>
         </div>
         {user && (
           <div className="background1 getUserContainer">
