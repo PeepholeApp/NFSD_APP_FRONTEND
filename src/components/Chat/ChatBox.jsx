@@ -1,19 +1,18 @@
-import React, { useContext, useState } from "react";
-import { AuthContext } from "../../context/Login";
-import { ChatContext } from "../../context/ChatContext";
-import { useFetchRecipientUser } from "../../hooks/useFetchRecipient";
-import { Stack } from "@mui/material";
-import moment from "moment";
-import InputEmoji from "react-input-emoji";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons"; 
-
+import { Stack } from "@mui/material";
+import React, { useContext, useState } from "react";
+import InputEmoji from "react-input-emoji";
+import { ChatContext } from "../../context/ChatContext";
+import { AuthContext } from "../../context/Login";
+import { useFetchRecipientUser } from "../../hooks/useFetchRecipient";
 
 const ChatBox = () => {
   const { user } = useContext(AuthContext);
-  const { currentChat, messages, isMessagesLoading, sendTextMessage } = useContext(ChatContext);
+  const { currentChat, messages, isMessagesLoading, sendTextMessage } =
+    useContext(ChatContext);
   const { recipientUser } = useFetchRecipientUser(currentChat, user);
-  const [textMessage, setTextMessage] = useState(""); 
+  const [textMessage, setTextMessage] = useState("");
 
   if (!recipientUser || !currentChat) {
     return (
@@ -50,15 +49,12 @@ const ChatBox = () => {
           ))}
       </Stack>
       <Stack direction={"horizontal"} gap={3} className="chat-input">
-        <InputEmoji 
-            value={textMessage} 
-            onChange={setTextMessage}
-        />
-        <button className="send-btn" onClick={() => sendTextMessage(textMessage, user, currentChat?._id)}>
-          <FontAwesomeIcon
-            icon={faPaperPlane}
-            className="send fill"
-          />
+        <InputEmoji value={textMessage} onChange={setTextMessage} />
+        <button
+          className="send-btn"
+          onClick={() => sendTextMessage(textMessage, user, currentChat?._id)}
+        >
+          <FontAwesomeIcon icon={faPaperPlane} className="send fill" />
         </button>
       </Stack>
     </Stack>
