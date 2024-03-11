@@ -18,7 +18,6 @@ async function initializeNotifications(user, onNewMessages) {
   const messaging = getMessaging();
 
   onMessage(messaging, (message) => {
-    console.log("message", message);
     if (onNewMessages) onNewMessages();
   });
 

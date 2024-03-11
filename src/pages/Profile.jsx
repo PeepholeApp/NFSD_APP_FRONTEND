@@ -29,6 +29,8 @@ import CardContent from "@mui/material/CardContent";
 import { styled } from "@mui/material/styles";
 import UploadPhotos from "../components/UploadPhotos";
 import languages from "../data/languages.json";
+import { useMediaQuery } from "@mui/material";
+import json2mq from "json2mq";
 
 const languagesOptions = languages.languages.map((lang) => ({
   label: lang.name,
@@ -67,6 +69,7 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 const Profile = ({}) => {
+  const mobile = useMediaQuery(json2mq({ maxWidth: 600 }));
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [brithday, setBrithday] = useState(new Date());
@@ -213,22 +216,24 @@ const Profile = ({}) => {
   };
 
   return (
-    <Stack sx={{ m: 5 }} alignItems="center">
-      <Stack sx={{ p: 8, width: 600, backgroundColor: "#262938" }} spacing={2}>
-        <Stepper activeStep={step}>
-          <Step>
-            <StepLabel>Informacion Personal</StepLabel>
-          </Step>
-          <Step>
-            <StepLabel>Biografia</StepLabel>
-          </Step>
-          <Step>
-            <StepLabel>Intereses</StepLabel>
-          </Step>
-          <Step>
-            <StepLabel>Fotos</StepLabel>
-          </Step>
-        </Stepper>
+    <Stack sx={{ m: 4 }} alignItems="center">
+      <Stack sx={{ p: mobile ? 4 : 6, backgroundColor: "#262938" }} spacing={2}>
+        <Box pb={3}>
+          <Stepper activeStep={step}>
+            <Step>
+              <StepLabel>Datos</StepLabel>
+            </Step>
+            <Step>
+              <StepLabel>Bio</StepLabel>
+            </Step>
+            <Step>
+              <StepLabel>Intereses</StepLabel>
+            </Step>
+            <Step>
+              <StepLabel>Fotos</StepLabel>
+            </Step>
+          </Stepper>
+        </Box>
 
         {error ? <Alert severity="error">{error}</Alert> : null}
 
@@ -338,7 +343,7 @@ const Profile = ({}) => {
           <>
             <FormControl
               sx={{
-                width: 500,
+                width: mobile ? undefined : 500,
                 maxWidth: "100%",
               }}
             >
@@ -405,7 +410,8 @@ const Profile = ({}) => {
             <Box
               sx={{
                 backgroundColor: "#333",
-                minWidth: 500,
+                minWidth: mobile ? undefined : 500,
+                maxWidth: 500,
                 minHeight: 500,
                 display: "flex",
                 alignItems: "center",
