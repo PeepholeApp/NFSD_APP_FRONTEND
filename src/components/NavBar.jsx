@@ -42,7 +42,6 @@ const Navbar = ({ newNotifications, onNotificationsRefresh }) => {
   const [profile, setProfile] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  // devuelve verdadero para dispositivos moviles
   const isMobile = useMediaQuery(
     json2mq({
       maxWidth: 700,
@@ -89,7 +88,6 @@ const Navbar = ({ newNotifications, onNotificationsRefresh }) => {
 
         {
           headers: {
-            //manda el token del usuario verificado
             Authorization: `Bearer ${user.token}`,
           },
         }
@@ -141,7 +139,6 @@ const Navbar = ({ newNotifications, onNotificationsRefresh }) => {
       },
       {
         headers: {
-          //manda el token del usuario verificado
           Authorization: `Bearer ${user.token}`,
         },
       }
@@ -185,7 +182,6 @@ const Navbar = ({ newNotifications, onNotificationsRefresh }) => {
           >
             {user ? (
               <>
-                {/* connection requests */}
                 <IconButton
                   size="large"
                   aria-label="show 4 new mails"
@@ -266,7 +262,6 @@ const Navbar = ({ newNotifications, onNotificationsRefresh }) => {
                   </Box>
                 </Popper>
 
-                {/* chat notifications */}
                 <IconButton
                   size="large"
                   aria-label="show 17 new notifications"
@@ -277,7 +272,6 @@ const Navbar = ({ newNotifications, onNotificationsRefresh }) => {
                   </Badge>
                 </IconButton>
 
-                {/* user menu */}
                 <Tooltip title="Open settings">
                   <IconButton
                     onClick={(event) => {
@@ -321,8 +315,6 @@ const Navbar = ({ newNotifications, onNotificationsRefresh }) => {
                 </Menu>
               </>
             ) : null}
-
-            {/* mobile menu */}
             {isMobile ? (
               <IconButton onClick={() => setDrawerOpen(true)}>
                 <MenuIcon />

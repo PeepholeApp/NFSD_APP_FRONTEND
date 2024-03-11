@@ -26,8 +26,6 @@ export default function UploadPhotos({ images, onChange }) {
   const handleUpload = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-
-    console.log("que es esto", formData);
     const files = e.target.files;
     console.log(e.target.files);
     //Toma todos los archivos e itera y agrega al formData
@@ -35,11 +33,12 @@ export default function UploadPhotos({ images, onChange }) {
       formData.append("file", file);
     }
     setUploading(true);
+
     const response = await axios.post(
       `${import.meta.env.VITE_API_URL}/image`,
       formData
     );
-    console.log(response.data);
+
     onChange(response.data);
     setUploading(false);
   };
