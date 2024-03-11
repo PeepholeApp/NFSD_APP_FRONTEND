@@ -4,7 +4,6 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/Login";
-import ForgotPassword from "./ForgotPassword";
 import backgroundImage from "../assets/login.png";
 
 const StyledContainer = styled("div")(({ theme }) => ({

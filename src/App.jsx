@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Navbar from "./components/NavBar";
@@ -19,6 +19,9 @@ import UserDetails from "./pages/UserDetails/UserDetails";
 import ForgotPassword from "./pages/ForgotPassword";
 import { useParams } from "react-router-dom";
 import initializeNotifications from "../notifications";
+import Chat from "./pages/Chat/Chat";
+import io from "socket.io-client";
+import { ChatContextProvider } from './context/ChatContext';
 
 const theme = createTheme({
   palette: {
@@ -54,48 +57,52 @@ function UserDetailsWrapper() {
 }
 
 function App() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+
   useEffect(() => {
     console.log("user", user);
     if (user) {
       initializeNotifications(user);
     }
   }, [user]);
+
   return (
     <>
       <ThemeProvider theme={theme}>
-        <BrowserRouter>
           <FiltersProvider>
             <CssBaseline />
+            <ChatContextProvider user={user}>
             <Navbar />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route
-                path="/profile"
-                element={<PrivateRoute element={<Profile />} />}
-              />
-              <Route
-                path="/editProfile"
-                element={<PrivateRoute element={<EditProfile />} />}
-              />
-              <Route
-                path="/home"
-                element={<PrivateRoute element={<HomeApp />} />}
-              />
-              <Route path="/user/:userId" element={<UserDetailsWrapper />} />
-              <Route
-                path="/community"
-                element={<PrivateRoute element={<Community />} />}
-              />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/aboutUs" element={<AboutUs />} />
-              <Route path="/contact" element={<Contact />} />
-            </Routes>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route
+                  path="/profile"
+                  element={<PrivateRoute element={<Profile />} />}
+                />
+                <Route
+                  path="/editProfile"
+                  element={<PrivateRoute element={<EditProfile />} />}
+                />
+                <Route
+                  path="/home"
+                  element={<PrivateRoute element={<HomeApp />} />}
+                />
+                <Route path="/user/:userId" element={<UserDetailsWrapper />} />
+                <Route
+                  path="/community"
+                  element={<PrivateRoute element={<Community />} />}
+                />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/aboutUs" element={<AboutUs />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/chat" element={<Chat />} />
+                <Route path="*" element={<Navigate to="/" />} />
+              </Routes>
+            </ChatContextProvider>
           </FiltersProvider>
-        </BrowserRouter>
       </ThemeProvider>
     </>
   );

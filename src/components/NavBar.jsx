@@ -34,7 +34,6 @@ import MainMenu from "./MainMenu";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
-
   const [requests, setRequests] = useState([]);
   const navigate = useNavigate();
   const [menuEl, setMenuEl] = useState(null);
@@ -42,7 +41,6 @@ const Navbar = () => {
   const [profile, setProfile] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  // devuelve verdadero para dispositivos moviles
   const isMobile = useMediaQuery(
     json2mq({
       maxWidth: 700,
@@ -60,10 +58,8 @@ const Navbar = () => {
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/profiles/user/${user.profileId}`,
-
         {
           headers: {
-            //manda el token del usuario verificado
             Authorization: `Bearer ${user.token}`,
           },
         }
@@ -75,14 +71,13 @@ const Navbar = () => {
       console.error(error);
     }
   };
+
   const getRequests = async () => {
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/connections/`,
-
         {
           headers: {
-            //manda el token del usuario verificado
             Authorization: `Bearer ${user.token}`,
           },
         }
@@ -134,7 +129,6 @@ const Navbar = () => {
       },
       {
         headers: {
-          //manda el token del usuario verificado
           Authorization: `Bearer ${user.token}`,
         },
       }
@@ -151,6 +145,10 @@ const Navbar = () => {
   };
 
   const open = Boolean(anchorEl);
+
+  const handleChatClick = () => {
+    navigate("/chat");
+  };
 
   return (
     <>
@@ -178,7 +176,6 @@ const Navbar = () => {
           >
             {user ? (
               <>
-                {/* connection requests */}
                 <IconButton
                   size="large"
                   aria-label="show 4 new mails"
@@ -253,19 +250,20 @@ const Navbar = () => {
                     </List>
                   </Box>
                 </Popper>
-
-                {/* chat notifications */}
+                
+                {user ? (
                 <IconButton
                   size="large"
-                  aria-label="show 17 new notifications"
+                  aria-label="go to chat"
                   color="inherit"
+                  onClick={handleChatClick}
                 >
                   <Badge badgeContent={0} color="error">
                     <ThreePIcon />
                   </Badge>
                 </IconButton>
+              ) : null}
 
-                {/* user menu */}
                 <Tooltip title="Open settings">
                   <IconButton
                     onClick={(event) => {
@@ -310,13 +308,14 @@ const Navbar = () => {
               </>
             ) : null}
 
-            {/* mobile menu */}
             {isMobile ? (
               <IconButton onClick={() => setDrawerOpen(true)}>
                 <MenuIcon />
               </IconButton>
             ) : null}
             {!isMobile && !user ? <Box sx={{ width: 150 }} /> : null}
+
+
           </Stack>
         </Toolbar>
 
