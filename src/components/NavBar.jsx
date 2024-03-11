@@ -34,7 +34,6 @@ import MainMenu from "./MainMenu";
 
 const Navbar = ({ newNotifications, onNotificationsRefresh }) => {
   const { user, logout } = useAuth();
-
   const [requests, setRequests] = useState([]);
   const navigate = useNavigate();
   const [menuEl, setMenuEl] = useState(null);
@@ -66,10 +65,8 @@ const Navbar = ({ newNotifications, onNotificationsRefresh }) => {
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/profiles/user/${user.profileId}`,
-
         {
           headers: {
-            //manda el token del usuario verificado
             Authorization: `Bearer ${user.token}`,
           },
         }
@@ -81,11 +78,11 @@ const Navbar = ({ newNotifications, onNotificationsRefresh }) => {
       console.error(error);
     }
   };
+
   const getRequests = async () => {
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/connections/`,
-
         {
           headers: {
             Authorization: `Bearer ${user.token}`,
@@ -155,6 +152,10 @@ const Navbar = ({ newNotifications, onNotificationsRefresh }) => {
   };
 
   const open = Boolean(anchorEl);
+
+  const handleChatClick = () => {
+    navigate("/chat");
+  };
 
   return (
     <>
@@ -261,17 +262,20 @@ const Navbar = ({ newNotifications, onNotificationsRefresh }) => {
                     )}
                   </Box>
                 </Popper>
-
+                 
+                {user ? (
                 <IconButton
                   size="large"
-                  aria-label="show 17 new notifications"
+                  aria-label="go to chat"
                   color="inherit"
+                  onClick={handleChatClick}
                 >
                   <Badge badgeContent={0} color="error">
                     <ThreePIcon />
                   </Badge>
                 </IconButton>
-
+              ) : null}
+              
                 <Tooltip title="Open settings">
                   <IconButton
                     onClick={(event) => {
@@ -315,12 +319,15 @@ const Navbar = ({ newNotifications, onNotificationsRefresh }) => {
                 </Menu>
               </>
             ) : null}
+
             {isMobile ? (
               <IconButton onClick={() => setDrawerOpen(true)}>
                 <MenuIcon />
               </IconButton>
             ) : null}
             {!isMobile && !user ? <Box sx={{ width: 150 }} /> : null}
+
+
           </Stack>
         </Toolbar>
 

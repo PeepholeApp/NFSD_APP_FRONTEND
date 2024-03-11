@@ -26,7 +26,14 @@ import Profile from "./pages/Profile";
 import RecoverPassword from "./pages/RecoverPassword";
 import Register from "./pages/Register";
 import UserDetails from "./pages/UserDetails/UserDetails";
+import ForgotPassword from "./pages/ForgotPassword";
+import { useParams } from "react-router-dom";
+import initializeNotifications from "../notifications";
+import Chat from "./pages/Chat/Chat";
+import io from "socket.io-client";
+import { ChatContextProvider } from './context/ChatContext';
 import UserManager from "./pages/UserManager/UserManager";
+
 
 const theme = createTheme({
   palette: {
@@ -62,58 +69,55 @@ function UserDetailsWrapper() {
 }
 
 function App() {
+  const { user, loading } = useAuth();
   const [newNotifications, setNewNotifications] = useState(false);
-  const { user } = useAuth();
+
 
   useEffect(() => {
     if (user) {
       initializeNotifications(user, () => setNewNotifications(true));
     }
   }, [user]);
+
   return (
     <>
       <ThemeProvider theme={theme}>
-        <BrowserRouter>
           <FiltersProvider>
             <CssBaseline />
-            <Navbar
-              newNotifications={newNotifications}
-              onNotificationsRefresh={() => setNewNotifications(false)}
-            />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route
-                path="/reset-password/:token"
-                element={<RecoverPassword />}
-              />
-              <Route
-                path="/profile"
-                element={<PrivateRoute element={<Profile />} />}
-              />
-              <Route
-                path="/editProfile"
-                element={<PrivateRoute element={<EditProfile />} />}
-              />
-              <Route
-                path="/home"
-                element={<PrivateRoute element={<HomeApp />} />}
-              />
-              <Route path="/user/:userId" element={<UserDetailsWrapper />} />
-              <Route
-                path="/community"
-                element={<PrivateRoute element={<Community />} />}
-              />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/aboutUs" element={<AboutUs />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/userManager" element={<UserManager />} />
-            </Routes>
+            <ChatContextProvider user={user}>
+            <Navbar />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route
+                  path="/profile"
+                  element={<PrivateRoute element={<Profile />} />}
+                />
+                <Route
+                  path="/editProfile"
+                  element={<PrivateRoute element={<EditProfile />} />}
+                />
+                <Route
+                  path="/home"
+                  element={<PrivateRoute element={<HomeApp />} />}
+                />
+                <Route path="/user/:userId" element={<UserDetailsWrapper />} />
+                <Route
+                  path="/community"
+                  element={<PrivateRoute element={<Community />} />}
+                />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/aboutUs" element={<AboutUs />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/chat" 
+                  element={<PrivateRoute element={<Chat />} />} 
+                  />
+                <Route path="*" element={<Navigate to="/" />} />
+              </Routes>
+            </ChatContextProvider>
           </FiltersProvider>
-        </BrowserRouter>
       </ThemeProvider>
     </>
   );
