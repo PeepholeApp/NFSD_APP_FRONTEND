@@ -108,6 +108,16 @@ const Activities = ({
               >
                 <FontAwesomeIcon icon={faCancel} />
               </button>
+              {user.role === "admin" ? (
+                <button
+                  className={`buttonBookStyle deleteButton`}
+                  onClick={() => deleteActivity(activity)}
+                >
+                  <FontAwesomeIcon icon={faTrash} />
+                </button>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
 
