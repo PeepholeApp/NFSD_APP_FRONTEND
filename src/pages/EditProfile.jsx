@@ -71,11 +71,6 @@ const EditProfile = () => {
               );
               return languageOption;
             })
-            /*
-                filtrar los codigos de lenguages que no
-                estan en el arreglo en caso de que en Mongo
-                exista un codigo de lenguage desconocido
-            */
             .filter((option) => !!option);
 
           setName(profile.name);

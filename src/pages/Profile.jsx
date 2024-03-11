@@ -100,14 +100,12 @@ const Profile = ({}) => {
   }, []);
 
   useEffect(() => {
-    //chekeo si existe usuario y este cargado
     if (!user?.token && !loading) {
       navigate("/login");
     }
   }, [user, loading]);
 
   useEffect(() => {
-    //chekeo si existe usuario y este cargado
     if (user?.profileId && !loading) {
       navigate("/home");
     }
@@ -141,12 +139,10 @@ const Profile = ({}) => {
     setStep((prevStep) => prevStep - 1);
   };
 
-  //se utilizo el Set js para almacenar los intereses selecionados
   const onSelectInterest = (interest) => {
     setSelectedInterests((selectedInterests) => {
       const selected = new Set(selectedInterests);
       if (selected.has(interest)) {
-        //el método has --> verifica si existe o no el interest
         selected.delete(interest);
         return selected;
       } else {
@@ -164,7 +160,6 @@ const Profile = ({}) => {
     const files = e.target.files;
     console.log(e.target.files);
 
-    //Toma todos los archivos e itera y agrega al formData
     for (let file of files) {
       formData.append("file", file);
     }
@@ -191,7 +186,7 @@ const Profile = ({}) => {
   };
 
   const onSave = async () => {
-    const interests = Array.from(selectedInterests); //convierte el set en un array
+    const interests = Array.from(selectedInterests);
     const response = await axios.post(
       `${import.meta.env.VITE_API_URL}/profiles`,
       {
@@ -366,7 +361,6 @@ const Profile = ({}) => {
             <FormControl>
               <Stack>
                 <Typography variant="h5">Intereses</Typography>
-                {/* entries:convierte un objeto en un arreglo */}
                 {Object.entries(Interests).map(([category, options]) => (
                   <Box key={category}>
                     <Typography variant="h6">{category}</Typography>

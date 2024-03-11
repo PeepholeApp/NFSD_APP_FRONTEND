@@ -13,7 +13,6 @@ async function initializeNotifications(user, onNewMessages) {
     measurementId: "G-V6GV3K3Y8E",
   };
 
-  // Initialize Firebase
   const app = initializeApp(firebaseConfig);
 
   const messaging = getMessaging();

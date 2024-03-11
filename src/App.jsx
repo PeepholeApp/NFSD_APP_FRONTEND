@@ -64,6 +64,7 @@ function UserDetailsWrapper() {
 function App() {
   const [newNotifications, setNewNotifications] = useState(false);
   const { user } = useAuth();
+
   useEffect(() => {
     if (user) {
       initializeNotifications(user, () => setNewNotifications(true));
