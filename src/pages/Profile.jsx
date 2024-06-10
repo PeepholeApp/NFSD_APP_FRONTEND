@@ -31,6 +31,7 @@ import UploadPhotos from "../components/UploadPhotos";
 import languages from "../data/languages.json";
 import { useMediaQuery } from "@mui/material";
 import json2mq from "json2mq";
+import countriesData from "../data/countries.json";
 
 const languagesOptions = languages.languages.map((lang) => ({
   label: lang.name,
@@ -78,29 +79,12 @@ const Profile = ({}) => {
   const [languages, setLanguages] = useState([]);
   const [bio, setBio] = useState("");
   const [step, setStep] = useState(0);
-  const [countries, setCountries] = useState([]);
   const [selectedInterests, setSelectedInterests] = useState(new Set());
   const { user, loading } = useAuth();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    axios.get("https://restcountries.com/v3.1/all").then((response) => {
-      const countries = response.data
-        .map((country) => {
-          return {
-            label: country.name.common,
-            value: country.cca2,
-          };
-        })
-        .sort((countryA, countryB) => {
-          return countryA.label.localeCompare(countryB.label);
-        });
-      setCountries(countries);
-    });
-  }, []);
 
   useEffect(() => {
     if (!user?.token && !loading) {
@@ -307,9 +291,9 @@ const Profile = ({}) => {
                   setNationality(e.target.value);
                 }}
               >
-                {countries.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
+                {countriesData.countries.map((option) => (
+                  <MenuItem key={option.acronym} value={option.acronym}>
+                    {option.name}
                   </MenuItem>
                 ))}
               </Select>
