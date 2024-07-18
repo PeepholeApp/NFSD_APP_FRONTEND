@@ -27,7 +27,7 @@ const MainMenu = ({ logged, vertical, onMenuClick }) => {
             to="/community"
             sx={{ color: "#fff" }}
           >
-            Comunity
+            Community
           </Button>
           <Button key="blog" component={Link} to="/blog" sx={{ color: "#fff" }}>
             Blog
